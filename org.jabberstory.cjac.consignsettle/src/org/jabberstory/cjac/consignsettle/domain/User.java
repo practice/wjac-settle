@@ -5,15 +5,20 @@ public class User {
 	private String username;
 	private String email;
 	private String password;
+	private UserGroup group;
 	
 	public User() {
 	}
-	
-	public User(String userId, String password) {
-		this.setUserId(userId);
-		this.setPassword(password);
+
+	public User(String userId, String username, String email, String password, UserGroup group) {
+		this.userId = userId;
+		this.username = username;
+		this.email = email;
+		this.password = password;
+		this.group = group;
 	}
-	
+
+
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
@@ -46,8 +51,11 @@ public class User {
 		return email;
 	}
 
-	public boolean hasRole(Role role) {
-		return false;
+	public void setGroup(UserGroup group) {
+		this.group = group;
 	}
 
+	public UserGroup getGroup() {
+		return group;
+	}
 }

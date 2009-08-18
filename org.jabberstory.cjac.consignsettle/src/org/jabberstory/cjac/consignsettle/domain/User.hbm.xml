@@ -10,9 +10,18 @@
 		<id name="userId" column="USERID" length="32">
 			<generator class="assigned" />
 		</id>
-		<property name="username" column="USERNAME" type="string" length="64" />
+		<property name="username" column="USERNAME" type="string" length="32" />
 		<property name="email" column="EMAIL" type="string" length="64" />
 		<property name="password" column="PASSWORD" type="string" length="64" />
+		<many-to-one name="group" class="UserGroup" column="groupId" foreign-key="FK_USER_GROUP"></many-to-one>
+	</class>
+	
+	<class name="UserGroup" table="USERGROUP">
+		<id name="groupId" column="GROUPID" length="32">
+			<generator class="assigned" />
+		</id>
+		<property name="name" column="NAME" length="32" />
+		<property name="role" column="ROLE" length="1" />
 	</class>
 
 </hibernate-mapping>
