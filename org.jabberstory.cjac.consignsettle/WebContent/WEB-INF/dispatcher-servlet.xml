@@ -18,7 +18,7 @@
 	</bean>
 	
 	<bean id="userListController" class="org.jabberstory.cjac.consignsettle.controller.UserListController" 
-		p:forumService-ref="userService" />
+		p:userService-ref="userService" />
 	
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">

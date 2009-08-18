@@ -29,17 +29,7 @@
 		class="org.springframework.orm.hibernate3.HibernateTransactionManager"
 		p:sessionFactory-ref="sessionFactory" />
 		
-	<tx:advice id="txAdvice" transaction-manager="transactionManager">
-		<tx:attributes>
-			<tx:method name="add*" propagation="REQUIRED" />
-			<tx:method name="remove*" propagation="REQUIRED" />
-			<tx:method name="update*" propagation="REQUIRED" />
-			<tx:method name="get*" read-only="true" />
-		</tx:attributes>
-	</tx:advice>
-	
-	<aop:config>
-		<aop:pointcut expression="execution(public * org.jabberstory.cjac.domain.*Service.*(..))" id="servicePublicMethod"/>
-		<aop:advisor advice-ref="txAdvice" pointcut-ref="servicePublicMethod" />
-	</aop:config>
+	<!-- Repository objects -->
+	<bean id="userRepository" class="org.jabberstory.cjac.consignsettle.domain.UserRepository" 
+		p:hibernateTemplate-ref="hibernateTemplate" />
 </beans>
