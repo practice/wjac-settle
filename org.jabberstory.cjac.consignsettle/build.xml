@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project default="schemaexport">
+	<path id="class.path">
+		<pathelement path="build/classes" />
+		<pathelement path="WebContent/WEB-INF/lib/hibernate3.jar" />
+		<pathelement path="WebContent/WEB-INF/lib/commons-logging-1.0.4.jar" />
+		<pathelement path="WebContent/WEB-INF/lib/commons-collections-2.1.1.jar" />
+		<pathelement path="WebContent/WEB-INF/lib/dom4j-1.6.1.jar" />
+		<pathelement path="WebContent/WEB-INF/lib/c3p0-0.9.1.jar" />
+		<pathelement path="WebContent/WEB-INF/lib/mysql-connector-java-5.0.4-bin.jar" />
+	</path>
+	<tstamp>
+		<format property="tstamp" pattern="yyyyMMdd-hhmmss" />
+	</tstamp>
+	<target name="schemaexport">
+		<taskdef name="schemaexport"
+			classname="org.hibernate.tool.hbm2ddl.SchemaExportTask"
+			classpathref="class.path" />
+		<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect"></property>
+		<property name="hibernate.format_sql" value="true" />
+		<schemaexport 
+			quiet="no" text="yes" drop="no" create="no" delimiter=";"
+			output="sql/schema_gen-${tstamp}.ddl">
+			<fileset dir="build/classes">
+				<include name="**/*.hbm.xml" />
+			</fileset>
+		</schemaexport>
+	</target>
+</project>
