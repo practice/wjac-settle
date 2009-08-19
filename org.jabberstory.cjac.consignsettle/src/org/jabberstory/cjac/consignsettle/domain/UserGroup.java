@@ -1,9 +1,13 @@
 package org.jabberstory.cjac.consignsettle.domain;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class UserGroup {
 	private String groupId;
 	private String name;
-	private String role;	// admin(A), consignee(C, 천지), owner(O, 전담), subject(S, 주관)
+	private String role;	// admin(A), consignee(C, 회계법인), owner(O, 전담), subject(S, 주관)
+	private Set<User> users = new HashSet<User>();
 
 	public UserGroup() {
 	}
@@ -39,5 +43,11 @@ public class UserGroup {
 		return role;
 	}
 
-	
+	public void setUsers(Set<User> users) {
+		this.users = users;
+	}
+
+	public Set<User> getUsers() {
+		return users;
+	}	
 }

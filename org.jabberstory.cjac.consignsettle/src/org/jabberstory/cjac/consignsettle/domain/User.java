@@ -58,4 +58,27 @@ public class User {
 	public UserGroup getGroup() {
 		return group;
 	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		final User other = (User)obj;
+		if (userId == null || other.userId == null)
+			return false;
+		if (!userId.equals(other.userId))
+			return false;
+		return true;
+	}
+	
+	@Override
+	public int hashCode() {
+		if (userId == null)
+			return 0;
+		return userId.hashCode();
+	}
 }

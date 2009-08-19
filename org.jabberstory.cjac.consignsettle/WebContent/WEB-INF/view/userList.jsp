@@ -1,0 +1,38 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>User List</title>
+</head>
+<body>
+<form method="post">사용자 검색<input type="text" size="10" name="userQuery"><input type="submit" value="검색"></form>
+<form method="post">사용자그룹 검색<input type="text" size="10" name="groupQuery"><input type="submit" value="검색"></form>
+<c:choose>
+	<c:when test="${count > 0}">
+		<table width="800" class="paginated" style="table-layout: fixed">
+			<thead>
+			<tr>
+			<th width="30">Group ID</th><th width="500">Group Name</th><th width="100">Role</th>
+			</tr>
+			</thead>
+			<tbody>
+			<c:forEach var="group" items="${groups}">
+			<tr>
+				<td>${group.groupId}</td><td style="text-overflow:ellipsis; overflow: hidden; ">
+					<a href="showpost?id=${group.groupId}"><nobr>${group.name}</nobr></a></td>
+				<td>${group.role}</td>
+			</tr>
+			</c:forEach>
+			</tbody>
+		</table>
+		<span id="numPages" style="display: none">${numPages}</span>
+		<span id="currentPage" style="display: none">${currentPage}</span>	
+	</c:when>
+	<c:otherwise>
+			검색 결과가 없습니다.
+	</c:otherwise>
+</c:choose>
+</body>
+</html>

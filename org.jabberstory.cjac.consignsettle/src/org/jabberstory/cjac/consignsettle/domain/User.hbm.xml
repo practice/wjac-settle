@@ -22,6 +22,10 @@
 		</id>
 		<property name="name" column="NAME" length="32" />
 		<property name="role" column="ROLE" length="1" />
+		<set name="users" table="USER" inverse="true">
+			<key column="GROUPID" />
+			<one-to-many class="User" />
+		</set>
 	</class>
 
 </hibernate-mapping>

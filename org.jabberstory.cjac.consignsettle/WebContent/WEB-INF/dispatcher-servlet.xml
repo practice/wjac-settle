@@ -12,7 +12,7 @@
 		<property name="alwaysUseFullPath" value="true"></property>
 		<property name="mappings">
 			<props>
-				<prop key="/user/list">UserListController</prop>
+				<prop key="/user/list">userListController</prop>
 			</props>
 		</property>
 	</bean>
