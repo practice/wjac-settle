@@ -19,4 +19,13 @@ public class UserServiceImpl implements UserService {
 		return userRepository.getUsers(userQuery);
 	}
 
+	@Override
+	public void createUserGroup(String groupId, String name, String role) throws DuplicateUserGroupException {
+		UserGroup group = userRepository.getUserGroup(groupId);
+		if (group != null) {
+			throw new DuplicateUserGroupException("Already existing User Group with group id = " + groupId);		
+		}
+		userRepository.createUserGroup(groupId, name, role);
+	}
+
 }

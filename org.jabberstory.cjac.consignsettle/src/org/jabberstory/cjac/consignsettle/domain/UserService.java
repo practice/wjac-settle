@@ -8,4 +8,6 @@ public interface UserService {
 
 	List<UserGroup> getGroups(String groupQuery);
 
+	void createUserGroup(String groupId, String name, String role) throws DuplicateUserGroupException;
+
 }

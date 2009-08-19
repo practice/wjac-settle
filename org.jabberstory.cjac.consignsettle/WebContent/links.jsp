@@ -9,7 +9,7 @@
 <body>
 Links to application logic.
 <ul>
-	<li><a href="useradmin">User/Role Admin</a></li>
+	<li><a href="user/list">User/Role Admin</a></li>
 </ul>
 </body>
 </html>

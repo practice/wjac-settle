@@ -13,12 +13,20 @@
 		<property name="mappings">
 			<props>
 				<prop key="/user/list">userListController</prop>
+				<prop key="/user/createUserGroup">createUserGroupController</prop>
 			</props>
 		</property>
 	</bean>
 	
 	<bean id="userListController" class="org.jabberstory.cjac.consignsettle.controller.UserListController" 
 		p:userService-ref="userService" />
+	
+	<bean id="createUserGroupController" class="org.jabberstory.cjac.consignsettle.controller.CreateUserGroupController"
+		p:successView=""
+		p:formView="createUserGroup"
+		p:validator-ref="createUserGroupValidator"
+		p:userService-ref="userService" />
+	<bean id="createUserGroupValidator" class="org.jabberstory.cjac.consignsettle.controller.CreateUserGroupValidator" />
 	
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">

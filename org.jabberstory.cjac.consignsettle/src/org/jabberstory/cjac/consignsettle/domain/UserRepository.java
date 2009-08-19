@@ -30,4 +30,19 @@ public class UserRepository extends HibernateDaoSupport {
 		return list;
 	}
 
+	public UserGroup getUserGroup(String groupId) {
+//		String queryString = "from UserGroup g where u.groupId = :groupId";
+//		List list = getHibernateTemplate().findByNamedParam(queryString, "groupId", groupId);
+//		if (list.size() > 0)
+//			return (UserGroup) list.get(0);
+//		return null;
+		UserGroup group = (UserGroup) getHibernateTemplate().get(UserGroup.class, groupId);
+		return group;
+	}
+
+	public void createUserGroup(String groupId, String name, String role) {
+		UserGroup group = new UserGroup(groupId, name, role);
+		getHibernateTemplate().save(group);
+	}
+
 }
