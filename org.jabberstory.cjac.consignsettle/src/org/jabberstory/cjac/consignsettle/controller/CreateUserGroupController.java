@@ -26,6 +26,6 @@ public class CreateUserGroupController extends SimpleFormController {
 			throws Exception {
 		CreateUserGroupCommand param = (CreateUserGroupCommand) command;
 		userService.createUserGroup(param.getGroupId(), param.getName(), param.getRole());
-		return new ModelAndView("redirect:/forum/userGroup?groupId=" + param.getGroupId());
+		return new ModelAndView("redirect:/user/showUserGroup?groupId=" + param.getGroupId());
 	}
 }

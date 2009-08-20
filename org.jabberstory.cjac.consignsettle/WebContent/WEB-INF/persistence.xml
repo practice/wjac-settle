@@ -28,8 +28,4 @@
 	<bean id="transactionManager"
 		class="org.springframework.orm.hibernate3.HibernateTransactionManager"
 		p:sessionFactory-ref="sessionFactory" />
-		
-	<!-- Repository objects -->
-	<bean id="userRepository" class="org.jabberstory.cjac.consignsettle.domain.UserRepository" 
-		p:hibernateTemplate-ref="hibernateTemplate" />
 </beans>

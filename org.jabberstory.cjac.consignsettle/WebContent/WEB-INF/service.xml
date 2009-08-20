@@ -31,7 +31,9 @@
 	<aop:advisor advice-ref="txAdvice" pointcut-ref="servicePublicMethod" />
 </aop:config>
 	
-<!--  Service objects -->
+<!--  Service and Repository objects -->
 <bean id="userService" class="org.jabberstory.cjac.consignsettle.domain.UserServiceImpl" 
 	p:userRepository-ref="userRepository"/>
+<bean id="userRepository" class="org.jabberstory.cjac.consignsettle.domain.UserRepository" 
+	p:hibernateTemplate-ref="hibernateTemplate" />
 </beans>

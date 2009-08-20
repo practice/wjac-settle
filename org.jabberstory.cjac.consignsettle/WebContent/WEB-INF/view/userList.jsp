@@ -7,6 +7,7 @@
 <title>User List</title>
 </head>
 <body>
+<div>
 <form method="post">사용자 검색<input type="text" size="10" name="userQuery"><input type="submit" value="검색"></form>
 <form method="post">사용자그룹 검색<input type="text" size="10" name="groupQuery"><input type="submit" value="검색"></form>
 <c:choose>
@@ -21,7 +22,7 @@
 			<c:forEach var="group" items="${groups}">
 			<tr>
 				<td>${group.groupId}</td><td style="text-overflow:ellipsis; overflow: hidden; ">
-					<a href="showpost?id=${group.groupId}"><nobr>${group.name}</nobr></a></td>
+					<a href="showUserGroup?groupId=${group.groupId}"><nobr>${group.name}</nobr></a></td>
 				<td>${group.role}</td>
 			</tr>
 			</c:forEach>
@@ -30,9 +31,15 @@
 		<span id="numPages" style="display: none">${numPages}</span>
 		<span id="currentPage" style="display: none">${currentPage}</span>	
 	</c:when>
-	<c:otherwise>
+	<c:when test="${count == 0}">
 			검색 결과가 없습니다.
+	</c:when>
+	<c:otherwise>
 	</c:otherwise>
 </c:choose>
+</div>
+<div>
+<a href="createUserGroup">Create User Group</a>
+</div>
 </body>
 </html>

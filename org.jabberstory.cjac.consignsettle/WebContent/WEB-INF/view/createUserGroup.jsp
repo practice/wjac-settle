@@ -12,7 +12,8 @@ Group Name: <input type="text" size="15" name="name" />
 <input type="radio" name="role" value="A">관리자
 <input type="radio" name="role" value="C">회계법인
 <input type="radio" name="role" value="O">전담기관
-<input type="radio" name="role" value="S">주관자
+<input type="radio" name="role" value="S" checked="checked">주관자
+<input type="submit" value="생성" />
 </form>
 </body>
 </html>

@@ -28,4 +28,9 @@ public class UserServiceImpl implements UserService {
 		userRepository.createUserGroup(groupId, name, role);
 	}
 
+	@Override
+	public UserGroup getUserGroup(String groupId) {
+		return userRepository.getUserGroup(groupId);
+	}
+
 }
