@@ -14,4 +14,6 @@ public interface UserService {
 
 	public void updateUserGroup(String groupId, String name, String role);
 
+	public void removeUserGroup(String groupId);
+
 }

@@ -38,4 +38,9 @@ public class UserServiceImpl implements UserService {
 		userRepository.updateUserGroup(groupId, name, role);
 	}
 
+	@Override
+	public void removeUserGroup(String groupId) {
+		userRepository.removeUserGroup(groupId);
+	}
+
 }

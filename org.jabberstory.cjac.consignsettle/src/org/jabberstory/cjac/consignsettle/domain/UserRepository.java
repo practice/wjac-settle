@@ -51,4 +51,9 @@ public class UserRepository extends HibernateDaoSupport {
 		group.setRole(role);
 	}
 
+	public void removeUserGroup(String groupId) {
+		UserGroup userGroup = getUserGroup(groupId);
+		getHibernateTemplate().delete(userGroup);
+	}
+
 }

@@ -16,10 +16,13 @@
 				<prop key="/user/createUserGroup">createUserGroupController</prop>
 				<prop key="/user/updateUserGroup">updateUserGroupController</prop>
 				<prop key="/user/showUserGroup">showUserGroupController</prop>
+				<prop key="/user/removeUserGroup">removeUserGroupController</prop>
 			</props>
 		</property>
 	</bean>
 	
+	<bean id="removeUserGroupController" class="org.jabberstory.cjac.consignsettle.controller.RemoveUserGroupController"
+		p:userService-ref="userService" />
 	<bean id="showUserGroupController" class="org.jabberstory.cjac.consignsettle.controller.ShowUserGroupController"
 		p:userService-ref="userService" />
 	<bean id="userListController" class="org.jabberstory.cjac.consignsettle.controller.UserListController" 
