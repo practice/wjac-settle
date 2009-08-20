@@ -2,6 +2,7 @@ package org.jabberstory.cjac.consignsettle.controller;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -28,7 +29,7 @@ public class UpdateUserGroupController extends SimpleFormController {
 	@SuppressWarnings("unchecked")
 	@Override
 	protected Map referenceData(HttpServletRequest request) throws Exception {
-		HashMap<String, String> availableRoles = new HashMap<String, String>();
+		TreeMap availableRoles = new TreeMap();
 		availableRoles.put("A", "Admin");
 		availableRoles.put("C", "회계법인");
 		availableRoles.put("O", "전담기관");
