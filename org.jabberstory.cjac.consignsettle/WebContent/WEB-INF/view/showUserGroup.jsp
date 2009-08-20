@@ -11,7 +11,7 @@
 User Group Info: ${group.groupId }, ${group.name }, (${group.role })
 </div>
 <div>
-<a href="list">User / Group Home</a>
+<a href="list">User / Group Home</a>, <a href="updateUserGroup?groupId=${group.groupId}">Edit</a>
 </div>
 </body>
 </html>

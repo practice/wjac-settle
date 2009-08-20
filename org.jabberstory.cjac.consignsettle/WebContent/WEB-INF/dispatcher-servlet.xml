@@ -14,6 +14,7 @@
 			<props>
 				<prop key="/user/list">userListController</prop>
 				<prop key="/user/createUserGroup">createUserGroupController</prop>
+				<prop key="/user/updateUserGroup">updateUserGroupController</prop>
 				<prop key="/user/showUserGroup">showUserGroupController</prop>
 			</props>
 		</property>
@@ -25,7 +26,10 @@
 		p:successView="userList"
 		p:formView="userList"
 		p:userService-ref="userService" />
-	
+	<bean id="updateUserGroupController" class="org.jabberstory.cjac.consignsettle.controller.UpdateUserGroupController"
+		p:successView=""
+		p:formView="updateUserGroup"
+		p:userService-ref="userService" />
 	<bean id="createUserGroupController" class="org.jabberstory.cjac.consignsettle.controller.CreateUserGroupController"
 		p:successView=""
 		p:formView="createUserGroup"

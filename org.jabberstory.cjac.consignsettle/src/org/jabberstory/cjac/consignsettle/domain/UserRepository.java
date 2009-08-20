@@ -45,4 +45,10 @@ public class UserRepository extends HibernateDaoSupport {
 		getHibernateTemplate().save(group);
 	}
 
+	public void updateUserGroup(String groupId, String name, String role) {
+		UserGroup group = getUserGroup(groupId);
+		group.setName(name);
+		group.setRole(role);
+	}
+
 }
