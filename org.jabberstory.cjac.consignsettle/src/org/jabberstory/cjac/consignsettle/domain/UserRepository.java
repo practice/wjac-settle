@@ -56,4 +56,13 @@ public class UserRepository extends HibernateDaoSupport {
 		getHibernateTemplate().delete(userGroup);
 	}
 
+	public User getUser(String userId) {
+		User user = (User) getHibernateTemplate().get(User.class, userId);
+		return user;
+	}
+
+	public void createUser(String userId, String password, String username, String email) {
+		getHibernateTemplate().save(new User(userId, username, email, password));
+	}
+
 }

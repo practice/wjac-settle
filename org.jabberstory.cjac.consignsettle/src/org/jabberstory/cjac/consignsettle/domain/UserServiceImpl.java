@@ -20,10 +20,10 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void createUserGroup(String groupId, String name, String role) throws DuplicateUserGroupException {
+	public void createUserGroup(String groupId, String name, String role) throws DuplicateEntityException {
 		UserGroup group = userRepository.getUserGroup(groupId);
 		if (group != null) {
-			throw new DuplicateUserGroupException("Already existing User Group with group id = " + groupId);		
+			throw new DuplicateEntityException("Already existing User Group with group id = " + groupId);		
 		}
 		userRepository.createUserGroup(groupId, name, role);
 	}
@@ -41,6 +41,14 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public void removeUserGroup(String groupId) {
 		userRepository.removeUserGroup(groupId);
+	}
+
+	@Override
+	public void createUser(String userId, String password, String username, String email) throws DuplicateEntityException {
+		User user = userRepository.getUser(userId);
+		if (user != null)
+			throw new DuplicateEntityException("Already existing user with user id = " + userId);
+		userRepository.createUser(userId, password, username, email);
 	}
 
 }

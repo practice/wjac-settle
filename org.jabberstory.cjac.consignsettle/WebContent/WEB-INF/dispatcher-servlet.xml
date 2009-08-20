@@ -17,10 +17,17 @@
 				<prop key="/user/updateUserGroup">updateUserGroupController</prop>
 				<prop key="/user/showUserGroup">showUserGroupController</prop>
 				<prop key="/user/removeUserGroup">removeUserGroupController</prop>
+				<prop key="/user/createUser">createUserController</prop>
 			</props>
 		</property>
 	</bean>
 	
+	<bean id="createUserController" class="org.jabberstory.cjac.consignsettle.controller.CreateUserController"
+		p:successView=""
+		p:formView="createUser"
+		p:validator-ref="createUserValidator"
+		p:userService-ref="userService" />
+	<bean id="createUserValidator" class="org.jabberstory.cjac.consignsettle.controller.CreateUserValidator" />
 	<bean id="removeUserGroupController" class="org.jabberstory.cjac.consignsettle.controller.RemoveUserGroupController"
 		p:userService-ref="userService" />
 	<bean id="showUserGroupController" class="org.jabberstory.cjac.consignsettle.controller.ShowUserGroupController"

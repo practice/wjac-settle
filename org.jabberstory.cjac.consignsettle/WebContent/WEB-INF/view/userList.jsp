@@ -39,7 +39,7 @@
 </c:choose>
 </div>
 <div>
-<a href="createUserGroup">Create User Group</a>
+<a href="createUser">Create User</a>, <a href="createUserGroup">Create User Group</a>
 </div>
 </body>
 </html>

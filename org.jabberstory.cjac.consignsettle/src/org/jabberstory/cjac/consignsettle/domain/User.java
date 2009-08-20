@@ -18,6 +18,12 @@ public class User {
 		this.group = group;
 	}
 
+	public User(String userId, String username, String email, String password) {
+		this.userId = userId;
+		this.username = username;
+		this.email = email;
+		this.password = password;
+	}
 
 	public void setUserId(String userId) {
 		this.userId = userId;
