@@ -20,4 +20,6 @@ public interface UserService {
 	public void createUser(String userId, String password, String username, String email) 
 		throws DuplicateEntityException;
 
+	public User getUser(String userId);
+
 }

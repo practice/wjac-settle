@@ -51,4 +51,9 @@ public class UserServiceImpl implements UserService {
 		userRepository.createUser(userId, password, username, email);
 	}
 
+	@Override
+	public User getUser(String userId) {
+		return userRepository.getUser(userId);
+	}
+
 }
