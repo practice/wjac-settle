@@ -31,13 +31,13 @@ public class UserListController extends SimpleFormController {
 		if (query.getUserQuery() != null && query.getUserQuery().trim().length() > 0) {
 			List<User> users = userService.getUsers(query.getUserQuery());
 			ModelAndView mv = new ModelAndView("userList", "users", users);
-			mv.addObject("count", users.size());
+			mv.addObject("userCount", users.size());
 			return mv;
 		} 
 		if (query.getGroupQuery() != null && query.getGroupQuery().trim().length() > 0) {
 			List<UserGroup> groups = userService.getGroups(query.getGroupQuery());
 			ModelAndView mv = new ModelAndView("userList", "groups", groups);
-			mv.addObject("count", groups.size());
+			mv.addObject("groupCount", groups.size());
 			return mv;
 		}
 		return new ModelAndView("userList");

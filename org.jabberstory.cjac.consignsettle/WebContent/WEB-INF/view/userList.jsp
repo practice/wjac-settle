@@ -10,8 +10,9 @@
 <div>
 <form method="post">사용자 검색<input type="text" size="10" name="userQuery"><input type="submit" value="검색"></form>
 <form method="post">사용자그룹 검색<input type="text" size="10" name="groupQuery"><input type="submit" value="검색"></form>
+<div id="groupList">
 <c:choose>
-	<c:when test="${count > 0}">
+	<c:when test="${groupCount > 0}">
 		<table width="800" class="paginated" style="table-layout: fixed">
 			<thead>
 			<tr>
@@ -31,12 +32,43 @@
 		<span id="numPages" style="display: none">${numPages}</span>
 		<span id="currentPage" style="display: none">${currentPage}</span>	
 	</c:when>
-	<c:when test="${count == 0}">
+	<c:when test="${groupCount == 0}">
 			검색 결과가 없습니다.
 	</c:when>
 	<c:otherwise>
 	</c:otherwise>
 </c:choose>
+</div>
+<div id="userList">
+<c:choose>
+	<c:when test="${userCount > 0}">
+		<table width="800" class="paginated" style="table-layout: fixed">
+			<thead>
+			<tr>
+			<th width="30">User ID</th><th width="500">User Name</th><th width="100">E-Mail</th><th width="100">Group</th>
+			</tr>
+			</thead>
+			<tbody>
+			<c:forEach var="user" items="${users}">
+			<tr>
+				<td>${user.userId}</td><td style="text-overflow:ellipsis; overflow: hidden; ">
+					<a href="showUser?userId=${user.userId}"><nobr>${user.username}</nobr></a></td>
+				<td>${user.email}</td>
+				<td>${user.group.name }</td>
+			</tr>
+			</c:forEach>
+			</tbody>
+		</table>
+		<span id="numPages" style="display: none">${numPages}</span>
+		<span id="currentPage" style="display: none">${currentPage}</span>	
+	</c:when>
+	<c:when test="${userCount == 0}">
+			검색 결과가 없습니다.
+	</c:when>
+	<c:otherwise>
+	</c:otherwise>
+</c:choose>
+</div>
 </div>
 <div>
 <a href="createUser">Create User</a>, <a href="createUserGroup">Create User Group</a>
