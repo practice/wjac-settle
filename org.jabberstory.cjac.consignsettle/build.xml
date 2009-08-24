@@ -4,7 +4,7 @@
 		<pathelement path="build/classes" />
 		<pathelement path="WebContent/WEB-INF/lib/hibernate3.jar" />
 		<pathelement path="WebContent/WEB-INF/lib/commons-logging-1.0.4.jar" />
-		<pathelement path="WebContent/WEB-INF/lib/commons-collections-2.1.1.jar" />
+		<pathelement path="WebContent/WEB-INF/lib/commons-collections-3.2.1.jar" />
 		<pathelement path="WebContent/WEB-INF/lib/dom4j-1.6.1.jar" />
 		<pathelement path="WebContent/WEB-INF/lib/c3p0-0.9.1.jar" />
 		<pathelement path="WebContent/WEB-INF/lib/mysql-connector-java-5.0.4-bin.jar" />
