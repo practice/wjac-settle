@@ -74,9 +74,9 @@
 					</tr>
 				</c:when>	
 				<c:otherwise>
-					<c:forEach items="${pagingList.items}" var="owner">		
+					<c:forEach items="${pagingList.items}" var="owner" varStatus="status">		
 						<tr>
-							<td class="">-</td>
+							<td class="">${(pagingList.currentPage - 1) * 10 + status.count}</td>
 							<td class=""><a href="#" onClick="showOwner('${owner.ownerId}');return false;">${owner.ownerName}</a></td>
 							<td class="">-</td>
 							<td class=""><a href="" onClick="">상세보기</a></td>
