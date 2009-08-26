@@ -36,4 +36,8 @@
 		<servlet-name>dispatcher</servlet-name>
 		<url-pattern>/user/*</url-pattern>
 	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>dispatcher</servlet-name>
+		<url-pattern>/owner/*</url-pattern>
+	</servlet-mapping>
 </web-app>
