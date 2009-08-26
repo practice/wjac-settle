@@ -36,4 +36,10 @@
 	p:userRepository-ref="userRepository"/>
 <bean id="userRepository" class="org.jabberstory.cjac.consignsettle.domain.UserRepository" 
 	p:hibernateTemplate-ref="hibernateTemplate" />
+
+<bean id="ownerDao" class="org.jabberstory.cjac.consignsettle.domain.OwnerDaoImpl" 
+	p:hibernateTemplate-ref="hibernateTemplate" />
+<bean id="ownerService" class="org.jabberstory.cjac.consignsettle.domain.OwnerServiceImpl" 
+	p:ownerDao-ref="ownerDao"/>	
+
 </beans>
