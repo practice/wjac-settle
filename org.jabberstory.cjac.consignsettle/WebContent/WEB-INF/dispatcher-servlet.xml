@@ -19,6 +19,7 @@
 				<prop key="/user/removeUserGroup">removeUserGroupController</prop>
 				<prop key="/user/createUser">createUserController</prop>
 				<prop key="/user/showUser">showUserController</prop>
+				<prop key="/owner/*">ownerMultiActionController</prop>
 			</props>
 		</property>
 	</bean>
@@ -49,6 +50,24 @@
 		p:validator-ref="createUserGroupValidator"
 		p:userService-ref="userService" />
 	<bean id="createUserGroupValidator" class="org.jabberstory.cjac.consignsettle.controller.CreateUserGroupValidator" />
+	
+	<bean id="ownerMultiActionController" class="org.jabberstory.cjac.consignsettle.controller.OwnerMultiActionController">
+		<property name="ownerService" ref="ownerService" />
+		<property name="methodNameResolver"	ref="ownerMultiActionControllerMethodNameResolver" />
+	</bean>
+	
+	<bean id="ownerMultiActionControllerMethodNameResolver" class="org.springframework.web.servlet.mvc.multiaction.PropertiesMethodNameResolver">
+		<property name="mappings">
+			<props>
+				<prop key="/listOwner">listPaging</prop>
+				<prop key="/createOwner">create</prop>
+				<prop key="/showOwner">show</prop>
+				<prop key="/updateOwner">update</prop>
+				<prop key="/deleteOwner">delete</prop>
+				<prop key="/*">others</prop>								
+			</props>
+		</property>		
+	</bean>
 	
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
