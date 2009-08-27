@@ -16,10 +16,12 @@
 package org.jabberstory.cjac.consignsettle.domain;
 
 import java.util.Collection;
+
 import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Order;
 import org.jabberstory.cjac.consignsettle.common.util.Paging;
 import org.jabberstory.cjac.consignsettle.domain.Owner;
@@ -67,16 +69,20 @@ public class OwnerDaoImpl extends HibernateDaoSupport implements OwnerDao{
 		int totalCount = this.getOwnersByUserId(userId, role).size();
 		final Order order = (sortColumn == "") ? Order.asc("ownerName"): Order.desc(sortColumn);
 		
-		Collection owners = (Collection)getHibernateTemplate().execute(new HibernateCallback() {
-            public Object doInHibernate(Session session) {
-                Criteria criteria = session.createCriteria(Owner.class);
-                criteria.addOrder(order);
-                criteria.setFirstResult(fromRowNum);
-                criteria.setMaxResults(toRowNum);
-                return criteria.list();
-            }
-        });
-			
+//		Collection owners = (Collection)getHibernateTemplate().execute(new HibernateCallback() {
+//            public Object doInHibernate(Session session) {
+//                Criteria criteria = session.createCriteria(Owner.class);
+//                criteria.addOrder(order);
+//                criteria.setFirstResult(fromRowNum);
+//                criteria.setMaxResults(toRowNum);
+//                return criteria.list();
+//            }
+//        });
+
+		DetachedCriteria criteria = DetachedCriteria.forClass(Owner.class);
+        criteria.addOrder(order);
+        List owners = (List)getHibernateTemplate().findByCriteria(criteria, fromRowNum, toRowNum);
+		
 		return new Paging((List)owners, totalCount, currentPage);
 	}
 
