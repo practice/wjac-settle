@@ -15,14 +15,23 @@
 */
 package org.jabberstory.cjac.consignsettle.controller;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.jabberstory.cjac.consignsettle.common.util.Paging;
+import org.jabberstory.cjac.consignsettle.domain.Owner;
+import org.jabberstory.cjac.consignsettle.domain.OwnerService;
 import org.jabberstory.cjac.consignsettle.domain.Subject;
 import org.jabberstory.cjac.consignsettle.domain.SubjectService;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
@@ -33,20 +42,28 @@ import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
  * @since August 28, 2009
  */
 public class SubjectMultiActionController extends MultiActionController {
+	
+	protected final Log logger = LogFactory.getLog(getClass());
+	private SubjectService subjectService;
+	private OwnerService ownerService;
 
 	public SubjectMultiActionController() {
 	}
 
-	private SubjectService subjectService;
-	
 	public void setSubjectService(SubjectService subjectService) {
 		this.subjectService = subjectService;
+	}
+	
+	public void setOwnerService(OwnerService ownerService) {
+		this.ownerService = ownerService;
 	}
 	
 	public ModelAndView create(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		
 		String subjectName = (request.getParameter("subjectName") == null) ? "": request.getParameter("subjectName");
+		String ownerId = (request.getParameter("ownerId") == null) ? "": request.getParameter("ownerId");
+		Owner owner = ownerService.getOwner(ownerId);
 		
 		if (subjectName.equals("")){
 			return new ModelAndView("createSubject");
@@ -55,6 +72,7 @@ public class SubjectMultiActionController extends MultiActionController {
 		Subject subject = new Subject();
 		
 		bind(request, subject);
+		subject.setOwner(owner);
 		
 		subjectService.createSubject(subject);
 		
@@ -78,6 +96,9 @@ public class SubjectMultiActionController extends MultiActionController {
 
 		String subjectId = request.getParameter("subjectId");
 		String subjectName = (request.getParameter("subjectName") == null) ? "": request.getParameter("subjectName");
+		String ownerId = (request.getParameter("ownerId") == null) ? "": request.getParameter("ownerId");
+		Owner owner = ownerService.getOwner(ownerId);
+		
 		Subject subject;
 		
 		if (subjectName.equals("")){
@@ -88,6 +109,7 @@ public class SubjectMultiActionController extends MultiActionController {
 		subject = new Subject();
 
 		bind(request, subject);
+		subject.setOwner(owner);
 
 		subjectService.updateSubject(subject);
 
@@ -123,7 +145,7 @@ public class SubjectMultiActionController extends MultiActionController {
 	
 	public ModelAndView listPaging(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
-
+		
 		String pageNo = (request.getParameter("pageNo") == null) ? "1": request.getParameter("pageNo");
 		String sortColumn = (request.getParameter("sortColumn") == null) ? "": request.getParameter("sortColumn");
 
@@ -141,5 +163,27 @@ public class SubjectMultiActionController extends MultiActionController {
 		return mv;
 
 	}
+	
+	public ModelAndView createCostDetail(HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		
+		return new ModelAndView("createCostDetail");
+	    
+	}
+	
+	public ModelAndView showCostDetail(HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+
+		return new ModelAndView("showCostDetail");
+
+	}
+	
+//	@Override
+//	protected void initBinder(HttpServletRequest request, 
+//            ServletRequestDataBinder binder) throws Exception { 
+//        DateFormat df = new SimpleDateFormat("yyyy-MM-dd"); 
+//        CustomDateEditor dateEdit = new CustomDateEditor(df, false); 
+//        binder.registerCustomEditor(Date.class, dateEdit); 
+//    } 
 	
 }
