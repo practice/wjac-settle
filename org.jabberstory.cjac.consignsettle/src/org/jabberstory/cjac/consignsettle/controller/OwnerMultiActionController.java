@@ -20,6 +20,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.jabberstory.cjac.consignsettle.common.util.Paging;
 import org.jabberstory.cjac.consignsettle.domain.Owner;
 import org.jabberstory.cjac.consignsettle.domain.OwnerService;
@@ -34,6 +36,8 @@ import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
  */
 public class OwnerMultiActionController extends MultiActionController {
 
+	protected final Log logger = LogFactory.getLog(getClass());
+	
 	public OwnerMultiActionController() {
 	}
 
