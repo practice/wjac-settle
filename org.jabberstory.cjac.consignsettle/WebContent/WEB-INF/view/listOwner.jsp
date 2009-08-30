@@ -6,7 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>CJAC</title>
-<script language="javascript">
+<script type="text/javascript">
 <!--
 	function doSearch(pageNo){
 		document.form1.pageNo.value = pageNo;
@@ -77,9 +77,9 @@
 					<c:forEach items="${pagingList.items}" var="owner" varStatus="status">		
 						<tr>
 							<td class="">${(pagingList.currentPage - 1) * 10 + status.count}</td>
-							<td class=""><a href="#" onClick="showOwner('${owner.ownerId}');return false;">${owner.ownerName}</a></td>
+							<td class="">${owner.ownerName}</td>
 							<td class="">-</td>
-							<td class=""><a href="" onClick="">상세보기</a></td>
+							<td class=""><a href="#" onClick="showOwner('${owner.ownerId}');return false;">상세보기</a></td>
 						</tr>
 					</c:forEach>
 				</c:otherwise>
@@ -90,7 +90,6 @@
 </div>		
 <div>
 	<a href="#" onClick="createOwner();return false;">전담기관생성</a>
-	<a href="#" onClick="createSubject();return false;">주관기관생성</a>
 </div>
 <!-- Start Paginate -->
 <caf:paging 
