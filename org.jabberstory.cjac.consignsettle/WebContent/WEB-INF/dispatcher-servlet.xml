@@ -20,6 +20,7 @@
 				<prop key="/user/createUser">createUserController</prop>
 				<prop key="/user/showUser">showUserController</prop>
 				<prop key="/owner/*">ownerMultiActionController</prop>
+				<prop key="/subject/*">subjectMultiActionController</prop>
 			</props>
 		</property>
 	</bean>
@@ -53,10 +54,16 @@
 	
 	<bean id="ownerMultiActionController" class="org.jabberstory.cjac.consignsettle.controller.OwnerMultiActionController">
 		<property name="ownerService" ref="ownerService" />
-		<property name="methodNameResolver"	ref="ownerMultiActionControllerMethodNameResolver" />
+		<property name="methodNameResolver"	ref="facilityMultiActionControllerMethodNameResolver" />
 	</bean>
 	
-	<bean id="ownerMultiActionControllerMethodNameResolver" class="org.springframework.web.servlet.mvc.multiaction.PropertiesMethodNameResolver">
+	<bean id="subjectMultiActionController" class="org.jabberstory.cjac.consignsettle.controller.SubjectMultiActionController">
+		<property name="subjectService" ref="subjectService" />
+		<property name="ownerService" ref="ownerService" />
+		<property name="methodNameResolver"	ref="facilityMultiActionControllerMethodNameResolver" />
+	</bean>
+	
+	<bean id="facilityMultiActionControllerMethodNameResolver" class="org.springframework.web.servlet.mvc.multiaction.PropertiesMethodNameResolver">
 		<property name="mappings">
 			<props>
 				<prop key="/listOwner">listPaging</prop>
@@ -64,6 +71,13 @@
 				<prop key="/showOwner">show</prop>
 				<prop key="/updateOwner">update</prop>
 				<prop key="/deleteOwner">delete</prop>
+				<prop key="/listSubject">listPaging</prop>
+				<prop key="/createSubject">create</prop>
+				<prop key="/showSubject">show</prop>
+				<prop key="/updateSubject">update</prop>
+				<prop key="/deleteSubject">delete</prop>
+				<prop key="/showCostDetail">showCostDetail</prop>
+				<prop key="/createCostDetail">createCostDetail</prop>				
 				<prop key="/*">others</prop>								
 			</props>
 		</property>		
