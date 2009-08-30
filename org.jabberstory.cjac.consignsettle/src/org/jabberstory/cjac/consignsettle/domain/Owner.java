@@ -16,6 +16,8 @@
 package org.jabberstory.cjac.consignsettle.domain;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * 전담기관 도메인 모델
@@ -28,23 +30,18 @@ public class Owner {
 	private String ownerName;
 	private String createUserId;
 	private Date createDate;
-
-	public Owner(){		
-	}
-
-	/**
-	 * @param ownerId
-	 * @param ownerName
-	 * @param createUserId
-	 * @param createDate
-	 */
+	private Set<Subject> subjects = new HashSet<Subject>();
+	
+	public Owner(){}
+	
 	public Owner(String ownerId, String ownerName, String createUserId,
-			Date createDate) {
+			Date createDate, Set<Subject> subjects) {
 		super();
 		this.ownerId = ownerId;
 		this.ownerName = ownerName;
 		this.createUserId = createUserId;
 		this.createDate = createDate;
+		this.subjects = subjects;
 	}
 
 	public String getOwnerId() {
@@ -79,11 +76,19 @@ public class Owner {
 		this.createDate = createDate;
 	}
 
+	public Set<Subject> getSubjects() {
+		return subjects;
+	}
+
+	public void setSubjects(Set<Subject> subjects) {
+		this.subjects = subjects;
+	}
+
 	@Override
 	public String toString() {
 		return "Owner [createDate=" + createDate + ", createUserId="
 				+ createUserId + ", ownerId=" + ownerId + ", ownerName="
-				+ ownerName + "]";
+				+ ownerName + ", subjects=" + subjects + "]";
 	}
 
 	@Override
@@ -97,6 +102,8 @@ public class Owner {
 		result = prime * result + ((ownerId == null) ? 0 : ownerId.hashCode());
 		result = prime * result
 				+ ((ownerName == null) ? 0 : ownerName.hashCode());
+		result = prime * result
+				+ ((subjects == null) ? 0 : subjects.hashCode());
 		return result;
 	}
 
@@ -129,7 +136,13 @@ public class Owner {
 				return false;
 		} else if (!ownerName.equals(other.ownerName))
 			return false;
+		if (subjects == null) {
+			if (other.subjects != null)
+				return false;
+		} else if (!subjects.equals(other.subjects))
+			return false;
 		return true;
 	}
+	
 	
 }

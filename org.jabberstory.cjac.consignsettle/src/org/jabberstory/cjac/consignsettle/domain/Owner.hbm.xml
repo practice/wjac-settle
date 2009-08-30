@@ -11,6 +11,68 @@
 		</id>
 		<property name="ownerName" column="OWNERNAME" type="string" length="32" />
 		<property name="createUserId" column="CREATEUSERID" type="string" length="32" />
-		<property name="createDate" column="CREATEDATE" type="timestamp" />
+		<property name="createDate" column="CREATEDATE" type="timestamp" generated="always"/>
+		<set name="subjects" table="Subject" inverse="true">
+			<key column="OWNERID" />
+			<one-to-many class="Subject" />
+		</set>
+		
 	</class>
+	
+	<class name="Subject" table="SUBJECT">
+		<id name="subjectId" column="SUBJECTID" length="32">
+			<generator class="uuid" />
+		</id>
+		<property name="subjectName" column="SUBJECT_NAME" type="string" length="32" />
+		<property name="businessName" column="BUSINESS_NAME" type="string" length="32" />
+		<property name="projectName" column="PROJECT_NAME" type="string" length="32" />
+		<property name="researchAgency" column="RESEARCH_AGENCY" type="string" length="32" />
+		<property name="researchResponsiblePerson" column="RESEARCH_RESPONSIBLE_PERSON" type="string" length="32" />
+		<property name="contractStartDate" column="CONTRACT_STARTDATE" type="string" length="32" />
+		<property name="contractEndDate" column="CONTRACT_ENDDATE" type="string" length="32" />
+		
+		<property name="govContributeAmount" column="GOV_CONTRIBUTE_AMOUNT" type="string" length="32" />
+		<property name="nonGovContributeAmount" column="NONGOV_CONTRIBUTE_AMOUNT" type="string" length="32" />
+		<property name="goodsAmount" column="GOODS_AMOUNT" type="string" length="32" />
+		<property name="totalCashAmount" column="TOTAL_CACHE_AMOUNT" type="string" length="32" />
+		<property name="govInterests" column="GOV_INTERESTS" type="string" length="32" />
+		<property name="consignSettlementCommission" column="CONSIGN_SETTLEMENT_COMMISSION" type="string" length="32" />
+		
+		<property name="useResultDate" column="USE_RESULT_DATE" type="string" length="32" />
+		<property name="formalObjectAcceptanceDate" column="FORMALOBJECT_ACCEPTANCE_DATE" type="string" length="32" />
+		<property name="formalObjectResultDate" column="FORMALOBJECT_RESULT_DATE" type="string" length="32" />
+		<property name="consignSettlementResultDate" column="CONSIGN_SETTLEMENT_RESULTDATE" type="string" length="32" />
+		
+		<property name="subjectResponsiblePerson" column="SUBJECT_RESPONSIBLE_PERSON" type="string" length="32" />
+		<property name="subjectResponsiblePhone1" column="SUBJECT_RESPONSIBLE_PHONE1" type="string" length="32" />
+		<property name="subjectResponsiblePhone2" column="SUBJECT_RESPONSIBLE_PHONE2" type="string" length="32" />
+		<property name="subjectResponsiblePhone3" column="SUBJECT_RESPONSIBLE_PHONE3" type="string" length="32" />
+		<property name="subjectResponsiblePostNumber1" column="SUBJECT_RESPONSIBLE_POSTNUMBER1" type="string" length="32" />
+		<property name="subjectResponsiblePostNumber2" column="SUBJECT_RESPONSIBLE_POSTNUMBER2" type="string" length="32" />
+		<property name="subjectResponsibleAddress" column="SUBJECT_RESPONSIBLE_ADDRESS" type="string" length="32" />
+		<property name="subejctResponsibleEmail" column="SUBJECT_RESPONSIBLE_EMAIL" type="string" length="32" />
+		
+		<property name="consignSettlementPerson" column="CONSIGN_SETTLEMENT_PERSON" type="string" length="32" />
+		<property name="consignSettlementPhone1" column="CONSIGN_SETTLEMENT_PHONE1" type="string" length="32" />
+		<property name="consignSettlementPhone2" column="CONSIGN_SETTLEMENT_PHONE2" type="string" length="32" />
+		<property name="consignSettlementPhone3" column="CONSIGN_SETTLEMENT_PHONE3" type="string" length="32" />
+		<property name="consignSettlementPostNumber1" column="CONSIGN_SETTLEMENT_POSTNUMBER1" type="string" length="32" />
+		<property name="consignSettlementPostNumber2" column="CONSIGN_SETTLEMENT_POSTNUMBER2" type="string" length="32" />
+		<property name="consignSettlementAddress" column="CONSIGN_SETTLEMENT_ADDRESS" type="string" length="32" />
+		<property name="consignSettlementEmail" column="CONSIGN_SETTLEMENT_EMAIL" type="string" length="32" />
+		
+		<property name="currentAccount" column="CURRENT_AMOUNT" type="string" length="32" />
+		<property name="currentInterest" column="CURRENT_INTEREST" type="string" length="32" />
+		<property name="currentNonPropriety" column="CURRENT_NONPROPRIETY" type="string" length="32" />
+		<property name="currentRedemtion" column="CURRENT_REDEMTION" type="string" length="32" />
+		<property name="currentSubTotal" column="CURRENT_SUB_TOTAL" type="string" length="32" />
+
+		<property name="createUserId" column="CREATE_USER_ID" type="string" length="32" />		
+		<property name="createUserName" column="CREATE_USER_NAME" type="string" length="32" />
+		<property name="createDate" column="CREATEDATE" type="timestamp" generated="always"/>
+		
+		<many-to-one name="owner" class="Owner" column="OWNERID" lazy="false" foreign-key="FK_SUBJECT_OWNER" />
+	
+	</class>
+	
 </hibernate-mapping>

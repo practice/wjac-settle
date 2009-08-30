@@ -15,18 +15,12 @@
 */
 package org.jabberstory.cjac.consignsettle.domain;
 
-import java.util.Collection;
-
 import java.util.List;
 
-import org.hibernate.Criteria;
-import org.hibernate.Session;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Order;
 import org.jabberstory.cjac.consignsettle.common.util.Paging;
-import org.jabberstory.cjac.consignsettle.domain.Owner;
 import org.springframework.dao.DataAccessException;
-import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 

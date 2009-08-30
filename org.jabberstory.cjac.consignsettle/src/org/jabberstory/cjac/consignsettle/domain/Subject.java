@@ -25,28 +25,26 @@ import java.util.Date;
  */
 public class Subject {
 
-	private String ownerId;
-	private String ownerName;
 	private String subjectId;
 	private String subjectName;
 	private String businessName;
 	private String projectName;
 	private String researchAgency;
 	private String researchResponsiblePerson;
-	private Date contractStartDate;
-	private Date contractEndDate;
+	private String contractStartDate;
+	private String contractEndDate;
 	
-	private long govContributeAmount;
-	private long nonGovContributeAmount;
-	private long goodsAmount;
-	private long totalCashAmount;
-	private long govInterests;
-	private long consignSettlementCommission;
+	private String govContributeAmount;
+	private String nonGovContributeAmount;
+	private String goodsAmount;
+	private String totalCashAmount;
+	private String govInterests;
+	private String consignSettlementCommission;
 	
-	private Date useResultDate;	
-	private Date formalObjectAcceptanceDate;
-	private Date formalObjectResultDate;
-	private Date consignSettlementResultDate;
+	private String useResultDate;	
+	private String formalObjectAcceptanceDate;
+	private String formalObjectResultDate;
+	private String consignSettlementResultDate;
 	
 	private String subjectResponsiblePerson;
 	private String subjectResponsiblePhone1;
@@ -66,30 +64,31 @@ public class Subject {
 	private String consignSettlementAddress;
 	private String consignSettlementEmail;
 	
-	private long currentAccount;
-	private long currentInterest;
-	private long currentNonPropriety;
-	private long currentRedemtion;
-	private long currentSubTotal;
+	private String currentAccount;
+	private String currentInterest;
+	private String currentNonPropriety;
+	private String currentRedemtion;
+	private String currentSubTotal;
 	
 	private String createUserId;
 	private String createUserName;
 	private Date createDate;
 	
-	public Subject(){
-	}
+	private Owner owner;
 	
-	public Subject(String ownerId, String ownerName, String subjectId,
-			String subjectName, String businessName, String projectName,
-			String researchAgency, String researchResponsiblePerson,
-			Date contractStartDate, Date contractEndDate,
-			long govContributeAmount, long nonGovContributeAmount,
-			long goodsAmount, long totalCashAmount, long govInterests,
-			long consignSettlementCommission, Date useResultDate,
-			Date formalObjectAcceptanceDate, Date formalObjectResultDate,
-			Date consignSettlementResultDate, String subjectResponsiblePerson,
-			String subjectResponsiblePhone1, String subjectResponsiblePhone2,
-			String subjectResponsiblePhone3,
+	public Subject(){}
+
+	public Subject(String subjectId, String subjectName, String businessName,
+			String projectName, String researchAgency,
+			String researchResponsiblePerson, String contractStartDate,
+			String contractEndDate, String govContributeAmount,
+			String nonGovContributeAmount, String goodsAmount,
+			String totalCashAmount, String govInterests,
+			String consignSettlementCommission, String useResultDate,
+			String formalObjectAcceptanceDate, String formalObjectResultDate,
+			String consignSettlementResultDate,
+			String subjectResponsiblePerson, String subjectResponsiblePhone1,
+			String subjectResponsiblePhone2, String subjectResponsiblePhone3,
 			String subjectResponsiblePostNumber1,
 			String subjectResponsiblePostNumber2,
 			String subjectResponsibleAddress, String subejctResponsibleEmail,
@@ -98,13 +97,11 @@ public class Subject {
 			String consignSettlementPostNumber1,
 			String consignSettlementPostNumber2,
 			String consignSettlementAddress, String consignSettlementEmail,
-			long currentAccount, long currentInterest,
-			long currentNonPropriety, long currentRedemtion,
-			long currentSubTotal, String createUserId, String createUserName,
-			Date createDate) {
+			String currentAccount, String currentInterest,
+			String currentNonPropriety, String currentRedemtion,
+			String currentSubTotal, String createUserId, String createUserName,
+			Date createDate, Owner owner) {
 		super();
-		this.ownerId = ownerId;
-		this.ownerName = ownerName;
 		this.subjectId = subjectId;
 		this.subjectName = subjectName;
 		this.businessName = businessName;
@@ -147,6 +144,353 @@ public class Subject {
 		this.createUserId = createUserId;
 		this.createUserName = createUserName;
 		this.createDate = createDate;
+		this.owner = owner;
+	}
+
+	public String getSubjectId() {
+		return subjectId;
+	}
+
+	public void setSubjectId(String subjectId) {
+		this.subjectId = subjectId;
+	}
+
+	public String getSubjectName() {
+		return subjectName;
+	}
+
+	public void setSubjectName(String subjectName) {
+		this.subjectName = subjectName;
+	}
+
+	public String getBusinessName() {
+		return businessName;
+	}
+
+	public void setBusinessName(String businessName) {
+		this.businessName = businessName;
+	}
+
+	public String getProjectName() {
+		return projectName;
+	}
+
+	public void setProjectName(String projectName) {
+		this.projectName = projectName;
+	}
+
+	public String getResearchAgency() {
+		return researchAgency;
+	}
+
+	public void setResearchAgency(String researchAgency) {
+		this.researchAgency = researchAgency;
+	}
+
+	public String getResearchResponsiblePerson() {
+		return researchResponsiblePerson;
+	}
+
+	public void setResearchResponsiblePerson(String researchResponsiblePerson) {
+		this.researchResponsiblePerson = researchResponsiblePerson;
+	}
+
+	public String getContractStartDate() {
+		return contractStartDate;
+	}
+
+	public void setContractStartDate(String contractStartDate) {
+		this.contractStartDate = contractStartDate;
+	}
+
+	public String getContractEndDate() {
+		return contractEndDate;
+	}
+
+	public void setContractEndDate(String contractEndDate) {
+		this.contractEndDate = contractEndDate;
+	}
+
+	public String getGovContributeAmount() {
+		return govContributeAmount;
+	}
+
+	public void setGovContributeAmount(String govContributeAmount) {
+		this.govContributeAmount = govContributeAmount;
+	}
+
+	public String getNonGovContributeAmount() {
+		return nonGovContributeAmount;
+	}
+
+	public void setNonGovContributeAmount(String nonGovContributeAmount) {
+		this.nonGovContributeAmount = nonGovContributeAmount;
+	}
+
+	public String getGoodsAmount() {
+		return goodsAmount;
+	}
+
+	public void setGoodsAmount(String goodsAmount) {
+		this.goodsAmount = goodsAmount;
+	}
+
+	public String getTotalCashAmount() {
+		return totalCashAmount;
+	}
+
+	public void setTotalCashAmount(String totalCashAmount) {
+		this.totalCashAmount = totalCashAmount;
+	}
+
+	public String getGovInterests() {
+		return govInterests;
+	}
+
+	public void setGovInterests(String govInterests) {
+		this.govInterests = govInterests;
+	}
+
+	public String getConsignSettlementCommission() {
+		return consignSettlementCommission;
+	}
+
+	public void setConsignSettlementCommission(String consignSettlementCommission) {
+		this.consignSettlementCommission = consignSettlementCommission;
+	}
+
+	public String getUseResultDate() {
+		return useResultDate;
+	}
+
+	public void setUseResultDate(String useResultDate) {
+		this.useResultDate = useResultDate;
+	}
+
+	public String getFormalObjectAcceptanceDate() {
+		return formalObjectAcceptanceDate;
+	}
+
+	public void setFormalObjectAcceptanceDate(String formalObjectAcceptanceDate) {
+		this.formalObjectAcceptanceDate = formalObjectAcceptanceDate;
+	}
+
+	public String getFormalObjectResultDate() {
+		return formalObjectResultDate;
+	}
+
+	public void setFormalObjectResultDate(String formalObjectResultDate) {
+		this.formalObjectResultDate = formalObjectResultDate;
+	}
+
+	public String getConsignSettlementResultDate() {
+		return consignSettlementResultDate;
+	}
+
+	public void setConsignSettlementResultDate(String consignSettlementResultDate) {
+		this.consignSettlementResultDate = consignSettlementResultDate;
+	}
+
+	public String getSubjectResponsiblePerson() {
+		return subjectResponsiblePerson;
+	}
+
+	public void setSubjectResponsiblePerson(String subjectResponsiblePerson) {
+		this.subjectResponsiblePerson = subjectResponsiblePerson;
+	}
+
+	public String getSubjectResponsiblePhone1() {
+		return subjectResponsiblePhone1;
+	}
+
+	public void setSubjectResponsiblePhone1(String subjectResponsiblePhone1) {
+		this.subjectResponsiblePhone1 = subjectResponsiblePhone1;
+	}
+
+	public String getSubjectResponsiblePhone2() {
+		return subjectResponsiblePhone2;
+	}
+
+	public void setSubjectResponsiblePhone2(String subjectResponsiblePhone2) {
+		this.subjectResponsiblePhone2 = subjectResponsiblePhone2;
+	}
+
+	public String getSubjectResponsiblePhone3() {
+		return subjectResponsiblePhone3;
+	}
+
+	public void setSubjectResponsiblePhone3(String subjectResponsiblePhone3) {
+		this.subjectResponsiblePhone3 = subjectResponsiblePhone3;
+	}
+
+	public String getSubjectResponsiblePostNumber1() {
+		return subjectResponsiblePostNumber1;
+	}
+
+	public void setSubjectResponsiblePostNumber1(
+			String subjectResponsiblePostNumber1) {
+		this.subjectResponsiblePostNumber1 = subjectResponsiblePostNumber1;
+	}
+
+	public String getSubjectResponsiblePostNumber2() {
+		return subjectResponsiblePostNumber2;
+	}
+
+	public void setSubjectResponsiblePostNumber2(
+			String subjectResponsiblePostNumber2) {
+		this.subjectResponsiblePostNumber2 = subjectResponsiblePostNumber2;
+	}
+
+	public String getSubjectResponsibleAddress() {
+		return subjectResponsibleAddress;
+	}
+
+	public void setSubjectResponsibleAddress(String subjectResponsibleAddress) {
+		this.subjectResponsibleAddress = subjectResponsibleAddress;
+	}
+
+	public String getSubejctResponsibleEmail() {
+		return subejctResponsibleEmail;
+	}
+
+	public void setSubejctResponsibleEmail(String subejctResponsibleEmail) {
+		this.subejctResponsibleEmail = subejctResponsibleEmail;
+	}
+
+	public String getConsignSettlementPerson() {
+		return consignSettlementPerson;
+	}
+
+	public void setConsignSettlementPerson(String consignSettlementPerson) {
+		this.consignSettlementPerson = consignSettlementPerson;
+	}
+
+	public String getConsignSettlementPhone1() {
+		return consignSettlementPhone1;
+	}
+
+	public void setConsignSettlementPhone1(String consignSettlementPhone1) {
+		this.consignSettlementPhone1 = consignSettlementPhone1;
+	}
+
+	public String getConsignSettlementPhone2() {
+		return consignSettlementPhone2;
+	}
+
+	public void setConsignSettlementPhone2(String consignSettlementPhone2) {
+		this.consignSettlementPhone2 = consignSettlementPhone2;
+	}
+
+	public String getConsignSettlementPhone3() {
+		return consignSettlementPhone3;
+	}
+
+	public void setConsignSettlementPhone3(String consignSettlementPhone3) {
+		this.consignSettlementPhone3 = consignSettlementPhone3;
+	}
+
+	public String getConsignSettlementPostNumber1() {
+		return consignSettlementPostNumber1;
+	}
+
+	public void setConsignSettlementPostNumber1(String consignSettlementPostNumber1) {
+		this.consignSettlementPostNumber1 = consignSettlementPostNumber1;
+	}
+
+	public String getConsignSettlementPostNumber2() {
+		return consignSettlementPostNumber2;
+	}
+
+	public void setConsignSettlementPostNumber2(String consignSettlementPostNumber2) {
+		this.consignSettlementPostNumber2 = consignSettlementPostNumber2;
+	}
+
+	public String getConsignSettlementAddress() {
+		return consignSettlementAddress;
+	}
+
+	public void setConsignSettlementAddress(String consignSettlementAddress) {
+		this.consignSettlementAddress = consignSettlementAddress;
+	}
+
+	public String getConsignSettlementEmail() {
+		return consignSettlementEmail;
+	}
+
+	public void setConsignSettlementEmail(String consignSettlementEmail) {
+		this.consignSettlementEmail = consignSettlementEmail;
+	}
+
+	public String getCurrentAccount() {
+		return currentAccount;
+	}
+
+	public void setCurrentAccount(String currentAccount) {
+		this.currentAccount = currentAccount;
+	}
+
+	public String getCurrentInterest() {
+		return currentInterest;
+	}
+
+	public void setCurrentInterest(String currentInterest) {
+		this.currentInterest = currentInterest;
+	}
+
+	public String getCurrentNonPropriety() {
+		return currentNonPropriety;
+	}
+
+	public void setCurrentNonPropriety(String currentNonPropriety) {
+		this.currentNonPropriety = currentNonPropriety;
+	}
+
+	public String getCurrentRedemtion() {
+		return currentRedemtion;
+	}
+
+	public void setCurrentRedemtion(String currentRedemtion) {
+		this.currentRedemtion = currentRedemtion;
+	}
+
+	public String getCurrentSubTotal() {
+		return currentSubTotal;
+	}
+
+	public void setCurrentSubTotal(String currentSubTotal) {
+		this.currentSubTotal = currentSubTotal;
+	}
+
+	public String getCreateUserId() {
+		return createUserId;
+	}
+
+	public void setCreateUserId(String createUserId) {
+		this.createUserId = createUserId;
+	}
+
+	public String getCreateUserName() {
+		return createUserName;
+	}
+
+	public void setCreateUserName(String createUserName) {
+		this.createUserName = createUserName;
+	}
+
+	public Date getCreateDate() {
+		return createDate;
+	}
+
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
+	}
+
+	public Owner getOwner() {
+		return owner;
+	}
+
+	public void setOwner(Owner owner) {
+		this.owner = owner;
 	}
 
 	@Override
@@ -177,12 +521,11 @@ public class Subject {
 				+ ", goodsAmount=" + goodsAmount + ", govContributeAmount="
 				+ govContributeAmount + ", govInterests=" + govInterests
 				+ ", nonGovContributeAmount=" + nonGovContributeAmount
-				+ ", ownerId=" + ownerId + ", ownerName=" + ownerName
-				+ ", projectName=" + projectName + ", researchAgency="
-				+ researchAgency + ", researchResponsiblePerson="
-				+ researchResponsiblePerson + ", subejctResponsibleEmail="
-				+ subejctResponsibleEmail + ", subjectId=" + subjectId
-				+ ", subjectName=" + subjectName
+				+ ", owner=" + owner + ", projectName=" + projectName
+				+ ", researchAgency=" + researchAgency
+				+ ", researchResponsiblePerson=" + researchResponsiblePerson
+				+ ", subejctResponsibleEmail=" + subejctResponsibleEmail
+				+ ", subjectId=" + subjectId + ", subjectName=" + subjectName
 				+ ", subjectResponsibleAddress=" + subjectResponsibleAddress
 				+ ", subjectResponsiblePerson=" + subjectResponsiblePerson
 				+ ", subjectResponsiblePhone1=" + subjectResponsiblePhone1
@@ -207,7 +550,8 @@ public class Subject {
 						: consignSettlementAddress.hashCode());
 		result = prime
 				* result
-				+ (int) (consignSettlementCommission ^ (consignSettlementCommission >>> 32));
+				+ ((consignSettlementCommission == null) ? 0
+						: consignSettlementCommission.hashCode());
 		result = prime
 				* result
 				+ ((consignSettlementEmail == null) ? 0
@@ -253,15 +597,18 @@ public class Subject {
 		result = prime * result
 				+ ((createUserName == null) ? 0 : createUserName.hashCode());
 		result = prime * result
-				+ (int) (currentAccount ^ (currentAccount >>> 32));
+				+ ((currentAccount == null) ? 0 : currentAccount.hashCode());
 		result = prime * result
-				+ (int) (currentInterest ^ (currentInterest >>> 32));
+				+ ((currentInterest == null) ? 0 : currentInterest.hashCode());
+		result = prime
+				* result
+				+ ((currentNonPropriety == null) ? 0 : currentNonPropriety
+						.hashCode());
+		result = prime
+				* result
+				+ ((currentRedemtion == null) ? 0 : currentRedemtion.hashCode());
 		result = prime * result
-				+ (int) (currentNonPropriety ^ (currentNonPropriety >>> 32));
-		result = prime * result
-				+ (int) (currentRedemtion ^ (currentRedemtion >>> 32));
-		result = prime * result
-				+ (int) (currentSubTotal ^ (currentSubTotal >>> 32));
+				+ ((currentSubTotal == null) ? 0 : currentSubTotal.hashCode());
 		result = prime
 				* result
 				+ ((formalObjectAcceptanceDate == null) ? 0
@@ -270,16 +617,19 @@ public class Subject {
 				* result
 				+ ((formalObjectResultDate == null) ? 0
 						: formalObjectResultDate.hashCode());
-		result = prime * result + (int) (goodsAmount ^ (goodsAmount >>> 32));
 		result = prime * result
-				+ (int) (govContributeAmount ^ (govContributeAmount >>> 32));
-		result = prime * result + (int) (govInterests ^ (govInterests >>> 32));
+				+ ((goodsAmount == null) ? 0 : goodsAmount.hashCode());
 		result = prime
 				* result
-				+ (int) (nonGovContributeAmount ^ (nonGovContributeAmount >>> 32));
-		result = prime * result + ((ownerId == null) ? 0 : ownerId.hashCode());
+				+ ((govContributeAmount == null) ? 0 : govContributeAmount
+						.hashCode());
 		result = prime * result
-				+ ((ownerName == null) ? 0 : ownerName.hashCode());
+				+ ((govInterests == null) ? 0 : govInterests.hashCode());
+		result = prime
+				* result
+				+ ((nonGovContributeAmount == null) ? 0
+						: nonGovContributeAmount.hashCode());
+		result = prime * result + ((owner == null) ? 0 : owner.hashCode());
 		result = prime * result
 				+ ((projectName == null) ? 0 : projectName.hashCode());
 		result = prime * result
@@ -325,7 +675,7 @@ public class Subject {
 				+ ((subjectResponsiblePostNumber2 == null) ? 0
 						: subjectResponsiblePostNumber2.hashCode());
 		result = prime * result
-				+ (int) (totalCashAmount ^ (totalCashAmount >>> 32));
+				+ ((totalCashAmount == null) ? 0 : totalCashAmount.hashCode());
 		result = prime * result
 				+ ((useResultDate == null) ? 0 : useResultDate.hashCode());
 		return result;
@@ -351,7 +701,11 @@ public class Subject {
 		} else if (!consignSettlementAddress
 				.equals(other.consignSettlementAddress))
 			return false;
-		if (consignSettlementCommission != other.consignSettlementCommission)
+		if (consignSettlementCommission == null) {
+			if (other.consignSettlementCommission != null)
+				return false;
+		} else if (!consignSettlementCommission
+				.equals(other.consignSettlementCommission))
 			return false;
 		if (consignSettlementEmail == null) {
 			if (other.consignSettlementEmail != null)
@@ -425,15 +779,30 @@ public class Subject {
 				return false;
 		} else if (!createUserName.equals(other.createUserName))
 			return false;
-		if (currentAccount != other.currentAccount)
+		if (currentAccount == null) {
+			if (other.currentAccount != null)
+				return false;
+		} else if (!currentAccount.equals(other.currentAccount))
 			return false;
-		if (currentInterest != other.currentInterest)
+		if (currentInterest == null) {
+			if (other.currentInterest != null)
+				return false;
+		} else if (!currentInterest.equals(other.currentInterest))
 			return false;
-		if (currentNonPropriety != other.currentNonPropriety)
+		if (currentNonPropriety == null) {
+			if (other.currentNonPropriety != null)
+				return false;
+		} else if (!currentNonPropriety.equals(other.currentNonPropriety))
 			return false;
-		if (currentRedemtion != other.currentRedemtion)
+		if (currentRedemtion == null) {
+			if (other.currentRedemtion != null)
+				return false;
+		} else if (!currentRedemtion.equals(other.currentRedemtion))
 			return false;
-		if (currentSubTotal != other.currentSubTotal)
+		if (currentSubTotal == null) {
+			if (other.currentSubTotal != null)
+				return false;
+		} else if (!currentSubTotal.equals(other.currentSubTotal))
 			return false;
 		if (formalObjectAcceptanceDate == null) {
 			if (other.formalObjectAcceptanceDate != null)
@@ -446,23 +815,30 @@ public class Subject {
 				return false;
 		} else if (!formalObjectResultDate.equals(other.formalObjectResultDate))
 			return false;
-		if (goodsAmount != other.goodsAmount)
-			return false;
-		if (govContributeAmount != other.govContributeAmount)
-			return false;
-		if (govInterests != other.govInterests)
-			return false;
-		if (nonGovContributeAmount != other.nonGovContributeAmount)
-			return false;
-		if (ownerId == null) {
-			if (other.ownerId != null)
+		if (goodsAmount == null) {
+			if (other.goodsAmount != null)
 				return false;
-		} else if (!ownerId.equals(other.ownerId))
+		} else if (!goodsAmount.equals(other.goodsAmount))
 			return false;
-		if (ownerName == null) {
-			if (other.ownerName != null)
+		if (govContributeAmount == null) {
+			if (other.govContributeAmount != null)
 				return false;
-		} else if (!ownerName.equals(other.ownerName))
+		} else if (!govContributeAmount.equals(other.govContributeAmount))
+			return false;
+		if (govInterests == null) {
+			if (other.govInterests != null)
+				return false;
+		} else if (!govInterests.equals(other.govInterests))
+			return false;
+		if (nonGovContributeAmount == null) {
+			if (other.nonGovContributeAmount != null)
+				return false;
+		} else if (!nonGovContributeAmount.equals(other.nonGovContributeAmount))
+			return false;
+		if (owner == null) {
+			if (other.owner != null)
+				return false;
+		} else if (!owner.equals(other.owner))
 			return false;
 		if (projectName == null) {
 			if (other.projectName != null)
@@ -538,7 +914,10 @@ public class Subject {
 		} else if (!subjectResponsiblePostNumber2
 				.equals(other.subjectResponsiblePostNumber2))
 			return false;
-		if (totalCashAmount != other.totalCashAmount)
+		if (totalCashAmount == null) {
+			if (other.totalCashAmount != null)
+				return false;
+		} else if (!totalCashAmount.equals(other.totalCashAmount))
 			return false;
 		if (useResultDate == null) {
 			if (other.useResultDate != null)
@@ -547,7 +926,6 @@ public class Subject {
 			return false;
 		return true;
 	}
-	
-	
+
 	
 }
