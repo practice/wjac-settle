@@ -34,7 +34,7 @@
 <!-- End Content Title -->
 <form name="form1" method="post">
 <input type="hidden" name="groupId" value="${userGroup.groupId}">
-전담 기관명: ${userGroup.groupId}
+전담 기관명: ${userGroup.groupName}
 </form>
 <div>
 	<a href="#" onClick="editOwner();return false;">수정</a>

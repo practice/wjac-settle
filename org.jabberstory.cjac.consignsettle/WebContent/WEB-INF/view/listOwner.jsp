@@ -43,10 +43,10 @@
 	<H3>전담기관 현황</H3>
 </div>
 <!-- End Content Title -->
-<div>
+<!-- div>
 	<a href="#" onClick="doOrderedSearch('createDate');return false;">최근등록별보기</a>
 	<a href="#" onClick="doOrderedSearch('');return false;">전담기관별보기</a>
-</div>
+</div-->
 <!-- Start Content Area -->	
 <div>
 	<table cellspacing="0" cellpadding="0" class="">
@@ -72,7 +72,7 @@
 					</tr>
 				</c:when>	
 				<c:otherwise>
-					<c:forEach items="${pagingList.items}" var="owner" varStatus="status">		
+					<c:forEach items="${pagingList.items}" var="userGroup" varStatus="status">		
 						<tr>
 							<td class="">${(pagingList.currentPage - 1) * 10 + status.count}</td>
 							<td class="">${userGroup.groupName}</td>
