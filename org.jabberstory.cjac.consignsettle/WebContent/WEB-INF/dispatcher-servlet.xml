@@ -19,8 +19,8 @@
 				<prop key="/user/removeUserGroup">removeUserGroupController</prop>
 				<prop key="/user/createUser">createUserController</prop>
 				<prop key="/user/showUser">showUserController</prop>
-				<prop key="/owner/*">ownerMultiActionController</prop>
-				<prop key="/subject/*">subjectMultiActionController</prop>
+				<prop key="/owner/*">userGroupMultiActionController</prop>
+				<prop key="/subject/*">userGroupMultiActionController</prop>
 				<prop key="/login">urlController</prop>
 			</props>
 		</property>
@@ -53,29 +53,24 @@
 		p:userService-ref="userService" />
 	<bean id="createUserGroupValidator" class="org.jabberstory.cjac.consignsettle.controller.CreateUserGroupValidator" />
 	
-	<bean id="ownerMultiActionController" class="org.jabberstory.cjac.consignsettle.controller.OwnerMultiActionController">
-		<property name="ownerService" ref="ownerService" />
+	<bean id="userGroupMultiActionController" class="org.jabberstory.cjac.consignsettle.controller.UserGroupMultiActionController">
+		<property name="userGroupService" ref="userGroupService" />
 		<property name="methodNameResolver"	ref="facilityMultiActionControllerMethodNameResolver" />
 	</bean>
 	
-	<bean id="subjectMultiActionController" class="org.jabberstory.cjac.consignsettle.controller.SubjectMultiActionController">
-		<property name="subjectService" ref="subjectService" />
-		<property name="ownerService" ref="ownerService" />
-		<property name="methodNameResolver"	ref="facilityMultiActionControllerMethodNameResolver" />
-	</bean>
 	<bean id="facilityMultiActionControllerMethodNameResolver" class="org.springframework.web.servlet.mvc.multiaction.PropertiesMethodNameResolver">
 		<property name="mappings">
 			<props>
-				<prop key="/listOwner">listPaging</prop>
-				<prop key="/createOwner">create</prop>
-				<prop key="/showOwner">show</prop>
-				<prop key="/updateOwner">update</prop>
-				<prop key="/deleteOwner">delete</prop>
-				<prop key="/listSubject">listPaging</prop>
-				<prop key="/createSubject">create</prop>
-				<prop key="/showSubject">show</prop>
-				<prop key="/updateSubject">update</prop>
-				<prop key="/deleteSubject">delete</prop>
+				<prop key="/listOwner">OwnerPagingList</prop>
+				<prop key="/createOwner">createOwner</prop>
+				<prop key="/showOwner">showOwner</prop>
+				<prop key="/updateOwner">updateOwner</prop>
+				<prop key="/deleteOwner">deleteOwner</prop>
+				<prop key="/listSubject">SubjectPagingList</prop>
+				<prop key="/createSubject">createSubject</prop>
+				<prop key="/showSubject">showSubject</prop>
+				<prop key="/updateSubject">updateSubject</prop>
+				<prop key="/deleteSubject">deleteSubject</prop>
 				<prop key="/showCostDetail">showCostDetail</prop>
 				<prop key="/createCostDetail">createCostDetail</prop>
 				<prop key="/*">others</prop>
