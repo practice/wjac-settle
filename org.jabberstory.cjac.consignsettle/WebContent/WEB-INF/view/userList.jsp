@@ -73,5 +73,8 @@
 <div>
 <a href="createUser">Create User</a>, <a href="createUserGroup">Create User Group</a>
 </div>
+
+<div><a href="<c:url value="/j_spring_security_logout" />">Logout</a>
+</div>
 </body>
 </html>

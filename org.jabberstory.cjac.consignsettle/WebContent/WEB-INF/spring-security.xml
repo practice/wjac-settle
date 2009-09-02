@@ -24,10 +24,13 @@
 		<intercept-url pattern="/messageDelete.htm*" access="ROLE_ADMIN" />
 	</http>
 	<authentication-provider>
-		<user-service>
-			<user name="admin" password="secret" authorities="ROLE_ADMIN,ROLE_USER" />
-			<user name="user1" password="1111" authorities="ROLE_USER" />
-		</user-service>
+		<jdbc-user-service data-source-ref="dataSource"
+			users-by-username-query="SELECT userId, password, 'true' as enabled
+									FROM USER
+									WHERE userId = ?"
+			authorities-by-username-query="SELECT userId, 'ROLE_USER' as authorities
+									FROM USER
+									WHERE userId = ?" />
 	</authentication-provider>
 
 </beans:beans>
