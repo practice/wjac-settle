@@ -54,7 +54,7 @@
 				<td>${user.userId}</td><td style="text-overflow:ellipsis; overflow: hidden; ">
 					<a href="showUser?userId=${user.userId}"><nobr>${user.username}</nobr></a></td>
 				<td>${user.email}</td>
-				<td>${user.group.name }</td>
+				<td>-</td>
 			</tr>
 			</c:forEach>
 			</tbody>

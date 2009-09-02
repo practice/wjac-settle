@@ -8,7 +8,7 @@
 </head>
 <body>
 <div>
-User Info: ${user.userId}, ${user.username}, ${user.email}, <a href="showUserGroup?groupId=${user.group.groupId }">${user.group.name}</a>
+User Info: ${user.userId}, ${user.username}, ${user.email}
 </div>
 <div>
 <a href="list">User / Group Home</a>, <a href="updateUser?userId=${user.userId}">Edit</a>,

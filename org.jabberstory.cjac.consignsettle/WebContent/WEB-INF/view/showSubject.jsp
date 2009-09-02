@@ -34,7 +34,7 @@
 <body>
 <!-- Start Content Title -->
 <div>
-	<H3>전담 기관 보기</H3>
+	<H3>주관 기관 현황</H3>
 </div>
 <!-- End Content Title -->
 <form name="form1" method="post">

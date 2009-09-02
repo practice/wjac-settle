@@ -26,7 +26,7 @@
 </div>
 <!-- End Content Title -->
 <form name="form1" method="post">
-<input type="text" name="ownerId" />
+<input type="text" name="ownerId" value="${owner.ownerId }"/>
 <table border="1" cellspacing="0" cellpadding="0" class="">
 	<caption class="">
 		사업정보 입력
@@ -40,7 +40,7 @@
 	<tbody>
 		<tr>
 			<th scope="row">전담기관</th>
-			<td class=""><input type="text" name="ownerName" style="" title="전담기관"></td>
+			<td class=""><input type="text" name="ownerName" style="" title="전담기관" value="${owner.ownerName }"></td>
 			<th scope="row">주관기관</th>
 			<td class=""><input type="text" name="subjectName" style="" title="주관기관"></td>
 		</tr>
