@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+			http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+			http://www.springframework.org/schema/jee
+			http://www.springframework.org/schema/jee/spring-jee-2.5.xsd
+			http://www.springframework.org/schema/aop
+			http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+			http://www.springframework.org/schema/tx
+			http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+			http://www.springframework.org/schema/security
+			http://www.springframework.org/schema/security/spring-security-2.0.1.xsd">
+
+	<http>
+		<form-login login-page="/login" authentication-failure-url="/login?error=true" />
+		<logout />
+		<anonymous username="anonymous" />
+		<intercept-url pattern="/login" access="ROLE_USER,ROLE_ANONYMOUS" />
+		<intercept-url pattern="/user/**" access="ROLE_USER" />
+		<intercept-url pattern="/messageDelete.htm*" access="ROLE_ADMIN" />
+	</http>
+	<authentication-provider>
+		<user-service>
+			<user name="admin" password="secret" authorities="ROLE_ADMIN,ROLE_USER" />
+			<user name="user1" password="1111" authorities="ROLE_USER" />
+		</user-service>
+	</authentication-provider>
+
+</beans:beans>

@@ -21,6 +21,7 @@
 				<prop key="/user/showUser">showUserController</prop>
 				<prop key="/owner/*">ownerMultiActionController</prop>
 				<prop key="/subject/*">subjectMultiActionController</prop>
+				<prop key="/login">urlController</prop>
 			</props>
 		</property>
 	</bean>
@@ -62,7 +63,6 @@
 		<property name="ownerService" ref="ownerService" />
 		<property name="methodNameResolver"	ref="facilityMultiActionControllerMethodNameResolver" />
 	</bean>
-	
 	<bean id="facilityMultiActionControllerMethodNameResolver" class="org.springframework.web.servlet.mvc.multiaction.PropertiesMethodNameResolver">
 		<property name="mappings">
 			<props>
@@ -77,11 +77,12 @@
 				<prop key="/updateSubject">update</prop>
 				<prop key="/deleteSubject">delete</prop>
 				<prop key="/showCostDetail">showCostDetail</prop>
-				<prop key="/createCostDetail">createCostDetail</prop>				
-				<prop key="/*">others</prop>								
+				<prop key="/createCostDetail">createCostDetail</prop>
+				<prop key="/*">others</prop>
 			</props>
 		</property>		
 	</bean>
+	<bean id="urlController" class="org.springframework.web.servlet.mvc.UrlFilenameViewController" />
 	
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
