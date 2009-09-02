@@ -26,8 +26,9 @@
 </div>
 <!-- End Content Title -->
 <form name="form1" method="post">
-<input type="hidden" name="ownerId" value="${owner.ownerId}">
-전담 기관명: <input type="text" size="32" name="ownerName" value="${owner.ownerName}"/>
+<input type="hidden" name="groupId" value="${userGroup.groupId}">
+<input type="hidden" name="role" value="O">
+전담 기관명: <input type="text" size="32" name="groupName" value="${userGroup.groupName}"/>
 </form>
 <div>
 	<a href="#" onClick="saveOwner();return false;">저장</a>

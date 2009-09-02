@@ -24,8 +24,8 @@
 		document.form1.submit();
 	}
 
-	function showOwner(ownerId){
-		document.form1.ownerId.value = ownerId;
+	function showOwner(groupId){
+		document.form1.groupId.value = groupId;
 		document.form1.action = "${pageContext.request.contextPath}/owner/showOwner";
 		document.form1.submit();
 	}
@@ -36,7 +36,7 @@
 <body>
 <form name="form1" method="post">
 <input type="hidden" name="pageNo">
-<input type="hidden" name="ownerId">
+<input type="hidden" name="groupId">
 <input type="hidden" name="sortColumn" value="${sortColumn}">
 <!-- Start Content Title -->
 <div>
@@ -54,15 +54,13 @@
 		</caption>
 		<colgroup>
 			<col width="10%">
-			<col width="40%">
-			<col width="40%">
+			<col width="80%">
 			<col width="10%">
 		</colgroup>
 		<thead>
 			<tr>
 				<th scope="col" class="">번호</th>
 				<th scope="col" class="">전담기관명</th>
-				<th scope="col" class="">주관기관명</th>
 				<th scope="col" class="">상세보기</th>
 			</tr>
 		</thead>
@@ -77,9 +75,8 @@
 					<c:forEach items="${pagingList.items}" var="owner" varStatus="status">		
 						<tr>
 							<td class="">${(pagingList.currentPage - 1) * 10 + status.count}</td>
-							<td class="">${owner.ownerName}</td>
-							<td class="">-</td>
-							<td class=""><a href="#" onClick="showOwner('${owner.ownerId}');return false;">상세보기</a></td>
+							<td class="">${userGroup.groupName}</td>
+							<td class=""><a href="#" onClick="showOwner('${userGroup.groupId}');return false;">상세보기</a></td>
 						</tr>
 					</c:forEach>
 				</c:otherwise>

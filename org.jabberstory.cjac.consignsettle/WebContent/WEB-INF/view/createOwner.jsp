@@ -26,7 +26,8 @@
 </div>
 <!-- End Content Title -->
 <form name="form1" method="post">
-전담 기관명: <input type="text" size="32" name="ownerName" />
+<input type="text" name="role" value="O"/><!-- 전담기관: big O -->
+전담 기관명: <input type="text" size="32" name="groupName" />
 </form>
 <div>
 	<a href="#" onClick="saveOwner();return false;">저장</a>
