@@ -40,7 +40,7 @@
 <bean id="userGroupDao" class="org.jabberstory.cjac.consignsettle.domain.UserGroupDaoImpl" 
 	p:hibernateTemplate-ref="hibernateTemplate" />
 <bean id="userGroupService" class="org.jabberstory.cjac.consignsettle.domain.UserGroupServiceImpl" 
-	p:subjectDao-ref="userGroupDao"/>	
+	p:userGroupDao-ref="userGroupDao"/>	
 	
 <bean id="ownerDao" class="org.jabberstory.cjac.consignsettle.domain.OwnerDaoImpl" 
 	p:hibernateTemplate-ref="hibernateTemplate" />
