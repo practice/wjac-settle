@@ -24,8 +24,9 @@ public class CreateUserGroupController extends SimpleFormController {
 	protected ModelAndView onSubmit(HttpServletRequest request,
 			HttpServletResponse response, Object command, BindException errors)
 			throws Exception {
-		CreateUserGroupCommand param = (CreateUserGroupCommand) command;
-		userService.createUserGroup(param.getGroupId(), param.getName(), param.getRole());
-		return new ModelAndView("redirect:/user/showUserGroup?groupId=" + param.getGroupId());
+//		CreateUserGroupCommand param = (CreateUserGroupCommand) command;
+//		userService.createUserGroup(param.getGroupId(), param.getName(), param.getRole());
+//		return new ModelAndView("redirect:/user/showUserGroup?groupId=" + param.getGroupId());
+		return null;
 	}
 }

@@ -31,6 +31,7 @@ public interface SubjectService {
 	Subject getSubject(String subjectId);
 	void createSubject(Subject subject);
 	void updateSubject(Subject subject);
+	void updateSubject(String subjectId, String costDetail);
 	void removeSubject(String subjectId);
 
 }

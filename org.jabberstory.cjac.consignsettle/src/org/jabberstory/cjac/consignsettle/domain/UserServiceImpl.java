@@ -9,39 +9,39 @@ public class UserServiceImpl implements UserService {
 		this.userRepository = userRepository;
 	}
 
-	@Override
-	public List<UserGroup> getGroups(String groupQuery) {
-		return userRepository.getGroups(groupQuery);
-	}
+//	@Override
+//	public List<UserGroup> getGroups(String groupQuery) {
+//		return userRepository.getGroups(groupQuery);
+//	}
 
 	@Override
 	public List<User> getUsers(String userQuery) {
 		return userRepository.getUsers(userQuery);
 	}
 
-	@Override
-	public void createUserGroup(String groupId, String name, String role) throws DuplicateEntityException {
-		UserGroup group = userRepository.getUserGroup(groupId);
-		if (group != null) {
-			throw new DuplicateEntityException("Already existing User Group with group id = " + groupId);		
-		}
-		userRepository.createUserGroup(groupId, name, role);
-	}
-
-	@Override
-	public UserGroup getUserGroup(String groupId) {
-		return userRepository.getUserGroup(groupId);
-	}
-
-	@Override
-	public void updateUserGroup(String groupId, String name, String role) {
-		userRepository.updateUserGroup(groupId, name, role);
-	}
-
-	@Override
-	public void removeUserGroup(String groupId) {
-		userRepository.removeUserGroup(groupId);
-	}
+//	@Override
+//	public void createUserGroup(String groupId, String name, String role) throws DuplicateEntityException {
+//		UserGroup group = userRepository.getUserGroup(groupId);
+//		if (group != null) {
+//			throw new DuplicateEntityException("Already existing User Group with group id = " + groupId);		
+//		}
+//		userRepository.createUserGroup(groupId, name, role);
+//	}
+//
+//	@Override
+//	public UserGroup getUserGroup(String groupId) {
+//		return userRepository.getUserGroup(groupId);
+//	}
+//
+//	@Override
+//	public void updateUserGroup(String groupId, String name, String role) {
+//		userRepository.updateUserGroup(groupId, name, role);
+//	}
+//
+//	@Override
+//	public void removeUserGroup(String groupId) {
+//		userRepository.removeUserGroup(groupId);
+//	}
 
 	@Override
 	public void createUser(String userId, String password, String username, String email) throws DuplicateEntityException {

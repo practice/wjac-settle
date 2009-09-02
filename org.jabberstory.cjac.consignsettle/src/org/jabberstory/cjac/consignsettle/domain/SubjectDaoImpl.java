@@ -81,4 +81,10 @@ public class SubjectDaoImpl extends HibernateDaoSupport implements SubjectDao{
 		getHibernateTemplate().update(subject);	
 	}
 
+	@Override
+	public void updateSubject(String subjectId, String costDetail)
+			throws DataAccessException {
+		Subject subject = getSubject(subjectId);
+		subject.setCostDetail(costDetail);		
+	}
 }

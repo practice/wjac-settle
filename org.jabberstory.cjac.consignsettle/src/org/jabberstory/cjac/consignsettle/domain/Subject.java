@@ -74,10 +74,62 @@ public class Subject {
 	private String createUserName;
 	private Date createDate;
 	
-	private Owner owner;
+	private String costDetail;		// 사업비 사용 명세
+	private String nonApproval1;	// 1차 불인정 내역
+	private String nonApproval2;	// 최종 불인정 내역
 	
+	private Owner owner;
+
 	public Subject(){}
 
+	/**
+	 * @param subjectId
+	 * @param subjectName
+	 * @param businessName
+	 * @param projectName
+	 * @param researchAgency
+	 * @param researchResponsiblePerson
+	 * @param contractStartDate
+	 * @param contractEndDate
+	 * @param govContributeAmount
+	 * @param nonGovContributeAmount
+	 * @param goodsAmount
+	 * @param totalCashAmount
+	 * @param govInterests
+	 * @param consignSettlementCommission
+	 * @param useResultDate
+	 * @param formalObjectAcceptanceDate
+	 * @param formalObjectResultDate
+	 * @param consignSettlementResultDate
+	 * @param subjectResponsiblePerson
+	 * @param subjectResponsiblePhone1
+	 * @param subjectResponsiblePhone2
+	 * @param subjectResponsiblePhone3
+	 * @param subjectResponsiblePostNumber1
+	 * @param subjectResponsiblePostNumber2
+	 * @param subjectResponsibleAddress
+	 * @param subejctResponsibleEmail
+	 * @param consignSettlementPerson
+	 * @param consignSettlementPhone1
+	 * @param consignSettlementPhone2
+	 * @param consignSettlementPhone3
+	 * @param consignSettlementPostNumber1
+	 * @param consignSettlementPostNumber2
+	 * @param consignSettlementAddress
+	 * @param consignSettlementEmail
+	 * @param currentAccount
+	 * @param currentInterest
+	 * @param currentNonPropriety
+	 * @param currentRedemtion
+	 * @param currentSubTotal
+	 * @param createUserId
+	 * @param createUserName
+	 * @param createDate
+	 * @param costDetail
+	 * @param nonApproval1
+	 * @param nonApproval2
+	 * @param owner
+	 */
 	public Subject(String subjectId, String subjectName, String businessName,
 			String projectName, String researchAgency,
 			String researchResponsiblePerson, String contractStartDate,
@@ -100,7 +152,8 @@ public class Subject {
 			String currentAccount, String currentInterest,
 			String currentNonPropriety, String currentRedemtion,
 			String currentSubTotal, String createUserId, String createUserName,
-			Date createDate, Owner owner) {
+			Date createDate, String costDetail, String nonApproval1,
+			String nonApproval2, Owner owner) {
 		super();
 		this.subjectId = subjectId;
 		this.subjectName = subjectName;
@@ -144,6 +197,9 @@ public class Subject {
 		this.createUserId = createUserId;
 		this.createUserName = createUserName;
 		this.createDate = createDate;
+		this.costDetail = costDetail;
+		this.nonApproval1 = nonApproval1;
+		this.nonApproval2 = nonApproval2;
 		this.owner = owner;
 	}
 
@@ -485,6 +541,30 @@ public class Subject {
 		this.createDate = createDate;
 	}
 
+	public String getCostDetail() {
+		return costDetail;
+	}
+
+	public void setCostDetail(String costDetail) {
+		this.costDetail = costDetail;
+	}
+
+	public String getNonApproval1() {
+		return nonApproval1;
+	}
+
+	public void setNonApproval1(String nonApproval1) {
+		this.nonApproval1 = nonApproval1;
+	}
+
+	public String getNonApproval2() {
+		return nonApproval2;
+	}
+
+	public void setNonApproval2(String nonApproval2) {
+		this.nonApproval2 = nonApproval2;
+	}
+
 	public Owner getOwner() {
 		return owner;
 	}
@@ -510,22 +590,25 @@ public class Subject {
 				+ ", consignSettlementResultDate="
 				+ consignSettlementResultDate + ", contractEndDate="
 				+ contractEndDate + ", contractStartDate=" + contractStartDate
-				+ ", createDate=" + createDate + ", createUserId="
-				+ createUserId + ", createUserName=" + createUserName
-				+ ", currentAccount=" + currentAccount + ", currentInterest="
-				+ currentInterest + ", currentNonPropriety="
-				+ currentNonPropriety + ", currentRedemtion="
-				+ currentRedemtion + ", currentSubTotal=" + currentSubTotal
+				+ ", costDetail=" + costDetail + ", createDate=" + createDate
+				+ ", createUserId=" + createUserId + ", createUserName="
+				+ createUserName + ", currentAccount=" + currentAccount
+				+ ", currentInterest=" + currentInterest
+				+ ", currentNonPropriety=" + currentNonPropriety
+				+ ", currentRedemtion=" + currentRedemtion
+				+ ", currentSubTotal=" + currentSubTotal
 				+ ", formalObjectAcceptanceDate=" + formalObjectAcceptanceDate
 				+ ", formalObjectResultDate=" + formalObjectResultDate
 				+ ", goodsAmount=" + goodsAmount + ", govContributeAmount="
 				+ govContributeAmount + ", govInterests=" + govInterests
-				+ ", nonGovContributeAmount=" + nonGovContributeAmount
-				+ ", owner=" + owner + ", projectName=" + projectName
-				+ ", researchAgency=" + researchAgency
-				+ ", researchResponsiblePerson=" + researchResponsiblePerson
-				+ ", subejctResponsibleEmail=" + subejctResponsibleEmail
-				+ ", subjectId=" + subjectId + ", subjectName=" + subjectName
+				+ ", nonApproval1=" + nonApproval1 + ", nonApproval2="
+				+ nonApproval2 + ", nonGovContributeAmount="
+				+ nonGovContributeAmount + ", owner=" + owner
+				+ ", projectName=" + projectName + ", researchAgency="
+				+ researchAgency + ", researchResponsiblePerson="
+				+ researchResponsiblePerson + ", subejctResponsibleEmail="
+				+ subejctResponsibleEmail + ", subjectId=" + subjectId
+				+ ", subjectName=" + subjectName
 				+ ", subjectResponsibleAddress=" + subjectResponsibleAddress
 				+ ", subjectResponsiblePerson=" + subjectResponsiblePerson
 				+ ", subjectResponsiblePhone1=" + subjectResponsiblePhone1
@@ -591,6 +674,8 @@ public class Subject {
 				+ ((contractStartDate == null) ? 0 : contractStartDate
 						.hashCode());
 		result = prime * result
+				+ ((costDetail == null) ? 0 : costDetail.hashCode());
+		result = prime * result
 				+ ((createDate == null) ? 0 : createDate.hashCode());
 		result = prime * result
 				+ ((createUserId == null) ? 0 : createUserId.hashCode());
@@ -625,6 +710,10 @@ public class Subject {
 						.hashCode());
 		result = prime * result
 				+ ((govInterests == null) ? 0 : govInterests.hashCode());
+		result = prime * result
+				+ ((nonApproval1 == null) ? 0 : nonApproval1.hashCode());
+		result = prime * result
+				+ ((nonApproval2 == null) ? 0 : nonApproval2.hashCode());
 		result = prime
 				* result
 				+ ((nonGovContributeAmount == null) ? 0
@@ -764,6 +853,11 @@ public class Subject {
 				return false;
 		} else if (!contractStartDate.equals(other.contractStartDate))
 			return false;
+		if (costDetail == null) {
+			if (other.costDetail != null)
+				return false;
+		} else if (!costDetail.equals(other.costDetail))
+			return false;
 		if (createDate == null) {
 			if (other.createDate != null)
 				return false;
@@ -829,6 +923,16 @@ public class Subject {
 			if (other.govInterests != null)
 				return false;
 		} else if (!govInterests.equals(other.govInterests))
+			return false;
+		if (nonApproval1 == null) {
+			if (other.nonApproval1 != null)
+				return false;
+		} else if (!nonApproval1.equals(other.nonApproval1))
+			return false;
+		if (nonApproval2 == null) {
+			if (other.nonApproval2 != null)
+				return false;
+		} else if (!nonApproval2.equals(other.nonApproval2))
 			return false;
 		if (nonGovContributeAmount == null) {
 			if (other.nonGovContributeAmount != null)
@@ -926,6 +1030,6 @@ public class Subject {
 			return false;
 		return true;
 	}
-
+	
 	
 }

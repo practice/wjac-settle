@@ -6,7 +6,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.jabberstory.cjac.consignsettle.domain.User;
-import org.jabberstory.cjac.consignsettle.domain.UserGroup;
 import org.jabberstory.cjac.consignsettle.domain.UserService;
 import org.springframework.validation.BindException;
 import org.springframework.web.servlet.ModelAndView;
@@ -34,12 +33,12 @@ public class UserListController extends SimpleFormController {
 			mv.addObject("userCount", users.size());
 			return mv;
 		} 
-		if (query.getGroupQuery() != null && query.getGroupQuery().trim().length() > 0) {
-			List<UserGroup> groups = userService.getGroups(query.getGroupQuery());
-			ModelAndView mv = new ModelAndView("userList", "groups", groups);
-			mv.addObject("groupCount", groups.size());
-			return mv;
-		}
+//		if (query.getGroupQuery() != null && query.getGroupQuery().trim().length() > 0) {
+//			List<UserGroup> groups = userService.getGroups(query.getGroupQuery());
+//			ModelAndView mv = new ModelAndView("userList", "groups", groups);
+//			mv.addObject("groupCount", groups.size());
+//			return mv;
+//		}
 		return new ModelAndView("userList");
 	}
 }

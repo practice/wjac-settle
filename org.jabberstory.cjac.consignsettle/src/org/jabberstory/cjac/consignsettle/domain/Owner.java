@@ -15,7 +15,7 @@
 */
 package org.jabberstory.cjac.consignsettle.domain;
 
-import java.util.Date;
+import java.sql.Timestamp;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -29,13 +29,20 @@ public class Owner {
 	private String ownerId;
 	private String ownerName;
 	private String createUserId;
-	private Date createDate;
+	private Timestamp createDate;
 	private Set<Subject> subjects = new HashSet<Subject>();
 	
 	public Owner(){}
-	
+
+	/**
+	 * @param ownerId
+	 * @param ownerName
+	 * @param createUserId
+	 * @param createDate
+	 * @param subjects
+	 */
 	public Owner(String ownerId, String ownerName, String createUserId,
-			Date createDate, Set<Subject> subjects) {
+			Timestamp createDate, Set<Subject> subjects) {
 		super();
 		this.ownerId = ownerId;
 		this.ownerName = ownerName;
@@ -68,11 +75,11 @@ public class Owner {
 		this.createUserId = createUserId;
 	}
 
-	public Date getCreateDate() {
+	public Timestamp getCreateDate() {
 		return createDate;
 	}
 
-	public void setCreateDate(Date createDate) {
+	public void setCreateDate(Timestamp createDate) {
 		this.createDate = createDate;
 	}
 
