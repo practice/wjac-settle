@@ -6,8 +6,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.jabberstory.cjac.consignsettle.common.util.Paging;
+import org.jabberstory.cjac.consignsettle.domain.User;
 import org.jabberstory.cjac.consignsettle.domain.UserGroup;
 import org.jabberstory.cjac.consignsettle.domain.UserGroupService;
+import org.jabberstory.cjac.consignsettle.domain.UserService;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
@@ -15,23 +17,38 @@ public class UserGroupMultiActionController extends MultiActionController {
 
 	public UserGroupMultiActionController() {}
 
+	private UserService userService;
 	private UserGroupService userGroupService;
+	
+	public void setUserService(UserService userService) {
+		this.userService = userService;
+	}
 	
 	public void setUserGroupService(UserGroupService userGroupService) {
 		this.userGroupService = userGroupService;
 	}
 	
-	public ModelAndView createOwner(HttpServletRequest request,	HttpServletResponse response) throws Exception {
+public ModelAndView createOwner(HttpServletRequest request,	HttpServletResponse response) throws Exception {
 		
 		String groupName = (request.getParameter("groupName") == null) ? "": request.getParameter("groupName");
+		String userId = (request.getParameter("userId") == null) ? "": request.getParameter("userId");
 		
 		if (groupName.equals("")){
-			return new ModelAndView("createOwner");
+			List<User> users = userService.getUsers("");
+			ModelAndView mv = new ModelAndView("createOwner");
+			mv.addObject("users", users);
+			return mv;
 		}
 		
 		UserGroup userGroup = new UserGroup();
 		
 		bind(request, userGroup);
+		
+		//User user = userService.getUser(userId);		
+		
+		User user = new User(userService.getUser(userId).getUserId(), userService.getUser(userId).getUsername(), userService.getUser(userId).getPassword(), userService.getUser(userId).getRole());
+		
+		userGroup.getUsers().add(user);
 		
 		userGroupService.createUserGroup(userGroup);
 		
