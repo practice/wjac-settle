@@ -21,11 +21,20 @@ public class User {
 		this.password = password;
 	}
 	
-	public User(String userId, String username, String email, String password, Set<UserGroup> userGroups) {
+	public User(String userId, String username, String email, String password, String role) {
 		this.userId = userId;
 		this.username = username;
 		this.email = email;
 		this.password = password;
+		this.role = role;
+	}
+	
+	public User(String userId, String username, String email, String password, String role, Set<UserGroup> userGroups) {
+		this.userId = userId;
+		this.username = username;
+		this.email = email;
+		this.password = password;
+		this.role = role;
 		this.userGroups = userGroups;
 	}
 

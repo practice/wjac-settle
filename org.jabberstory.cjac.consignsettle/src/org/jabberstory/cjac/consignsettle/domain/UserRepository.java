@@ -64,5 +64,9 @@ public class UserRepository extends HibernateDaoSupport {
 	public void createUser(String userId, String password, String username, String email) {
 		getHibernateTemplate().save(new User(userId, username, email, password));
 	}
+	
+	public void createUser(String userId, String password, String username, String email, String role) {
+		getHibernateTemplate().save(new User(userId, username, email, password, role));
+	}
 
 }
