@@ -19,6 +19,9 @@ public interface UserService {
 
 	public void createUser(String userId, String password, String username, String email) 
 		throws DuplicateEntityException;
+	
+	public void createUser(String userId, String password, String username, String email, String role) 
+	throws DuplicateEntityException;
 
 	public User getUser(String userId);
 

@@ -50,6 +50,14 @@ public class UserServiceImpl implements UserService {
 			throw new DuplicateEntityException("Already existing user with user id = " + userId);
 		userRepository.createUser(userId, password, username, email);
 	}
+	
+	@Override
+	public void createUser(String userId, String password, String username, String email, String role) throws DuplicateEntityException {
+		User user = userRepository.getUser(userId);
+		if (user != null)
+			throw new DuplicateEntityException("Already existing user with user id = " + userId);
+		userRepository.createUser(userId, password, username, email, role);
+	}
 
 	@Override
 	public User getUser(String userId) {
