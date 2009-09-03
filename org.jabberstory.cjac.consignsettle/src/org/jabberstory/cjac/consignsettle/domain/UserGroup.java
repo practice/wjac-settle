@@ -8,7 +8,8 @@ public class UserGroup {
 	private String groupId;
 	private String groupName;
 	private String role;	// admin(A), consignee(C, 회계법인), owner(O, 전담), subject(S, 주관)
-	private String refGroupId;
+	private String parentGroupId;
+	private String parentGroupName;
 	
 	private String businessName;
 	private String projectName;
@@ -69,7 +70,8 @@ public class UserGroup {
 	 * @param groupId
 	 * @param groupName
 	 * @param role
-	 * @param refGroupId
+	 * @param parentGroupId
+	 * @param parentGroupName
 	 * @param businessName
 	 * @param projectName
 	 * @param researchAgency
@@ -116,11 +118,12 @@ public class UserGroup {
 	 * @param users
 	 */
 	public UserGroup(String groupId, String groupName, String role,
-			String refGroupId, String businessName, String projectName,
-			String researchAgency, String researchResponsiblePerson,
-			String contractStartDate, String contractEndDate,
-			String govContributeAmount, String nonGovContributeAmount,
-			String goodsAmount, String totalCashAmount, String govInterests,
+			String parentGroupId, String parentGroupName, String businessName,
+			String projectName, String researchAgency,
+			String researchResponsiblePerson, String contractStartDate,
+			String contractEndDate, String govContributeAmount,
+			String nonGovContributeAmount, String goodsAmount,
+			String totalCashAmount, String govInterests,
 			String consignSettlementCommission, String useResultDate,
 			String formalObjectAcceptanceDate, String formalObjectResultDate,
 			String consignSettlementResultDate,
@@ -143,7 +146,8 @@ public class UserGroup {
 		this.groupId = groupId;
 		this.groupName = groupName;
 		this.role = role;
-		this.refGroupId = refGroupId;
+		this.parentGroupId = parentGroupId;
+		this.parentGroupName = parentGroupName;
 		this.businessName = businessName;
 		this.projectName = projectName;
 		this.researchAgency = researchAgency;
@@ -214,12 +218,20 @@ public class UserGroup {
 		this.role = role;
 	}
 
-	public String getRefGroupId() {
-		return refGroupId;
+	public String getParentGroupId() {
+		return parentGroupId;
 	}
 
-	public void setRefGroupId(String refGroupId) {
-		this.refGroupId = refGroupId;
+	public void setParentGroupId(String parentGroupId) {
+		this.parentGroupId = parentGroupId;
+	}
+
+	public String getParentGroupName() {
+		return parentGroupName;
+	}
+
+	public void setParentGroupName(String parentGroupName) {
+		this.parentGroupName = parentGroupName;
 	}
 
 	public String getBusinessName() {
@@ -677,9 +689,11 @@ public class UserGroup {
 				+ ((nonGovContributeAmount == null) ? 0
 						: nonGovContributeAmount.hashCode());
 		result = prime * result
-				+ ((projectName == null) ? 0 : projectName.hashCode());
+				+ ((parentGroupId == null) ? 0 : parentGroupId.hashCode());
 		result = prime * result
-				+ ((refGroupId == null) ? 0 : refGroupId.hashCode());
+				+ ((parentGroupName == null) ? 0 : parentGroupName.hashCode());
+		result = prime * result
+				+ ((projectName == null) ? 0 : projectName.hashCode());
 		result = prime * result
 				+ ((researchAgency == null) ? 0 : researchAgency.hashCode());
 		result = prime
@@ -906,15 +920,20 @@ public class UserGroup {
 				return false;
 		} else if (!nonGovContributeAmount.equals(other.nonGovContributeAmount))
 			return false;
+		if (parentGroupId == null) {
+			if (other.parentGroupId != null)
+				return false;
+		} else if (!parentGroupId.equals(other.parentGroupId))
+			return false;
+		if (parentGroupName == null) {
+			if (other.parentGroupName != null)
+				return false;
+		} else if (!parentGroupName.equals(other.parentGroupName))
+			return false;
 		if (projectName == null) {
 			if (other.projectName != null)
 				return false;
 		} else if (!projectName.equals(other.projectName))
-			return false;
-		if (refGroupId == null) {
-			if (other.refGroupId != null)
-				return false;
-		} else if (!refGroupId.equals(other.refGroupId))
 			return false;
 		if (researchAgency == null) {
 			if (other.researchAgency != null)
@@ -1029,17 +1048,17 @@ public class UserGroup {
 				+ ", groupId=" + groupId + ", groupName=" + groupName
 				+ ", nonApproval1=" + nonApproval1 + ", nonApproval2="
 				+ nonApproval2 + ", nonGovContributeAmount="
-				+ nonGovContributeAmount + ", projectName=" + projectName
-				+ ", refGroupId=" + refGroupId + ", researchAgency="
-				+ researchAgency + ", researchResponsiblePerson="
-				+ researchResponsiblePerson + ", role=" + role
-				+ ", subejctResponsibleEmail=" + subejctResponsibleEmail
-				+ ", subjectResponsibleAddress=" + subjectResponsibleAddress
-				+ ", subjectResponsiblePerson=" + subjectResponsiblePerson
-				+ ", subjectResponsiblePhone1=" + subjectResponsiblePhone1
-				+ ", subjectResponsiblePhone2=" + subjectResponsiblePhone2
-				+ ", subjectResponsiblePhone3=" + subjectResponsiblePhone3
-				+ ", subjectResponsiblePostNumber1="
+				+ nonGovContributeAmount + ", parentGroupId=" + parentGroupId
+				+ ", parentGroupName=" + parentGroupName + ", projectName="
+				+ projectName + ", researchAgency=" + researchAgency
+				+ ", researchResponsiblePerson=" + researchResponsiblePerson
+				+ ", role=" + role + ", subejctResponsibleEmail="
+				+ subejctResponsibleEmail + ", subjectResponsibleAddress="
+				+ subjectResponsibleAddress + ", subjectResponsiblePerson="
+				+ subjectResponsiblePerson + ", subjectResponsiblePhone1="
+				+ subjectResponsiblePhone1 + ", subjectResponsiblePhone2="
+				+ subjectResponsiblePhone2 + ", subjectResponsiblePhone3="
+				+ subjectResponsiblePhone3 + ", subjectResponsiblePostNumber1="
 				+ subjectResponsiblePostNumber1
 				+ ", subjectResponsiblePostNumber2="
 				+ subjectResponsiblePostNumber2 + ", totalCashAmount="

@@ -26,7 +26,8 @@
 		</id>
 		<property name="groupName" column="GROUPNAME" length="32" />
 		<property name="role" column="ROLE" type="string" length="1" />
-		<property name="refGroupId" column="REF_GROUPID" type="string" length="32" />
+		<property name="parentGroupId" column="PARENT_GROUPID" type="string" length="32" />
+		<property name="parentGroupName" column="PARENT_GROUPNAME" type="string" length="32" />
 		
 		<property name="businessName" column="BUSINESS_NAME" type="string" length="32" />
 		<property name="projectName" column="PROJECT_NAME" type="string" length="32" />
