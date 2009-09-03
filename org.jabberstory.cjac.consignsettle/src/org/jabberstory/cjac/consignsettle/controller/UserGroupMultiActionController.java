@@ -1,6 +1,8 @@
 package org.jabberstory.cjac.consignsettle.controller;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -28,7 +30,7 @@ public class UserGroupMultiActionController extends MultiActionController {
 		this.userGroupService = userGroupService;
 	}
 	
-public ModelAndView createOwner(HttpServletRequest request,	HttpServletResponse response) throws Exception {
+	public ModelAndView createOwner(HttpServletRequest request,	HttpServletResponse response) throws Exception {
 		
 		String groupName = (request.getParameter("groupName") == null) ? "": request.getParameter("groupName");
 		String userId = (request.getParameter("userId") == null) ? "": request.getParameter("userId");
@@ -44,11 +46,15 @@ public ModelAndView createOwner(HttpServletRequest request,	HttpServletResponse 
 		
 		bind(request, userGroup);
 		
-		//User user = userService.getUser(userId);		
+//		User user = userService.getUser(userId);	
+//		Set<User> users = new HashSet<User>();
+//		users.add(user);
+//		
+//		userGroup.setUsers(users);
+				
+		//User user = new User(userService.getUser(userId).getUserId(), userService.getUser(userId).getUsername(), userService.getUser(userId).getPassword(), userService.getUser(userId).getRole());
 		
-		User user = new User(userService.getUser(userId).getUserId(), userService.getUser(userId).getUsername(), userService.getUser(userId).getPassword(), userService.getUser(userId).getRole());
-		
-		userGroup.getUsers().add(user);
+		userGroup.getUsers().add(userService.getUser(userId));		
 		
 		userGroupService.createUserGroup(userGroup);
 		
