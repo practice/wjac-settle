@@ -6,7 +6,7 @@
 	
 <hibernate-mapping package="org.jabberstory.cjac.consignsettle.domain" default-access="field">
 	<!-- User -->
-	<class name="User" table="USER">
+	<class name="User" table="USER" lazy="true">
 		<id name="userId" column="USERID" length="32">
 			<generator class="assigned" />
 		</id>
@@ -20,7 +20,7 @@
 		</set>
 	</class>
 	
-	<class name="UserGroup" table="USERGROUP">
+	<class name="UserGroup" table="USERGROUP" lazy="true">
 		<id name="groupId" column="GROUPID" length="32">
 			<generator class="uuid" />
 		</id>
