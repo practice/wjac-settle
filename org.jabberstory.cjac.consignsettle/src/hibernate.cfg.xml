@@ -14,5 +14,6 @@
 
 		<mapping resource="org/jabberstory/cjac/consignsettle/domain/User.hbm.xml" />
 		<mapping resource="org/jabberstory/cjac/consignsettle/domain/Owner.hbm.xml" />
+		<mapping resource="org/jabberstory/cjac/forum/domain/Forum.hbm.xml" />
 	</session-factory>
 </hibernate-configuration>

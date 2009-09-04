@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+	
+<hibernate-mapping package="org.jabberstory.cjac.forum.domain" default-access="field">
+
+	<class name="ForumPost" table="FORUMPOST">
+		<id name="id" column="POSTID">
+			<generator class="native" />
+		</id>
+		<property name="step" column="STEP" type="int" />
+		<property name="depth" column="DEPTH" type="int" />
+		<property name="rootId" column="ROOTPOSTID" type="int" />
+		<property name="subject" column="SUBJECT" type="string" length="128" />
+		<property name="body" column="BODY" type="text" />
+		<!-- property name="createdDate" column="WTIME" type="timestamp" insert="false" update="false" generated="always" / -->
+		<property name="createdDate" column="WTIME" type="timestamp" />
+		<property name="readCount" column="READCOUNT" type="int" length="8" />
+		<property name="replyCount" column="REPLYCOUNT" type="int" length="4" />
+		<many-to-one name="user" column="USERID" class="org.jabberstory.cjac.consignsettle.domain.User" 
+			foreign-key="FK_USER_POST" fetch="join" />
+		<list name="attachments" cascade="save-update, delete">
+			<key column="POSTID" />
+			<list-index column="LISTINDEX" />
+			<one-to-many class="PostAttachment" />
+		</list>
+	</class>
+	
+	<class name="PostAttachment" table="POSTATTACHMENT">
+		<id name="id" column="ATTID">
+			<generator class="native" />
+		</id>
+		<property name="filename" column="FILENAME" length="128" />
+		<property name="filesize" column="FILESIZE" length="16" />
+		<many-to-one name="post" column="POSTID" class="ForumPost" foreign-key="FK_POST_ATTACHMENT"></many-to-one>
+	</class>
+
+</hibernate-mapping>

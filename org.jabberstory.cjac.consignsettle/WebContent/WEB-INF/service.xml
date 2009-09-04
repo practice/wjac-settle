@@ -52,4 +52,10 @@
 <bean id="subjectService" class="org.jabberstory.cjac.consignsettle.domain.SubjectServiceImpl" 
 	p:subjectDao-ref="subjectDao"/>		
 
+<bean id="forumService" class="org.jabberstory.cjac.forum.domain.ForumServiceImpl"
+	p:forumRepository-ref="forumRepository"	/>
+<bean id="forumRepository" class="org.jabberstory.cjac.forum.domain.ForumRepository"
+	p:hibernateTemplate-ref="hibernateTemplate" 
+	p:userService-ref="userService" />
+
 </beans>

@@ -5,6 +5,9 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans 
 			http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 
+	<!-- ############################################################## -->
+	<!-- Request Mapping -->
+	<!-- ############################################################## -->
 	<bean id="handlerMapping"
 		class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping">
 	</bean>
@@ -22,10 +25,17 @@
 				<prop key="/owner/*">userGroupMultiActionController</prop>
 				<prop key="/subject/*">userGroupMultiActionController</prop>
 				<prop key="/login">urlController</prop>
+				<prop key="/forum/list">forumListController</prop>
+				<prop key="/forum/write">writeController</prop>
+				<prop key="/forum/showpost">showPostController</prop>
+				<prop key="/forum/download">downloadController</prop>
 			</props>
 		</property>
 	</bean>
 
+	<!-- ############################################################## -->
+	<!--  User Management Controller -->
+	<!-- ############################################################## -->
 	<bean id="showUserController" class="org.jabberstory.cjac.consignsettle.controller.ShowUserController" 
 		p:userService-ref="userService" />
 	<bean id="createUserController" class="org.jabberstory.cjac.consignsettle.controller.CreateUserController"
@@ -77,6 +87,28 @@
 			</props>
 		</property>		
 	</bean>
+
+	<!-- ############################################################## -->
+	<!-- Forum Controller -->
+	<!-- ############################################################## -->
+	<bean id="writeController" class="org.jabberstory.cjac.forum.controller.WriteController" 
+		p:successView=""
+		p:formView="forum/write"
+		p:forumService-ref="forumService" 
+		p:validator-ref="writeValidator" />
+	<bean id="writeValidator" class="org.jabberstory.cjac.forum.controller.WriteCommandValidator" />
+	<bean id="forumListController" class="org.jabberstory.cjac.forum.controller.ForumListController" 
+		p:forumService-ref="forumService" />
+	<bean id="showPostController" class="org.jabberstory.cjac.forum.controller.ShowPostController" 
+		p:forumService-ref="forumService" />
+	<bean id="downloadController" class="org.jabberstory.cjac.forum.controller.AttachmentDownloadController" 
+		p:forumService-ref="forumService" />
+	
+	<bean id="downloadView" class="org.jabberstory.cjac.forum.view.DownloadView" />
+
+	<!-- ############################################################## -->
+	<!--  General purpose beans -->
+	<!-- ############################################################## -->
 	<bean id="urlController" class="org.springframework.web.servlet.mvc.UrlFilenameViewController" />
 	
 	<bean id="viewResolver"
@@ -85,6 +117,10 @@
 		<property name="suffix" value=".jsp" />
 	</bean>
 	
+	<bean id="beanNameViewResolver" class="org.springframework.web.servlet.view.BeanNameViewResolver" />
+	
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
+
 	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
 		<property name="basenames">
 			<list>
@@ -92,5 +128,4 @@
 			</list>
 		</property>
 	</bean>
-	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
 </beans>

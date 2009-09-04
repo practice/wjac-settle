@@ -21,7 +21,8 @@
 		<anonymous username="anonymous" />
 		<intercept-url pattern="/login" access="ROLE_USER,ROLE_ANONYMOUS" />
 		<intercept-url pattern="/user/**" access="ROLE_USER" />
-		<intercept-url pattern="/messageDelete.htm*" access="ROLE_ADMIN" />
+		<intercept-url pattern="/forum/**" access="ROLE_USER" />
+		<intercept-url pattern="/admin/**" access="ROLE_ADMIN" />
 	</http>
 	<authentication-provider>
 		<jdbc-user-service data-source-ref="dataSource"
