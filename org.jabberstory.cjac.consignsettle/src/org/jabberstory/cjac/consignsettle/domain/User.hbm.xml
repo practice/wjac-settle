@@ -16,7 +16,7 @@
 		<property name="role" column="ROLE" type="string" length="1" />
 		<set name="userGroups" table="USER_USERGROUP" cascade="save-update" inverse="true">
 			<key column="USERID" />
-			<many-to-many class="UserGroup" column="GROUPID"/>
+			<many-to-many class="UserGroup" column="GROUPID" foreign-key="FK_USER_GROUP_TO_GROUP" />
 		</set>
 	</class>
 	
@@ -78,7 +78,7 @@
 		
 		<set name="users" table="USER_USERGROUP">
 			<key column="GROUPID" />
-			<many-to-many class="User" column="USERID" />
+			<many-to-many class="User" column="USERID" foreign-key="FK_USER_GROUP_TO_USER" />
 		</set>
 	</class>
 
