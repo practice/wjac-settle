@@ -79,8 +79,12 @@ public class UserGroupMultiActionController extends MultiActionController {
 		UserGroup userGroup;
 		
 		if (groupName.equals("")){
+			List<User> users = userService.getUsers("");
 			userGroup = userGroupService.getUserGroup(groupId);
-			return new ModelAndView("updateOwner", "userGroup", userGroup);
+			ModelAndView mv = new ModelAndView("updateOwner");
+			mv.addObject("users", users);
+			mv.addObject("userGroup", userGroup);
+			return mv;
 		}
 		
 		userGroup = new UserGroup();

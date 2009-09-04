@@ -65,10 +65,11 @@
 	
 	<bean id="userGroupMultiActionController" class="org.jabberstory.cjac.consignsettle.controller.UserGroupMultiActionController">
 		<property name="userGroupService" ref="userGroupService" />
-		<property name="methodNameResolver"	ref="facilityMultiActionControllerMethodNameResolver" />
+		<property name="userService" ref="userService" />
+		<property name="methodNameResolver"	ref="userGroupMultiActionControllerMethodNameResolver" />
 	</bean>
 	
-	<bean id="facilityMultiActionControllerMethodNameResolver" class="org.springframework.web.servlet.mvc.multiaction.PropertiesMethodNameResolver">
+	<bean id="userGroupMultiActionControllerMethodNameResolver" class="org.springframework.web.servlet.mvc.multiaction.PropertiesMethodNameResolver">
 		<property name="mappings">
 			<props>
 				<prop key="/listOwner">OwnerPagingList</prop>
