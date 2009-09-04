@@ -45,36 +45,14 @@ public class ForumRepository extends HibernateDaoSupport {
 	/* (non-Javadoc)
 	 * @see org.jabberstory.toy.forum.ForumService#savePost(java.lang.String, java.lang.String, java.lang.String)
 	 */
-	public ForumPost createPost(String subject, String body, String userId, MultipartFile file0, MultipartFile file1) {
+	public ForumPost createPost(String subject, String body, String userId, MultipartFile[] file) 
+		throws IllegalStateException, IOException {
 		ForumPost post = new ForumPost(subject, body, userService.getUser(userId));
-		if (!file0.isEmpty()) {
-			try {
-				file0.transferTo(new File(ForumService.FILE_PREFIX + file0.getOriginalFilename()));
-			} catch (IllegalStateException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+		for (MultipartFile mpf : file) {
+			mpf.transferTo(new File(ForumService.FILE_PREFIX + mpf.getOriginalFilename()));
 			PostAttachment attachment = new PostAttachment();
-			attachment.setFilename(file0.getOriginalFilename());
-			attachment.setFilesize(file0.getSize());
-			post.addAttachment(attachment);
-		}
-		if (!file1.isEmpty()) {
-			try {
-				file1.transferTo(new File(ForumService.FILE_PREFIX + file1.getOriginalFilename()));
-			} catch (IllegalStateException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			PostAttachment attachment = new PostAttachment();
-			attachment.setFilename(file1.getOriginalFilename());
-			attachment.setFilesize(file1.getSize());
+			attachment.setFilename(mpf.getOriginalFilename());
+			attachment.setFilesize(mpf.getSize());
 			post.addAttachment(attachment);
 		}
 		getHibernateTemplate().save(post);

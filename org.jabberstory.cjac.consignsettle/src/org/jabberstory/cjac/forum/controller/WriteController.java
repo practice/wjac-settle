@@ -29,7 +29,7 @@ public class WriteController extends SimpleFormController {
 		WriteSubmitCommand writeCommand = (WriteSubmitCommand) command;
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		// auth type is UsernamePasswordAuthenticationToken.
-		forumService.createPost(writeCommand.getTitle(), writeCommand.getBody(), auth.getName(), writeCommand.getFile0(), writeCommand.getFile1());
+		forumService.createPost(writeCommand.getTitle(), writeCommand.getBody(), auth.getName(), writeCommand.getFile());
 		return new ModelAndView("redirect:/forum/list");
 	}
 }

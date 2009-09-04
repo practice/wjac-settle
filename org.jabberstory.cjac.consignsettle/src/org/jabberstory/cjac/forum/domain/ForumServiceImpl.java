@@ -1,5 +1,6 @@
 package org.jabberstory.cjac.forum.domain;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
@@ -13,8 +14,8 @@ public class ForumServiceImpl implements ForumService {
 
 	@Override
 	public ForumPost createPost(String subject, String body, String userId,
-			MultipartFile file0, MultipartFile file1) {
-		return forumRepository.createPost(subject, body, userId, file0, file1);
+			MultipartFile[] file) throws IllegalStateException, IOException {
+		return forumRepository.createPost(subject, body, userId, file);
 	}
 
 	@Override

@@ -1,5 +1,6 @@
 package org.jabberstory.cjac.forum.domain;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
@@ -12,6 +13,6 @@ public interface ForumService {
 	public ForumPost getPost(int id);
 	public List<ForumPost> getPosts(int page);
 	public Long getPageCount();
-	public ForumPost createPost(String subject, String body, String userId, MultipartFile multipartFile, MultipartFile multipartFile2);
+	public ForumPost createPost(String subject, String body, String userId, MultipartFile[] file) throws IllegalStateException, IOException;
 	public PostAttachment getPostAttachment(int postId, int attId);
 }
