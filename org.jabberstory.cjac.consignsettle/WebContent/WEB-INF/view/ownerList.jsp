@@ -10,7 +10,7 @@
 <!--
 	function doSearch(pageNo){
 		document.form1.pageNo.value = pageNo;
-		document.form1.action = "${pageContext.request.contextPath}/owner/listOwner";
+		document.form1.action = "${pageContext.request.contextPath}/owner/ownerList";
 		document.form1.submit();
 	}
 
@@ -24,8 +24,8 @@
 		document.form1.submit();
 	}
 
-	function showOwner(groupId){
-		document.form1.groupId.value = groupId;
+	function showOwner(organId){
+		document.form1.organId.value = organId;
 		document.form1.action = "${pageContext.request.contextPath}/owner/showOwner";
 		document.form1.submit();
 	}
@@ -36,7 +36,7 @@
 <body>
 <form name="form1" method="post">
 <input type="hidden" name="pageNo">
-<input type="hidden" name="groupId">
+<input type="hidden" name="organId">
 <input type="hidden" name="sortColumn" value="${sortColumn}">
 <!-- Start Content Title -->
 <div>
@@ -72,11 +72,11 @@
 					</tr>
 				</c:when>	
 				<c:otherwise>
-					<c:forEach items="${pagingList.items}" var="userGroup" varStatus="status">		
+					<c:forEach items="${pagingList.items}" var="organ" varStatus="status">		
 						<tr>
 							<td class="">${(pagingList.currentPage - 1) * 10 + status.count}</td>
-							<td class="">${userGroup.groupName}</td>
-							<td class=""><a href="#" onClick="showOwner('${userGroup.groupId}');return false;">상세보기</a></td>
+							<td class="">${organ.organName}</td>
+							<td class=""><a href="#" onClick="showOwner('${organ.organId}');return false;">상세보기</a></td>
 						</tr>
 					</c:forEach>
 				</c:otherwise>
