@@ -13,6 +13,8 @@
 		<property name="use_sql_comments">true</property>
 
 		<mapping resource="org/jabberstory/cjac/consignsettle/domain/User.hbm.xml" />
+		<mapping resource="org/jabberstory/cjac/consignsettle/domain/UserGroup.hbm.xml" />
+		<mapping resource="org/jabberstory/cjac/consignsettle/domain/Organ.hbm.xml" />
 		<mapping resource="org/jabberstory/cjac/forum/domain/Forum.hbm.xml" />
 	</session-factory>
 </hibernate-configuration>
