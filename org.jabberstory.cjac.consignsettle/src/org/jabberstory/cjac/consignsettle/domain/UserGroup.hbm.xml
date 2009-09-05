@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+	
+<hibernate-mapping package="org.jabberstory.cjac.consignsettle.domain" default-access="field">
+	<class name="UserGroup" table="USERGROUP" lazy="true">
+		<id name="groupId" column="GROUPID" type="string" length="32">
+			<generator class="uuid" />
+		</id>
+		<property name="groupName" column="GROUPNAME" type="string" length="32" />
+		<property name="role" column="ROLE" type="string" length="1" />
+		<set name="users" table="USER_USERGROUP">
+			<key column="GROUPID" />
+			<many-to-many class="User" column="USERID" foreign-key="FK_USERGROUP_TO_USER" />
+		</set>
+		<set name="organs" table="ORGAN_USERGROUP">
+			<key column="GROUPID" />
+			<many-to-many class="Organ" column="ORGANID" foreign-key="FK_USERGROUP_TO_ORGAN" />
+		</set>
+	</class>
+
+</hibernate-mapping>
