@@ -23,7 +23,7 @@
 			<c:forEach var="group" items="${groups}">
 			<tr>
 				<td>${group.groupId}</td><td style="text-overflow:ellipsis; overflow: hidden; ">
-					<a href="showUserGroup?groupId=${group.groupId}"><nobr>${group.name}</nobr></a></td>
+					<a href="showUserGroup?groupId=${group.groupId}"><nobr>${group.groupName}</nobr></a></td>
 				<td>${group.role}</td>
 			</tr>
 			</c:forEach>

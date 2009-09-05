@@ -14,7 +14,7 @@ public class UserRepository extends HibernateDaoSupport {
 
 	@SuppressWarnings("unchecked")
 	public List<UserGroup> getGroups(String groupQuery) {
-		String queryString = "from UserGroup g where g.groupId like :query or g.name like :query";
+		String queryString = "from UserGroup g where g.groupId like :query or g.groupName like :query";
 		List list = getHibernateTemplate().findByNamedParam(queryString, 
 				new String[] {"query"}, 
 				new Object[] {"%" + groupQuery + "%"});
