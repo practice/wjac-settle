@@ -22,8 +22,8 @@
 				<prop key="/user/removeUserGroup">removeUserGroupController</prop>
 				<prop key="/user/createUser">createUserController</prop>
 				<prop key="/user/showUser">showUserController</prop>
-				<prop key="/owner/*">userGroupMultiActionController</prop>
-				<prop key="/subject/*">userGroupMultiActionController</prop>
+				<prop key="/owner/*">organMultiActionController</prop>
+				<prop key="/subject/*">organMultiActionController</prop>
 				<prop key="/login">urlController</prop>
 				<prop key="/forum/list">forumListController</prop>
 				<prop key="/forum/write">writeController</prop>
@@ -63,21 +63,21 @@
 		p:userService-ref="userService" />
 	<bean id="createUserGroupValidator" class="org.jabberstory.cjac.consignsettle.controller.CreateUserGroupValidator" />
 	
-	<bean id="userGroupMultiActionController" class="org.jabberstory.cjac.consignsettle.controller.UserGroupMultiActionController">
-		<property name="userGroupService" ref="userGroupService" />
+	<bean id="organMultiActionController" class="org.jabberstory.cjac.consignsettle.controller.OrganMultiActionController">
+		<property name="organService" ref="organService" />
 		<property name="userService" ref="userService" />
-		<property name="methodNameResolver"	ref="userGroupMultiActionControllerMethodNameResolver" />
+		<property name="methodNameResolver"	ref="organMultiActionControllerMethodNameResolver" />
 	</bean>
 	
-	<bean id="userGroupMultiActionControllerMethodNameResolver" class="org.springframework.web.servlet.mvc.multiaction.PropertiesMethodNameResolver">
+	<bean id="organMultiActionControllerMethodNameResolver" class="org.springframework.web.servlet.mvc.multiaction.PropertiesMethodNameResolver">
 		<property name="mappings">
 			<props>
-				<prop key="/listOwner">OwnerPagingList</prop>
+				<prop key="/ownerList">OwnerPagingList</prop>
 				<prop key="/createOwner">createOwner</prop>
 				<prop key="/showOwner">showOwner</prop>
 				<prop key="/updateOwner">updateOwner</prop>
 				<prop key="/deleteOwner">deleteOwner</prop>
-				<prop key="/listSubject">SubjectPagingList</prop>
+				<prop key="/subjectList">SubjectPagingList</prop>
 				<prop key="/createSubject">createSubject</prop>
 				<prop key="/showSubject">showSubject</prop>
 				<prop key="/updateSubject">updateSubject</prop>

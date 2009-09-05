@@ -37,10 +37,10 @@
 <bean id="userRepository" class="org.jabberstory.cjac.consignsettle.domain.UserRepository" 
 	p:hibernateTemplate-ref="hibernateTemplate" />
 
-<bean id="userGroupDao" class="org.jabberstory.cjac.consignsettle.domain.UserGroupDaoImpl" 
+<bean id="organRepository" class="org.jabberstory.cjac.consignsettle.domain.OrganRepository" 
 	p:hibernateTemplate-ref="hibernateTemplate" />
-<bean id="userGroupService" class="org.jabberstory.cjac.consignsettle.domain.UserGroupServiceImpl" 
-	p:userGroupDao-ref="userGroupDao"/>	
+<bean id="organService" class="org.jabberstory.cjac.consignsettle.domain.OrganServiceImpl" 
+	p:organRepository-ref="organRepository"/>	
 	
 <bean id="forumService" class="org.jabberstory.cjac.forum.domain.ForumServiceImpl"
 	p:forumRepository-ref="forumRepository"	/>
