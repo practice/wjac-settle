@@ -12,14 +12,14 @@ import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
  */
 public class UserRepository extends HibernateDaoSupport {
 
-//	@SuppressWarnings("unchecked")
-//	public List<UserGroup> getGroups(String groupQuery) {
-//		String queryString = "from UserGroup g where g.groupId like :query or g.name like :query";
-//		List list = getHibernateTemplate().findByNamedParam(queryString, 
-//				new String[] {"query"}, 
-//				new Object[] {"%" + groupQuery + "%"});
-//		return list;
-//	}
+	@SuppressWarnings("unchecked")
+	public List<UserGroup> getGroups(String groupQuery) {
+		String queryString = "from UserGroup g where g.groupId like :query or g.name like :query";
+		List list = getHibernateTemplate().findByNamedParam(queryString, 
+				new String[] {"query"}, 
+				new Object[] {"%" + groupQuery + "%"});
+		return list;
+	}
 
 	@SuppressWarnings("unchecked")
 	public List<User> getUsers(String userQuery) {
@@ -38,23 +38,23 @@ public class UserRepository extends HibernateDaoSupport {
 //		return null;
 		UserGroup group = (UserGroup) getHibernateTemplate().get(UserGroup.class, groupId);
 		return group;
+	}	
+
+	public void createUserGroup(String groupName, String role) {
+		UserGroup group = new UserGroup(groupName, role);
+		getHibernateTemplate().save(group);
 	}
 
-//	public void createUserGroup(String groupId, String name, String role) {
-//		UserGroup group = new UserGroup(groupId, name, role);
-//		getHibernateTemplate().save(group);
-//	}
-//
-//	public void updateUserGroup(String groupId, String name, String role) {
-//		UserGroup group = getUserGroup(groupId);
-//		group.setName(name);
-//		group.setRole(role);
-//	}
+	public void updateUserGroup(String groupId, String groupName, String role) {
+		UserGroup group = getUserGroup(groupId);
+		group.setGroupName(groupName);
+		group.setRole(role);
+	}
 
-//	public void removeUserGroup(String groupId) {
-//		UserGroup userGroup = getUserGroup(groupId);
-//		getHibernateTemplate().delete(userGroup);
-//	}
+	public void removeUserGroup(String groupId) {
+		UserGroup userGroup = getUserGroup(groupId);
+		getHibernateTemplate().delete(userGroup);
+	}
 
 	public User getUser(String userId) {
 		User user = (User) getHibernateTemplate().get(User.class, userId);
@@ -63,10 +63,6 @@ public class UserRepository extends HibernateDaoSupport {
 
 	public void createUser(String userId, String password, String username, String email) {
 		getHibernateTemplate().save(new User(userId, username, email, password));
-	}
-	
-	public void createUser(String userId, String password, String username, String email, String role) {
-		getHibernateTemplate().save(new User(userId, username, email, password, role));
 	}
 
 }

@@ -5,81 +5,17 @@
 	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
 	
 <hibernate-mapping package="org.jabberstory.cjac.consignsettle.domain" default-access="field">
-	<!-- User -->
 	<class name="User" table="USER" lazy="true">
-		<id name="userId" column="USERID" length="32">
+		<id name="userId" column="USERID" type="string" length="32">
 			<generator class="assigned" />
 		</id>
 		<property name="username" column="USERNAME" type="string" length="32" />
 		<property name="email" column="EMAIL" type="string" length="64" />
 		<property name="password" column="PASSWORD" type="string" length="64" />
-		<property name="role" column="ROLE" type="string" length="1" />
-		<set name="userGroups" table="USER_USERGROUP" cascade="save-update" inverse="true">
+		<set name="userGroups" table="USER_USERGROUP" inverse="true">
 			<key column="USERID" />
-			<many-to-many class="UserGroup" column="GROUPID" foreign-key="FK_USER_GROUP_TO_GROUP" />
+			<many-to-many class="UserGroup" column="GROUPID" foreign-key="FK_USER_TO_USERGROUP" />
 		</set>
 	</class>
 	
-	<class name="UserGroup" table="USERGROUP" lazy="true">
-		<id name="groupId" column="GROUPID" length="32">
-			<generator class="uuid" />
-		</id>
-		<property name="groupName" column="GROUPNAME" length="32" />
-		<property name="role" column="ROLE" type="string" length="1" />
-		<property name="parentGroupId" column="PARENT_GROUPID" type="string" length="32" />
-		<property name="parentGroupName" column="PARENT_GROUPNAME" type="string" length="32" />
-		
-		<property name="businessName" column="BUSINESS_NAME" type="string" length="32" />
-		<property name="projectName" column="PROJECT_NAME" type="string" length="32" />
-		<property name="researchAgency" column="RESEARCH_AGENCY" type="string" length="32" />
-		<property name="researchResponsiblePerson" column="RESEARCH_RESPONSIBLE_PERSON" type="string" length="32" />
-		<property name="contractStartDate" column="CONTRACT_STARTDATE" type="string" length="32" />
-		<property name="contractEndDate" column="CONTRACT_ENDDATE" type="string" length="32" />
-		
-		<property name="govContributeAmount" column="GOV_CONTRIBUTE_AMOUNT" type="string" length="32" />
-		<property name="nonGovContributeAmount" column="NONGOV_CONTRIBUTE_AMOUNT" type="string" length="32" />
-		<property name="goodsAmount" column="GOODS_AMOUNT" type="string" length="32" />
-		<property name="totalCashAmount" column="TOTAL_CACHE_AMOUNT" type="string" length="32" />
-		<property name="govInterests" column="GOV_INTERESTS" type="string" length="32" />
-		<property name="consignSettlementCommission" column="CONSIGN_SETTLEMENT_COMMISSION" type="string" length="32" />
-		
-		<property name="useResultDate" column="USE_RESULT_DATE" type="string" length="32" />
-		<property name="formalObjectAcceptanceDate" column="FORMALOBJECT_ACCEPTANCE_DATE" type="string" length="32" />
-		<property name="formalObjectResultDate" column="FORMALOBJECT_RESULT_DATE" type="string" length="32" />
-		<property name="consignSettlementResultDate" column="CONSIGN_SETTLEMENT_RESULTDATE" type="string" length="32" />
-		
-		<property name="subjectResponsiblePerson" column="SUBJECT_RESPONSIBLE_PERSON" type="string" length="32" />
-		<property name="subjectResponsiblePhone1" column="SUBJECT_RESPONSIBLE_PHONE1" type="string" length="32" />
-		<property name="subjectResponsiblePhone2" column="SUBJECT_RESPONSIBLE_PHONE2" type="string" length="32" />
-		<property name="subjectResponsiblePhone3" column="SUBJECT_RESPONSIBLE_PHONE3" type="string" length="32" />
-		<property name="subjectResponsiblePostNumber1" column="SUBJECT_RESPONSIBLE_POSTNUMBER1" type="string" length="32" />
-		<property name="subjectResponsiblePostNumber2" column="SUBJECT_RESPONSIBLE_POSTNUMBER2" type="string" length="32" />
-		<property name="subjectResponsibleAddress" column="SUBJECT_RESPONSIBLE_ADDRESS" type="string" length="32" />
-		<property name="subejctResponsibleEmail" column="SUBJECT_RESPONSIBLE_EMAIL" type="string" length="32" />
-		
-		<property name="consignSettlementPerson" column="CONSIGN_SETTLEMENT_PERSON" type="string" length="32" />
-		<property name="consignSettlementPhone1" column="CONSIGN_SETTLEMENT_PHONE1" type="string" length="32" />
-		<property name="consignSettlementPhone2" column="CONSIGN_SETTLEMENT_PHONE2" type="string" length="32" />
-		<property name="consignSettlementPhone3" column="CONSIGN_SETTLEMENT_PHONE3" type="string" length="32" />
-		<property name="consignSettlementPostNumber1" column="CONSIGN_SETTLEMENT_POSTNUMBER1" type="string" length="32" />
-		<property name="consignSettlementPostNumber2" column="CONSIGN_SETTLEMENT_POSTNUMBER2" type="string" length="32" />
-		<property name="consignSettlementAddress" column="CONSIGN_SETTLEMENT_ADDRESS" type="string" length="32" />
-		<property name="consignSettlementEmail" column="CONSIGN_SETTLEMENT_EMAIL" type="string" length="32" />
-		
-		<property name="currentAccount" column="CURRENT_AMOUNT" type="string" length="32" />
-		<property name="currentInterest" column="CURRENT_INTEREST" type="string" length="32" />
-		<property name="currentNonPropriety" column="CURRENT_NONPROPRIETY" type="string" length="32" />
-		<property name="currentRedemtion" column="CURRENT_REDEMTION" type="string" length="32" />
-		<property name="currentSubTotal" column="CURRENT_SUB_TOTAL" type="string" length="32" />
-
-		<property name="costDetail" column="COST_DETAIL" type="text"/>
-		<property name="nonApproval1" column="NON_APPROVAL1" type="text"/>
-		<property name="nonApproval2" column="NON_APPROVAL2" type="text"/>
-		
-		<set name="users" table="USER_USERGROUP">
-			<key column="GROUPID" />
-			<many-to-many class="User" column="USERID" foreign-key="FK_USER_GROUP_TO_USER" />
-		</set>
-	</class>
-
 </hibernate-mapping>

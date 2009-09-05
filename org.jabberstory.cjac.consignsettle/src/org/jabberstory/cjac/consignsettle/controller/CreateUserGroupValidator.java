@@ -14,8 +14,7 @@ public class CreateUserGroupValidator implements Validator {
 
 	@Override
 	public void validate(Object target, Errors errors) {
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "groupId", "required");
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name", "required");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "groupName", "required");
 	}
 
 }
