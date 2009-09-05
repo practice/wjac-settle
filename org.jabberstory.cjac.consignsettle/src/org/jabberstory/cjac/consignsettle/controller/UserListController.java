@@ -33,12 +33,6 @@ public class UserListController extends SimpleFormController {
 			mv.addObject("userCount", users.size());
 			return mv;
 		} 
-//		if (query.getGroupQuery() != null && query.getGroupQuery().trim().length() > 0) {
-//			List<UserGroup> groups = userService.getGroups(query.getGroupQuery());
-//			ModelAndView mv = new ModelAndView("userList", "groups", groups);
-//			mv.addObject("groupCount", groups.size());
-//			return mv;
-//		}
 		return new ModelAndView("userList");
 	}
 }
