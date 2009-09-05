@@ -13,7 +13,7 @@
 	}
 
 	function gotoList(){
-		document.form1.action = "${pageContext.request.contextPath}/owner/listOwner";
+		document.form1.action = "${pageContext.request.contextPath}/owner/ownerList";
 		document.form1.submit();
 	}
 
@@ -27,14 +27,7 @@
 </div>
 <!-- End Content Title -->
 <form name="form1" method="post">
-<input type="text" name="role" value="O"/><!-- 전담기관: big O -->
-전담 기관명: <input type="text" size="32" name="groupName" />
-담당자: 	<select name="userId">
-			<option value="">선택</option>
-			<c:forEach items="${users}" var="users">		
-				<option value="${users.userId }">${users.username }</option>
-			</c:forEach>
-		</select>
+전담 기관명: <input type="text" size="32" name="organName" />
 </form>
 <div>
 	<a href="#" onClick="saveOwner();return false;">저장</a>

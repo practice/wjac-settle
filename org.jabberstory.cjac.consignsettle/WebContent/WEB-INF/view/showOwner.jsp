@@ -8,7 +8,7 @@
 <script language="JavaScript">
 <!--
 	function gotoList(){
-		document.form1.action = "${pageContext.request.contextPath}/owner/listOwner";
+		document.form1.action = "${pageContext.request.contextPath}/owner/ownerList";
 		document.form1.submit();
 	}
 
@@ -33,8 +33,8 @@
 </div>
 <!-- End Content Title -->
 <form name="form1" method="post">
-<input type="hidden" name="groupId" value="${userGroup.groupId}">
-전담 기관명: ${userGroup.groupName}
+<input type="hidden" name="organId" value="${organ.organId}">
+전담 기관명: ${organ.organName}
 </form>
 <div>
 	<a href="#" onClick="editOwner();return false;">수정</a>
