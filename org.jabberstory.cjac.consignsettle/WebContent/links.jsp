@@ -12,6 +12,7 @@ Links to application logic.
 	<li><a href="user/list">User/Role Admin</a></li>
 	<li><a href="owner/ownerList">Owner Admin</a></li>
 	<li><a href="subject/subjectList">Subject Admin</a></li>
+	<li><a href="subject/settlementList">정산진행 현황</a></li>	
 	<li><a href="forum/list">Forum</a></li>	
 </ul>
 </body>
