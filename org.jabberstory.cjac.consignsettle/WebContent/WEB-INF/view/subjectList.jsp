@@ -10,7 +10,7 @@
 <!--
 	function doSearch(pageNo){
 		document.form1.pageNo.value = pageNo;
-		document.form1.action = "${pageContext.request.contextPath}/subject/listSubject";
+		document.form1.action = "${pageContext.request.contextPath}/subject/subjectList";
 		document.form1.submit();
 	}
 
@@ -24,8 +24,8 @@
 		document.form1.submit();
 	}
 
-	function showSubject(subjectId){
-		document.form1.subjectId.value = subjectId;
+	function showSubject(organId){
+		document.form1.organId.value = organId;
 		document.form1.action = "${pageContext.request.contextPath}/subject/showSubject";
 		document.form1.submit();
 	}
@@ -36,17 +36,17 @@
 <body>
 <form name="form1" method="post">
 <input type="hidden" name="pageNo">
-<input type="hidden" name="subjectId">
+<input type="hidden" name="organId">
 <input type="hidden" name="sortColumn" value="${sortColumn}">
 <!-- Start Content Title -->
 <div>
 	<H3>주관기관 현황</H3>
 </div>
 <!-- End Content Title -->
-<div>
+<!-- div>
 	<a href="#" onClick="doOrderedSearch('createDate');return false;">최근등록별보기</a>
 	<a href="#" onClick="doOrderedSearch('');return false;">주관기관별보기</a>
-</div>
+</div-->
 <!-- Start Content Area -->	
 <div>
 	<table cellspacing="0" cellpadding="0" class="">
@@ -74,12 +74,12 @@
 					</tr>
 				</c:when>	
 				<c:otherwise>
-					<c:forEach items="${pagingList.items}" var="subject" varStatus="status">		
+					<c:forEach items="${pagingList.items}" var="organ" varStatus="status">		
 						<tr>
 							<td class="">${(pagingList.currentPage - 1) * 10 + status.count}</td>
-							<td class="">${subject.owner.ownerName}</td>
-							<td class="">${subject.subjectName}</td>
-							<td class=""><a href="#" onClick="showSubject('${subject.subjectId}');return false;">상세보기</a></td>
+							<td class="">${organ.owner.organName}</td>
+							<td class="">${organ.organName}</td>
+							<td class=""><a href="#" onClick="showSubject('${organ.organId}');return false;">상세보기</a></td>
 						</tr>
 					</c:forEach>
 				</c:otherwise>

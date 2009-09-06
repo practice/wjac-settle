@@ -83,7 +83,15 @@
 				<prop key="/updateSubject">updateSubject</prop>
 				<prop key="/deleteSubject">deleteSubject</prop>
 				<prop key="/showCostDetail">showCostDetail</prop>
-				<prop key="/createCostDetail">createCostDetail</prop>
+				<prop key="/updateCostDetail">updateCostDetail</prop>
+				<prop key="/deleteCostDetail">deleteCostDetail</prop>
+				<prop key="/showNonApproval1">showNonApproval1</prop>
+				<prop key="/updateNonApproval1">updateNonApproval1</prop>
+				<prop key="/deleteNonApproval1">deleteNonApproval1</prop>
+				<prop key="/showNonApproval2">showNonApproval2</prop>
+				<prop key="/updateNonApproval2">updateNonApproval2</prop>
+				<prop key="/deleteNonApproval2">deleteNonApproval2</prop>
+				<prop key="/settlementList">settlementPagingList</prop>
 				<prop key="/*">others</prop>
 			</props>
 		</property>		

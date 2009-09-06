@@ -7,8 +7,8 @@
 <title>Insert title here</title>
 <script type="text/javascript">
 <!--
-	function updateCostDetail(){
-		document.form1.action = "${pageContext.request.contextPath}/subject/updateCostDetail";
+	function updateNonApproval2(){
+		document.form1.action = "${pageContext.request.contextPath}/subject/updateNonApproval2";
 		document.form1.submit();
 	}
 
@@ -17,9 +17,9 @@
 		document.form1.submit();
 	}
 
-	function deleteCostDetail() {
+	function deleteNonApproval2() {
 		if(confirm("삭제하시겠습니까?")){
-			document.form1.action = "${pageContext.request.contextPath}/subject/deleteCostDetail";
+			document.form1.action = "${pageContext.request.contextPath}/subject/deleteNonApproval2";
 			document.form1.submit();
 		}
 	}
@@ -29,7 +29,7 @@
 <body>
 <!-- Start Content Title -->
 <div>
-	<H3>사업비 사용명세:${organ.organName}</H3>
+	<H3>최종 불인정 내역:${organ.organName}</H3>
 </div>
 <!-- End Content Title -->
 <form name="form1">
@@ -48,28 +48,20 @@
 	<tbody>
 		<tr>
 		<c:choose>		
-			<c:when test="${organ.costDetail == null || organ.costDetail == ''}">
-				<td colspan="6" class="">입력된 사업비 사용명세서가 없습니다.</td>
+			<c:when test="${organ.nonApproval2 == null || organ.nonApproval2 == ''}">
+				<td colspan="6" class="">입력된 최종 불인정 내역이 없습니다.</td>
 			</c:when>	
 			<c:otherwise>			
-				<td colspan="6" class="">${organ.costDetail }</td>			
+				<td colspan="6" class="">${organ.nonApproval2 }</td>			
 			</c:otherwise>
 		</c:choose>
-		</tr>
-		<tr>
-			<td class="">사용잔액</td>
-			<td class="">${organ.currentAccount}</td>
-			<td class="">발생이자(잔액)</td>
-			<td class="">${organ.currentInterest}</td>
-			<td class="">불인정액</td>
-			<td class="">${organ.currentNonPropriety}</td>
-		</tr>
+		</tr>		
 	</tbody>
 </table>
 </form>
 <div>
-	<a href="#" onClick="updateCostDetail();return false;">사업비사용명세 입력/수정</a>
-	<a href="#" onClick="deleteCostDetail();return false;">삭제</a>
+	<a href="#" onClick="updateNonApproval2();return false;">최종 불인정 내역 입력/수정</a>
+	<a href="#" onClick="deleteNonApproval2();return false;">삭제</a>
 	<a href="#" onClick="showSubject();return false;">주관기관 현황</a>
 	<a href="#" onClick="alert('준비중...');return false;">인쇄</a>
 </div>

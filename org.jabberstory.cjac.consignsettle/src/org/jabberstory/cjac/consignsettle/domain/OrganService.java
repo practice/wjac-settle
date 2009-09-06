@@ -7,16 +7,26 @@ import org.springframework.dao.DataAccessException;
 
 public interface OrganService {
 	List<Organ> getOrgans(String userId, String role) throws DataAccessException;
-
+	
+	List<Organ> getAllOrgans(String role) throws DataAccessException;
+	
 	Paging getOrgansWithPaging(String userId, String role, int currentPage, int pageSize, String sortColumn) throws DataAccessException;
 
-	Organ getOrgan(String groupId) throws DataAccessException;
+	Organ getOrgan(String organId) throws DataAccessException;
 
-	void createOrgan(Organ userGroup) throws DataAccessException;
+	void createOrgan(Organ organ) throws DataAccessException;
+	
+	void createOrgan(Organ organ, String ownerId) throws DataAccessException;
 
-	void updateOrgan(Organ userGroup) throws DataAccessException;
+	void updateOrgan(Organ organ, String ownerId) throws DataAccessException;
 
+	void updateOrgan(Organ organ) throws DataAccessException;
+	
+	void updateOrganCostDetail(String organId, String costDetail) throws DataAccessException;
+	
+	void updateOrganNonApproval1(String organId, String nonApproval1) throws DataAccessException;
+	
+	void updateOrganNonApproval2(String organId, String nonApproval2) throws DataAccessException;
+	
 	void removeOrgan(String organId) throws DataAccessException;
-
-	void updateOrgan(String organId, String costDetail) throws DataAccessException;
 }

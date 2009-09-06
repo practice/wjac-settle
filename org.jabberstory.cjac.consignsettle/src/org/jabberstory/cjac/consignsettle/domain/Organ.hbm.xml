@@ -31,14 +31,14 @@
 		<property name="formalObjectResultDate" column="FORMALOBJECT_RESULT_DATE" type="string" length="32" />
 		<property name="consignSettlementResultDate" column="CONSIGN_SETTLEMENT_RESULTDATE" type="string" length="32" />
 		
-		<property name="subjectResponsiblePerson" column="SUBJECT_RESPONSIBLE_PERSON" type="string" length="32" />
-		<property name="subjectResponsiblePhone1" column="SUBJECT_RESPONSIBLE_PHONE1" type="string" length="32" />
-		<property name="subjectResponsiblePhone2" column="SUBJECT_RESPONSIBLE_PHONE2" type="string" length="32" />
-		<property name="subjectResponsiblePhone3" column="SUBJECT_RESPONSIBLE_PHONE3" type="string" length="32" />
-		<property name="subjectResponsiblePostNumber1" column="SUBJECT_RESPONSIBLE_POSTNUMBER1" type="string" length="32" />
-		<property name="subjectResponsiblePostNumber2" column="SUBJECT_RESPONSIBLE_POSTNUMBER2" type="string" length="32" />
-		<property name="subjectResponsibleAddress" column="SUBJECT_RESPONSIBLE_ADDRESS" type="string" length="32" />
-		<property name="subejctResponsibleEmail" column="SUBJECT_RESPONSIBLE_EMAIL" type="string" length="32" />
+		<property name="organResponsiblePerson" column="ORGAN_RESPONSIBLE_PERSON" type="string" length="32" />
+		<property name="organResponsiblePhone1" column="ORGAN_RESPONSIBLE_PHONE1" type="string" length="32" />
+		<property name="organResponsiblePhone2" column="ORGAN_RESPONSIBLE_PHONE2" type="string" length="32" />
+		<property name="organResponsiblePhone3" column="ORGAN_RESPONSIBLE_PHONE3" type="string" length="32" />
+		<property name="organResponsiblePostNumber1" column="ORGAN_RESPONSIBLE_POSTNUMBER1" type="string" length="32" />
+		<property name="organResponsiblePostNumber2" column="ORGAN_RESPONSIBLE_POSTNUMBER2" type="string" length="32" />
+		<property name="organResponsibleAddress" column="ORGAN_RESPONSIBLE_ADDRESS" type="string" length="32" />
+		<property name="organResponsibleEmail" column="ORGAN_RESPONSIBLE_EMAIL" type="string" length="32" />
 		
 		<property name="consignSettlementPerson" column="CONSIGN_SETTLEMENT_PERSON" type="string" length="32" />
 		<property name="consignSettlementPhone1" column="CONSIGN_SETTLEMENT_PHONE1" type="string" length="32" />
@@ -59,11 +59,11 @@
 		<property name="nonApproval1" column="NON_APPROVAL1" type="text"/>
 		<property name="nonApproval2" column="NON_APPROVAL2" type="text"/>
 		
-		<many-to-one name="parentOrgan" class="Organ" foreign-key="FK_ORGAN_TO_PARENTORGAN" />
+		<many-to-one name="owner" class="Organ" foreign-key="FK_ORGAN_TO_PARENTORGAN" lazy="false"/>
 			
 		<set name="userGroups" table="ORGAN_USERGROUP">
 			<key column="ORGANID" />
-			<many-to-many class="UserGroup" column="GROUPID" foreign-key="FK_ORGAN_TO_USERGROUP" />
+			<many-to-many class="UserGroup" column="GROUPID" foreign-key="FK_ORGAN_TO_USERGROUP" lazy="false"/>
 		</set>
 	</class>
 

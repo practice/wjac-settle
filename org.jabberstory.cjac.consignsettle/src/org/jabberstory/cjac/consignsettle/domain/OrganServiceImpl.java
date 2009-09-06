@@ -17,16 +17,27 @@ public class OrganServiceImpl implements OrganService{
 	public void createOrgan(Organ organ) throws DataAccessException {
 		organRepository.createOrgan(organ);
 	}
+	
+	@Override
+	public void createOrgan(Organ organ, String ownerId) throws DataAccessException {
+		organRepository.createOrgan(organ, ownerId);
+	}
 
 	@Override
-	public Organ getOrgan(String groupId) throws DataAccessException {
-		return organRepository.getOrgan(groupId);
+	public Organ getOrgan(String organId) throws DataAccessException {
+		return organRepository.getOrgan(organId);
 	}
 
 	@Override
 	public List<Organ> getOrgans(String userId, String role)
 			throws DataAccessException {
 		return organRepository.getOrgans(userId, role);
+	}
+	
+	@Override
+	public List<Organ> getAllOrgans(String role)
+			throws DataAccessException {
+		return organRepository.getAllOrgans(role);
 	}
 
 	@Override
@@ -37,19 +48,36 @@ public class OrganServiceImpl implements OrganService{
 	}
 
 	@Override
-	public void removeOrgan(String groupId) throws DataAccessException {
-		organRepository.removeOrgan(groupId);
+	public void removeOrgan(String organId) throws DataAccessException {
+		organRepository.removeOrgan(organId);
 	}
 
 	@Override
 	public void updateOrgan(Organ organ) throws DataAccessException {
 		organRepository.updateOrgan(organ);
 	}
+	
+	@Override
+	public void updateOrgan(Organ organ, String ownerId) throws DataAccessException {
+		organRepository.updateOrgan(organ, ownerId);
+	}
 
 	@Override
-	public void updateOrgan(String groupId, String costDetail)
+	public void updateOrganCostDetail(String organId, String costDetail)
 			throws DataAccessException {
-		organRepository.updateOrgan(groupId, costDetail);
+		organRepository.updateOrganCostDetail(organId, costDetail);
+	}
+	
+	@Override
+	public void updateOrganNonApproval1(String organId, String nonApproval1)
+			throws DataAccessException {
+		organRepository.updateOrganNonApproval1(organId, nonApproval1);
+	}
+	
+	@Override
+	public void updateOrganNonApproval2(String organId, String nonApproval2)
+			throws DataAccessException {
+		organRepository.updateOrganNonApproval2(organId, nonApproval2);
 	}
 
 }

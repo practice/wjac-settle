@@ -9,16 +9,16 @@
 <!--
 	window.onload = function()
 	{
-		CKEDITOR.replace( 'costDetail' );
+		CKEDITOR.replace( 'nonApproval2' );
 	}
 
-	function saveSubject(){
-		document.form1.action = "${pageContext.request.contextPath}/subject/updateCostDetail";
+	function saveNonApproval2(){
+		document.form1.action = "${pageContext.request.contextPath}/subject/updateNonApproval2";
 		document.form1.submit();
 	}
 	
-	function showCostDetail(){
-		document.form1.action = "${pageContext.request.contextPath}/subject/showCostDetail";
+	function showNonApproval2(){
+		document.form1.action = "${pageContext.request.contextPath}/subject/showNonApproval2";
 		document.form1.submit();
 	}
 //-->
@@ -27,7 +27,7 @@
 <body>
 <!-- Start Content Title -->
 <div>
-	<H3>사업비 사용명세:${organ.organName}</H3>
+	<H3>최종 불인정 내역:${organ.organName}</H3>
 </div>
 <!-- End Content Title -->
 <form name="form1" method="post">
@@ -45,22 +45,14 @@
 	</colgroup>
 	<tbody>
 		<tr>
-			<td colspan="6" class=""><textarea id="costDetail" name="costDetail">${organ.costDetail}</textarea></td>
-		</tr>
-		<tr>
-			<td class="">사용잔액</td>
-			<td class="">${organ.currentAccount}</td>
-			<td class="">발생이자(잔액)</td>
-			<td class="">${organ.currentInterest}</td>
-			<td class="">불인정액</td>
-			<td class="">${organ.currentNonPropriety}</td>
-		</tr>
+			<td colspan="6" class=""><textarea id="nonApproval2" name="nonApproval2">${organ.nonApproval2}</textarea></td>
+		</tr>		
 	</tbody>
 </table>
 </form>
 <div>
-	<a href="#" onClick="saveSubject();return false;">저장</a>
-	<a href="#" onClick="showCostDetail();return false;">취소</a>
+	<a href="#" onClick="saveNonApproval2();return false;">저장</a>
+	<a href="#" onClick="showNonApproval2();return false;">취소</a>
 </div>	
 </body>
 </html>

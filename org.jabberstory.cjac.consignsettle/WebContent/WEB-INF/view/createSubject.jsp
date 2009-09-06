@@ -1,18 +1,45 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>CJAC</title>
-<script language="javascript">
+<script type="text/javascript">
 <!--
+	function trim(str) {
+		return str.replace(/^\s\s*/, '').replace(/\s\s*$/, '');
+	}
+
+	function requiredFieldCheck(){
+
+		var selObj = document.form1.ownerId;	
+		var selIndex = selObj.selectedIndex;
+
+		if(selObj.options[selIndex].value == ""){
+			alert("전담기관을 선택해주세요.");
+			selObj.focus();			
+			return false;
+		}
+
+		if(trim(document.form1.organName.value) == ""){
+			alert("주관기관명을 입력해주세요.");
+			selObj.focus();			
+			return false;
+		}
+
+		return true;
+	}
+	
 	function saveSubject(){
-		document.form1.action = "${pageContext.request.contextPath}/subject/createSubject";
-		document.form1.submit();
+		if(requiredFieldCheck()){
+			document.form1.action = "${pageContext.request.contextPath}/subject/createSubject";
+			document.form1.submit();
+		}
 	}
 
 	function gotoList(){
-		document.form1.action = "${pageContext.request.contextPath}/subject/listSubject";
+		document.form1.action = "${pageContext.request.contextPath}/subject/subjectList";
 		document.form1.submit();
 	}
 
@@ -26,7 +53,6 @@
 </div>
 <!-- End Content Title -->
 <form name="form1" method="post">
-<input type="text" name="ownerId" value="${owner.ownerId }"/>
 <table border="1" cellspacing="0" cellpadding="0" class="">
 	<caption class="">
 		사업정보 입력
@@ -40,9 +66,14 @@
 	<tbody>
 		<tr>
 			<th scope="row">전담기관</th>
-			<td class=""><input type="text" name="ownerName" style="" title="전담기관" value="${owner.ownerName }"></td>
+			<td class=""><select name="ownerId">
+							<option value="">선택</option>
+							<c:forEach items="${owners}" var="owner">		
+								<option value="${owner.organId }">${owner.organName }</option>
+							</c:forEach>
+						</select></td>
 			<th scope="row">주관기관</th>
-			<td class=""><input type="text" name="subjectName" style="" title="주관기관"></td>
+			<td class=""><input type="text" name="organName" style="" title="주관기관"></td>
 		</tr>
 		<tr>
 			<th scope="row">사업명</th>
@@ -131,16 +162,16 @@
 	<tbody>
 		<tr>
 			<th scope="row">주관기관담당자</th>
-			<td class=""><input type="text" name="subjectResponsiblePerson" style="" title="주관기관담당자"></td>
+			<td class=""><input type="text" name="organResponsiblePerson" style="" title="주관기관담당자"></td>
 			<th scope="row">정산기관담당자</th>
 			<td class=""><input type="text" name="consignSettlementPerson" style="" title="정산기관담당자"></td>
 		</tr>
 		<tr>
 			<th scope="row">연락처</th>
 			<td class="">
-				<input type="text" name="subjectResponsiblePhone1" style="" title="연락처">-
-				<input type="text" name="subjectResponsiblePhone2" style="" title="연락처">-
-				<input type="text" name="subjectResponsiblePhone3" style="" title="연락처">
+				<input type="text" name="organResponsiblePhone1" style="" title="연락처">-
+				<input type="text" name="organResponsiblePhone2" style="" title="연락처">-
+				<input type="text" name="organResponsiblePhone3" style="" title="연락처">
 			</td>
 			<th scope="row">연락처</th>
 			<td class="">
@@ -152,9 +183,9 @@
 		<tr>
 			<th scope="row">주소</th>
 			<td class="">
-				<input type="text" name="subjectResponsiblePostNumber1" style="" title="우편번호1">-
-				<input type="text" name="subjectResponsiblePostNumber2" style="" title="우편번호2">우편번호찾기
-				<input type="text" name="subjectResponsibleAddress" style="" title="주소">
+				<input type="text" name="organResponsiblePostNumber1" style="" title="우편번호1">-
+				<input type="text" name="organResponsiblePostNumber2" style="" title="우편번호2">우편번호찾기
+				<input type="text" name="organResponsibleAddress" style="" title="주소">
 			</td>
 			<th scope="row">주소</th>
 			<td class="">
@@ -165,7 +196,7 @@
 		</tr>
 		<tr>
 			<th scope="row">E-mail</th>
-			<td class=""><input type="text" name="subejctResponsibleEmail" style="" title="E-mail"></td>
+			<td class=""><input type="text" name="organResponsibleEmail" style="" title="E-mail"></td>
 			<th scope="row">E-mail</th>
 			<td class=""><input type="text" name="consignSettlementEmail" style="" title="E-mail"></td>
 		</tr>

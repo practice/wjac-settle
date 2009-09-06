@@ -8,7 +8,7 @@
 <script language="JavaScript">
 <!--
 	function gotoList(){
-		document.form1.action = "${pageContext.request.contextPath}/subject/listSubject";
+		document.form1.action = "${pageContext.request.contextPath}/subject/subjectList";
 		document.form1.submit();
 	}
 
@@ -19,6 +19,16 @@
 
 	function showCostDetail() {
 		document.form1.action = "${pageContext.request.contextPath}/subject/showCostDetail";
+		document.form1.submit();
+	}
+
+	function showNonApproval1() {
+		document.form1.action = "${pageContext.request.contextPath}/subject/showNonApproval1";
+		document.form1.submit();
+	}
+
+	function showNonApproval2() {
+		document.form1.action = "${pageContext.request.contextPath}/subject/showNonApproval2";
 		document.form1.submit();
 	}
 
@@ -38,7 +48,7 @@
 </div>
 <!-- End Content Title -->
 <form name="form1" method="post">
-<input type="hidden" name="subjectId" value="${subject.subjectId}">
+<input type="hidden" name="organId" value="${organ.organId}">
 <table border="1" cellspacing="0" cellpadding="0" class="">
 	<caption class="">
 		사업정보 입력
@@ -52,27 +62,27 @@
 	<tbody>
 		<tr>
 			<th scope="row">전담기관</th>
-			<td class="">${subject.owner.ownerName}</td>
+			<td class="">${organ.owner.organName}</td>
 			<th scope="row">주관기관</th>
-			<td class="">${subject.subjectName}</td>
+			<td class="">${organ.organName}</td>
 		</tr>
 		<tr>
 			<th scope="row">사업명</th>
-			<td class="">${subject.businessName}</td>
+			<td class="">${organ.businessName}</td>
 			<th scope="row">과제명</th>
-			<td class="">${subject.projectName}</td>
+			<td class="">${organ.projectName}</td>
 		</tr>
 		<tr>
 			<th scope="row">연구기관명</th>
-			<td class="">${subject.researchAgency}</td>
+			<td class="">${organ.researchAgency}</td>
 			<th scope="row">연구책임자</th>
-			<td class="">${subject.researchResponsiblePerson}</td>
+			<td class="">${organ.researchResponsiblePerson}</td>
 		</tr>
 		<tr>
 			<th scope="row">협약기관 시작일</th>
-			<td class="">${subject.contractStartDate}</td>
+			<td class="">${organ.contractStartDate}</td>
 			<th scope="row">협약기관 종료일</th>
-			<td class="">${subject.contractEndDate}</td>
+			<td class="">${organ.contractEndDate}</td>
 		</tr>
 	</tbody>
 </table>
@@ -89,21 +99,21 @@
 	<tbody>
 		<tr>
 			<th scope="row">정부출현금</th>
-			<td class="">${subject.govContributeAmount}</td>
+			<td class="">${organ.govContributeAmount}</td>
 			<th scope="row">민감부담금</th>
-			<td class="">${subject.nonGovContributeAmount}</td>
+			<td class="">${organ.nonGovContributeAmount}</td>
 		</tr>
 		<tr>
 			<th scope="row">현물</th>
-			<td class="">${subject.goodsAmount}</td>
+			<td class="">${organ.goodsAmount}</td>
 			<th scope="row">총현금</th>
-			<td class="">${subject.totalCashAmount}</td>
+			<td class="">${organ.totalCashAmount}</td>
 		</tr>
 		<tr>
 			<th scope="row">정부지분</th>
-			<td class="">${subject.govInterests}</td>
+			<td class="">${organ.govInterests}</td>
 			<th scope="row">위탁정산 수수료</th>
-			<td class="">${subject.consignSettlementCommission}</td>
+			<td class="">${organ.consignSettlementCommission}</td>
 		</tr>
 </table>
 <table border="1" cellspacing="0" cellpadding="0" class="">
@@ -119,15 +129,15 @@
 	<tbody>
 		<tr>
 			<th scope="row">사용실적 제출일</th>
-			<td class="">${subject.useResultDate}</td>
+			<td class="">${organ.useResultDate}</td>
 			<th scope="row">이의 신청 접수일</th>
-			<td class="">${subject.formalObjectAcceptanceDate}</td>
+			<td class="">${organ.formalObjectAcceptanceDate}</td>
 		</tr>
 		<tr>
 			<th scope="row">이의신청 결과통보일</th>
-			<td class="">${subject.formalObjectResultDate}</td>
+			<td class="">${organ.formalObjectResultDate}</td>
 			<th scope="row">정산결과 보고일</th>
-			<td class="">${subject.consignSettlementResultDate}</td>
+			<td class="">${organ.consignSettlementResultDate}</td>
 		</tr>
 </table>
 <table border="1" cellspacing="0" cellpadding="0" class="">
@@ -143,37 +153,37 @@
 	<tbody>
 		<tr>
 			<th scope="row">주관기관담당자</th>
-			<td class="">${subject.subjectResponsiblePerson}</td>
+			<td class="">${organ.organResponsiblePerson}</td>
 			<th scope="row">정산기관담당자</th>
-			<td class="">${subject.consignSettlementPerson}</td>
+			<td class="">${organ.consignSettlementPerson}</td>
 		</tr>
 		<tr>
 			<th scope="row">연락처</th>
 			<td class="">
-				${subject.subjectResponsiblePhone1}-${subject.subjectResponsiblePhone2}-${subject.subjectResponsiblePhone3}
+				${organ.organResponsiblePhone1}-${organ.organResponsiblePhone2}-${organ.organResponsiblePhone3}
 			</td>
 			<th scope="row">연락처</th>
 			<td class="">
-				${subject.consignSettlementPhone1}-${subject.consignSettlementPhone2}-${subject.consignSettlementPhone3}
+				${organ.consignSettlementPhone1}-${organ.consignSettlementPhone2}-${organ.consignSettlementPhone3}
 			</td>
 		</tr>
 		<tr>
 			<th scope="row">주소</th>
 			<td class="">
-				${subject.subjectResponsiblePostNumber1}-${subject.subjectResponsiblePostNumber2}
-				${subject.subjectResponsibleAddress}
+				${organ.organResponsiblePostNumber1}-${organ.organResponsiblePostNumber2}
+				${organ.organResponsibleAddress}
 			</td>
 			<th scope="row">주소</th>
 			<td class="">
-				${subject.consignSettlementPostNumber1}-${subject.consignSettlementPostNumber2}
-				${subject.consignSettlementAddress}
+				${organ.consignSettlementPostNumber1}-${organ.consignSettlementPostNumber2}
+				${organ.consignSettlementAddress}
 			</td>
 		</tr>
 		<tr>
 			<th scope="row">E-mail</th>
-			<td class="">${subject.subejctResponsibleEmail}</td>
+			<td class="">${organ.organResponsibleEmail}</td>
 			<th scope="row">E-mail</th>
-			<td class="">${subject.consignSettlementEmail}</td>
+			<td class="">${organ.consignSettlementEmail}</td>
 		</tr>
 </table>
 <table border="1" cellspacing="0" cellpadding="0" class="">
@@ -189,27 +199,30 @@
 	<tbody>
 		<tr>
 			<th scope="row">사용잔액</th>
-			<td class="">${subject.currentAccount}</td>
+			<td class="">${organ.currentAccount}</td>
 			<th scope="row">발생이자</th>
-			<td class="">${subject.currentInterest}</td>
+			<td class="">${organ.currentInterest}</td>
 		</tr>
 		<tr>
 			<th scope="row">부적정금액</th>
-			<td class="">${subject.currentNonPropriety}</td>
+			<td class="">${organ.currentNonPropriety}</td>
 			<th scope="row">소계</th>
-			<td class="">${subject.currentSubTotal}</td>
+			<td class="">${organ.currentSubTotal}</td>
 		</tr>
 		<tr>
 			<th scope="row">환수대상액</th>
-			<td colspan="3" class="">${subject.currentRedemtion}</td>
+			<td colspan="3" class="">${organ.currentRedemtion}</td>
 		</tr>		
 </table>
 </form>
 <div>
 	<a href="#" onClick="showCostDetail();return false;">사업비사용명세</a>
+	<a href="#" onClick="showNonApproval1();return false;">1차 불인정 내역</a>
+	<a href="#" onClick="showNonApproval2();return false;">최종 불인정 내역</a>
 	<a href="#" onClick="editSubject();return false;">수정</a>
 	<a href="#" onClick="deleteSubject();return false;">삭제</a>
 	<a href="#" onClick="gotoList();return false;">목록</a>
+	<a href="#" onClick="alert('준비중...');return false;">인쇄</a>
 </div>
 </body>
 </html>

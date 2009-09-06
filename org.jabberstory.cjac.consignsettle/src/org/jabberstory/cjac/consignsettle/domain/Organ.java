@@ -27,14 +27,14 @@ public class Organ {
 	private String formalObjectAcceptanceDate;
 	private String formalObjectResultDate;
 	private String consignSettlementResultDate;
-	private String subjectResponsiblePerson;
-	private String subjectResponsiblePhone1;
-	private String subjectResponsiblePhone2;
-	private String subjectResponsiblePhone3;
-	private String subjectResponsiblePostNumber1;
-	private String subjectResponsiblePostNumber2;
-	private String subjectResponsibleAddress;
-	private String subejctResponsibleEmail;
+	private String organResponsiblePerson;
+	private String organResponsiblePhone1;
+	private String organResponsiblePhone2;
+	private String organResponsiblePhone3;
+	private String organResponsiblePostNumber1;
+	private String organResponsiblePostNumber2;
+	private String organResponsibleAddress;
+	private String organResponsibleEmail;
 	private String consignSettlementPerson;
 	private String consignSettlementPhone1;
 	private String consignSettlementPhone2;
@@ -51,7 +51,7 @@ public class Organ {
 	private String costDetail;
 	private String nonApproval1;
 	private String nonApproval2;
-	private Organ parentOrgan;
+	private Organ owner;
 	private Set<UserGroup> userGroups = new HashSet<UserGroup>(0);
 
 	public Organ() {
@@ -66,11 +66,11 @@ public class Organ {
 			String consignSettlementCommission, String useResultDate,
 			String formalObjectAcceptanceDate, String formalObjectResultDate,
 			String consignSettlementResultDate,
-			String subjectResponsiblePerson, String subjectResponsiblePhone1,
-			String subjectResponsiblePhone2, String subjectResponsiblePhone3,
-			String subjectResponsiblePostNumber1,
-			String subjectResponsiblePostNumber2,
-			String subjectResponsibleAddress, String subejctResponsibleEmail,
+			String organResponsiblePerson, String organResponsiblePhone1,
+			String organResponsiblePhone2, String organResponsiblePhone3,
+			String organResponsiblePostNumber1,
+			String organResponsiblePostNumber2,
+			String organResponsibleAddress, String organResponsibleEmail,
 			String consignSettlementPerson, String consignSettlementPhone1,
 			String consignSettlementPhone2, String consignSettlementPhone3,
 			String consignSettlementPostNumber1,
@@ -79,7 +79,7 @@ public class Organ {
 			String currentAccount, String currentInterest,
 			String currentNonPropriety, String currentRedemtion,
 			String currentSubTotal, String costDetail, String nonApproval1,
-			String nonApproval2, Organ parentOrgan, Set<UserGroup> userGroups) {
+			String nonApproval2, Organ owner, Set<UserGroup> userGroups) {
 		this.organName = organName;
 		this.role = role;
 		this.businessName = businessName;
@@ -98,14 +98,14 @@ public class Organ {
 		this.formalObjectAcceptanceDate = formalObjectAcceptanceDate;
 		this.formalObjectResultDate = formalObjectResultDate;
 		this.consignSettlementResultDate = consignSettlementResultDate;
-		this.subjectResponsiblePerson = subjectResponsiblePerson;
-		this.subjectResponsiblePhone1 = subjectResponsiblePhone1;
-		this.subjectResponsiblePhone2 = subjectResponsiblePhone2;
-		this.subjectResponsiblePhone3 = subjectResponsiblePhone3;
-		this.subjectResponsiblePostNumber1 = subjectResponsiblePostNumber1;
-		this.subjectResponsiblePostNumber2 = subjectResponsiblePostNumber2;
-		this.subjectResponsibleAddress = subjectResponsibleAddress;
-		this.subejctResponsibleEmail = subejctResponsibleEmail;
+		this.organResponsiblePerson = organResponsiblePerson;
+		this.organResponsiblePhone1 = organResponsiblePhone1;
+		this.organResponsiblePhone2 = organResponsiblePhone2;
+		this.organResponsiblePhone3 = organResponsiblePhone3;
+		this.organResponsiblePostNumber1 = organResponsiblePostNumber1;
+		this.organResponsiblePostNumber2 = organResponsiblePostNumber2;
+		this.organResponsibleAddress = organResponsibleAddress;
+		this.organResponsibleEmail = organResponsibleEmail;
 		this.consignSettlementPerson = consignSettlementPerson;
 		this.consignSettlementPhone1 = consignSettlementPhone1;
 		this.consignSettlementPhone2 = consignSettlementPhone2;
@@ -122,12 +122,12 @@ public class Organ {
 		this.costDetail = costDetail;
 		this.nonApproval1 = nonApproval1;
 		this.nonApproval2 = nonApproval2;
-		this.parentOrgan = parentOrgan;
+		this.owner = owner;
 		this.userGroups = userGroups;
 	}
 
 	public String getOrganId() {
-		return this.organId;
+		return organId;
 	}
 
 	public void setOrganId(String organId) {
@@ -135,7 +135,7 @@ public class Organ {
 	}
 
 	public String getOrganName() {
-		return this.organName;
+		return organName;
 	}
 
 	public void setOrganName(String organName) {
@@ -143,7 +143,7 @@ public class Organ {
 	}
 
 	public String getRole() {
-		return this.role;
+		return role;
 	}
 
 	public void setRole(String role) {
@@ -151,7 +151,7 @@ public class Organ {
 	}
 
 	public String getBusinessName() {
-		return this.businessName;
+		return businessName;
 	}
 
 	public void setBusinessName(String businessName) {
@@ -159,7 +159,7 @@ public class Organ {
 	}
 
 	public String getProjectName() {
-		return this.projectName;
+		return projectName;
 	}
 
 	public void setProjectName(String projectName) {
@@ -167,7 +167,7 @@ public class Organ {
 	}
 
 	public String getResearchAgency() {
-		return this.researchAgency;
+		return researchAgency;
 	}
 
 	public void setResearchAgency(String researchAgency) {
@@ -175,7 +175,7 @@ public class Organ {
 	}
 
 	public String getResearchResponsiblePerson() {
-		return this.researchResponsiblePerson;
+		return researchResponsiblePerson;
 	}
 
 	public void setResearchResponsiblePerson(String researchResponsiblePerson) {
@@ -183,7 +183,7 @@ public class Organ {
 	}
 
 	public String getContractStartDate() {
-		return this.contractStartDate;
+		return contractStartDate;
 	}
 
 	public void setContractStartDate(String contractStartDate) {
@@ -191,7 +191,7 @@ public class Organ {
 	}
 
 	public String getContractEndDate() {
-		return this.contractEndDate;
+		return contractEndDate;
 	}
 
 	public void setContractEndDate(String contractEndDate) {
@@ -199,7 +199,7 @@ public class Organ {
 	}
 
 	public String getGovContributeAmount() {
-		return this.govContributeAmount;
+		return govContributeAmount;
 	}
 
 	public void setGovContributeAmount(String govContributeAmount) {
@@ -207,7 +207,7 @@ public class Organ {
 	}
 
 	public String getNonGovContributeAmount() {
-		return this.nonGovContributeAmount;
+		return nonGovContributeAmount;
 	}
 
 	public void setNonGovContributeAmount(String nonGovContributeAmount) {
@@ -215,7 +215,7 @@ public class Organ {
 	}
 
 	public String getGoodsAmount() {
-		return this.goodsAmount;
+		return goodsAmount;
 	}
 
 	public void setGoodsAmount(String goodsAmount) {
@@ -223,7 +223,7 @@ public class Organ {
 	}
 
 	public String getTotalCashAmount() {
-		return this.totalCashAmount;
+		return totalCashAmount;
 	}
 
 	public void setTotalCashAmount(String totalCashAmount) {
@@ -231,7 +231,7 @@ public class Organ {
 	}
 
 	public String getGovInterests() {
-		return this.govInterests;
+		return govInterests;
 	}
 
 	public void setGovInterests(String govInterests) {
@@ -239,16 +239,15 @@ public class Organ {
 	}
 
 	public String getConsignSettlementCommission() {
-		return this.consignSettlementCommission;
+		return consignSettlementCommission;
 	}
 
-	public void setConsignSettlementCommission(
-			String consignSettlementCommission) {
+	public void setConsignSettlementCommission(String consignSettlementCommission) {
 		this.consignSettlementCommission = consignSettlementCommission;
 	}
 
 	public String getUseResultDate() {
-		return this.useResultDate;
+		return useResultDate;
 	}
 
 	public void setUseResultDate(String useResultDate) {
@@ -256,7 +255,7 @@ public class Organ {
 	}
 
 	public String getFormalObjectAcceptanceDate() {
-		return this.formalObjectAcceptanceDate;
+		return formalObjectAcceptanceDate;
 	}
 
 	public void setFormalObjectAcceptanceDate(String formalObjectAcceptanceDate) {
@@ -264,7 +263,7 @@ public class Organ {
 	}
 
 	public String getFormalObjectResultDate() {
-		return this.formalObjectResultDate;
+		return formalObjectResultDate;
 	}
 
 	public void setFormalObjectResultDate(String formalObjectResultDate) {
@@ -272,82 +271,79 @@ public class Organ {
 	}
 
 	public String getConsignSettlementResultDate() {
-		return this.consignSettlementResultDate;
+		return consignSettlementResultDate;
 	}
 
-	public void setConsignSettlementResultDate(
-			String consignSettlementResultDate) {
+	public void setConsignSettlementResultDate(String consignSettlementResultDate) {
 		this.consignSettlementResultDate = consignSettlementResultDate;
 	}
 
-	public String getSubjectResponsiblePerson() {
-		return this.subjectResponsiblePerson;
+	public String getOrganResponsiblePerson() {
+		return organResponsiblePerson;
 	}
 
-	public void setSubjectResponsiblePerson(String subjectResponsiblePerson) {
-		this.subjectResponsiblePerson = subjectResponsiblePerson;
+	public void setOrganResponsiblePerson(String organResponsiblePerson) {
+		this.organResponsiblePerson = organResponsiblePerson;
 	}
 
-	public String getSubjectResponsiblePhone1() {
-		return this.subjectResponsiblePhone1;
+	public String getOrganResponsiblePhone1() {
+		return organResponsiblePhone1;
 	}
 
-	public void setSubjectResponsiblePhone1(String subjectResponsiblePhone1) {
-		this.subjectResponsiblePhone1 = subjectResponsiblePhone1;
+	public void setOrganResponsiblePhone1(String organResponsiblePhone1) {
+		this.organResponsiblePhone1 = organResponsiblePhone1;
 	}
 
-	public String getSubjectResponsiblePhone2() {
-		return this.subjectResponsiblePhone2;
+	public String getOrganResponsiblePhone2() {
+		return organResponsiblePhone2;
 	}
 
-	public void setSubjectResponsiblePhone2(String subjectResponsiblePhone2) {
-		this.subjectResponsiblePhone2 = subjectResponsiblePhone2;
+	public void setOrganResponsiblePhone2(String organResponsiblePhone2) {
+		this.organResponsiblePhone2 = organResponsiblePhone2;
 	}
 
-	public String getSubjectResponsiblePhone3() {
-		return this.subjectResponsiblePhone3;
+	public String getOrganResponsiblePhone3() {
+		return organResponsiblePhone3;
 	}
 
-	public void setSubjectResponsiblePhone3(String subjectResponsiblePhone3) {
-		this.subjectResponsiblePhone3 = subjectResponsiblePhone3;
+	public void setOrganResponsiblePhone3(String organResponsiblePhone3) {
+		this.organResponsiblePhone3 = organResponsiblePhone3;
 	}
 
-	public String getSubjectResponsiblePostNumber1() {
-		return this.subjectResponsiblePostNumber1;
+	public String getOrganResponsiblePostNumber1() {
+		return organResponsiblePostNumber1;
 	}
 
-	public void setSubjectResponsiblePostNumber1(
-			String subjectResponsiblePostNumber1) {
-		this.subjectResponsiblePostNumber1 = subjectResponsiblePostNumber1;
+	public void setOrganResponsiblePostNumber1(String organResponsiblePostNumber1) {
+		this.organResponsiblePostNumber1 = organResponsiblePostNumber1;
 	}
 
-	public String getSubjectResponsiblePostNumber2() {
-		return this.subjectResponsiblePostNumber2;
+	public String getOrganResponsiblePostNumber2() {
+		return organResponsiblePostNumber2;
 	}
 
-	public void setSubjectResponsiblePostNumber2(
-			String subjectResponsiblePostNumber2) {
-		this.subjectResponsiblePostNumber2 = subjectResponsiblePostNumber2;
+	public void setOrganResponsiblePostNumber2(String organResponsiblePostNumber2) {
+		this.organResponsiblePostNumber2 = organResponsiblePostNumber2;
 	}
 
-	public String getSubjectResponsibleAddress() {
-		return this.subjectResponsibleAddress;
+	public String getOrganResponsibleAddress() {
+		return organResponsibleAddress;
 	}
 
-	public void setSubjectResponsibleAddress(String subjectResponsibleAddress) {
-		this.subjectResponsibleAddress = subjectResponsibleAddress;
+	public void setOrganResponsibleAddress(String organResponsibleAddress) {
+		this.organResponsibleAddress = organResponsibleAddress;
 	}
 
-	public String getSubejctResponsibleEmail() {
-		return this.subejctResponsibleEmail;
+	public String getOrganResponsibleEmail() {
+		return organResponsibleEmail;
 	}
 
-	public void setSubejctResponsibleEmail(String subejctResponsibleEmail) {
-		this.subejctResponsibleEmail = subejctResponsibleEmail;
+	public void setOrganResponsibleEmail(String organResponsibleEmail) {
+		this.organResponsibleEmail = organResponsibleEmail;
 	}
 
 	public String getConsignSettlementPerson() {
-		return this.consignSettlementPerson;
+		return consignSettlementPerson;
 	}
 
 	public void setConsignSettlementPerson(String consignSettlementPerson) {
@@ -355,7 +351,7 @@ public class Organ {
 	}
 
 	public String getConsignSettlementPhone1() {
-		return this.consignSettlementPhone1;
+		return consignSettlementPhone1;
 	}
 
 	public void setConsignSettlementPhone1(String consignSettlementPhone1) {
@@ -363,7 +359,7 @@ public class Organ {
 	}
 
 	public String getConsignSettlementPhone2() {
-		return this.consignSettlementPhone2;
+		return consignSettlementPhone2;
 	}
 
 	public void setConsignSettlementPhone2(String consignSettlementPhone2) {
@@ -371,7 +367,7 @@ public class Organ {
 	}
 
 	public String getConsignSettlementPhone3() {
-		return this.consignSettlementPhone3;
+		return consignSettlementPhone3;
 	}
 
 	public void setConsignSettlementPhone3(String consignSettlementPhone3) {
@@ -379,25 +375,23 @@ public class Organ {
 	}
 
 	public String getConsignSettlementPostNumber1() {
-		return this.consignSettlementPostNumber1;
+		return consignSettlementPostNumber1;
 	}
 
-	public void setConsignSettlementPostNumber1(
-			String consignSettlementPostNumber1) {
+	public void setConsignSettlementPostNumber1(String consignSettlementPostNumber1) {
 		this.consignSettlementPostNumber1 = consignSettlementPostNumber1;
 	}
 
 	public String getConsignSettlementPostNumber2() {
-		return this.consignSettlementPostNumber2;
+		return consignSettlementPostNumber2;
 	}
 
-	public void setConsignSettlementPostNumber2(
-			String consignSettlementPostNumber2) {
+	public void setConsignSettlementPostNumber2(String consignSettlementPostNumber2) {
 		this.consignSettlementPostNumber2 = consignSettlementPostNumber2;
 	}
 
 	public String getConsignSettlementAddress() {
-		return this.consignSettlementAddress;
+		return consignSettlementAddress;
 	}
 
 	public void setConsignSettlementAddress(String consignSettlementAddress) {
@@ -405,7 +399,7 @@ public class Organ {
 	}
 
 	public String getConsignSettlementEmail() {
-		return this.consignSettlementEmail;
+		return consignSettlementEmail;
 	}
 
 	public void setConsignSettlementEmail(String consignSettlementEmail) {
@@ -413,7 +407,7 @@ public class Organ {
 	}
 
 	public String getCurrentAccount() {
-		return this.currentAccount;
+		return currentAccount;
 	}
 
 	public void setCurrentAccount(String currentAccount) {
@@ -421,7 +415,7 @@ public class Organ {
 	}
 
 	public String getCurrentInterest() {
-		return this.currentInterest;
+		return currentInterest;
 	}
 
 	public void setCurrentInterest(String currentInterest) {
@@ -429,7 +423,7 @@ public class Organ {
 	}
 
 	public String getCurrentNonPropriety() {
-		return this.currentNonPropriety;
+		return currentNonPropriety;
 	}
 
 	public void setCurrentNonPropriety(String currentNonPropriety) {
@@ -437,7 +431,7 @@ public class Organ {
 	}
 
 	public String getCurrentRedemtion() {
-		return this.currentRedemtion;
+		return currentRedemtion;
 	}
 
 	public void setCurrentRedemtion(String currentRedemtion) {
@@ -445,7 +439,7 @@ public class Organ {
 	}
 
 	public String getCurrentSubTotal() {
-		return this.currentSubTotal;
+		return currentSubTotal;
 	}
 
 	public void setCurrentSubTotal(String currentSubTotal) {
@@ -453,7 +447,7 @@ public class Organ {
 	}
 
 	public String getCostDetail() {
-		return this.costDetail;
+		return costDetail;
 	}
 
 	public void setCostDetail(String costDetail) {
@@ -461,7 +455,7 @@ public class Organ {
 	}
 
 	public String getNonApproval1() {
-		return this.nonApproval1;
+		return nonApproval1;
 	}
 
 	public void setNonApproval1(String nonApproval1) {
@@ -469,27 +463,27 @@ public class Organ {
 	}
 
 	public String getNonApproval2() {
-		return this.nonApproval2;
+		return nonApproval2;
 	}
 
 	public void setNonApproval2(String nonApproval2) {
 		this.nonApproval2 = nonApproval2;
 	}
 
-	public Organ getParentOrgan() {
-		return this.parentOrgan;
+	public Organ getOwner() {
+		return owner;
 	}
 
-	public void setParentOrgan(Organ parentOrgan) {
-		this.parentOrgan = parentOrgan;
+	public void setOwner(Organ owner) {
+		this.owner = owner;
 	}
 
 	public Set<UserGroup> getUserGroups() {
-		return this.userGroups;
+		return userGroups;
 	}
 
 	public void setUserGroups(Set<UserGroup> userGroups) {
 		this.userGroups = userGroups;
 	}
-
+	
 }
