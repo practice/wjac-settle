@@ -20,6 +20,14 @@ public class OrganRepository extends HibernateDaoSupport {
 		organ.setOwner(owner);
 		getHibernateTemplate().save(organ);
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Organ> getAllOrgans()
+			throws DataAccessException {		
+		
+		return getHibernateTemplate().findByNamedParam("from Organ as o", new String[]{}, new Object[]{});
+		
+	}
 
 	@SuppressWarnings("unchecked")
 	public List<Organ> getAllOrgans(String role)
@@ -37,10 +45,21 @@ public class OrganRepository extends HibernateDaoSupport {
 			throws DataAccessException {
 		
 		// 권한별로 쿼리를 해야하는데...좀 골치가 아프군.
-		String queryString = "from Organ as o where o.role = :role";
+		String queryString = "from Organ as o where o.role like :role";
 		List list = getHibernateTemplate().findByNamedParam(queryString, 
 				new String[] {"role"}, 
-				new Object[] {role});
+				new Object[] {'%' + role + '%'});
+		return list;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Organ> getOrgans(UserGroup group)
+			throws DataAccessException {
+		
+		String queryString = "from Organ as o where :group in elements(o.userGroups)";
+		List list = getHibernateTemplate().findByNamedParam(queryString, 
+				new String[] {"group"}, 
+				new Object[] {group});
 		return list;
 	}
 

@@ -1,6 +1,7 @@
 package org.jabberstory.cjac.consignsettle.domain;
 
 import java.util.List;
+import java.util.Set;
 
 public class UserServiceImpl implements UserService {
 	private UserRepository userRepository;
@@ -36,6 +37,11 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public void updateUserGroup(String groupId, String name, String role) {
 		userRepository.updateUserGroup(groupId, name, role);
+	}
+	
+	@Override
+	public void updateUserGroup(String groupId, Set<Organ> organs) {
+		userRepository.updateUserGroup(groupId, organs);
 	}
 
 	@Override

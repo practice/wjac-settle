@@ -1,6 +1,7 @@
 package org.jabberstory.cjac.consignsettle.domain;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
@@ -49,6 +50,11 @@ public class UserRepository extends HibernateDaoSupport {
 		UserGroup group = getUserGroup(groupId);
 		group.setGroupName(groupName);
 		group.setRole(role);
+	}
+	
+	public void updateUserGroup(String groupId, Set<Organ> organs) {
+		UserGroup group = getUserGroup(groupId);
+		group.setOrgans(organs);
 	}
 
 	public void removeUserGroup(String groupId) {

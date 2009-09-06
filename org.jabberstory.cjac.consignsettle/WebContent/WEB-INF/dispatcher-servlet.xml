@@ -29,6 +29,7 @@
 				<prop key="/forum/write">writeController</prop>
 				<prop key="/forum/showpost">showPostController</prop>
 				<prop key="/forum/download">downloadController</prop>
+				<prop key="/auth/*">dataAdminMultiActionController</prop>
 			</props>
 		</property>
 	</bean>
@@ -63,6 +64,28 @@
 		p:userService-ref="userService" />
 	<bean id="createUserGroupValidator" class="org.jabberstory.cjac.consignsettle.controller.CreateUserGroupValidator" />
 	
+	<!-- ############################################################## -->
+	<!--  Data Administration Controller -->
+	<!-- ############################################################## -->
+	<bean id="dataAdminMultiActionController" class="org.jabberstory.cjac.consignsettle.controller.DataAdminMultiActionController">
+		<property name="organService" ref="organService" />
+		<property name="userService" ref="userService" />
+		<property name="methodNameResolver"	ref="dataAdminMultiActionControllerMethodNameResolver" />
+	</bean>
+	
+	<bean id="dataAdminMultiActionControllerMethodNameResolver" class="org.springframework.web.servlet.mvc.multiaction.PropertiesMethodNameResolver">
+		<property name="mappings">
+			<props>
+				<prop key="/showDataAdmin">showDataAdmin</prop>
+				<prop key="/updateDataAdmin">updateDataAdmin</prop>
+				<prop key="/*">others</prop>
+			</props>
+		</property>		
+	</bean>
+	
+	<!-- ############################################################## -->
+	<!--  Organization(Owner, Subject) Management Controller -->
+	<!-- ############################################################## -->
 	<bean id="organMultiActionController" class="org.jabberstory.cjac.consignsettle.controller.OrganMultiActionController">
 		<property name="organService" ref="organService" />
 		<property name="userService" ref="userService" />

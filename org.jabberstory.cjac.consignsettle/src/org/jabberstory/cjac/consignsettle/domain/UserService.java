@@ -1,6 +1,7 @@
 package org.jabberstory.cjac.consignsettle.domain;
 
 import java.util.List;
+import java.util.Set;
 
 public interface UserService {
 
@@ -14,6 +15,8 @@ public interface UserService {
 	public UserGroup getUserGroup(String groupId);
 
 	public void updateUserGroup(String groupId, String name, String role);
+	
+	public void updateUserGroup(String groupId, Set<Organ> organs);
 
 	public void removeUserGroup(String groupId);
 

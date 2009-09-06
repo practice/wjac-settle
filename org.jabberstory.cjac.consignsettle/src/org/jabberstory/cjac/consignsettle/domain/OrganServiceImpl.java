@@ -12,6 +12,12 @@ public class OrganServiceImpl implements OrganService{
 	public void setOrganRepository(OrganRepository organRepository) {
 		this.organRepository = organRepository;
 	}
+	
+	private UserRepository userRepository;
+
+	public void setUserRepository(UserRepository userRepository) {
+		this.userRepository = userRepository;
+	}
 
 	@Override
 	public void createOrgan(Organ organ) throws DataAccessException {
@@ -32,6 +38,20 @@ public class OrganServiceImpl implements OrganService{
 	public List<Organ> getOrgans(String userId, String role)
 			throws DataAccessException {
 		return organRepository.getOrgans(userId, role);
+	}
+	
+	@Override
+	public List<Organ> getOrgansByUserGroup(String groupId)
+			throws DataAccessException {
+		
+		UserGroup userGroup = userRepository.getUserGroup(groupId);		
+		return organRepository.getOrgans(userGroup);
+	}
+	
+	@Override
+	public List<Organ> getAllOrgans()
+			throws DataAccessException {
+		return organRepository.getAllOrgans();
 	}
 	
 	@Override

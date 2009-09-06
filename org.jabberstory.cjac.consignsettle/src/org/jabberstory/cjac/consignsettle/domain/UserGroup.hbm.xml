@@ -13,11 +13,11 @@
 		<property name="role" column="ROLE" type="string" length="1" />
 		<set name="users" table="USER_USERGROUP">
 			<key column="GROUPID" />
-			<many-to-many class="User" column="USERID" foreign-key="FK_USERGROUP_TO_USER" />
+			<many-to-many class="User" column="USERID" foreign-key="FK_USERGROUP_TO_USER" lazy="false" />
 		</set>
 		<set name="organs" table="ORGAN_USERGROUP">
 			<key column="GROUPID" />
-			<many-to-many class="Organ" column="ORGANID" foreign-key="FK_USERGROUP_TO_ORGAN" />
+			<many-to-many class="Organ" column="ORGANID" foreign-key="FK_USERGROUP_TO_ORGAN" lazy="false" />
 		</set>
 	</class>
 

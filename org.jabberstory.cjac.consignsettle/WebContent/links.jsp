@@ -13,6 +13,7 @@ Links to application logic.
 	<li><a href="owner/ownerList">Owner Admin</a></li>
 	<li><a href="subject/subjectList">Subject Admin</a></li>
 	<li><a href="subject/settlementList">정산진행 현황</a></li>	
+	<li><a href="auth/showDataAdmin">데이터권한관리</a></li>
 	<li><a href="forum/list">Forum</a></li>	
 </ul>
 </body>

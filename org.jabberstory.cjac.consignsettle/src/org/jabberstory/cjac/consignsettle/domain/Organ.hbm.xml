@@ -61,7 +61,7 @@
 		
 		<many-to-one name="owner" class="Organ" foreign-key="FK_ORGAN_TO_PARENTORGAN" lazy="false"/>
 			
-		<set name="userGroups" table="ORGAN_USERGROUP">
+		<set name="userGroups" table="ORGAN_USERGROUP" inverse="true">
 			<key column="ORGANID" />
 			<many-to-many class="UserGroup" column="GROUPID" foreign-key="FK_ORGAN_TO_USERGROUP" lazy="false"/>
 		</set>

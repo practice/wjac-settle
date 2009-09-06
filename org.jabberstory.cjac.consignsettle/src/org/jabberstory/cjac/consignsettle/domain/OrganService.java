@@ -8,6 +8,10 @@ import org.springframework.dao.DataAccessException;
 public interface OrganService {
 	List<Organ> getOrgans(String userId, String role) throws DataAccessException;
 	
+	List<Organ> getOrgansByUserGroup(String groupId) throws DataAccessException;
+	
+	List<Organ> getAllOrgans() throws DataAccessException;
+	
 	List<Organ> getAllOrgans(String role) throws DataAccessException;
 	
 	Paging getOrgansWithPaging(String userId, String role, int currentPage, int pageSize, String sortColumn) throws DataAccessException;
