@@ -7,6 +7,10 @@ public interface UserService {
 
 	public List<User> getUsers(String userQuery);
 
+	public List<User> getAllUsers();
+	
+	public List<User> getUsersByUserGroup(String groupId);
+	
 	public List<UserGroup> getGroups(String groupQuery);
 
 	public void createUserGroup(String groupName, String role) 
@@ -16,7 +20,9 @@ public interface UserService {
 
 	public void updateUserGroup(String groupId, String name, String role);
 	
-	public void updateUserGroup(String groupId, Set<Organ> organs);
+	public void updateUserGroupWithOrgans(String groupId, Set<Organ> organs);
+	
+	public void updateUserGroupWithUsers(String groupId, Set<User> users);
 
 	public void removeUserGroup(String groupId);
 

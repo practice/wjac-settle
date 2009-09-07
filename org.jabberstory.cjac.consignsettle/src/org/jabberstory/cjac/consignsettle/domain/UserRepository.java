@@ -3,6 +3,7 @@ package org.jabberstory.cjac.consignsettle.domain;
 import java.util.List;
 import java.util.Set;
 
+import org.springframework.dao.DataAccessException;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 /**
@@ -30,6 +31,14 @@ public class UserRepository extends HibernateDaoSupport {
 				new Object[] {"%" + userQuery + "%"});
 		return list;
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<User> getAllUsers()
+			throws DataAccessException {		
+		
+		return getHibernateTemplate().findByNamedParam("from User as u", new String[]{}, new Object[]{});
+		
+	}
 
 	public UserGroup getUserGroup(String groupId) {
 //		String queryString = "from UserGroup g where u.groupId = :groupId";
@@ -40,6 +49,17 @@ public class UserRepository extends HibernateDaoSupport {
 		UserGroup group = (UserGroup) getHibernateTemplate().get(UserGroup.class, groupId);
 		return group;
 	}	
+	
+	@SuppressWarnings("unchecked")
+	public List<User> getUsers(UserGroup group)
+			throws DataAccessException {
+		
+		String queryString = "from User as u where :group in elements(u.userGroups)";
+		List list = getHibernateTemplate().findByNamedParam(queryString, 
+				new String[] {"group"}, 
+				new Object[] {group});
+		return list;
+	}
 
 	public void createUserGroup(String groupName, String role) {
 		UserGroup group = new UserGroup(groupName, role);
@@ -52,9 +72,14 @@ public class UserRepository extends HibernateDaoSupport {
 		group.setRole(role);
 	}
 	
-	public void updateUserGroup(String groupId, Set<Organ> organs) {
+	public void updateUserGroupWithOrgans(String groupId, Set<Organ> organs) {
 		UserGroup group = getUserGroup(groupId);
 		group.setOrgans(organs);
+	}
+	
+	public void updateUserGroupWithUsers(String groupId, Set<User> users) {
+		UserGroup group = getUserGroup(groupId);
+		group.setUsers(users);
 	}
 
 	public void removeUserGroup(String groupId) {

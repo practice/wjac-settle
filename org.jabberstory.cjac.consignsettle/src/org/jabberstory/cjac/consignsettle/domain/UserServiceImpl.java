@@ -3,6 +3,8 @@ package org.jabberstory.cjac.consignsettle.domain;
 import java.util.List;
 import java.util.Set;
 
+import org.springframework.dao.DataAccessException;
+
 public class UserServiceImpl implements UserService {
 	private UserRepository userRepository;
 
@@ -18,6 +20,19 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public List<User> getUsers(String userQuery) {
 		return userRepository.getUsers(userQuery);
+	}
+	
+	@Override
+	public List<User> getAllUsers() {
+		return userRepository.getAllUsers();
+	}
+	
+	@Override
+	public List<User> getUsersByUserGroup(String groupId)
+			throws DataAccessException {
+		
+		UserGroup userGroup = userRepository.getUserGroup(groupId);		
+		return userRepository.getUsers(userGroup);
 	}
 
 	@Override
@@ -40,8 +55,13 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override
-	public void updateUserGroup(String groupId, Set<Organ> organs) {
-		userRepository.updateUserGroup(groupId, organs);
+	public void updateUserGroupWithOrgans(String groupId, Set<Organ> organs) {
+		userRepository.updateUserGroupWithOrgans(groupId, organs);
+	}
+	
+	
+	public void updateUserGroupWithUsers(String groupId, Set<User> users) {
+		userRepository.updateUserGroupWithUsers(groupId, users);
 	}
 
 	@Override
