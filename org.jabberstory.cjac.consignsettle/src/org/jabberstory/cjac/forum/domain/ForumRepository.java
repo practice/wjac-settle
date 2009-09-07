@@ -45,10 +45,10 @@ public class ForumRepository extends HibernateDaoSupport {
 	/* (non-Javadoc)
 	 * @see org.jabberstory.toy.forum.ForumService#savePost(java.lang.String, java.lang.String, java.lang.String)
 	 */
-	public ForumPost createPost(String subject, String body, String userId, MultipartFile[] file) 
+	public ForumPost createPost(String subject, String body, String userId, List<MultipartFile> files) 
 		throws IllegalStateException, IOException {
 		ForumPost post = new ForumPost(subject, body, userService.getUser(userId));
-		for (MultipartFile mpf : file) {
+		for (MultipartFile mpf : files) {
 			mpf.transferTo(new File(ForumService.FILE_PREFIX + mpf.getOriginalFilename()));
 			PostAttachment attachment = new PostAttachment();
 			attachment.setFilename(mpf.getOriginalFilename());

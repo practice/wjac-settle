@@ -13,6 +13,6 @@ public interface ForumService {
 	public ForumPost getPost(int id);
 	public List<ForumPost> getPosts(int page);
 	public Long getPageCount();
-	public ForumPost createPost(String subject, String body, String userId, MultipartFile[] file) throws IllegalStateException, IOException;
+	public ForumPost createPost(String subject, String body, String userId, List<MultipartFile> files) throws IllegalStateException, IOException;
 	public PostAttachment getPostAttachment(int postId, int attId);
 }

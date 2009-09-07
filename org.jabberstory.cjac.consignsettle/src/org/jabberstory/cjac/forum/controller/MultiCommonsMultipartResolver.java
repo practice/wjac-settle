@@ -1,6 +1,8 @@
 package org.jabberstory.cjac.forum.controller;
 
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -11,6 +13,7 @@ import javax.servlet.ServletContext;
 import org.apache.commons.fileupload.FileItem;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartException;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
@@ -73,12 +76,21 @@ public class MultiCommonsMultipartResolver extends CommonsMultipartResolver {
 				if (fileItem.getSize() == 0)
 					continue;
 				CommonsMultipartFile file = new CommonsMultipartFile(fileItem);
-				if (multipartFiles.put(fileItem.getName(), file) != null) {
-					throw new MultipartException(
-							"Multiple files for field name ["
-									+ file.getName()
-									+ "] found - not supported by MultipartResolver");
+//				if (multipartFiles.put(fileItem.getName(), file) != null) {
+//					throw new MultipartException(
+//							"Multiple files for field name ["
+//									+ file.getName()
+//									+ "] found - not supported by MultipartResolver");
+//				}
+				List list = (List) multipartFiles.get(fileItem.getName());
+				if (list != null) {
+					list.add(file);
+				} else {
+					List fileList = new ArrayList();
+					fileList.add(file);
+					multipartFiles.put(fileItem.getName(), fileList);
 				}
+				
 				if (logger.isDebugEnabled()) {
 					logger.debug("Found multipart file [" + file.getName()
 							+ "] of size " + file.getSize()
@@ -90,5 +102,25 @@ public class MultiCommonsMultipartResolver extends CommonsMultipartResolver {
 		}
 		return new MultipartParsingResult(multipartFiles, multipartParameters);
 	}
-
+	
+	@Override
+	protected void cleanupFileItems(Collection multipartFiles) {
+		for (Iterator it = multipartFiles.iterator(); it.hasNext();) {
+//			CommonsMultipartFile file = (CommonsMultipartFile) it.next();
+			List fileList = (List) it.next();
+			Iterator iter = fileList.iterator();
+			while (iter.hasNext()) {
+				CommonsMultipartFile file = (CommonsMultipartFile) iter.next();
+				if (logger.isDebugEnabled()) {
+					logger.debug("Cleaning up multipart file ["
+							+ file.getName() + "] with original filename ["
+							+ file.getOriginalFilename() + "], stored "
+							+ file.getStorageDescription());
+				}
+				file.getFileItem().delete();
+			}
+//			file.getFileItem().delete();
+		}
+	}
+	
 }

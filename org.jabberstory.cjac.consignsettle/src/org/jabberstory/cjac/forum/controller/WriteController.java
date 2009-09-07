@@ -7,6 +7,7 @@ import org.jabberstory.cjac.forum.domain.ForumService;
 import org.springframework.security.Authentication;
 import org.springframework.security.context.SecurityContextHolder;
 import org.springframework.validation.BindException;
+import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.SimpleFormController;
 
@@ -29,7 +30,16 @@ public class WriteController extends SimpleFormController {
 		WriteSubmitCommand writeCommand = (WriteSubmitCommand) command;
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		// auth type is UsernamePasswordAuthenticationToken.
-		forumService.createPost(writeCommand.getTitle(), writeCommand.getBody(), auth.getName(), writeCommand.getFile());
+		forumService.createPost(writeCommand.getTitle(), writeCommand.getBody(), auth.getName(), writeCommand.getFiles());
 		return new ModelAndView("redirect:/forum/list");
+	}
+	
+	@Override
+	protected ServletRequestDataBinder createBinder(HttpServletRequest request,
+			Object command) throws Exception {
+		ServletRequestDataBinder binder = new MultiFileSupportServletRequestDataBinder(command, getCommandName());
+		prepareBinder(binder);
+		initBinder(request, binder);
+		return binder;
 	}
 }

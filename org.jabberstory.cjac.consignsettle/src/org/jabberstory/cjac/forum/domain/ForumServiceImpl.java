@@ -14,8 +14,8 @@ public class ForumServiceImpl implements ForumService {
 
 	@Override
 	public ForumPost createPost(String subject, String body, String userId,
-			MultipartFile[] file) throws IllegalStateException, IOException {
-		return forumRepository.createPost(subject, body, userId, file);
+			List<MultipartFile> files) throws IllegalStateException, IOException {
+		return forumRepository.createPost(subject, body, userId, files);
 	}
 
 	@Override
