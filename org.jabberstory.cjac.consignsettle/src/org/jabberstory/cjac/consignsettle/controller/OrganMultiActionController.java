@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.jabberstory.cjac.consignsettle.common.util.Paging;
 import org.jabberstory.cjac.consignsettle.domain.Organ;
 import org.jabberstory.cjac.consignsettle.domain.OrganService;
-import org.jabberstory.cjac.consignsettle.domain.User;
 import org.jabberstory.cjac.consignsettle.domain.UserService;
+import org.springframework.security.context.SecurityContextHolder;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
@@ -229,12 +229,11 @@ public class OrganMultiActionController extends MultiActionController {
 
 	}
 	
-	public ModelAndView SubjectPagingList(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ModelAndView subjectPagingList(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
 		String pageNo = (request.getParameter("pageNo") == null) ? "1": request.getParameter("pageNo");
 		String sortColumn = (request.getParameter("sortColumn") == null) ? "": request.getParameter("sortColumn");
-
-		String userId = ""; // UserService 사용자정보 쿼포함되어야 하지 않을까?
+		String userId = SecurityContextHolder.getContext().getAuthentication().getName();
 		
 		int pageSize = 10;
 
@@ -243,6 +242,7 @@ public class OrganMultiActionController extends MultiActionController {
 		ModelAndView mv = new ModelAndView("subjectList", "pagingList", pagingList);
 		mv.addObject("organCount", pagingList.getTotalCount());
 		mv.addObject("sortColumn", sortColumn);
+		mv.addObject("userId", userId);
 		
 		return mv;
 

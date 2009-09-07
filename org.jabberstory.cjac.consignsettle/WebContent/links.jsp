@@ -14,6 +14,7 @@ Links to application logic.
 	<li><a href="subject/subjectList">Subject Admin</a></li>
 	<li><a href="subject/settlementList">정산 진행 현황</a></li>	
 	<li><a href="auth/showOrganAuthAdmin">기관 권한 관리</a></li>
+	<li><a href="auth/showUserAuthAdmin">사용자 권한 관리</a></li>
 	<li><a href="forum/list">Forum</a></li>	
 </ul>
 </body>

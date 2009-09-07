@@ -97,7 +97,7 @@
 <body>
 <!-- Start Content Title -->
 <div>
-	<H3>정산기관 권한 관리</H3>
+	<H3>기관 권한 관리</H3>
 </div>
 <!-- End Content Title -->
 <form name="form1" method="post">
@@ -155,7 +155,7 @@
 </table>
 </form>
 <div>
-	<a href="#" onClick="loadData();return false;">조회</a>
+	<!-- a href="#" onClick="loadData();return false;">조회</a-->
 	<a href="#" onClick="saveData();return false;">저장</a>
 </div>
 </body>

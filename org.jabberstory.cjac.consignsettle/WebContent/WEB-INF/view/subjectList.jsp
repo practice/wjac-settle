@@ -47,6 +47,9 @@
 	<a href="#" onClick="doOrderedSearch('createDate');return false;">최근등록별보기</a>
 	<a href="#" onClick="doOrderedSearch('');return false;">주관기관별보기</a>
 </div-->
+<div>
+loginId:${userId }
+</div>
 <!-- Start Content Area -->	
 <div>
 	<table cellspacing="0" cellpadding="0" class="">
