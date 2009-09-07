@@ -29,7 +29,7 @@
 				<prop key="/forum/write">writeController</prop>
 				<prop key="/forum/showpost">showPostController</prop>
 				<prop key="/forum/download">downloadController</prop>
-				<prop key="/auth/*">dataAdminMultiActionController</prop>
+				<prop key="/auth/*">authAdminMultiActionController</prop>
 			</props>
 		</property>
 	</bean>
@@ -65,19 +65,19 @@
 	<bean id="createUserGroupValidator" class="org.jabberstory.cjac.consignsettle.controller.CreateUserGroupValidator" />
 	
 	<!-- ############################################################## -->
-	<!--  Data Administration Controller -->
+	<!--  Authorization Administration Controller -->
 	<!-- ############################################################## -->
-	<bean id="dataAdminMultiActionController" class="org.jabberstory.cjac.consignsettle.controller.DataAdminMultiActionController">
+	<bean id="authAdminMultiActionController" class="org.jabberstory.cjac.consignsettle.controller.AuthAdminMultiActionController">
 		<property name="organService" ref="organService" />
 		<property name="userService" ref="userService" />
-		<property name="methodNameResolver"	ref="dataAdminMultiActionControllerMethodNameResolver" />
+		<property name="methodNameResolver"	ref="authAdminMultiActionControllerMethodNameResolver" />
 	</bean>
 	
-	<bean id="dataAdminMultiActionControllerMethodNameResolver" class="org.springframework.web.servlet.mvc.multiaction.PropertiesMethodNameResolver">
+	<bean id="authAdminMultiActionControllerMethodNameResolver" class="org.springframework.web.servlet.mvc.multiaction.PropertiesMethodNameResolver">
 		<property name="mappings">
 			<props>
-				<prop key="/showDataAdmin">showDataAdmin</prop>
-				<prop key="/updateDataAdmin">updateDataAdmin</prop>
+				<prop key="/showOrganAuthAdmin">showOrganAuthAdmin</prop>
+				<prop key="/updateOrganAuthAdmin">updateOrganAuthAdmin</prop>
 				<prop key="/*">others</prop>
 			</props>
 		</property>		
