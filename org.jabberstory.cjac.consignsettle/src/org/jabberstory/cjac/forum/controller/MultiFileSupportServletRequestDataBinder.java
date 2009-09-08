@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.springframework.beans.MutablePropertyValues;
 import org.springframework.web.bind.ServletRequestDataBinder;
+import org.springframework.web.multipart.MultipartFile;
 
 public class MultiFileSupportServletRequestDataBinder extends
 		ServletRequestDataBinder {
@@ -19,15 +20,21 @@ public class MultiFileSupportServletRequestDataBinder extends
 		super(target, objectName);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	protected void bindMultipartFiles(Map multipartFiles, MutablePropertyValues mpvs) {
 		for (Iterator it = multipartFiles.entrySet().iterator(); it.hasNext();) {
 			Map.Entry entry = (Map.Entry) it.next();
 			String key = (String) entry.getKey();
 			// MultipartFile value = (MultipartFile) entry.getValue();
-			List value = (List)entry.getValue();
+			List<MultipartFile> value = (List<MultipartFile>)entry.getValue();
+			for (MultipartFile file : value) {
+				logger.debug("##### " + file.getName() + "=" + file.getOriginalFilename());
+			}
 			if (isBindEmptyMultipartFiles() || !value.isEmpty()) {
-				mpvs.addPropertyValue(key, value);
+				logger.debug("##### " + key + "=" + value);
+//				mpvs.addPropertyValue(key, value);
+				mpvs.addPropertyValue(value.get(0).getName(), value);
 			}
 		}
 	}

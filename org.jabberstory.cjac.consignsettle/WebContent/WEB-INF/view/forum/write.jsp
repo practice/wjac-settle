@@ -28,9 +28,9 @@ input {
 	</p>
 	<p><textarea name="body" cols="80" rows="20"><form:errors path="write.body" /></textarea><br/>
 	</p>
-	<p><label class="write">File 0</label><input type="file" name="file" />
+	<p><label class="write">File 0</label><input type="file" name="files" />
 	</p>
-	<p><label class="write">File 1</label><input type="file" name="file" />
+	<p><label class="write">File 1</label><input type="file" name="files" />
 	</p>
 	<p><input type="submit" value="Save" /><br>
 </form>

@@ -12,8 +12,6 @@ import javax.servlet.ServletContext;
 
 import org.apache.commons.fileupload.FileItem;
 import org.springframework.util.StringUtils;
-import org.springframework.web.multipart.MultipartException;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
@@ -39,6 +37,7 @@ public class MultiCommonsMultipartResolver extends CommonsMultipartResolver {
 		Map multipartFiles = new HashMap();
 		Map multipartParameters = new HashMap();
 
+		logger.debug("##### parsing file items");
 		// Extract multipart files and multipart parameters.
 		for (Iterator it = fileItems.iterator(); it.hasNext();) {
 			FileItem fileItem = (FileItem) it.next();
@@ -82,13 +81,15 @@ public class MultiCommonsMultipartResolver extends CommonsMultipartResolver {
 //									+ file.getName()
 //									+ "] found - not supported by MultipartResolver");
 //				}
-				List list = (List) multipartFiles.get(fileItem.getName());
+				List list = (List) multipartFiles.get(file.getName());
 				if (list != null) {
+					logger.debug("##### added file " + file.getName());
 					list.add(file);
 				} else {
+					logger.debug("##### create new array " + file.getName());
 					List fileList = new ArrayList();
 					fileList.add(file);
-					multipartFiles.put(fileItem.getName(), fileList);
+					multipartFiles.put(file.getName(), fileList);
 				}
 				
 				if (logger.isDebugEnabled()) {
@@ -103,6 +104,7 @@ public class MultiCommonsMultipartResolver extends CommonsMultipartResolver {
 		return new MultipartParsingResult(multipartFiles, multipartParameters);
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	protected void cleanupFileItems(Collection multipartFiles) {
 		for (Iterator it = multipartFiles.iterator(); it.hasNext();) {
