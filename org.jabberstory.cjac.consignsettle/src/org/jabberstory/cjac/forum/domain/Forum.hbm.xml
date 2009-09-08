@@ -6,6 +6,13 @@
 	
 <hibernate-mapping package="org.jabberstory.cjac.forum.domain" default-access="field">
 
+	<class name="Forum" table="FORUM">
+		<id name="id" column="FORUMID">
+			<generator class="native" />
+		</id>
+		<property name="name" column="NAME" type="string" length="64" />
+	</class>
+	
 	<class name="ForumPost" table="FORUMPOST">
 		<id name="id" column="POSTID">
 			<generator class="native" />
@@ -26,6 +33,8 @@
 			<list-index column="LISTINDEX" />
 			<one-to-many class="PostAttachment" />
 		</list>
+		<many-to-one name="forum" column="FORUMID" class="Forum" 
+			foreign-key="FK_FORUM_POST"/>
 	</class>
 	
 	<class name="PostAttachment" table="POSTATTACHMENT">

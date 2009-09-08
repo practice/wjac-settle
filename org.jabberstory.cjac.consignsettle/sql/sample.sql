@@ -1,13 +1,11 @@
-delete from USER;
-delete from USERGROUP;
+insert into USERGROUP(GROUPID, NAME, ROLE) values ('admin', 'Administrators', 'A');
+insert into USERGROUP(GROUPID, NAME, ROLE) values ('accountant', 'Accountants', 'C');
 
-insert into USERGROUP(GROUPID, NAME, ROLE) values 
-	('admin', 'Administrators', 'A'), 
-	('accountant', 'Accountants', 'C');
+insert into USER(USERID, USERNAME, EMAIL, PASSWORD) values ('admin', 'Administrator', 'admin@cjac.net', 'adminadmin');
+insert into USER(USERID, USERNAME, EMAIL, PASSWORD) values ('admin2', 'Administrator', 'admin2@cjac.net', 'adminadmin');
+insert into USER(USERID, USERNAME, EMAIL, PASSWORD) values ('shawn', '원상호', 'shawn.won@gmail.com', 'shawn');
 
-insert into USER(USERID, USERNAME, EMAIL, PASSWORD, GROUPID) values
-	('admin', 'Administrator', 'admin@cjac.net', 'adminadmin', 'admin'),
-	('admin2', 'Administrator', 'admin2@cjac.net', 'adminadmin', 'admin');
+insert into FORUM(NAME) values ('public');
+insert into FORUM(NAME) values ('qna');
+insert into FORUM(NAME) values ('files');
 
-select * from USERGROUP;
-SELECT * FROM USER;

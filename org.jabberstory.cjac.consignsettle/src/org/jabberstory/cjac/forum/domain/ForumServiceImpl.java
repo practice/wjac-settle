@@ -12,18 +12,18 @@ public class ForumServiceImpl implements ForumService {
 	}
 
 	@Override
-	public ForumPost createPost(String subject, String body, String userId, List<MultipartFile> files) {
-		return forumRepository.createPost(subject, body, userId, files);
+	public ForumPost createPost(int forumId, String subject, String body, String userId, List<MultipartFile> files) {
+		return forumRepository.createPost(forumId, subject, body, userId, files);
 	}
 
 	@Override
-	public ForumPost createReply(int id, String subject, String body, String userId, List<MultipartFile> files) {
-		return forumRepository.createReply(id, subject, body, userId, files);
+	public ForumPost createReply(int forumId, int id, String subject, String body, String userId, List<MultipartFile> files) {
+		return forumRepository.createReply(forumId, id, subject, body, userId, files);
 	}
 
 	@Override
-	public Long getPageCount() {
-		return forumRepository.getPageCount();
+	public Long getPageCount(int forumId) {
+		return forumRepository.getPageCount(forumId);
 	}
 
 	@Override
@@ -42,8 +42,8 @@ public class ForumServiceImpl implements ForumService {
 	}
 
 	@Override
-	public List<ForumPost> getTopLevelPosts(int page) {
-		return forumRepository.getTopLevelPosts(page);
+	public List<ForumPost> getTopLevelPosts(int forumId, int page) {
+		return forumRepository.getTopLevelPosts(forumId, page);
 	}
 
 	@Override

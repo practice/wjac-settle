@@ -46,6 +46,8 @@ public class UpdatePostController extends SimpleFormController {
 	protected ModelAndView onSubmit(HttpServletRequest request,
 			HttpServletResponse response, Object command, BindException errors)
 			throws Exception {
+		int forumId = ForumUtil.extractForumId(request);
+		int page = ForumUtil.getIntParam(request, "page", 1);
 		WriteSubmitCommand param = (WriteSubmitCommand) command;
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "title", "required");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "body", "required");
@@ -56,6 +58,6 @@ public class UpdatePostController extends SimpleFormController {
 		if (post.getRootId() != 0) {
 			rootId = post.getRootId();
 		}
-		return new ModelAndView("redirect:/forum/showpost?id=" + rootId + "&page=" + request.getParameter("page"));
+		return new ModelAndView("redirect:" + ForumUtil.buildShowPostUrl(forumId, rootId, page));
 	}
 }

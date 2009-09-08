@@ -19,6 +19,7 @@ public class ForumPost {
 	private int replyCount;	
 	private User user;
 	private List<PostAttachment> attachments = new ArrayList<PostAttachment>();
+	private Forum forum;
 
 //	private static SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd HH.mm.ss");
 	private static SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
@@ -109,6 +110,14 @@ public class ForumPost {
 
 	public List<PostAttachment> getAttachments() {
 		return attachments;
+	}
+
+	public void setForum(Forum forum) {
+		this.forum = forum;
+	}
+
+	public Forum getForum() {
+		return forum;
 	}
 
 }

@@ -25,12 +25,12 @@
 				<prop key="/owner/*">organMultiActionController</prop>
 				<prop key="/subject/*">organMultiActionController</prop>
 				<prop key="/login">urlController</prop>
-				<prop key="/forum/list">forumListController</prop>
-				<prop key="/forum/write">writeController</prop>
-				<prop key="/forum/updatePost">updatePostController</prop>
-				<prop key="/forum/removePost">removePostController</prop>
-				<prop key="/forum/showpost">showPostController</prop>
-				<prop key="/forum/download">downloadController</prop>
+				<prop key="/forum/*/list">forumListController</prop>
+				<prop key="/forum/*/write">writeController</prop>
+				<prop key="/forum/*/updatePost">updatePostController</prop>
+				<prop key="/forum/*/removePost">removePostController</prop>
+				<prop key="/forum/*/showpost">showPostController</prop>
+				<prop key="/forum/*/download">downloadController</prop>
 				<prop key="/auth/*">authAdminMultiActionController</prop>
 			</props>
 		</property>

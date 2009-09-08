@@ -24,10 +24,14 @@ public class ForumRepository extends HibernateDaoSupport {
 	 * @see org.jabberstory.toy.forum.ForumService#listPosts(int)
 	 */
 	@SuppressWarnings("unchecked")
-	public List<ForumPost> getTopLevelPosts(int page) {
+	public List<ForumPost> getTopLevelPosts(int forumId, int page) {
 //		String queryString = "from ForumPost post left join fetch post.user where post.rootId = 0 order by post.id desc";
 		DetachedCriteria criteria = DetachedCriteria.forClass(ForumPost.class);
 		criteria.add(Restrictions.eq("rootId", 0));
+		// TODO 이렇게 하는거 맞나?
+//		criteria.add(Restrictions.eq("forum", getForum(forumId)));
+		DetachedCriteria forumCrit = criteria.createCriteria("forum", "f", CriteriaSpecification.INNER_JOIN);
+		forumCrit.add(Restrictions.eq("id", forumId));
 		criteria.addOrder(Order.desc("id"));
 		criteria.createAlias("user", "u", CriteriaSpecification.LEFT_JOIN);
 		return getHibernateTemplate().findByCriteria(criteria, ForumService.PAGESIZE * (page -1), ForumService.PAGESIZE);
@@ -37,8 +41,9 @@ public class ForumRepository extends HibernateDaoSupport {
 	 * @see org.jabberstory.toy.forum.ForumService#getPageCount()
 	 */
 	@SuppressWarnings("unchecked")
-	public Long getPageCount() {
-		List result = getHibernateTemplate().find("select count(p) from ForumPost p where p.rootId = 0 ");
+	public Long getPageCount(int forumId) {
+		final String queryString = "select count(p) from ForumPost p where p.rootId = 0 and p.forum.id = :forumId";
+		List result = getHibernateTemplate().findByNamedParam(queryString, "forumId", forumId);
 		
 		Long postCount = ((Number)result.get(0)).longValue();
 		Long pageCount = postCount / ForumService.PAGESIZE;
@@ -50,19 +55,25 @@ public class ForumRepository extends HibernateDaoSupport {
 	/* (non-Javadoc)
 	 * @see org.jabberstory.toy.forum.ForumService#savePost(java.lang.String, java.lang.String, java.lang.String)
 	 */
-	public ForumPost createPost(String subject, String body, String userId, List<MultipartFile> files) {
+	public ForumPost createPost(int forumId, String subject, String body, String userId, List<MultipartFile> files) {
 		ForumPost post = new ForumPost(subject, body, userService.getUser(userId));
+		post.setForum(getForum(forumId));
 		saveAttachments(files, post);
 		getHibernateTemplate().save(post);
 		return post;
 	}
 
-	public ForumPost createReply(int id, String subject, String body, String userId, List<MultipartFile> files) {
+	private Forum getForum(int forumId) {
+		return (Forum) getHibernateTemplate().get(Forum.class, forumId);
+	}
+
+	public ForumPost createReply(int forumId, int id, String subject, String body, String userId, List<MultipartFile> files) {
 		ForumPost post = new ForumPost(subject, body, userService.getUser(userId));
 		saveAttachments(files, post);
 		post.setDepth(post.getDepth() + 1);
 		post.setRootId(id);
 		post.setReplyCount(post.getReplyCount() + 1);
+		post.setForum(getForum(forumId));
 		getHibernateTemplate().save(post);
 		return post;
 	}

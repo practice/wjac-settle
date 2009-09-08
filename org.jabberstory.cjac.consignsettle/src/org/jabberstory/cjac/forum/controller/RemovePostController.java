@@ -18,15 +18,16 @@ public class RemovePostController extends AbstractController {
 	@Override
 	protected ModelAndView handleRequestInternal(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
-		int id = Integer.valueOf(request.getParameter("id"));
-		String page = request.getParameter("page");
+		int forumId = ForumUtil.extractForumId(request);
+		int id = ForumUtil.getIntParam(request, "id", 0);
+		int page = ForumUtil.getIntParam(request, "page", 1);
 		ForumPost post = forumService.getPost(id);
 		int rootId = post.getRootId();
 		forumService.removePost(id);
 		if (rootId == 0) {
-			return new ModelAndView("redirect:/forum/list?page=" + page);
+			return new ModelAndView("redirect:" + ForumUtil.buildListUrl(forumId, page));
 		} else {
-			return new ModelAndView("redirect:/forum/showpost?id=" + rootId + "&page=" + page);
+			return new ModelAndView("redirect:" + ForumUtil.buildShowPostUrl(forumId, rootId, page));
 		}
 	}
 

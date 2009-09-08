@@ -11,11 +11,11 @@ public interface ForumService {
 
 	public ForumPost getPost(int id);
 	public List<ForumPost> getChildrenPosts(int id);
-	public List<ForumPost> getTopLevelPosts(int page);
-	public Long getPageCount();
-	public ForumPost createPost(String subject, String body, String userId, List<MultipartFile> files);
+	public List<ForumPost> getTopLevelPosts(int forumId, int page);
+	public Long getPageCount(int forumId);
+	public ForumPost createPost(int forumId, String subject, String body, String userId, List<MultipartFile> files);
 	public PostAttachment getPostAttachment(int postId, int attId);
-	public ForumPost createReply(int id, String subject, String body, String userId, List<MultipartFile> files);
+	public ForumPost createReply(int forumId, int id, String subject, String body, String userId, List<MultipartFile> files);
 	public ForumPost updatePost(int id, String subject, String body);
 	public void removePost(int id);
 }

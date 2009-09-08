@@ -27,17 +27,20 @@ public class WriteController extends SimpleFormController {
 	protected ModelAndView onSubmit(HttpServletRequest request,
 			HttpServletResponse response, Object command, BindException errors)
 			throws Exception {
-		String id = request.getParameter("id");
+		int forumId = ForumUtil.extractForumId(request);
+		int id = ForumUtil.getIntParam(request, "id", -999);
 		WriteSubmitCommand writeCommand = (WriteSubmitCommand) command;
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		// auth type is UsernamePasswordAuthenticationToken.
-		if (id != null && id.length() > 0) {  // this is reply.
-			forumService.createReply(Integer.parseInt(id), writeCommand.getTitle(), writeCommand.getBody(), auth.getName(), writeCommand.getFiles());
-			return new ModelAndView("redirect:/forum/showpost?id=" + id + "&page=" + request.getParameter("page"));
+		if (id > 0) {  // this is reply.
+			int page = Integer.parseInt(request.getParameter("page"));
+			forumService.createReply(forumId, id, 
+					writeCommand.getTitle(), writeCommand.getBody(), auth.getName(), writeCommand.getFiles());
+			return new ModelAndView("redirect:" + ForumUtil.buildShowPostUrl(forumId, id, page));
 		}
 		// new forum thread.
-		forumService.createPost(writeCommand.getTitle(), writeCommand.getBody(), auth.getName(), writeCommand.getFiles());
-		return new ModelAndView("redirect:/forum/list");
+		forumService.createPost(forumId, writeCommand.getTitle(), writeCommand.getBody(), auth.getName(), writeCommand.getFiles());
+		return new ModelAndView("redirect:" + ForumUtil.buildListUrl(forumId));
 	}
 	
 	@Override
