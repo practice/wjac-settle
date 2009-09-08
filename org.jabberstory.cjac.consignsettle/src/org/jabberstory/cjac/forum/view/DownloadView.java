@@ -19,9 +19,11 @@ public class DownloadView extends AbstractView {
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		File file = (File) model.get("file");
-		response.setContentType("application/octet-stream");
+//		response.setCharacterEncoding("UTF-8");
+		response.setContentType("application/octet-stream;charset=UTF-8");
 		response.setContentLength((int)file.length());
-		response.setHeader("Content-Disposition", "attachment; filename=\"" + file.getName() + "\"");
+		response.setHeader("Content-Disposition", "attachment; filename=\"" + 
+				new String(file.getName().getBytes(), "8859_1") + "\"");
 		response.setHeader("Content-Transfer-Encoding", "binary");
 		FileInputStream inputStream = new FileInputStream(file);
 		ServletOutputStream outputStream = response.getOutputStream();
