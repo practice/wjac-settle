@@ -4,6 +4,10 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+import org.hibernate.criterion.CriteriaSpecification;
+import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
 import org.jabberstory.cjac.consignsettle.domain.UserService;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 import org.springframework.web.multipart.MultipartFile;
@@ -21,11 +25,12 @@ public class ForumRepository extends HibernateDaoSupport {
 	 */
 	@SuppressWarnings("unchecked")
 	public List<ForumPost> getTopLevelPosts(int page) {
-		String queryString = "from ForumPost post left join fetch post.user where post.rootId = 0 order by post.id desc";
-		return getHibernateTemplate().find(queryString);
-//		DetachedCriteria criteria = DetachedCriteria.forClass(ForumPost.class);
-//		criteria.addOrder(Order.desc("id"));
-//		return getHibernateTemplate().findByCriteria(criteria, ForumService.PAGESIZE * (page -1), ForumService.PAGESIZE);
+//		String queryString = "from ForumPost post left join fetch post.user where post.rootId = 0 order by post.id desc";
+		DetachedCriteria criteria = DetachedCriteria.forClass(ForumPost.class);
+		criteria.add(Restrictions.eq("rootId", 0));
+		criteria.addOrder(Order.desc("id"));
+		criteria.createAlias("user", "u", CriteriaSpecification.LEFT_JOIN);
+		return getHibernateTemplate().findByCriteria(criteria, ForumService.PAGESIZE * (page -1), ForumService.PAGESIZE);
 	}
 
 	/* (non-Javadoc)
@@ -33,7 +38,7 @@ public class ForumRepository extends HibernateDaoSupport {
 	 */
 	@SuppressWarnings("unchecked")
 	public Long getPageCount() {
-		List result = getHibernateTemplate().find("select count(a) from ForumPost a");
+		List result = getHibernateTemplate().find("select count(p) from ForumPost p where p.rootId = 0 ");
 		
 		Long postCount = ((Number)result.get(0)).longValue();
 		Long pageCount = postCount / ForumService.PAGESIZE;
