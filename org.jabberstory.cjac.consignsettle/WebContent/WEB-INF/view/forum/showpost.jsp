@@ -18,8 +18,8 @@
 </c:forEach>
 </ul>
 <a href="list?page=${param.page}">List</a>, 
-<a href="updatePost?id=${post.id}">수정</a>
-<c:choose><c:when test="${childrenCount == 0}">, <a href="removePost?id=${post.id}">삭제</a></c:when></c:choose>
+<a href="updatePost?id=${post.id}&page=${param.page}">수정</a>
+<c:choose><c:when test="${childrenCount == 0}">, <a href="removePost?id=${post.id}&page=${param.page}">삭제</a></c:when></c:choose>
 <hr/>
 <c:forEach var="child" items="${children}">
 <p>ID: ${child.id }
@@ -33,13 +33,14 @@
 	<li><a href="download?post=${child.id}&file=${file.id}">${file.filename}</a> ${file.filesize} bytes</li>
 </c:forEach>
 </ul>
-<a href="updatePost?id=${child.id}">수정</a>
-, <a href="removePost?id=${child.id}">삭제</a>
+<a href="updatePost?id=${child.id}&page=${param.page}">수정</a>
+, <a href="removePost?id=${child.id}&page=${param.page}">삭제</a>
 </c:forEach>
 
 <form action="write" method="post" enctype="multipart/form-data">
 	<input type="hidden" name="id" value="${param.id }" />
-	<div><label>제목</label><input type="text" name="subject" /></div>
+	<input type="hidden" name="page" value="${param.page }" />
+	<div><label>제목</label><input type="text" name="title" /></div>
 	<div><textarea name="body" rows="10" cols="80"></textarea></div>
 	<div><input type="file" name="files" /></div>
 	<div><input type="submit" value="Reply" /></div>

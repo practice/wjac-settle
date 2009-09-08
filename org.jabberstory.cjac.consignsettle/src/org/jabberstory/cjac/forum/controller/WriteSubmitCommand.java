@@ -28,6 +28,7 @@ public class WriteSubmitCommand {
 	
 	public void setTitle(String title) {
 		this.title = title;
+		logger.debug("##### title assigned.");
 	}
 	public String getTitle() {
 		return title;
@@ -35,9 +36,7 @@ public class WriteSubmitCommand {
 
 	public void setBody(String body) {
 		this.body = body;
-		if (logger.isDebugEnabled()) {
-			logger.debug("##### body assigned.");
-		}
+		logger.debug("##### body assigned.");
 	}
 
 	public String getBody() {
@@ -45,9 +44,6 @@ public class WriteSubmitCommand {
 	}
 
 	public void setFiles(List<MultipartFile> files) {
-		if (logger.isDebugEnabled()) {
-			logger.debug("##### File assigned.");
-		}
 		this.files = files;
 	}
 

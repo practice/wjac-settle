@@ -33,9 +33,10 @@ public class UpdatePostController extends SimpleFormController {
 		ForumPost post = forumService.getPost(Integer.valueOf(id));
 		if (post != null) {
 			command.setId(id);
-//			command.setTitle(post.getSubject());
-			String subject = post.getSubject().replaceAll("\"", "&quot;");
-			command.setTitle(subject);
+			if (post.getSubject() != null) {
+				String subject = post.getSubject().replaceAll("\"", "&quot;");
+				command.setTitle(subject);
+			}
 			command.setBody(post.getBody());
 		}
 		return command;
@@ -50,7 +51,11 @@ public class UpdatePostController extends SimpleFormController {
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "body", "required");
 		if (errors.hasErrors())
 			return showForm(request, response, errors);
-		forumService.updatePost(Integer.valueOf(param.getId()), param.getTitle(), param.getBody());
-		return new ModelAndView("redirect:/forum/showpost?id=" + param.getId());
+		ForumPost post = forumService.updatePost(Integer.valueOf(param.getId()), param.getTitle(), param.getBody());
+		int rootId = post.getId();
+		if (post.getRootId() != 0) {
+			rootId = post.getRootId();
+		}
+		return new ModelAndView("redirect:/forum/showpost?id=" + rootId + "&page=" + request.getParameter("page"));
 	}
 }

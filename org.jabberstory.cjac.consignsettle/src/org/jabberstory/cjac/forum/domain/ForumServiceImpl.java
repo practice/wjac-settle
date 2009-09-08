@@ -47,8 +47,13 @@ public class ForumServiceImpl implements ForumService {
 	}
 
 	@Override
-	public void updatePost(int id, String subject, String body) {
-		forumRepository.updatePost(id, subject, body);
+	public ForumPost updatePost(int id, String subject, String body) {
+		return forumRepository.updatePost(id, subject, body);
+	}
+
+	@Override
+	public void removePost(int id) {
+		forumRepository.removePost(id);
 	}
 
 }

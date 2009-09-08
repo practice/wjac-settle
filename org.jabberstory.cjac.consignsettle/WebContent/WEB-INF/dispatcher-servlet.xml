@@ -28,6 +28,7 @@
 				<prop key="/forum/list">forumListController</prop>
 				<prop key="/forum/write">writeController</prop>
 				<prop key="/forum/updatePost">updatePostController</prop>
+				<prop key="/forum/removePost">removePostController</prop>
 				<prop key="/forum/showpost">showPostController</prop>
 				<prop key="/forum/download">downloadController</prop>
 				<prop key="/auth/*">authAdminMultiActionController</prop>
@@ -126,6 +127,8 @@
 	<!-- ############################################################## -->
 	<!-- Forum Controller -->
 	<!-- ############################################################## -->
+	<bean id="removePostController" class="org.jabberstory.cjac.forum.controller.RemovePostController"
+		p:forumService-ref="forumService" />
 	<bean id="updatePostController" class="org.jabberstory.cjac.forum.controller.UpdatePostController"
 		p:successView=""
 		p:formView="forum/updatePost"

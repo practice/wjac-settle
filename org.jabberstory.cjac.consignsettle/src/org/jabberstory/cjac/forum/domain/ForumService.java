@@ -16,5 +16,6 @@ public interface ForumService {
 	public ForumPost createPost(String subject, String body, String userId, List<MultipartFile> files);
 	public PostAttachment getPostAttachment(int postId, int attId);
 	public ForumPost createReply(int id, String subject, String body, String userId, List<MultipartFile> files);
-	public void updatePost(int id, String subject, String body);
+	public ForumPost updatePost(int id, String subject, String body);
+	public void removePost(int id);
 }

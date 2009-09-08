@@ -33,7 +33,7 @@ public class WriteController extends SimpleFormController {
 		// auth type is UsernamePasswordAuthenticationToken.
 		if (id != null && id.length() > 0) {  // this is reply.
 			forumService.createReply(Integer.parseInt(id), writeCommand.getTitle(), writeCommand.getBody(), auth.getName(), writeCommand.getFiles());
-			return new ModelAndView("redirect:/forum/showpost?id=" + id);
+			return new ModelAndView("redirect:/forum/showpost?id=" + id + "&page=" + request.getParameter("page"));
 		}
 		// new forum thread.
 		forumService.createPost(writeCommand.getTitle(), writeCommand.getBody(), auth.getName(), writeCommand.getFiles());
