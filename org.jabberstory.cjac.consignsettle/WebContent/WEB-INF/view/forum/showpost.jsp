@@ -17,7 +17,9 @@
 	<li><a href="download?post=${post.id}&file=${file.id}">${file.filename}</a> ${file.filesize} bytes</li>
 </c:forEach>
 </ul>
-<a href="list?page=${param.page}">List</a>, <a href="updatePost?id=${post.id}">수정</a>
+<a href="list?page=${param.page}">List</a>, 
+<a href="updatePost?id=${post.id}">수정</a>
+<c:choose><c:when test="${childrenCount == 0}">, <a href="removePost?id=${post.id}">삭제</a></c:when></c:choose>
 <hr/>
 <c:forEach var="child" items="${children}">
 <p>ID: ${child.id }
@@ -31,6 +33,8 @@
 	<li><a href="download?post=${child.id}&file=${file.id}">${file.filename}</a> ${file.filesize} bytes</li>
 </c:forEach>
 </ul>
+<a href="updatePost?id=${child.id}">수정</a>
+, <a href="removePost?id=${child.id}">삭제</a>
 </c:forEach>
 
 <form action="write" method="post" enctype="multipart/form-data">

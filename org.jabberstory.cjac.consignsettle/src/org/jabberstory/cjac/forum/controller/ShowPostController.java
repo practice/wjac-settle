@@ -29,6 +29,7 @@ public class ShowPostController extends AbstractController {
 		List<ForumPost> children = forumService.getChildrenPosts(id);
 		request.setAttribute("post", post);
 		request.setAttribute("children", children);
+		request.setAttribute("childrenCount", new Integer(children.size()));
 		return new ModelAndView("forum/showpost");
 	}
 
