@@ -27,7 +27,7 @@
 </tx:advice>
 
 <aop:config>
-	<aop:pointcut expression="execution(public * org.jabberstory.cjac.consignsettle.domain.*Service.*(..))" id="servicePublicMethod"/>
+	<aop:pointcut expression="execution(public * org.jabberstory.cjac.*.domain.*Service.*(..))" id="servicePublicMethod"/>
 	<aop:advisor advice-ref="txAdvice" pointcut-ref="servicePublicMethod" />
 </aop:config>
 	
