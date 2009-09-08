@@ -1,6 +1,5 @@
 package org.jabberstory.cjac.forum.domain;
 
-import java.io.IOException;
 import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
@@ -13,9 +12,13 @@ public class ForumServiceImpl implements ForumService {
 	}
 
 	@Override
-	public ForumPost createPost(String subject, String body, String userId,
-			List<MultipartFile> files) throws IllegalStateException, IOException {
+	public ForumPost createPost(String subject, String body, String userId, List<MultipartFile> files) {
 		return forumRepository.createPost(subject, body, userId, files);
+	}
+
+	@Override
+	public ForumPost createReply(int id, String subject, String body, String userId, List<MultipartFile> files) {
+		return forumRepository.createReply(id, subject, body, userId, files);
 	}
 
 	@Override
@@ -29,13 +32,18 @@ public class ForumServiceImpl implements ForumService {
 	}
 
 	@Override
+	public List<ForumPost> getChildrenPosts(int id) {
+		return forumRepository.getChildrenPosts(id);
+	}
+
+	@Override
 	public PostAttachment getPostAttachment(int postId, int attId) {
 		return forumRepository.getPostAttachment(postId, attId);
 	}
 
 	@Override
-	public List<ForumPost> getPosts(int page) {
-		return forumRepository.getPosts(page);
+	public List<ForumPost> getTopLevelPosts(int page) {
+		return forumRepository.getTopLevelPosts(page);
 	}
 
 }

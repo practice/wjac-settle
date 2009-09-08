@@ -30,7 +30,7 @@ public class ForumListController extends AbstractController {
 		if (page < 1)
 			page = 1;
 		ModelAndView mv = new ModelAndView();
-		List<ForumPost> posts = forumService.getPosts(page);
+		List<ForumPost> posts = forumService.getTopLevelPosts(page);
 
 		mv.addObject("posts", posts);
 		if (posts.isEmpty())

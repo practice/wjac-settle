@@ -14,7 +14,11 @@ public class WriteCommandValidator implements Validator {
 
 	@Override
 	public void validate(Object target, Errors errors) {
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "title", "required");
+		WriteSubmitCommand command = (WriteSubmitCommand)target;
+		// title check is needed only when this is new thread post.
+		if (command.getId() == null) { 
+			ValidationUtils.rejectIfEmptyOrWhitespace(errors, "title", "required");
+		}
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "body", "required");
 	}
 

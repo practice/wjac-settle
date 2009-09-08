@@ -44,7 +44,7 @@ $(document).ready(function() {
 			<c:forEach var="post" items="${posts}">
 			<tr>
 				<td>${post.id}</td><td style="text-overflow:ellipsis; overflow: hidden; ">
-					<a href="showpost?id=${post.id}"><nobr>${post.subject}</nobr></a></td>
+					<a href="showpost?id=${post.id}&page=${currentPage}"><nobr>${post.subject}</nobr></a></td>
 				<td>${post.user.username}</td>
 				<td>${post.createdDate}</td>
 			</tr>
@@ -56,7 +56,7 @@ $(document).ready(function() {
 		<span id="currentPage" style="display: none">${currentPage}</span>	
 	</c:when>
 	<c:otherwise>
-			등록된  글이 없어부러~ 이런... 썅~
+			등록된  글이 없습니다. 첫 번째 글을 <a href="write">작성</a>해 주십시오.
 	</c:otherwise>
 </c:choose>
 <p><a href="write">Write</a>

@@ -8,12 +8,21 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.web.multipart.MultipartFile;
 
 public class WriteSubmitCommand {
+	private String id;
 	private String title;
 	private String body;
 	private List<MultipartFile> files = new ArrayList<MultipartFile>(); // 여러개의 파일을 가변적으로 업로드 할 경우? file0, file1, ... fileN 과 같이 한다?
 	
 	protected final Log logger = LogFactory.getLog(getClass());
 	
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getId() {
+		return id;
+	}
+
 	public WriteSubmitCommand() {
 	}
 	

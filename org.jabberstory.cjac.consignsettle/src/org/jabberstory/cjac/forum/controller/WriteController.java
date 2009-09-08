@@ -27,9 +27,15 @@ public class WriteController extends SimpleFormController {
 	protected ModelAndView onSubmit(HttpServletRequest request,
 			HttpServletResponse response, Object command, BindException errors)
 			throws Exception {
+		String id = request.getParameter("id");
 		WriteSubmitCommand writeCommand = (WriteSubmitCommand) command;
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		// auth type is UsernamePasswordAuthenticationToken.
+		if (id != null && id.length() > 0) {  // this is reply.
+			forumService.createReply(Integer.parseInt(id), writeCommand.getTitle(), writeCommand.getBody(), auth.getName(), writeCommand.getFiles());
+			return new ModelAndView("redirect:/forum/showpost?id=" + id);
+		}
+		// new forum thread.
 		forumService.createPost(writeCommand.getTitle(), writeCommand.getBody(), auth.getName(), writeCommand.getFiles());
 		return new ModelAndView("redirect:/forum/list");
 	}

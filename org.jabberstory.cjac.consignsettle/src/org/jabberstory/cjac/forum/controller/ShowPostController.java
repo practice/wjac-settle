@@ -1,5 +1,7 @@
 package org.jabberstory.cjac.forum.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -18,12 +20,15 @@ public class ShowPostController extends AbstractController {
 	@Override
 	protected ModelAndView handleRequestInternal(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
-		String id = request.getParameter("id");
-		ForumPost post = forumService.getPost(Integer.valueOf(id));
+		String idStr = request.getParameter("id");
+		int id = Integer.valueOf(idStr);
+		ForumPost post = forumService.getPost(id);
 		if (post == null) {
 			return null;
 		}
+		List<ForumPost> children = forumService.getChildrenPosts(id);
 		request.setAttribute("post", post);
+		request.setAttribute("children", children);
 		return new ModelAndView("forum/showpost");
 	}
 
