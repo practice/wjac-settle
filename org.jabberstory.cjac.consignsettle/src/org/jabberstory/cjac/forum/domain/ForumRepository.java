@@ -112,4 +112,10 @@ public class ForumRepository extends HibernateDaoSupport {
 		return (PostAttachment)list.get(0);
 	}
 
+	public void updatePost(int id, String subject, String body) {
+		ForumPost post = getPost(id);
+		post.setSubject(subject);
+		post.setBody(body);
+	}
+
 }

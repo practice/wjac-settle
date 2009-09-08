@@ -13,12 +13,11 @@
 <p>Body: ${post.body }</p>
 <p>At: ${post.createdDate }</p>
 <p>Attachments</p>
-
 <ul><c:forEach var="file" items="${post.attachments}">
 	<li><a href="download?post=${post.id}&file=${file.id}">${file.filename}</a> ${file.filesize} bytes</li>
 </c:forEach>
 </ul>
-<a href="list?page=${param.page}">List</a>
+<a href="list?page=${param.page}">List</a>, <a href="updatePost?id=${post.id}">수정</a>
 <hr/>
 <c:forEach var="child" items="${children}">
 <p>ID: ${child.id }

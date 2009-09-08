@@ -46,4 +46,9 @@ public class ForumServiceImpl implements ForumService {
 		return forumRepository.getTopLevelPosts(page);
 	}
 
+	@Override
+	public void updatePost(int id, String subject, String body) {
+		forumRepository.updatePost(id, subject, body);
+	}
+
 }
