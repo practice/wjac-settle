@@ -36,7 +36,7 @@ public class OrganMultiActionController extends MultiActionController {
 	public ModelAndView createOwner(HttpServletRequest request,	HttpServletResponse response) throws Exception {
 		
 		String organName = (request.getParameter("organName") == null) ? "": request.getParameter("organName");
-		String userId = (request.getParameter("userId") == null) ? "": request.getParameter("userId");
+		String userId = SecurityContextHolder.getContext().getAuthentication().getName();
 		
 		if (organName.equals("")){
 			ModelAndView mv = new ModelAndView("createOwner");
@@ -99,28 +99,15 @@ public class OrganMultiActionController extends MultiActionController {
 
 	}
 
-	public ModelAndView ownerList(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		
-		String userId = ""; // UserService 사용자정보 쿼포함되어야 하지 않을까?
-		
-		List<Organ> organs = organService.getOrgans(userId, ROLE_OWNER);
-		
-		ModelAndView mv = new ModelAndView("ownerList", "organs", organs);
-
-		return mv;
-
-	}
-	
-	public ModelAndView OwnerPagingList(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ModelAndView ownerPagingList(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
 		String pageNo = (request.getParameter("pageNo") == null) ? "1": request.getParameter("pageNo");
 		String sortColumn = (request.getParameter("sortColumn") == null) ? "": request.getParameter("sortColumn");
-
-		String userId = ""; // UserService 사용자정보 쿼포함되어야 하지 않을까?
+		String userId = SecurityContextHolder.getContext().getAuthentication().getName();
 		
 		int pageSize = 10;
 
-		Paging pagingList = organService.getOrgansWithPaging(userId, ROLE_OWNER, Integer.parseInt(pageNo), pageSize, sortColumn);
+		Paging pagingList = organService.getOrgansWithPaging(ROLE_OWNER, Integer.parseInt(pageNo), pageSize, sortColumn);
 		
 		ModelAndView mv = new ModelAndView("ownerList", "pagingList", pagingList);
 		mv.addObject("organCount", pagingList.getTotalCount());
@@ -142,11 +129,11 @@ public class OrganMultiActionController extends MultiActionController {
 	public ModelAndView createSubject(HttpServletRequest request,	HttpServletResponse response) throws Exception {
 		
 		String organName = (request.getParameter("organName") == null) ? "": request.getParameter("organName");
-		String userId = (request.getParameter("userId") == null) ? "": request.getParameter("userId");
 		String ownerId = (request.getParameter("ownerId") == null) ? "": request.getParameter("ownerId");
+		String userId = SecurityContextHolder.getContext().getAuthentication().getName();		
 		
 		if (organName.equals("")){
-			List<Organ> owners = organService.getAllOrgans(ROLE_OWNER);
+			List<Organ> owners = organService.getOrgans(ROLE_OWNER);
 			ModelAndView mv = new ModelAndView("createSubject");
 			mv.addObject("owners", owners);
 			return mv;
@@ -183,7 +170,7 @@ public class OrganMultiActionController extends MultiActionController {
 		Organ organ = organService.getOrgan(organId);
 		
 		if (organName.equals("")){			
-			List<Organ> owners = organService.getAllOrgans(ROLE_OWNER);			
+			List<Organ> owners = organService.getOrgans(ROLE_OWNER);			
 			ModelAndView mv = new ModelAndView("updateSubject");
 			mv.addObject("owners", owners);
 			mv.addObject("organ", organ);
@@ -217,19 +204,26 @@ public class OrganMultiActionController extends MultiActionController {
 
 	}
 	
-	public ModelAndView subjectList(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		
-		String userId = ""; // UserService 사용자정보 쿼포함되어야 하지 않을까?
-		
-		List<Organ> organs = organService.getOrgans(userId, ROLE_SUBJECT);
-		
-		ModelAndView mv = new ModelAndView("subjectList", "organs", organs);
+	public ModelAndView subjectPagingList(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
+		String pageNo = (request.getParameter("pageNo") == null) ? "1": request.getParameter("pageNo");
+		String sortColumn = (request.getParameter("sortColumn") == null) ? "": request.getParameter("sortColumn");
+		String userId = SecurityContextHolder.getContext().getAuthentication().getName();
+		
+		int pageSize = 10;
+
+		Paging pagingList = organService.getOrgansWithPaging(ROLE_SUBJECT, Integer.parseInt(pageNo), pageSize, sortColumn);
+		
+		ModelAndView mv = new ModelAndView("subjectList", "pagingList", pagingList);
+		mv.addObject("organCount", pagingList.getTotalCount());
+		mv.addObject("sortColumn", sortColumn);
+		mv.addObject("userId", userId);
+		
 		return mv;
 
 	}
 	
-	public ModelAndView subjectPagingList(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ModelAndView subjectPagingListByUserId(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
 		String pageNo = (request.getParameter("pageNo") == null) ? "1": request.getParameter("pageNo");
 		String sortColumn = (request.getParameter("sortColumn") == null) ? "": request.getParameter("sortColumn");
@@ -375,11 +369,11 @@ public class OrganMultiActionController extends MultiActionController {
 		String pageNo = (request.getParameter("pageNo") == null) ? "1": request.getParameter("pageNo");
 		String sortColumn = (request.getParameter("sortColumn") == null) ? "": request.getParameter("sortColumn");
 
-		String userId = ""; // UserService 사용자정보 쿼포함되어야 하지 않을까?
+		String userId = SecurityContextHolder.getContext().getAuthentication().getName();
 		
 		int pageSize = 10;
 
-		Paging pagingList = organService.getOrgansWithPaging(userId, ROLE_SUBJECT, Integer.parseInt(pageNo), pageSize, sortColumn);
+		Paging pagingList = organService.getOrgansWithPaging(ROLE_SUBJECT, Integer.parseInt(pageNo), pageSize, sortColumn);
 		
 		ModelAndView mv = new ModelAndView("settlementList", "pagingList", pagingList);
 		mv.addObject("organCount", pagingList.getTotalCount());

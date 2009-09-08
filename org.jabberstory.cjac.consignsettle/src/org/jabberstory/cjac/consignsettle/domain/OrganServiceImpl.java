@@ -41,6 +41,12 @@ public class OrganServiceImpl implements OrganService{
 	}
 	
 	@Override
+	public List<Organ> getOrgans(String role)
+			throws DataAccessException {
+		return organRepository.getOrgans(role);
+	}
+	
+	@Override
 	public List<Organ> getOrgansByUserGroup(String groupId)
 			throws DataAccessException {
 		
@@ -55,11 +61,12 @@ public class OrganServiceImpl implements OrganService{
 	}
 	
 	@Override
-	public List<Organ> getAllOrgans(String role)
+	public Paging getOrgansWithPaging(String role,
+			int currentPage, int pageSize, String sortColumn)
 			throws DataAccessException {
-		return organRepository.getAllOrgans(role);
+		return organRepository.getOrgansWithPaging(role, currentPage, pageSize, sortColumn);
 	}
-
+	
 	@Override
 	public Paging getOrgansWithPaging(String userId, String role,
 			int currentPage, int pageSize, String sortColumn)
