@@ -97,7 +97,7 @@ public class ForumRepository extends HibernateDaoSupport {
 
 	@SuppressWarnings("unchecked")
 	public List<ForumPost> getChildrenPosts(int id) {
-		String queryString = "from ForumPost post left join fetch post.user left join fetch post.attachments where post.rootId = :id ";
+		String queryString = "select distinct post from ForumPost post left join fetch post.user left join fetch post.attachments where post.rootId = :id ";
 		return getHibernateTemplate().findByNamedParam(queryString, "id", id);
 	}
 
