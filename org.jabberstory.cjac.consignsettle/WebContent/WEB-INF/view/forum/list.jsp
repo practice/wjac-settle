@@ -2,37 +2,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 
-<html>
-<head>
-<title>Forum</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/style.css" type="text/css" media="screen" charset="utf-8" />
-<script src="${pageContext.request.contextPath}/jquery-1.2.6.js" type="text/javascript"></script>
-<script src="${pageContext.request.contextPath}/tables.js" type="text/javascript"></script>
-<script>
-$(document).ready(function() {
-	var numPages = $('#numPages').text();
-	var currentPage = $('#currentPage').text();
-	// alert(numPages);
-	$('table.paginated').each(function() {
-		var $table = $(this);
-		var $pager = $('<div class="pager"></div>');
-		for (var page = 1; page <= numPages; page++) {
-			var pageButton = $('<span class="page-number">' + page + '</span>').appendTo($pager);
-			if (pageButton.text() == currentPage)
-				pageButton.addClass('active');
-			else {
-				pageButton.bind('click', { newPage : page }, function(event) {
-					location.href = 'list?page=' + event.data['newPage'];
-				}).addClass('clickable');	
-			}
-		}
-		$pager.insertBefore($table);
-	});
-});
-</script>
-</head>
-<body>
-<h1>Simple Forum</h1>
 <c:choose>
 	<c:when test="${!isEmptyList}">
 		<div id="wrapper"><div id="container"><div id="content">
@@ -62,5 +31,85 @@ $(document).ready(function() {
 	</c:otherwise>
 </c:choose>
 <p><a href="write">Write</a>
-</body>
-</html>
+
+
+
+<div id="container">
+  <div id="content">
+    <div id="content_top">
+      <p id="title"> 공지사항 : 원주대학교 </p>
+      <p id="path"> PATH : 정산진행현황 &gt; <span id="path_b">현재위치</span></p>
+    </div>
+    <div class="button">
+      <div class="b_blue">
+        <ul>
+          <li><a href="#">최종 불인정 내역</a></li>
+          <li><a href="#">1차 불인정 내역</a></li>
+          <li><a href="#">사업비 사용명세</a></li>
+          <li><a href="#">사업정보 상세</a></li>
+        </ul>
+      </div>
+    </div>
+    hello
+    <div id="table">
+      <table width="100%" cellspacing="0">
+        <thead>
+          <tr>
+            <th width="50">번호</th>
+            <th width="100">전담기관</th>
+            <th width="100">주관기관</th>
+            <th>제목</th>
+            <th width="80">작성일</th>
+            <th width="80">작성자</th>
+            <th width="50">첨부</th>
+            <th width="50">조회수</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>3</td>
+            <td>건기평</td>
+            <td>원주대학교</td>
+            <td class="cell"><a href="#">이런 집행내역 <img src="img/icon_new.gif" width="12" height="12" align="absmiddle"/></a></td>
+            <td>2009.09.09</td>
+            <td>홍길동</td>
+            <td><img src="img/icon_file.gif" width="13" height="12" /></td>
+            <td>1234</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>건기평</td>
+            <td>원주대학교</td>
+            <td class="cell"><a href="#">이런 집행내역</a></td>
+            <td>2009.09.09</td>
+            <td>홍길동</td>
+            <td><img src="img/icon_file.gif" width="13" height="12" /></td>
+            <td>1234</td>
+          </tr>
+          <tr>
+            <td>1</td>
+            <td>건기평</td>
+            <td>원주대학교</td>
+            <td class="cell"><a href="#">이런 집행내역</a></td>
+            <td>2009.09.09</td>
+            <td>홍길동</td>
+            <td><img src="img/icon_file.gif" width="13" height="12" /></td>
+            <td>1324</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="8"><a href="#"><img src="img/page_first.gif" align="absmiddle"/></a> <a href="#"><img src="img/page_pre.gif" align="absmiddle"/></a> | <a href="#">1</a> | <a href="#">2</a> | <a href="#">3</a> | <a href="#">4</a> | <a href="#">5</a> | <a href="#">6</a> | <a href="#">7</a> | <a href="#">8</a> | <a href="#">9</a> | <a href="#">10</a> | <a href=""><img src="img/page_next.gif" align="absmiddle"/></a> <a href="#"><img src="img/page_end.gif" align="absmiddle"/></a></td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+    <div class="button">
+      <div class="b_blue">
+        <ul>
+          <li><a href="#">글쓰기</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
