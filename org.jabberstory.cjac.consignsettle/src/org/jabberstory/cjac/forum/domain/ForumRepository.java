@@ -168,6 +168,7 @@ public class ForumRepository extends HibernateDaoSupport {
 	public void removePost(int id) {
 		ForumPost post = getPost(id);
 		getHibernateTemplate().delete(post);
+		// TODO 파일도 삭제해야 함.
 	}
 
 	public boolean isUnix() {

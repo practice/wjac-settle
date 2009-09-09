@@ -41,7 +41,7 @@
 		<id name="id" column="ATTID">
 			<generator class="native" />
 		</id>
-		<property name="filename" column="FILENAME" length="128" />
+		<property name="filename" column="FILENAME" length="256" />
 		<property name="filesize" column="FILESIZE" length="16" />
 		<property name="dir" column="DIR" length="256" />
 		<many-to-one name="post" column="POSTID" class="ForumPost" foreign-key="FK_POST_ATTACHMENT" />
