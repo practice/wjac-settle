@@ -23,4 +23,12 @@
 		<put-attribute name="body" value="/WEB-INF/view/forum/write.jsp" />
 	</definition>
 
+	<definition name="forum/showpost" extends="base_layout">
+		<put-attribute name="body" value="/WEB-INF/view/forum/showpost.jsp" />
+	</definition>
+
+	<definition name="forum/updatePost" extends="base_layout">
+		<put-attribute name="body" value="/WEB-INF/view/forum/updatePost.jsp" />
+	</definition>
+
 </tiles-definitions>
