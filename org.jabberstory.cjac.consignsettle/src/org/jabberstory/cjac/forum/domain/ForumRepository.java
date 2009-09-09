@@ -2,6 +2,8 @@ package org.jabberstory.cjac.forum.domain;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.criterion.CriteriaSpecification;
@@ -13,6 +15,11 @@ import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 import org.springframework.web.multipart.MultipartFile;
 
 public class ForumRepository extends HibernateDaoSupport {
+	private static boolean isUnix = true;
+	static {
+		String os = System.getProperty("os.name");
+		isUnix = !os.contains("Windows");
+	}
 	
 	private UserService userService;
 
@@ -58,8 +65,10 @@ public class ForumRepository extends HibernateDaoSupport {
 	public ForumPost createPost(int forumId, String subject, String body, String userId, List<MultipartFile> files) {
 		ForumPost post = new ForumPost(subject, body, userService.getUser(userId));
 		post.setForum(getForum(forumId));
-		saveAttachments(files, post);
 		getHibernateTemplate().save(post);
+		String saveDir = calcSaveDir(post);
+		addAttachments(files, post, saveDir);
+		saveFiles(files, saveDir);
 		return post;
 	}
 
@@ -69,29 +78,54 @@ public class ForumRepository extends HibernateDaoSupport {
 
 	public ForumPost createReply(int forumId, int id, String subject, String body, String userId, List<MultipartFile> files) {
 		ForumPost post = new ForumPost(subject, body, userService.getUser(userId));
-		saveAttachments(files, post);
+		getHibernateTemplate().save(post);
+		String saveDir = calcSaveDir(post);
+		addAttachments(files, post, saveDir);
 		post.setDepth(post.getDepth() + 1);
 		post.setRootId(id);
 		post.setReplyCount(post.getReplyCount() + 1);
 		post.setForum(getForum(forumId));
-		getHibernateTemplate().save(post);
+		saveFiles(files, saveDir);
 		return post;
 	}
 
-	private void saveAttachments(List<MultipartFile> files, ForumPost post) {
+	private void saveFiles(List<MultipartFile> files, String saveDir) {
 		for (MultipartFile mpf : files) {
 			try {
-				mpf.transferTo(new File(ForumService.FILE_PREFIX + mpf.getOriginalFilename()));
+				if (isUnix) {
+					createDir(ForumService.FILE_PREFIX_UNIX + saveDir);
+					mpf.transferTo(new File(ForumService.FILE_PREFIX_UNIX + saveDir + "/" + mpf.getOriginalFilename()));
+				}
+				else {
+					createDir(ForumService.FILE_PREFIX_WIN + saveDir);
+					mpf.transferTo(new File(ForumService.FILE_PREFIX_WIN + saveDir + "/" + mpf.getOriginalFilename()));
+				}
 			} catch (IllegalStateException e) {
 				throw new RuntimeException(e);
 			} catch (IOException e) {
 				throw new RuntimeException(e);
 			}
+		}
+	}
+
+	private void addAttachments(List<MultipartFile> files, ForumPost post, String saveDir) {
+		for (MultipartFile mpf : files) {
 			PostAttachment attachment = new PostAttachment();
 			attachment.setFilename(mpf.getOriginalFilename());
 			attachment.setFilesize(mpf.getSize());
+			attachment.setDir(saveDir);
 			post.addAttachment(attachment);
 		}
+	}
+
+	private void createDir(String path) {
+		new File(path).mkdirs();
+	}
+
+	private String calcSaveDir(ForumPost post) {
+		SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy/MM/dd/HH/");
+		String path = dateFormatter.format(new Date());
+		return path + post.getId();
 	}
 
 	/* (non-Javadoc)
@@ -134,6 +168,10 @@ public class ForumRepository extends HibernateDaoSupport {
 	public void removePost(int id) {
 		ForumPost post = getPost(id);
 		getHibernateTemplate().delete(post);
+	}
+
+	public boolean isUnix() {
+		return isUnix;
 	}
 
 }

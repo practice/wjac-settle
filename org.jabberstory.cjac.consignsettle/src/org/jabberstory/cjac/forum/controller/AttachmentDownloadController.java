@@ -35,7 +35,13 @@ public class AttachmentDownloadController implements Controller, ApplicationCont
 		String postId = request.getParameter("post");
 		String attId = request.getParameter("file");
 		PostAttachment attachment = forumService.getPostAttachment(Integer.valueOf(postId), Integer.valueOf(attId));
-		File file = new File(ForumService.FILE_PREFIX + attachment.getFilename());
+		File file;
+		if (forumService.isUnix()) {
+			file = new File(ForumService.FILE_PREFIX_UNIX + attachment.getDir() + "/" + attachment.getFilename());
+		} else {
+			file = new File(ForumService.FILE_PREFIX_WIN + attachment.getDir() + "/" + attachment.getFilename());
+		}
+		
 		return new ModelAndView((View)appContext.getBean("downloadView"), "file", file);	// here we do not use view name. Instead use view object.
 	}
 

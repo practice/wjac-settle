@@ -43,7 +43,8 @@
 		</id>
 		<property name="filename" column="FILENAME" length="128" />
 		<property name="filesize" column="FILESIZE" length="16" />
-		<many-to-one name="post" column="POSTID" class="ForumPost" foreign-key="FK_POST_ATTACHMENT"></many-to-one>
+		<property name="dir" column="DIR" length="256" />
+		<many-to-one name="post" column="POSTID" class="ForumPost" foreign-key="FK_POST_ATTACHMENT" />
 	</class>
 
 </hibernate-mapping>

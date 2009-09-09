@@ -56,4 +56,9 @@ public class ForumServiceImpl implements ForumService {
 		forumRepository.removePost(id);
 	}
 
+	@Override
+	public boolean isUnix() {
+		return forumRepository.isUnix();
+	}
+
 }

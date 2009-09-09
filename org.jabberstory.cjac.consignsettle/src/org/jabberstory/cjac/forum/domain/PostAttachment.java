@@ -4,6 +4,7 @@ public class PostAttachment {
 	private int id;
 	private String filename;
 	private long filesize;
+	private String dir;
 	private ForumPost post;
 	
 	public PostAttachment() {
@@ -39,6 +40,14 @@ public class PostAttachment {
 
 	public ForumPost getPost() {
 		return post;
+	}
+
+	public void setDir(String dir) {
+		this.dir = dir;
+	}
+
+	public String getDir() {
+		return dir;
 	}
 
 }
