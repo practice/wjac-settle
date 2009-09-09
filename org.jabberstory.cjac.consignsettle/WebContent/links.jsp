@@ -10,14 +10,9 @@
 Links to application logic.
 <ul>
 	<li><a href="user/list">User/Role Admin</a></li>
-	<li><a href="owner/ownerList">Owner Admin</a></li>
-	<li><a href="subject/subjectList">Subject Admin</a></li>
-	<li><a href="subject/settlementList">정산 진행 현황</a></li>	
-	<li><a href="auth/showOrganAuthAdmin">기관 권한 관리</a></li>
-	<li><a href="auth/showUserAuthAdmin">사용자 권한 관리</a></li>
-	<li><a href="forum/1/list">공지사항</a></li>	
-	<li><a href="forum/2/list">Q &amp; A</a></li>	
-	<li><a href="forum/3/list">자료실</a></li>	
+	<li><a href="organ/subjectList">Subject Admin</a></li>
+	<li><a href="organ/settlementList">정산 진행 현황</a></li>	
+	<li><a href="auth/showUserAuthAdmin">사용자 권한 관리</a></li>		
 </ul>
 </body>
 </html>

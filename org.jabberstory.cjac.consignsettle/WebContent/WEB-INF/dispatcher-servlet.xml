@@ -22,8 +22,7 @@
 				<prop key="/user/removeUserGroup">removeUserGroupController</prop>
 				<prop key="/user/createUser">createUserController</prop>
 				<prop key="/user/showUser">showUserController</prop>
-				<prop key="/owner/*">organMultiActionController</prop>
-				<prop key="/subject/*">organMultiActionController</prop>
+				<prop key="/organ/*">organMultiActionController</prop>
 				<prop key="/login">urlController</prop>
 				<prop key="/forum/*/list">forumListController</prop>
 				<prop key="/forum/*/write">writeController</prop>
@@ -164,6 +163,7 @@
 		<property name="definitions">
 			<list>
 				<value>/WEB-INF/tiles2def/tilesdef.xml</value>
+				<value>/WEB-INF/tiles2def/tilesdef-organ.xml</value>
 			</list>
 		</property>
 	</bean>
