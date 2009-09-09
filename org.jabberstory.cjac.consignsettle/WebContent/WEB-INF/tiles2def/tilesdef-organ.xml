@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
+<tiles-definitions>
+
+	<definition name="links" template="/links.jsp" />
+	
+	<!-- 사용자권한관리-->
+	<definition name="auth/userAuthAdmin" extends="base_layout">
+		<put-attribute name="body" value="/WEB-INF/view/userAuthAdmin.jsp" />
+	</definition>
+	
+	<!-- 주관기관현황 -->
+	<definition name="organ/subjectList" extends="base_layout">
+		<put-attribute name="body" value="/WEB-INF/view/subjectList.jsp" />
+	</definition>
+			
+	<!-- 주관기관 생성 -->
+	<definition name="organ/createSubject" extends="base_layout">
+		<put-attribute name="body" value="/WEB-INF/view/createSubject.jsp" />
+	</definition>
+	
+	<!-- 주관기관 조회 -->
+	<definition name="organ/showSubject" extends="base_layout">
+		<put-attribute name="body" value="/WEB-INF/view/showSubject.jsp" />
+	</definition>
+	
+	<!-- 주관기관 수정 -->
+	<definition name="organ/updateSubject" extends="base_layout">
+		<put-attribute name="body" value="/WEB-INF/view/updateSubject.jsp" />
+	</definition>
+	
+	<!-- 사업비 명세 조회 -->
+	<definition name="organ/showCostDetail" extends="base_layout">
+		<put-attribute name="body" value="/WEB-INF/view/showCostDetail.jsp" />
+	</definition>
+	
+	<!-- 사업비 명세 수정 -->
+	<definition name="organ/updateCostDetail" extends="base_layout">
+		<put-attribute name="body" value="/WEB-INF/view/updateCostDetail.jsp" />
+	</definition>
+	
+	<!-- 1차 불인정 내역 조회 -->
+	<definition name="organ/showNonApproval1" extends="base_layout">
+		<put-attribute name="body" value="/WEB-INF/view/showNonApproval1.jsp" />
+	</definition>
+	
+	<!-- 1차 불인정 내역 수정 -->
+	<definition name="organ/updateNonApproval1" extends="base_layout">
+		<put-attribute name="body" value="/WEB-INF/view/updateNonApproval1.jsp" />
+	</definition>
+	
+	<!-- 2차 불인정 내역 조회 -->
+	<definition name="organ/showNonApproval2" extends="base_layout">
+		<put-attribute name="body" value="/WEB-INF/view/showNonApproval2.jsp" />
+	</definition>
+	
+	<!-- 2차 불인정 내역 수정 -->
+	<definition name="organ/updateNonApproval2" extends="base_layout">
+		<put-attribute name="body" value="/WEB-INF/view/updateNonApproval2.jsp" />
+	</definition>
+	
+	<!-- 정산현황 -->
+	<definition name="organ/settlementList" extends="base_layout">
+		<put-attribute name="body" value="/WEB-INF/view/settlementList.jsp" />
+	</definition>
+	
+</tiles-definitions>

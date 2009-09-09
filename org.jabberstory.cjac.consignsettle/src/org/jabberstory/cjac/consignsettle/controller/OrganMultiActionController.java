@@ -43,7 +43,7 @@ public class OrganMultiActionController extends MultiActionController {
 //		String userId = SecurityContextHolder.getContext().getAuthentication().getName();
 //		
 //		if (organName.equals("")){
-//			ModelAndView mv = new ModelAndView("createOwner");
+//			ModelAndView mv = new ModelAndView("organ/createOwner");
 //			return mv;
 //		}
 //		
@@ -54,7 +54,7 @@ public class OrganMultiActionController extends MultiActionController {
 //		
 //		organService.createOrgan(organ);
 		
-	    return new ModelAndView("redirect:ownerList");
+	    return new ModelAndView("redirect:organ/ownerList");
 	    
 	} 
 	
@@ -64,7 +64,7 @@ public class OrganMultiActionController extends MultiActionController {
 
 		Organ organ = organService.getOrgan(organId);
 		
-		return new ModelAndView("showOwner", "organ", organ);
+		return new ModelAndView("organ/showOwner", "organ", organ);
 
 	}
 	
@@ -76,7 +76,7 @@ public class OrganMultiActionController extends MultiActionController {
 //		
 //		if (organName.equals("")){
 //			organ = organService.getOrgan(organId);
-//			ModelAndView mv = new ModelAndView("updateOwner");
+//			ModelAndView mv = new ModelAndView("organ/updateOwner");
 //			mv.addObject("organ", organ);
 //			return mv;
 //		}
@@ -89,7 +89,7 @@ public class OrganMultiActionController extends MultiActionController {
 //
 //		organService.updateOrgan(organ);
 
-		return new ModelAndView("redirect:ownerList");
+		return new ModelAndView("redirect:organ/ownerList");
 
 	}
 	
@@ -99,7 +99,7 @@ public class OrganMultiActionController extends MultiActionController {
 
 		organService.removeOrgan(organId);
 
-		return new ModelAndView("redirect:ownerList");
+		return new ModelAndView("redirect:organ/ownerList");
 
 	}
 
@@ -113,7 +113,7 @@ public class OrganMultiActionController extends MultiActionController {
 //
 //		Paging pagingList = organService.getOrgansWithPaging(ROLE_OWNER, Integer.parseInt(pageNo), pageSize, sortColumn);
 //		
-//		ModelAndView mv = new ModelAndView("ownerList", "pagingList", pagingList);
+//		ModelAndView mv = new ModelAndView("organ/ownerList", "pagingList", pagingList);
 //		mv.addObject("organCount", pagingList.getTotalCount());
 //		mv.addObject("sortColumn", sortColumn);
 //		
@@ -139,7 +139,7 @@ public class OrganMultiActionController extends MultiActionController {
 		if (ownerGroupId.equals("") || subjectGroupId.equals("")){
 			List<UserGroup> ownerGroups = userService.getGroupsByRole(ROLE_OWNER);
 			List<UserGroup> subjectGroups = userService.getGroupsByRole(ROLE_SUBJECT);
-			ModelAndView mv = new ModelAndView("createSubject");
+			ModelAndView mv = new ModelAndView("organ/createSubject");
 			mv.addObject("ownerGroups", ownerGroups);
 			mv.addObject("subjectGroups", subjectGroups);
 			return mv;
@@ -156,7 +156,7 @@ public class OrganMultiActionController extends MultiActionController {
 		
 		organService.createOrgan(organ);
 		
-	    return new ModelAndView("redirect:subjectList");
+	    return new ModelAndView("redirect:organ/subjectList");
 	    
 	} 
 	
@@ -166,7 +166,7 @@ public class OrganMultiActionController extends MultiActionController {
 
 		Organ organ = organService.getOrgan(organId);
 		
-		return new ModelAndView("showSubject", "organ", organ);
+		return new ModelAndView("organ/showSubject", "organ", organ);
 
 	}
 	
@@ -184,7 +184,7 @@ public class OrganMultiActionController extends MultiActionController {
 		if (ownerGroupId.equals("") || subjectGroupId.equals("")){
 			List<UserGroup> ownerGroups = userService.getGroupsByRole(ROLE_OWNER);
 			List<UserGroup> subjectGroups = userService.getGroupsByRole(ROLE_SUBJECT);
-			ModelAndView mv = new ModelAndView("updateSubject");
+			ModelAndView mv = new ModelAndView("organ/updateSubject");
 			mv.addObject("ownerGroups", ownerGroups);
 			mv.addObject("subjectGroups", subjectGroups);
 			mv.addObject("organ", organ);
@@ -204,7 +204,7 @@ public class OrganMultiActionController extends MultiActionController {
 		
 		organService.updateOrgan(organCommand);
 
-		return new ModelAndView("redirect:subjectList");
+		return new ModelAndView("redirect:organ/subjectList");
 
 	}
 	
@@ -214,7 +214,7 @@ public class OrganMultiActionController extends MultiActionController {
 
 		organService.removeOrgan(organId);
 
-		return new ModelAndView("redirect:subjectList");
+		return new ModelAndView("redirect:organ/subjectList");
 
 	}
 	
@@ -232,7 +232,7 @@ public class OrganMultiActionController extends MultiActionController {
 		
 		Paging	pagingList = organService.getOrgansWithPaging(userId, Integer.parseInt(pageNo), pageSize, sortColumn);
 		
-		ModelAndView mv = new ModelAndView("subjectList", "pagingList", pagingList);
+		ModelAndView mv = new ModelAndView("organ/subjectList", "pagingList", pagingList);
 		mv.addObject("sortColumn", sortColumn);
 		
 		return mv;
@@ -247,13 +247,13 @@ public class OrganMultiActionController extends MultiActionController {
 		Organ organ = organService.getOrgan(organId);
 		
 		if (costDetail.equals("")) {
-			return new ModelAndView("updateCostDetail", "organ", organ);
+			return new ModelAndView("organ/updateCostDetail", "organ", organ);
 		}
 		
 		organService.updateOrganCostDetail(organId, costDetail);
 		organ = organService.getOrgan(organId);
 		
-		return new ModelAndView("showCostDetail", "organ", organ);
+		return new ModelAndView("organ/showCostDetail", "organ", organ);
 	
 	}
 	
@@ -266,7 +266,7 @@ public class OrganMultiActionController extends MultiActionController {
 		
 		Organ organ = organService.getOrgan(organId);
 		
-		return new ModelAndView("showCostDetail", "organ", organ);
+		return new ModelAndView("organ/showCostDetail", "organ", organ);
 	
 	}
 	
@@ -276,7 +276,7 @@ public class OrganMultiActionController extends MultiActionController {
 		
 		Organ organ = organService.getOrgan(organId);
 		
-		return new ModelAndView("showCostDetail", "organ", organ);
+		return new ModelAndView("organ/showCostDetail", "organ", organ);
 		
 	}
 	
@@ -288,13 +288,13 @@ public class OrganMultiActionController extends MultiActionController {
 		Organ organ = organService.getOrgan(organId);
 		
 		if (nonApproval1.equals("")) {
-			return new ModelAndView("updateNonApproval1", "organ", organ);
+			return new ModelAndView("organ/updateNonApproval1", "organ", organ);
 		}
 		
 		organService.updateOrganNonApproval1(organId, nonApproval1);
 		organ = organService.getOrgan(organId);
 		
-		return new ModelAndView("showNonApproval1", "organ", organ);
+		return new ModelAndView("organ/showNonApproval1", "organ", organ);
 	
 	}
 	
@@ -306,7 +306,7 @@ public class OrganMultiActionController extends MultiActionController {
 		
 		Organ organ = organService.getOrgan(organId);
 		
-		return new ModelAndView("showNonApproval1", "organ", organ);
+		return new ModelAndView("organ/showNonApproval1", "organ", organ);
 	
 	}
 	
@@ -316,7 +316,7 @@ public class OrganMultiActionController extends MultiActionController {
 		
 		Organ organ = organService.getOrgan(organId);
 		
-		return new ModelAndView("showNonApproval1", "organ", organ);
+		return new ModelAndView("organ/showNonApproval1", "organ", organ);
 		
 	}
 	
@@ -328,13 +328,13 @@ public class OrganMultiActionController extends MultiActionController {
 		Organ organ = organService.getOrgan(organId);
 		
 		if (nonApproval2.equals("")) {
-			return new ModelAndView("updateNonApproval2", "organ", organ);
+			return new ModelAndView("organ/updateNonApproval2", "organ", organ);
 		}
 		
 		organService.updateOrganNonApproval2(organId, nonApproval2);
 		organ = organService.getOrgan(organId);
 		
-		return new ModelAndView("showNonApproval2", "organ", organ);
+		return new ModelAndView("organ/showNonApproval2", "organ", organ);
 	
 	}
 	
@@ -346,7 +346,7 @@ public class OrganMultiActionController extends MultiActionController {
 		
 		Organ organ = organService.getOrgan(organId);
 		
-		return new ModelAndView("showNonApproval2", "organ", organ);
+		return new ModelAndView("organ/showNonApproval2", "organ", organ);
 	
 	}
 	
@@ -356,7 +356,7 @@ public class OrganMultiActionController extends MultiActionController {
 		
 		Organ organ = organService.getOrgan(organId);
 		
-		return new ModelAndView("showNonApproval2", "organ", organ);
+		return new ModelAndView("organ/showNonApproval2", "organ", organ);
 		
 	}
 		
@@ -371,7 +371,7 @@ public class OrganMultiActionController extends MultiActionController {
 
 		Paging pagingList = organService.getOrgansWithPaging(userId, Integer.parseInt(pageNo), pageSize, sortColumn);
 		
-		ModelAndView mv = new ModelAndView("settlementList", "pagingList", pagingList);
+		ModelAndView mv = new ModelAndView("organ/settlementList", "pagingList", pagingList);
 		mv.addObject("sortColumn", sortColumn);
 		
 		return mv;
