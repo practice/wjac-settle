@@ -140,7 +140,8 @@
 				</select>
 			</td>
 			<td>
-				<input type="button" value="선택" onClick="copyElement(availableUserId, selectedUserId);"/><p/><input type="button" value="제거" onClick="removeElement(selectedUserId, availableUserId);"/>
+				<input type="button" value="선택" onClick="moveElement(availableUserId, selectedUserId);"/><p/>
+				<input type="button" value="제거" onClick="moveElement(selectedUserId, availableUserId);"/>
 			</td>
 			<td>
 				선택한 사용자 목록<p/>

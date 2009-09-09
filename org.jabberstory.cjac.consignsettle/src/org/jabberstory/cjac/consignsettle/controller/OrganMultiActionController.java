@@ -5,9 +5,11 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
 import org.jabberstory.cjac.consignsettle.common.util.Paging;
 import org.jabberstory.cjac.consignsettle.domain.Organ;
 import org.jabberstory.cjac.consignsettle.domain.OrganService;
+import org.jabberstory.cjac.consignsettle.domain.UserGroup;
 import org.jabberstory.cjac.consignsettle.domain.UserService;
 import org.springframework.security.context.SecurityContextHolder;
 import org.springframework.web.servlet.ModelAndView;
@@ -15,6 +17,8 @@ import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
 public class OrganMultiActionController extends MultiActionController {
 
+	private Logger log = Logger.getLogger(this.getClass());
+	
 	public OrganMultiActionController() {}
 
 	private UserService userService;
@@ -35,20 +39,20 @@ public class OrganMultiActionController extends MultiActionController {
 	
 	public ModelAndView createOwner(HttpServletRequest request,	HttpServletResponse response) throws Exception {
 		
-		String organName = (request.getParameter("organName") == null) ? "": request.getParameter("organName");
-		String userId = SecurityContextHolder.getContext().getAuthentication().getName();
-		
-		if (organName.equals("")){
-			ModelAndView mv = new ModelAndView("createOwner");
-			return mv;
-		}
-		
-		Organ organ = new Organ();
-		
-		bind(request, organ);
-		organ.setRole(ROLE_OWNER);
-		
-		organService.createOrgan(organ);
+//		String organName = (request.getParameter("organName") == null) ? "": request.getParameter("organName");
+//		String userId = SecurityContextHolder.getContext().getAuthentication().getName();
+//		
+//		if (organName.equals("")){
+//			ModelAndView mv = new ModelAndView("createOwner");
+//			return mv;
+//		}
+//		
+//		Organ organ = new Organ();
+//		
+//		bind(request, organ);
+//		organ.setRole(ROLE_OWNER);
+//		
+//		organService.createOrgan(organ);
 		
 	    return new ModelAndView("redirect:ownerList");
 	    
@@ -66,24 +70,24 @@ public class OrganMultiActionController extends MultiActionController {
 	
 	public ModelAndView updateOwner(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-		String organId = request.getParameter("organId");
-		String organName = (request.getParameter("organName") == null) ? "": request.getParameter("organName");
-		Organ organ;
-		
-		if (organName.equals("")){
-			organ = organService.getOrgan(organId);
-			ModelAndView mv = new ModelAndView("updateOwner");
-			mv.addObject("organ", organ);
-			return mv;
-		}
-		
-		organ = new Organ();
-
-		bind(request, organ);
-		
-		organ.setRole(ROLE_OWNER);
-
-		organService.updateOrgan(organ);
+//		String organId = request.getParameter("organId");
+//		String organName = (request.getParameter("organName") == null) ? "": request.getParameter("organName");
+//		Organ organ;
+//		
+//		if (organName.equals("")){
+//			organ = organService.getOrgan(organId);
+//			ModelAndView mv = new ModelAndView("updateOwner");
+//			mv.addObject("organ", organ);
+//			return mv;
+//		}
+//		
+//		organ = new Organ();
+//
+//		bind(request, organ);
+//		
+//		organ.setRole(ROLE_OWNER);
+//
+//		organService.updateOrgan(organ);
 
 		return new ModelAndView("redirect:ownerList");
 
@@ -101,19 +105,20 @@ public class OrganMultiActionController extends MultiActionController {
 
 	public ModelAndView ownerPagingList(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-		String pageNo = (request.getParameter("pageNo") == null) ? "1": request.getParameter("pageNo");
-		String sortColumn = (request.getParameter("sortColumn") == null) ? "": request.getParameter("sortColumn");
-		String userId = SecurityContextHolder.getContext().getAuthentication().getName();
-		
-		int pageSize = 10;
-
-		Paging pagingList = organService.getOrgansWithPaging(ROLE_OWNER, Integer.parseInt(pageNo), pageSize, sortColumn);
-		
-		ModelAndView mv = new ModelAndView("ownerList", "pagingList", pagingList);
-		mv.addObject("organCount", pagingList.getTotalCount());
-		mv.addObject("sortColumn", sortColumn);
-		
-		return mv;
+//		String pageNo = (request.getParameter("pageNo") == null) ? "1": request.getParameter("pageNo");
+//		String sortColumn = (request.getParameter("sortColumn") == null) ? "": request.getParameter("sortColumn");
+//		String userId = SecurityContextHolder.getContext().getAuthentication().getName();
+//		
+//		int pageSize = 10;
+//
+//		Paging pagingList = organService.getOrgansWithPaging(ROLE_OWNER, Integer.parseInt(pageNo), pageSize, sortColumn);
+//		
+//		ModelAndView mv = new ModelAndView("ownerList", "pagingList", pagingList);
+//		mv.addObject("organCount", pagingList.getTotalCount());
+//		mv.addObject("sortColumn", sortColumn);
+//		
+//		return mv;
+		return new ModelAndView();
 
 	}
 	
@@ -128,24 +133,28 @@ public class OrganMultiActionController extends MultiActionController {
 	 */
 	public ModelAndView createSubject(HttpServletRequest request,	HttpServletResponse response) throws Exception {
 		
-		String organName = (request.getParameter("organName") == null) ? "": request.getParameter("organName");
-		String ownerId = (request.getParameter("ownerId") == null) ? "": request.getParameter("ownerId");
-		String userId = SecurityContextHolder.getContext().getAuthentication().getName();		
+		String ownerGroupId = (request.getParameter("ownerGroupId") == null) ? "": request.getParameter("ownerGroupId");
+		String subjectGroupId = (request.getParameter("subjectGroupId") == null) ? "": request.getParameter("subjectGroupId");
 		
-		if (organName.equals("")){
-			List<Organ> owners = organService.getOrgans(ROLE_OWNER);
+		if (ownerGroupId.equals("") || subjectGroupId.equals("")){
+			List<UserGroup> ownerGroups = userService.getGroupsByRole(ROLE_OWNER);
+			List<UserGroup> subjectGroups = userService.getGroupsByRole(ROLE_SUBJECT);
 			ModelAndView mv = new ModelAndView("createSubject");
-			mv.addObject("owners", owners);
+			mv.addObject("ownerGroups", ownerGroups);
+			mv.addObject("subjectGroups", subjectGroups);
 			return mv;
 		}
+		
+		UserGroup ownerGroup = userService.getUserGroup(ownerGroupId);
+		UserGroup subjectGroup = userService.getUserGroup(subjectGroupId);
 		
 		Organ organ = new Organ();
 		
 		bind(request, organ);
+		organ.setOwnerGroup(ownerGroup);
+		organ.setSubjectGroup(subjectGroup);
 		
-		organ.setRole(ROLE_SUBJECT);		
-		
-		organService.createOrgan(organ, ownerId);
+		organService.createOrgan(organ);
 		
 	    return new ModelAndView("redirect:subjectList");
 	    
@@ -164,31 +173,36 @@ public class OrganMultiActionController extends MultiActionController {
 	public ModelAndView updateSubject(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
 		String organId = request.getParameter("organId");
-		String organName = (request.getParameter("organName") == null) ? "": request.getParameter("organName");
-		String ownerId = (request.getParameter("ownerId") == null) ? "": request.getParameter("ownerId");
+		String ownerGroupId = (request.getParameter("ownerGroupId") == null) ? "": request.getParameter("ownerGroupId");
+		String subjectGroupId = (request.getParameter("subjectGroupId") == null) ? "": request.getParameter("subjectGroupId");
 		
 		Organ organ = organService.getOrgan(organId);
-		
-		if (organName.equals("")){			
-			List<Organ> owners = organService.getOrgans(ROLE_OWNER);			
-			ModelAndView mv = new ModelAndView("updateSubject");
-			mv.addObject("owners", owners);
-			mv.addObject("organ", organ);
-			return mv;			
-		}
-		
 		String costDetail = organ.getCostDetail();
 		String nonApproval1 = organ.getNonApproval1();
 		String nonApproval2 = organ.getNonApproval2();
 		
+		if (ownerGroupId.equals("") || subjectGroupId.equals("")){
+			List<UserGroup> ownerGroups = userService.getGroupsByRole(ROLE_OWNER);
+			List<UserGroup> subjectGroups = userService.getGroupsByRole(ROLE_SUBJECT);
+			ModelAndView mv = new ModelAndView("updateSubject");
+			mv.addObject("ownerGroups", ownerGroups);
+			mv.addObject("subjectGroups", subjectGroups);
+			mv.addObject("organ", organ);
+			return mv;
+		}
+		
+		UserGroup ownerGroup = userService.getUserGroup(ownerGroupId);
+		UserGroup subjectGroup = userService.getUserGroup(subjectGroupId);
+		
 		Organ organCommand = new Organ();
 		bind(request, organCommand);		
-		organCommand.setRole(ROLE_SUBJECT);
 		organCommand.setCostDetail(costDetail);
 		organCommand.setNonApproval1(nonApproval1);
 		organCommand.setNonApproval2(nonApproval2);
+		organCommand.setOwnerGroup(ownerGroup);
+		organCommand.setSubjectGroup(subjectGroup);
 		
-		organService.updateOrgan(organCommand, ownerId);
+		organService.updateOrgan(organCommand);
 
 		return new ModelAndView("redirect:subjectList");
 
@@ -212,31 +226,14 @@ public class OrganMultiActionController extends MultiActionController {
 		
 		int pageSize = 10;
 
-		Paging pagingList = organService.getOrgansWithPaging(ROLE_SUBJECT, Integer.parseInt(pageNo), pageSize, sortColumn);
+		log.info("############################################################");
+		log.info(userId);
+		log.info("############################################################");
+		
+		Paging	pagingList = organService.getOrgansWithPaging(userId, Integer.parseInt(pageNo), pageSize, sortColumn);
 		
 		ModelAndView mv = new ModelAndView("subjectList", "pagingList", pagingList);
-		mv.addObject("organCount", pagingList.getTotalCount());
 		mv.addObject("sortColumn", sortColumn);
-		mv.addObject("userId", userId);
-		
-		return mv;
-
-	}
-	
-	public ModelAndView subjectPagingListByUserId(HttpServletRequest request, HttpServletResponse response) throws Exception {
-
-		String pageNo = (request.getParameter("pageNo") == null) ? "1": request.getParameter("pageNo");
-		String sortColumn = (request.getParameter("sortColumn") == null) ? "": request.getParameter("sortColumn");
-		String userId = SecurityContextHolder.getContext().getAuthentication().getName();
-		
-		int pageSize = 10;
-
-		Paging pagingList = organService.getOrgansWithPaging(userId, ROLE_SUBJECT, Integer.parseInt(pageNo), pageSize, sortColumn);
-		
-		ModelAndView mv = new ModelAndView("subjectList", "pagingList", pagingList);
-		mv.addObject("organCount", pagingList.getTotalCount());
-		mv.addObject("sortColumn", sortColumn);
-		mv.addObject("userId", userId);
 		
 		return mv;
 
@@ -368,15 +365,13 @@ public class OrganMultiActionController extends MultiActionController {
 
 		String pageNo = (request.getParameter("pageNo") == null) ? "1": request.getParameter("pageNo");
 		String sortColumn = (request.getParameter("sortColumn") == null) ? "": request.getParameter("sortColumn");
-
 		String userId = SecurityContextHolder.getContext().getAuthentication().getName();
-		
+				
 		int pageSize = 10;
 
-		Paging pagingList = organService.getOrgansWithPaging(ROLE_SUBJECT, Integer.parseInt(pageNo), pageSize, sortColumn);
+		Paging pagingList = organService.getOrgansWithPaging(userId, Integer.parseInt(pageNo), pageSize, sortColumn);
 		
 		ModelAndView mv = new ModelAndView("settlementList", "pagingList", pagingList);
-		mv.addObject("organCount", pagingList.getTotalCount());
 		mv.addObject("sortColumn", sortColumn);
 		
 		return mv;

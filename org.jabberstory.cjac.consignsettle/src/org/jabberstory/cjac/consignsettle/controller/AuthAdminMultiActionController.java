@@ -1,12 +1,14 @@
 package org.jabberstory.cjac.consignsettle.controller;
 
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
 import org.jabberstory.cjac.consignsettle.domain.Organ;
 import org.jabberstory.cjac.consignsettle.domain.OrganService;
 import org.jabberstory.cjac.consignsettle.domain.User;
@@ -16,6 +18,9 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
 public class AuthAdminMultiActionController extends MultiActionController {
+	
+	private Logger log = Logger.getLogger(this.getClass());
+
 	private UserService userService;
 
 	public void setUserService(UserService userService) {
@@ -58,39 +63,40 @@ public class AuthAdminMultiActionController extends MultiActionController {
 	}
 			
 	public ModelAndView updateOrganAuthAdmin(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String selectedGroupId = request.getParameter("selectedGroupId");
-		String[] selectedOrganIds = request.getParameterValues("selectedOrganId");
-
-		// 모든 사용자 그룹 목록
-		List<UserGroup> userGroups = userService.getGroups("");
-		
-		// 가용 기관(전체 기관) 목록
-		List<Organ> availableOrgans = organService.getAllOrgans();		
-		
-		ModelAndView mv = new ModelAndView("organAuthAdmin");
-		mv.addObject("userGroups", userGroups);
-		mv.addObject("availableOrgans", availableOrgans);
-		
-		// 해당 그룹에 기관 Assign
-		if(selectedOrganIds != null && selectedGroupId != null){
-			
-			// 선택한 기관 목록 Set
-			Set<Organ> selectedOrgans = new HashSet<Organ>();		
-			for(int i=0; i<selectedOrganIds.length; i++){			
-				selectedOrgans.add(organService.getOrgan(selectedOrganIds[i]));
-			}		
-			
-			// 선택한 사용자그룹에 기관 Assign
-			userService.updateUserGroupWithOrgans(selectedGroupId, selectedOrgans);
-			
-			// 해당 사용자 그룹이 접근 가능한 기관 목록		
-			List<Organ> authrizedOrgans = organService.getOrgansByUserGroup(selectedGroupId);
-			mv.addObject("selectedGroupId", selectedGroupId);
-			mv.addObject("selectedOrgans", authrizedOrgans);
-			return mv;
-		}	
-	
-		return mv;
+//		String selectedGroupId = request.getParameter("selectedGroupId");
+//		String[] selectedOrganIds = request.getParameterValues("selectedOrganId");
+//
+//		// 모든 사용자 그룹 목록
+//		List<UserGroup> userGroups = userService.getGroups("");
+//		
+//		// 가용 기관(전체 기관) 목록
+//		List<Organ> availableOrgans = organService.getAllOrgans();		
+//		
+//		ModelAndView mv = new ModelAndView("organAuthAdmin");
+//		mv.addObject("userGroups", userGroups);
+//		mv.addObject("availableOrgans", availableOrgans);
+//		
+//		// 해당 그룹에 기관 Assign
+//		if(selectedOrganIds != null && selectedGroupId != null){
+//			
+//			// 선택한 기관 목록 Set
+//			Set<Organ> selectedOrgans = new HashSet<Organ>();		
+//			for(int i=0; i<selectedOrganIds.length; i++){			
+//				selectedOrgans.add(organService.getOrgan(selectedOrganIds[i]));
+//			}		
+//			
+//			// 선택한 사용자그룹에 기관 Assign
+//			userService.updateUserGroupWithOrgans(selectedGroupId, selectedOrgans);
+//			
+//			// 해당 사용자 그룹이 접근 가능한 기관 목록		
+//			List<Organ> authrizedOrgans = organService.getOrgansByUserGroup(selectedGroupId);
+//			mv.addObject("selectedGroupId", selectedGroupId);
+//			mv.addObject("selectedOrgans", authrizedOrgans);
+//			return mv;
+//		}	
+//	
+//		return mv;
+		return new ModelAndView();
 	}
 	
 	public ModelAndView showUserAuthAdmin(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -100,8 +106,8 @@ public class AuthAdminMultiActionController extends MultiActionController {
 		// 모든 사용자 그룹 목록
 		List<UserGroup> userGroups = userService.getGroups("");
 		
-		// 가용 유저(전체 유저) 목록
-		List<User> availableUsers = userService.getAllUsers();
+		// 가용 유저 목록: Any 그룹에 속하지 않은 유저 목록
+		List<User> availableUsers = userService.getAvailableUsers();
 		
 		ModelAndView mv = new ModelAndView("userAuthAdmin");
 		mv.addObject("userGroups", userGroups);
@@ -112,6 +118,17 @@ public class AuthAdminMultiActionController extends MultiActionController {
 			
 			// 해당 사용자 그룹에 할당한 사용자 목록		
 			List<User> authrizedUsers = userService.getUsersByUserGroup(selectedGroupId); 
+			log.info("############################################################");
+			log.info("authrizedUsers");
+			for (int i=0; i < authrizedUsers.size(); i++){
+				log.info(authrizedUsers.get(i));
+			}
+
+
+			
+			log.info("############################################################");
+			
+			
 			mv.addObject("selectedGroupId", selectedGroupId);
 			mv.addObject("selectedUsers", authrizedUsers);
 			return mv;
@@ -128,19 +145,20 @@ public class AuthAdminMultiActionController extends MultiActionController {
 		List<UserGroup> userGroups = userService.getGroups("");
 		
 		// 가용 유저(전체 유저) 목록
-		List<User> availableUsers = userService.getAllUsers();		
+		List<User> availableUsers = userService.getAvailableUsers();		
 		
 		ModelAndView mv = new ModelAndView("userAuthAdmin");
 		mv.addObject("userGroups", userGroups);
 		mv.addObject("availableUsers", availableUsers);
 		
 		// 해당 그룹에 사용자 Assign
-		if(selectedUserIds != null && selectedGroupId != null){
+		if(selectedUserIds.length > 0 && selectedGroupId != null){
 			
 			// 선택한 사용자 목록 Set
 			Set<User> selectedUsers = new HashSet<User>();		
 			for(int i=0; i<selectedUserIds.length; i++){			
 				selectedUsers.add(userService.getUser(selectedUserIds[i]));
+				
 			}		
 			
 			// 선택한 사용자그룹에 사용자 Assign

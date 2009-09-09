@@ -2,11 +2,14 @@ package org.jabberstory.cjac.consignsettle.domain;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.jabberstory.cjac.consignsettle.common.util.Paging;
 import org.springframework.dao.DataAccessException;
 
 public class OrganServiceImpl implements OrganService{
-
+	
+	private Logger log = Logger.getLogger(this.getClass());
+	
 	private OrganRepository organRepository;
 
 	public void setOrganRepository(OrganRepository organRepository) {
@@ -25,11 +28,6 @@ public class OrganServiceImpl implements OrganService{
 	}
 	
 	@Override
-	public void createOrgan(Organ organ, String ownerId) throws DataAccessException {
-		organRepository.createOrgan(organ, ownerId);
-	}
-
-	@Override
 	public Organ getOrgan(String organId) throws DataAccessException {
 		return organRepository.getOrgan(organId);
 	}
@@ -38,12 +36,6 @@ public class OrganServiceImpl implements OrganService{
 	public List<Organ> getOrgans(String userId, String role)
 			throws DataAccessException {
 		return organRepository.getOrgans(userId, role);
-	}
-	
-	@Override
-	public List<Organ> getOrgans(String role)
-			throws DataAccessException {
-		return organRepository.getOrgans(role);
 	}
 	
 	@Override
@@ -61,17 +53,19 @@ public class OrganServiceImpl implements OrganService{
 	}
 	
 	@Override
-	public Paging getOrgansWithPaging(String role,
+	public Paging getOrgansWithPaging(String userId,
 			int currentPage, int pageSize, String sortColumn)
 			throws DataAccessException {
-		return organRepository.getOrgansWithPaging(role, currentPage, pageSize, sortColumn);
-	}
-	
-	@Override
-	public Paging getOrgansWithPaging(String userId, String role,
-			int currentPage, int pageSize, String sortColumn)
-			throws DataAccessException {
-		return organRepository.getOrgansWithPaging(userId, role, currentPage, pageSize, sortColumn);
+		log.info("############################################################");
+		log.info(userId);
+		log.info("############################################################");
+		String userRole = "";
+		User user = userRepository.getUser(userId);
+		
+		if(user.getUserGroup() == null) userRole = "";
+		else userRole = user.getUserGroup().getRole(); 
+			
+		return organRepository.getOrgansWithPaging(userId, userRole, currentPage, pageSize, sortColumn);
 	}
 
 	@Override
@@ -84,11 +78,6 @@ public class OrganServiceImpl implements OrganService{
 		organRepository.updateOrgan(organ);
 	}
 	
-	@Override
-	public void updateOrgan(Organ organ, String ownerId) throws DataAccessException {
-		organRepository.updateOrgan(organ, ownerId);
-	}
-
 	@Override
 	public void updateOrganCostDetail(String organId, String costDetail)
 			throws DataAccessException {

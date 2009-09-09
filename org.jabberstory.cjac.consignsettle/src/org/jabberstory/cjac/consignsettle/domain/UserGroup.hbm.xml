@@ -11,13 +11,9 @@
 		</id>
 		<property name="groupName" column="GROUPNAME" type="string" length="32" />
 		<property name="role" column="ROLE" type="string" length="1" />
-		<set name="users" table="USER_USERGROUP">
+		<set name="users" table="USER" inverse="true" lazy="false">
 			<key column="GROUPID" />
-			<many-to-many class="User" column="USERID" foreign-key="FK_USERGROUP_TO_USER" lazy="false" />
-		</set>
-		<set name="organs" table="ORGAN_USERGROUP">
-			<key column="GROUPID" />
-			<many-to-many class="Organ" column="ORGANID" foreign-key="FK_USERGROUP_TO_ORGAN" lazy="false" />
+			<one-to-many class="User" />
 		</set>
 	</class>
 

@@ -9,7 +9,7 @@
 <body>
 <form method="post">
 Group ID: ${updateUserGroup.groupId }
-Group Name: <input type="text" size="15" name="name" value="${updateUserGroup.groupName }"/>
+Group Name: <input type="text" size="15" name="groupName" value="${updateUserGroup.groupName }"/>
 <form:radiobuttons items="${availableRoles}" path="updateUserGroup.role" />
 <input type="submit" value="Save" />
 </form>

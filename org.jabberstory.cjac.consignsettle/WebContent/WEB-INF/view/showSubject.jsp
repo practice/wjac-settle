@@ -62,9 +62,9 @@
 	<tbody>
 		<tr>
 			<th scope="row">전담기관</th>
-			<td class="">${organ.owner.organName}</td>
+			<td class="">${organ.owner.groupName}</td>
 			<th scope="row">주관기관</th>
-			<td class="">${organ.organName}</td>
+			<td class="">${organ.subject.groupName}</td>
 		</tr>
 		<tr>
 			<th scope="row">사업명</th>

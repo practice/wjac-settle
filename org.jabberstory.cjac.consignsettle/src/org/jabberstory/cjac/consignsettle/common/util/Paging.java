@@ -35,6 +35,10 @@ public class Paging {
 	private int startPage;
 	private int endPage;
 	
+	public Paging(){
+		
+	}
+	
 	@SuppressWarnings("unchecked")
 	public Paging(List items, int totalCount, int currentPage, int pageSize, int sizePerPage){
 		this(items, totalCount, currentPage);

@@ -23,16 +23,22 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override
-	public List<User> getAllUsers() {
-		return userRepository.getAllUsers();
+	public List<User> getAvailableUsers() {
+		return userRepository.getAvailableUsers();
 	}
 	
 	@Override
 	public List<User> getUsersByUserGroup(String groupId)
 			throws DataAccessException {
 		
-		UserGroup userGroup = userRepository.getUserGroup(groupId);		
-		return userRepository.getUsers(userGroup);
+		return userRepository.getUsersByGroupId(groupId);
+	}
+	
+	@Override
+	public List<UserGroup> getGroupsByRole(String role)
+			throws DataAccessException {
+		
+		return userRepository.getGroupsByRole(role);
 	}
 
 	@Override
@@ -53,12 +59,6 @@ public class UserServiceImpl implements UserService {
 	public void updateUserGroup(String groupId, String name, String role) {
 		userRepository.updateUserGroup(groupId, name, role);
 	}
-	
-	@Override
-	public void updateUserGroupWithOrgans(String groupId, Set<Organ> organs) {
-		userRepository.updateUserGroupWithOrgans(groupId, organs);
-	}
-	
 	
 	public void updateUserGroupWithUsers(String groupId, Set<User> users) {
 		userRepository.updateUserGroupWithUsers(groupId, users);
