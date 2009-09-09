@@ -12,7 +12,7 @@ body {
 }
 
 * {
-	font-family:"µ¸¿ò";
+	font-family: Segoe UI, ë§‘ì€ ê³ ë”•, Tahoma;
 	font-size:11px;
 	color: #666666; 
 	line-height:18px;
@@ -287,7 +287,7 @@ tfoot td {
 
 /*button*/
 
-/*·Î±×ÀÎ&¾Æ¿ô ¹öÆ°*/
+/*ï¿½Î±ï¿½ï¿½ï¿½&ï¿½Æ¿ï¿½ ï¿½ï¿½Æ°*/
 .b_log {
 	background:url(img/button_blue.gif) no-repeat;
 	color:#FFFFFF;
@@ -299,7 +299,7 @@ tfoot td {
 	cursor:hand;
 }
 
-/*¾îµå¹Î ¹öÆ°*/
+/*ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ°*/
 .b_close {
 	background:url(img/button_purple.gif) no-repeat;
 	color:#FFFFFF;
@@ -311,7 +311,7 @@ tfoot td {
 	cursor:hand;
 }
 
-/*º¸±â ¹öÆ°*/
+/*ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ°*/
 .b_view {
 	background:url(img/btn_view.gif) no-repeat;
 	width:47px;
@@ -319,7 +319,7 @@ tfoot td {
 	cursor:hand;
 }
 
-/*°Ë»ö ¹öÆ°*/
+/*ï¿½Ë»ï¿½ ï¿½ï¿½Æ°*/
 .b_search {
 	background:url(img/button_search.gif) no-repeat;
 	width:55px;
@@ -344,16 +344,17 @@ tfoot td {
 	cursor:hand;
 }
 
-/*¹öÆ° ¹­À½*/
+/*ï¿½ï¿½Æ° ï¿½ï¿½ï¿½ï¿½*/
 .button {
 	margin:3px 0 5px 0;
 }
 
 .b_blue ul {
+	float: right;
 	margin:3px 0 0 0;
 }
 .b_blue ul li {
-	float:right;
+	// float:right;
 	background:url(img/but_off_right.gif) no-repeat top right;
 	margin:5px 0 0 2px;	
 }
@@ -402,7 +403,7 @@ tfoot td {
 .b_gray ul li a:hover {
 	color:#000;
 }
-/*¹öÆ° ¹­À½*/
+/*ï¿½ï¿½Æ° ï¿½ï¿½ï¿½ï¿½*/
 
 .b_blue01 {
 	background:#2e4c6e;
