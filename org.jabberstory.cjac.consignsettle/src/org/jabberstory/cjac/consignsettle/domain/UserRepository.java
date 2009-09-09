@@ -3,6 +3,7 @@ package org.jabberstory.cjac.consignsettle.domain;
 import java.util.List;
 import java.util.Set;
 
+import org.apache.log4j.Logger;
 import org.springframework.dao.DataAccessException;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
@@ -13,6 +14,8 @@ import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
  *
  */
 public class UserRepository extends HibernateDaoSupport {
+	
+	private Logger log = Logger.getLogger(this.getClass());
 
 	@SuppressWarnings("unchecked")
 	public List<UserGroup> getGroups(String groupQuery) {
@@ -22,7 +25,16 @@ public class UserRepository extends HibernateDaoSupport {
 				new Object[] {"%" + groupQuery + "%"});
 		return list;
 	}
-
+	
+	@SuppressWarnings("unchecked")
+	public List<UserGroup> getGroupsByRole(String role) {
+		String queryString = "from UserGroup g where g.role = :role";
+		List list = getHibernateTemplate().findByNamedParam(queryString, 
+				new String[] {"role"}, 
+				new Object[] {role});
+		return list;
+	}
+	
 	@SuppressWarnings("unchecked")
 	public List<User> getUsers(String userQuery) {
 		String queryString = "from User u where u.userId like :query or u.username like :query or u.email like :query";
@@ -33,10 +45,10 @@ public class UserRepository extends HibernateDaoSupport {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<User> getAllUsers()
+	public List<User> getAvailableUsers()
 			throws DataAccessException {		
 		
-		return getHibernateTemplate().findByNamedParam("from User as u", new String[]{}, new Object[]{});
+		return getHibernateTemplate().find("from User u where u.userGroup = null");
 		
 	}
 
@@ -51,13 +63,11 @@ public class UserRepository extends HibernateDaoSupport {
 	}	
 	
 	@SuppressWarnings("unchecked")
-	public List<User> getUsers(UserGroup group)
+	public List<User> getUsersByGroupId(String groupId)
 			throws DataAccessException {
 		
-		String queryString = "from User as u where :group in elements(u.userGroups)";
-		List list = getHibernateTemplate().findByNamedParam(queryString, 
-				new String[] {"group"}, 
-				new Object[] {group});
+		String queryString = "from User as u join u.userGroup g where g.groupId = :groupId";
+		List list = getHibernateTemplate().findByNamedParam(queryString,"groupId",groupId); 
 		return list;
 	}
 
@@ -70,11 +80,6 @@ public class UserRepository extends HibernateDaoSupport {
 		UserGroup group = getUserGroup(groupId);
 		group.setGroupName(groupName);
 		group.setRole(role);
-	}
-	
-	public void updateUserGroupWithOrgans(String groupId, Set<Organ> organs) {
-		UserGroup group = getUserGroup(groupId);
-		group.setOrgans(organs);
 	}
 	
 	public void updateUserGroupWithUsers(String groupId, Set<User> users) {

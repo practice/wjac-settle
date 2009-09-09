@@ -9,9 +9,6 @@
 		<id name="organId" column="ORGANID" type="string" length="32">
 			<generator class="uuid" />
 		</id>
-		<property name="organName" column="ORGANNAME" type="string" length="32" />
-		<property name="role" column="ROLE" type="string" length="1" /><!-- O:Owner, S:Subject -->
-		
 		<property name="businessName" column="BUSINESS_NAME" type="string" length="32" />
 		<property name="projectName" column="PROJECT_NAME" type="string" length="32" />
 		<property name="researchAgency" column="RESEARCH_AGENCY" type="string" length="32" />
@@ -59,12 +56,9 @@
 		<property name="nonApproval1" column="NON_APPROVAL1" type="text"/>
 		<property name="nonApproval2" column="NON_APPROVAL2" type="text"/>
 		
-		<many-to-one name="owner" class="Organ" foreign-key="FK_ORGAN_TO_PARENTORGAN" lazy="false"/>
-			
-		<set name="userGroups" table="ORGAN_USERGROUP" inverse="true">
-			<key column="ORGANID" />
-			<many-to-many class="UserGroup" column="GROUPID" foreign-key="FK_ORGAN_TO_USERGROUP" lazy="false"/>
-		</set>
+		<many-to-one name="ownerGroup" class="UserGroup" column="OWNER_GROUPID" foreign-key="FK_ORGAN_OWNERGROUP" lazy="false"/>
+        <many-to-one name="subjectGroup" class="UserGroup" column="SUBJECT_GROUPID" foreign-key="FK_ORGAN_SUBJECTGROUP" lazy="false"/>
+       
 	</class>
 
 </hibernate-mapping>

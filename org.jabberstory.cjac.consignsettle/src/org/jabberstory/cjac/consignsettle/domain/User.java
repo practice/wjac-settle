@@ -8,7 +8,7 @@ public class User {
 	private String username;
 	private String email;
 	private String password;
-	private Set<UserGroup> userGroups = new HashSet<UserGroup>();
+	private UserGroup userGroup;
 	
 	public User() {
 	}
@@ -23,12 +23,12 @@ public class User {
 		this.email = email;
 		this.password = password;
 	}
-	public User(String userId, String username, String email, String password, Set<UserGroup> userGroups) {
+	public User(String userId, String username, String email, String password, UserGroup userGroup) {
 		this.userId = userId;
 		this.username = username;
 		this.email = email;
 		this.password = password;
-		this.userGroups = userGroups;
+		this.userGroup = userGroup;
 	}
 
 	public String getUserId() {
@@ -63,12 +63,18 @@ public class User {
 		this.password = password;
 	}
 
-	public Set<UserGroup> getUserGroups() {
-		return userGroups;
+	public UserGroup getUserGroup() {
+		return userGroup;
 	}
 
-	public void setUserGroups(Set<UserGroup> userGroups) {
-		this.userGroups = userGroups;
+	public void setUserGroup(UserGroup userGroup) {
+		this.userGroup = userGroup;
+	}
+
+	@Override
+	public String toString() {
+		return "User [email=" + email + ", password=" + password + ", userId="
+				+ userId + ", username=" + username + "]";
 	}
 
 }

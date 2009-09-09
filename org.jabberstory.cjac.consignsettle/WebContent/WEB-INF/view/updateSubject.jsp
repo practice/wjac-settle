@@ -8,9 +8,34 @@
 <title>CJAC</title>
 <script language="javascript">
 <!--
+
+	function requiredFieldCheck(){
+	
+		var selObjOwnerGroup = document.form1.ownerGroupId;	
+		var IndexOwnerGroup = selObjOwnerGroup.selectedIndex;
+		var selObjSubjectGroup = document.form1.subjectGroupId;	
+		var IndexSubjectGroup = selObjSubjectGroup.selectedIndex;
+	
+		if(selObjOwnerGroup.options[IndexOwnerGroup].value == ""){
+			alert("전담기관을 선택해주세요.");
+			selObj.focus();			
+			return false;
+		}
+	
+		if(selObjSubjectGroup.options[IndexSubjectGroup].value == ""){
+			alert("주관기관을 선택해주세요.");
+			selObj.focus();			
+			return false;
+		}
+	
+		return true;
+	}
+
 	function saveSubject(){
-		document.form1.action = "${pageContext.request.contextPath}/subject/updateSubject";
-		document.form1.submit();
+		if(requiredFieldCheck()){
+			document.form1.action = "${pageContext.request.contextPath}/subject/updateSubject";
+			document.form1.submit();
+		}
 	}
 
 	function gotoList(){
@@ -42,21 +67,33 @@
 	<tbody>
 		<tr>
 			<th scope="row">전담기관</th>
-			<td class=""><select name="ownerId">
+			<td class=""><select name="ownerGroupId">
 							<option value="">선택</option>
-							<c:forEach items="${owners}" var="owner">
+							<c:forEach items="${ownerGroups}" var="ownerGroup">
 								<c:choose>		
-									<c:when test="${owner.organId == organ.owner.organId}">
-										<option value="${owner.organId }" selected>${owner.organName }</option>
+									<c:when test="${ownerGroup.groupId == organ.owner.groupId}">
+										<option value="${ownerGroup.groupId }" selected>${ownerGroup.groupName }</option>
 									</c:when>
 									<c:otherwise>
-										<option value="${owner.organId }">${owner.organName }</option>
+										<option value="${ownerGroup.groupId }">${ownerGroup.groupName }</option>
 									</c:otherwise>
 								</c:choose>								
 							</c:forEach>
 						</select></td>
 			<th scope="row">주관기관</th>
-			<td class=""><input type="text" name="organName" value="${organ.organName}" style="" title="주관기관"></td>
+			<td class=""><select name="subjectGroupId">
+							<option value="">선택</option>
+							<c:forEach items="${subjectGroups}" var="subjectGroup">
+								<c:choose>		
+									<c:when test="${subjectGroup.groupId == organ.subject.groupId}">
+										<option value="${subjectGroup.groupId }" selected>${subjectGroup.groupName }</option>
+									</c:when>
+									<c:otherwise>
+										<option value="${subjectGroup.groupId }">${subjectGroup.groupName }</option>
+									</c:otherwise>
+								</c:choose>								
+							</c:forEach>
+						</select><</td>
 		</tr>
 		<tr>
 			<th scope="row">사업명</th>

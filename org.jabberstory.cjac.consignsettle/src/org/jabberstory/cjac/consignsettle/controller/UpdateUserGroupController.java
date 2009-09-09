@@ -61,7 +61,7 @@ public class UpdateUserGroupController extends SimpleFormController {
 			HttpServletResponse response, Object command, BindException errors)
 			throws Exception {
 		CreateUserGroupCommand param = (CreateUserGroupCommand) command;
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name", "required");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "grouName", "required");
 		if (errors.hasErrors())
 			return showForm(request, response, errors);
 		userService.updateUserGroup(param.getGroupId(), param.getGroupName(), param.getRole());
