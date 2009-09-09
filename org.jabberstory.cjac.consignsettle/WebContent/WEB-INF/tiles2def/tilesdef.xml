@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
+<tiles-definitions>
+
+	<definition name="base_layout" template="/WEB-INF/view/template/layout.jsp">
+		<put-attribute name="jsfile" value="" />
+		<put-attribute name="header" value="/WEB-INF/view/template/header.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/view/template/footer.jsp" />
+		<put-attribute name="title" value="CJAC 위탁정산" />
+	</definition>
+
+	<definition name="login" template="/WEB-INF/view/login.jsp" />
+
+	<definition name="forum/list" extends="base_layout">
+		<put-attribute name="body" value="/WEB-INF/view/forum/list.jsp" />
+		<put-attribute name="jsfile" value="js/forum/list.js" />
+	</definition>
+
+	<definition name="forum/write" extends="base_layout">
+		<put-attribute name="body" value="/WEB-INF/view/forum/write.jsp" />
+	</definition>
+
+</tiles-definitions>
