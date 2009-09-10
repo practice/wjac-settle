@@ -50,7 +50,6 @@
         </ul>
       </div>
     </div>
-    hello
     <div id="table">
       <table width="100%" cellspacing="0">
         <thead>

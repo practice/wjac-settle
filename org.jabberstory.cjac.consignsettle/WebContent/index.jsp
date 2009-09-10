@@ -3,11 +3,14 @@
     	               "http://www.w3.org/TR/html4/loose.dtd">
 
 <html>
-  <head>
-    	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    	<title>GlassFish JSP Page</title>
-  </head>
-  <body>
-    <h1>Hello World!</h1>
-  </body>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>천지회계법인 위탁정산 시스템</title>
+<script>
+location.href="organ/subjectList";
+</script>
+</head>
+  
+<body>
+</body>
 </html> 
