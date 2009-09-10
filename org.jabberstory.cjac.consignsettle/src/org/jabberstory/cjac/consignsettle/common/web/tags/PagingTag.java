@@ -56,19 +56,19 @@ public class PagingTag extends RequestContextAwareTag {
 
 			out.println("<div class=\"paginate\">"); 
 			
-			out.println("<a href=\"#\" class=\"btn_ll\" onClick=\"" + getSearchScript(1) + "\"><img src=\"" + getImgStart() + "\" alt=\"" + getAltStart() + "\" width=\"11\" height=\"11\"></a>"); 
-			out.println("	<a href=\"#\" class=\"btn_l\" onClick=\"" + getSearchScript(pagingList.getPreviousPage()) + "\"><img src=\"" + getImgPrev() + "\" alt=\"" + getAltPrev() + "\" width=\"11\" height=\"11\"></a>");
+			out.println("<a href=\"#\" class=\"btn_ll\" onClick=\"" + getSearchScript(1) + "\"><img src=\"" + getImgStart() + "\" alt=\"" + getAltStart() + "\" align=\"absmiddle\"></a>"); 
+			out.println("<a href=\"#\" class=\"btn_l\" onClick=\"" + getSearchScript(pagingList.getPreviousPage()) + "\"><img src=\"" + getImgPrev() + "\" alt=\"" + getAltPrev() + "\" align=\"absmiddle\"></a>");
 
 			for (int pageNo = pagingList.getStartPage(); pageNo <= pagingList.getEndPage(); pageNo++) {				
 				if(pageNo == pagingList.getCurrentPage()){
 					out.println("<strong>" + pageNo + "</strong>");
 				}else{
-					out.println("<a href=\"#\" onClick=\"" + getSearchScript(pageNo) + "\">" + pageNo + "</a>");
+					out.println("|<a href=\"#\" onClick=\"" + getSearchScript(pageNo) + "\">" + pageNo + "</a>|");
 				}
 		    }
 			
-			out.println("	<a href=\"#\" class=\"btn_r\" onClick=\"" + getSearchScript(pagingList.getNextPage()) + "\"><img src=\"" + getImgNext() + "\" alt=\"" + getAltNext() + "\" width=\"11\" height=\"11\"></a>"); 
-			out.println("	<a href=\"#\" class=\"btn_rr\" onClick=\"" + getSearchScript(pagingList.getTotalPage()) + "\"><img src=\"" + getImgEnd() + "\" alt=\"" + getAltEnd() + "\" width=\"11\" height=\"11\"></a>");
+			out.println("<a href=\"#\" class=\"btn_r\" onClick=\"" + getSearchScript(pagingList.getNextPage()) + "\"><img src=\"" + getImgNext() + "\" alt=\"" + getAltNext() + "\" align=\"absmiddle\"></a>"); 
+			out.println("<a href=\"#\" class=\"btn_rr\" onClick=\"" + getSearchScript(pagingList.getTotalPage()) + "\"><img src=\"" + getImgEnd() + "\" alt=\"" + getAltEnd() + "\" align=\"absmiddle\"></a>");
 			
 			out.println("</div>");			
 			
@@ -115,7 +115,7 @@ public class PagingTag extends RequestContextAwareTag {
 	public String getImgStart() {
 		if(imgStart == null)
 		{
-			return this.getRequestContext().getContextPath() + "/images/board_pg_btn_ll.gif";
+			return this.getRequestContext().getContextPath() + "/img/page_first.gif";
 		}
 		return imgStart;
 		
@@ -140,7 +140,7 @@ public class PagingTag extends RequestContextAwareTag {
 	public String getImgPrev() {
 		if(imgPrev == null)
 		{
-			return this.getRequestContext().getContextPath() + "/images/board_pg_btn_l.gif";
+			return this.getRequestContext().getContextPath() + "/img/page_pre.gif";
 		}
 		return imgPrev;
 	}
@@ -164,7 +164,7 @@ public class PagingTag extends RequestContextAwareTag {
 	public String getImgNext() {
 		if(imgNext == null)
 		{
-			return this.getRequestContext().getContextPath() + "/images/board_pg_btn_r.gif";
+			return this.getRequestContext().getContextPath() + "/img/page_next.gif";
 		}
 		return imgNext;
 	}
@@ -188,7 +188,7 @@ public class PagingTag extends RequestContextAwareTag {
 	public String getImgEnd() {
 		if(imgEnd == null)
 		{
-			return this.getRequestContext().getContextPath() + "/images/board_pg_btn_rr.gif";
+			return this.getRequestContext().getContextPath() + "/img/page_end.gif";
 		}
 		return imgEnd;
 	}

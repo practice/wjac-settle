@@ -8,18 +8,18 @@
 <script type="text/javascript">
 <!--
 	function updateCostDetail(){
-		document.form1.action = "${pageContext.request.contextPath}/subject/updateCostDetail";
+		document.form1.action = "${pageContext.request.contextPath}/organ/updateCostDetail";
 		document.form1.submit();
 	}
 
 	function showSubject() {
-		document.form1.action = "${pageContext.request.contextPath}/subject/showSubject";
+		document.form1.action = "${pageContext.request.contextPath}/organ/showSubject";
 		document.form1.submit();
 	}
 
 	function deleteCostDetail() {
 		if(confirm("삭제하시겠습니까?")){
-			document.form1.action = "${pageContext.request.contextPath}/subject/deleteCostDetail";
+			document.form1.action = "${pageContext.request.contextPath}/organ/deleteCostDetail";
 			document.form1.submit();
 		}
 	}

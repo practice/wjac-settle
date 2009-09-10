@@ -10,7 +10,7 @@
 <!--
 	function doSearch(pageNo){
 		document.form1.pageNo.value = pageNo;
-		document.form1.action = "${pageContext.request.contextPath}/subject/subjectList";
+		document.form1.action = "${pageContext.request.contextPath}/organ/subjectList";
 		document.form1.submit();
 	}
 
@@ -21,7 +21,7 @@
 
 	function showSubject(organId){
 		document.form1.organId.value = organId;
-		document.form1.action = "${pageContext.request.contextPath}/subject/showSubject";
+		document.form1.action = "${pageContext.request.contextPath}/organ/showSubject";
 		document.form1.submit();
 	}
 

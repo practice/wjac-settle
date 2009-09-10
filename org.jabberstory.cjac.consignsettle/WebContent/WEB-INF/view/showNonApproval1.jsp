@@ -8,18 +8,18 @@
 <script type="text/javascript">
 <!--
 	function updateNonApproval1(){
-		document.form1.action = "${pageContext.request.contextPath}/subject/updateNonApproval1";
+		document.form1.action = "${pageContext.request.contextPath}/organ/updateNonApproval1";
 		document.form1.submit();
 	}
 
 	function showSubject() {
-		document.form1.action = "${pageContext.request.contextPath}/subject/showSubject";
+		document.form1.action = "${pageContext.request.contextPath}/organ/showSubject";
 		document.form1.submit();
 	}
 
 	function deleteNonApproval1() {
 		if(confirm("삭제하시겠습니까?")){
-			document.form1.action = "${pageContext.request.contextPath}/subject/deleteNonApproval1";
+			document.form1.action = "${pageContext.request.contextPath}/organ/deleteNonApproval1";
 			document.form1.submit();
 		}
 	}

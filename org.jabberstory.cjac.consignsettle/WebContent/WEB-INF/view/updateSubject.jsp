@@ -33,13 +33,13 @@
 
 	function saveSubject(){
 		if(requiredFieldCheck()){
-			document.form1.action = "${pageContext.request.contextPath}/subject/updateSubject";
+			document.form1.action = "${pageContext.request.contextPath}/organ/updateSubject";
 			document.form1.submit();
 		}
 	}
 
 	function gotoList(){
-		document.form1.action = "${pageContext.request.contextPath}/subject/showSubject";
+		document.form1.action = "${pageContext.request.contextPath}/organ/showSubject";
 		document.form1.submit();
 	}
 
@@ -71,7 +71,7 @@
 							<option value="">선택</option>
 							<c:forEach items="${ownerGroups}" var="ownerGroup">
 								<c:choose>		
-									<c:when test="${ownerGroup.groupId == organ.owner.groupId}">
+									<c:when test="${ownerGroup.groupId == organ.ownerGroup.groupId}">
 										<option value="${ownerGroup.groupId }" selected>${ownerGroup.groupName }</option>
 									</c:when>
 									<c:otherwise>
@@ -85,7 +85,7 @@
 							<option value="">선택</option>
 							<c:forEach items="${subjectGroups}" var="subjectGroup">
 								<c:choose>		
-									<c:when test="${subjectGroup.groupId == organ.subject.groupId}">
+									<c:when test="${subjectGroup.groupId == organ.subjectGroup.groupId}">
 										<option value="${subjectGroup.groupId }" selected>${subjectGroup.groupName }</option>
 									</c:when>
 									<c:otherwise>

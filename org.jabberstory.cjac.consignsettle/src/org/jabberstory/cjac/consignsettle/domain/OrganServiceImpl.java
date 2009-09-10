@@ -56,9 +56,6 @@ public class OrganServiceImpl implements OrganService{
 	public Paging getOrgansWithPaging(String userId,
 			int currentPage, int pageSize, String sortColumn)
 			throws DataAccessException {
-		log.info("############################################################");
-		log.info(userId);
-		log.info("############################################################");
 		String userRole = "";
 		User user = userRepository.getUser(userId);
 		

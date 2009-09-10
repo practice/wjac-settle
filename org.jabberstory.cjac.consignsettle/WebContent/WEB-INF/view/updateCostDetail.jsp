@@ -13,12 +13,12 @@
 	}
 
 	function saveSubject(){
-		document.form1.action = "${pageContext.request.contextPath}/subject/updateCostDetail";
+		document.form1.action = "${pageContext.request.contextPath}/organ/updateCostDetail";
 		document.form1.submit();
 	}
 	
 	function showCostDetail(){
-		document.form1.action = "${pageContext.request.contextPath}/subject/showCostDetail";
+		document.form1.action = "${pageContext.request.contextPath}/organ/showCostDetail";
 		document.form1.submit();
 	}
 //-->
