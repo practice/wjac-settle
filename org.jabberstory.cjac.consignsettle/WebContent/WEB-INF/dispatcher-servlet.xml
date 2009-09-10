@@ -4,14 +4,21 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans 
 			http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
-
+	
 	<!-- ############################################################## -->
 	<!-- Request Mapping -->
 	<!-- ############################################################## -->
+	<bean id="commonVariableInterceptor" class="org.jabberstory.cjac.consignsettle.common.util.CommonVariableInterceptorAdaptor" />
+	
 	<bean id="handlerMapping"
 		class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping">
 	</bean>
 	<bean id="simpleMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="interceptors">
+			<list>
+				<ref bean="commonVariableInterceptor" />
+			</list>
+		</property>
 		<property name="alwaysUseFullPath" value="true"></property>
 		<property name="mappings">
 			<props>
