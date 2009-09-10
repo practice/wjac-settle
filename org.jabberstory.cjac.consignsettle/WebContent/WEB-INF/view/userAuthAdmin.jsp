@@ -95,28 +95,27 @@
 </script>
 </head>
 <body>
-<!-- Start Content Title -->
-<div>
-	<H3>사용자 권한 관리</H3>
-</div>
-<!-- End Content Title -->
 <form name="form1" method="post">
-<table>
-	<caption>
-	</caption>
-	<colgroup>
-		<col width="27%">
-		<col width="10%">
-		<col width="27%">
-		<col width="10%">
-		<col width="26%">
-	</colgroup>
-	<thead>
-	</thead>
-	<tbody>
-		<tr>
-			<td>
-				사용자 그룹<p/>
+<div id="container">
+  <div id="content">
+    <div id="content_top">
+      <p id="title">권한관리 </p>
+      <p id="path"> PATH : Admin > 권한관리> <span id="path_b">권한관리조회/수정</span></p>
+    </div>
+    <div class="button">
+      <div class="b_blue">
+        <ul>
+          <li><a href="#">사용자 관리</a></li>
+		  <li><a href="#">주관기관 관리</a></li>
+          <li><a href="#">전담기관 관리</a></li>
+        </ul>
+      </div>
+    </div>
+    <br />
+	<div id="group">
+		<ul>
+			<li>						
+				사용자그룹<p/>
 				<select name="selectedGroupId" size="10" style="width:200px;" onChange="loadData();">
 					<c:forEach items="${userGroups}" var="userGroup">
 						<c:choose>		
@@ -129,35 +128,44 @@
 						</c:choose>						
 					</c:forEach>
 				</select>
-			</td>
-			<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-			<td>
+			
+			<li>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			
+			<li>
 				가용 사용자 목록<p/>
 				<select id="availableUserId" name="availableUserId" multiple size="10" style="width:200px;" onDblClick="moveElement(this, selectedUserId);">
 					<c:forEach items="${availableUsers}" var="availableUser">		
 						<option value="${availableUser.userId }">${availableUser.username }[소속]</option>
 					</c:forEach>
 				</select>
-			</td>
-			<td>
-				<input type="button" value="선택" onClick="moveElement(availableUserId, selectedUserId);"/><p/>
+			<li>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<li>
+				<br/><br/><br/>
+				<input type="button" value="선택" onClick="moveElement(availableUserId, selectedUserId);"/><br/><br/>
 				<input type="button" value="제거" onClick="moveElement(selectedUserId, availableUserId);"/>
-			</td>
-			<td>
+			<li>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	
+			<li>									
 				선택한 사용자 목록<p/>
 				<select id="selectedUserId" name="selectedUserId" multiple size="10" style="width:200px" onDblClick="moveElement(this, availableUserId);">
 					<c:forEach items="${selectedUsers}" var="selectedUser">		
 						<option value="${selectedUser.userId }">${selectedUser.username }[소속]</option>
 					</c:forEach>
-				</select>
-			</td>
-		</tr>	
-	</tbody>
-</table>
+				</select>							
+		</ul>
+	</div>
+	<br />
+	<div class="button">
+        <div class="b_blue">
+          <ul>
+            <li><a href="#" onClick="saveData();return false;">저장</a></li>
+          </ul>
+        </div>
+    </div>
+  </div>
+</div>	
 </form>
-<div>
-	<!-- a href="#" onClick="loadData();return false;">조회</a-->
-	<a href="#" onClick="saveData();return false;">저장</a>
-</div>
 </body>
 </html>
