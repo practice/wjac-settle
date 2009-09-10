@@ -23,8 +23,7 @@
 		<intercept-url pattern="/user/**" access="ROLE_USER" />
 		<intercept-url pattern="/forum/**" access="ROLE_USER" />
 		<intercept-url pattern="/admin/**" access="ROLE_ADMIN" />
-		<intercept-url pattern="/owner/**" access="ROLE_USER" />
-		<intercept-url pattern="/subject/**" access="ROLE_USER" />
+		<intercept-url pattern="/organ/**" access="ROLE_USER" />
 	</http>
 	<authentication-provider>
 		<jdbc-user-service data-source-ref="dataSource"
