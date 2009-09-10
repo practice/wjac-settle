@@ -13,12 +13,12 @@
 	}
 
 	function saveNonApproval1(){
-		document.form1.action = "${pageContext.request.contextPath}/subject/updateNonApproval1";
+		document.form1.action = "${pageContext.request.contextPath}/organ/updateNonApproval1";
 		document.form1.submit();
 	}
 	
 	function showNonApproval1(){
-		document.form1.action = "${pageContext.request.contextPath}/subject/showNonApproval1";
+		document.form1.action = "${pageContext.request.contextPath}/organ/showNonApproval1";
 		document.form1.submit();
 	}
 //-->

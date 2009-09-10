@@ -8,33 +8,33 @@
 <script language="JavaScript">
 <!--
 	function gotoList(){
-		document.form1.action = "${pageContext.request.contextPath}/subject/subjectList";
+		document.form1.action = "${pageContext.request.contextPath}/organ/subjectList";
 		document.form1.submit();
 	}
 
 	function editSubject() {
-		document.form1.action = "${pageContext.request.contextPath}/subject/updateSubject";
+		document.form1.action = "${pageContext.request.contextPath}/organ/updateSubject";
 		document.form1.submit();
 	}
 
 	function showCostDetail() {
-		document.form1.action = "${pageContext.request.contextPath}/subject/showCostDetail";
+		document.form1.action = "${pageContext.request.contextPath}/organ/showCostDetail";
 		document.form1.submit();
 	}
 
 	function showNonApproval1() {
-		document.form1.action = "${pageContext.request.contextPath}/subject/showNonApproval1";
+		document.form1.action = "${pageContext.request.contextPath}/organ/showNonApproval1";
 		document.form1.submit();
 	}
 
 	function showNonApproval2() {
-		document.form1.action = "${pageContext.request.contextPath}/subject/showNonApproval2";
+		document.form1.action = "${pageContext.request.contextPath}/organ/showNonApproval2";
 		document.form1.submit();
 	}
 
 	function deleteSubject() {
 		if(confirm("삭제하시겠습니까?")){
-			document.form1.action = "${pageContext.request.contextPath}/subject/deleteSubject";
+			document.form1.action = "${pageContext.request.contextPath}/organ/deleteSubject";
 			document.form1.submit();
 		}
 	}
@@ -62,9 +62,9 @@
 	<tbody>
 		<tr>
 			<th scope="row">전담기관</th>
-			<td class="">${organ.owner.groupName}</td>
+			<td class="">${organ.ownerGroup.groupName}</td>
 			<th scope="row">주관기관</th>
-			<td class="">${organ.subject.groupName}</td>
+			<td class="">${organ.subjectGroup.groupName}</td>
 		</tr>
 		<tr>
 			<th scope="row">사업명</th>
