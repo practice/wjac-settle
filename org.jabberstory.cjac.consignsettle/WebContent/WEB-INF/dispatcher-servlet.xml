@@ -23,7 +23,7 @@
 				<prop key="/user/createUser">createUserController</prop>
 				<prop key="/user/showUser">showUserController</prop>
 				<prop key="/organ/*">organMultiActionController</prop>
-				<prop key="/login">urlController</prop>
+				<prop key="/login">loginController</prop>
 				<prop key="/forum/*/list">forumListController</prop>
 				<prop key="/forum/*/write">writeController</prop>
 				<prop key="/forum/*/updatePost">updatePostController</prop>
@@ -150,6 +150,8 @@
 	<!-- ############################################################## -->
 	<!--  General purpose beans -->
 	<!-- ############################################################## -->
+	<bean id="loginController" class="org.jabberstory.cjac.consignsettle.controller.LoginController" 
+		p:userService-ref="userService" />
 	<bean id="urlController" class="org.springframework.web.servlet.mvc.UrlFilenameViewController" />
 
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver"
