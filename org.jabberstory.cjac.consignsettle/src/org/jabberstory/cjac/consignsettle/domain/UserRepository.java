@@ -1,5 +1,6 @@
 package org.jabberstory.cjac.consignsettle.domain;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -48,7 +49,9 @@ public class UserRepository extends HibernateDaoSupport {
 	public List<User> getAvailableUsers()
 			throws DataAccessException {		
 		
-		return getHibernateTemplate().find("from User u where u.userGroup = null");
+		List list = getHibernateTemplate().find("from User u where u.userGroup = null");
+		// 해당 사용자 그룹에 할당한 사용자 목록		
+		return list;
 		
 	}
 
@@ -66,8 +69,9 @@ public class UserRepository extends HibernateDaoSupport {
 	public List<User> getUsersByGroupId(String groupId)
 			throws DataAccessException {
 		
-		String queryString = "from User as u join u.userGroup g where g.groupId = :groupId";
-		List list = getHibernateTemplate().findByNamedParam(queryString,"groupId",groupId); 
+		String queryString = "from User as u where u.userGroup.groupId = :groupId ";
+		List list = getHibernateTemplate().findByNamedParam(queryString, "groupId", groupId); 
+		
 		return list;
 	}
 
@@ -83,8 +87,9 @@ public class UserRepository extends HibernateDaoSupport {
 	}
 	
 	public void updateUserGroupWithUsers(String groupId, Set<User> users) {
-		UserGroup group = getUserGroup(groupId);
-		group.setUsers(users);
+		UserGroup userGroup = getUserGroup(groupId);
+		userGroup.setUsers(users);
+		
 	}
 
 	public void removeUserGroup(String groupId) {
