@@ -5,14 +5,14 @@
 	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
 	
 <hibernate-mapping package="org.jabberstory.cjac.consignsettle.domain" default-access="field">
-	<class name="User" table="USER" lazy="true">
+	<class name="User" table="USER">
 		<id name="userId" column="USERID" type="string" length="32">
 			<generator class="assigned" />
 		</id>
 		<property name="username" column="USERNAME" type="string" length="32" />
 		<property name="email" column="EMAIL" type="string" length="64" />
 		<property name="password" column="PASSWORD" type="string" length="64" />
-		<many-to-one name="userGroup" class="UserGroup" column="GROUPID" foreign-key="FK_USER_GROUP" lazy="false"/>
+		<many-to-one name="userGroup" class="UserGroup" column="GROUPID" foreign-key="FK_USER_GROUP"/>
 	</class>
 	
 </hibernate-mapping>

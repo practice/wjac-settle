@@ -9,7 +9,7 @@ public interface UserService {
 
 	public List<User> getAvailableUsers();
 	
-	public List<User> getUsersByUserGroup(String groupId);
+	public List<User> getUsersByGroupId(String groupId);
 	
 	public List<UserGroup> getGroups(String groupQuery);
 	
