@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+	
+<hibernate-mapping package="org.jabberstory.cjac.consignsettle.domain" default-access="field">
+	<class name="ZipCode" table="ZIPCODE">
+		<id name="zipcodeid" column="ZIPCODEID">
+			<generator class="identity" />
+		</id>
+		<property name="zipcode" column="ZIPCODE" type="string" length="6" />
+		<property name="serial" column="SERIAL" type="string" length="3" />
+		<property name="addr01" column="ADDR01" type="string" length="30" />
+		<property name="addr02" column="ADDR02" type="string" length="30" />
+		<property name="addr03" column="ADDR03" type="string" length="30" />
+		<property name="addr04" column="ADDR04" type="string" length="30" />
+		<property name="addr05" column="ADDR05" type="string" length="30" />
+		<property name="bungi" column="BUNGI" type="string" length="30" />
+		<property name="bungifrmain" column="BUNGIFRMAIN" type="string" length="30" />
+		<property name="bungifrsub" column="BUNGIFRSUB" type="string" length="30" />
+		<property name="bungitomain" column="BUNGITOMAIN" type="string" length="30" />
+		<property name="bungitosub" column="BUNGITOSUB" type="string" length="30" />
+  		<property name="building" column="BUILDING" type="string" length="30" />
+  		<property name="dongfr" column="DONGFR" type="string" length="30" />
+  		<property name="dongto" column="DONGTO" type="string" length="30" />
+		<property name="datechange" column="DATECHANGE" type="string" length="8" />
+		<property name="addr" column="ADDR" type="string" length="100" />
+	</class>
+
+</hibernate-mapping>

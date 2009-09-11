@@ -43,6 +43,11 @@
 	p:organRepository-ref="organRepository"
 	p:userRepository-ref="userRepository" />	
 	
+<bean id="zipCodeRepository" class="org.jabberstory.cjac.consignsettle.domain.ZipCodeRepository" 
+	p:hibernateTemplate-ref="hibernateTemplate" />
+<bean id="zipCodeService" class="org.jabberstory.cjac.consignsettle.domain.ZipCodeServiceImpl" 
+	p:zipCodeRepository-ref="zipCodeRepository" />	
+	
 <bean id="forumService" class="org.jabberstory.cjac.forum.domain.ForumServiceImpl"
 	p:forumRepository-ref="forumRepository"	/>
 <bean id="forumRepository" class="org.jabberstory.cjac.forum.domain.ForumRepository"

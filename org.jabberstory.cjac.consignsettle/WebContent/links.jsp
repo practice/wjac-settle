@@ -13,6 +13,7 @@ Links to application logic.
 	<li><a href="organ/subjectList">Subject Admin</a></li>
 	<li><a href="organ/settlementList">정산 진행 현황</a></li>	
 	<li><a href="auth/showUserAuthAdmin">사용자 권한 관리</a></li>		
+	<li><a href="organ/zipCodeList">우편번호검색</a></li>
 </ul>
 </body>
 </html>
