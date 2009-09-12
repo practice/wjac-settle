@@ -8,9 +8,9 @@
   <div id="top_menu"><a href='#'>공지사항</a> | <a href='#'>Q&amp;A</a> | <a href='#'>회계세무 자료실</a></div>
   <div id="gnb">
     <ul>
-      <li id="menu01"><a href='#'>주관기관 현황</a></li>
+      <li id="menu01"><a href='#' onClick="location.href='${pageContext.request.contextPath}/organ/subjectList';return false;">주관기관 현황</a></li>
       <li id="division">|</li>
-	  <li id="menu02"><a href='#'>정산진행 현황</a></li>
+	  <li id="menu02"><a href='#' onClick="location.href='${pageContext.request.contextPath}/organ/settlementList';return false;">정산진행 현황</a></li>
       <li id="division">|</li>
     </ul>
   </div>
@@ -21,7 +21,7 @@
         <input name="logout" type="button" value="Log-out" class="b_log"/>
       </li>
       <li>
-        <input name="close" type="button" value="Admin"  class="b_close"/>
+        <input name="close" type="button" value="Admin"  class="b_close" onClick="location.href='${pageContext.request.contextPath}/admin/showUserAuthAdmin';return false;"/>
       </li>
     </ul>
   </div>

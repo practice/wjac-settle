@@ -19,20 +19,26 @@
 		<form-login login-page="/login" authentication-failure-url="/login?error=true" />
 		<logout />
 		<anonymous username="anonymous" />
-		<intercept-url pattern="/login" access="ROLE_USER,ROLE_ANONYMOUS" />
-		<intercept-url pattern="/user/**" access="ROLE_USER" />
-		<intercept-url pattern="/forum/**" access="ROLE_USER" />
+		<intercept-url pattern="/login" access="ROLE_USER,ROLE_ANONYMOUS,ROLE_ADMIN" />
+		<intercept-url pattern="/user/**" access="ROLE_USER,ROLE_ADMIN" />
+		<intercept-url pattern="/forum/**" access="ROLE_USER,ROLE_ADMIN" />
 		<intercept-url pattern="/admin/**" access="ROLE_ADMIN" />
-		<intercept-url pattern="/organ/**" access="ROLE_USER" />
+		<intercept-url pattern="/organ/**" access="ROLE_USER,ROLE_ADMIN" />
 	</http>
 	<authentication-provider>
 		<jdbc-user-service data-source-ref="dataSource"
 			users-by-username-query="SELECT userId, password, 'true' as enabled
 									FROM USER
 									WHERE userId = ?"
-			authorities-by-username-query="SELECT userId, 'ROLE_USER' as authorities
-									FROM USER
-									WHERE userId = ?" />
+			authorities-by-username-query="select a.userid,
+											      (case b.role
+											        when 'A' then 'ROLE_ADMIN'
+											        when 'C' then 'ROLE_ADMIN'
+											        else 'ROLE_USER'
+											      end) as authorities
+											from user a left outer join usergroup b
+											  on a.groupid = b.groupid
+											where userid = ?" />
 	</authentication-provider>
 
 </beans:beans>

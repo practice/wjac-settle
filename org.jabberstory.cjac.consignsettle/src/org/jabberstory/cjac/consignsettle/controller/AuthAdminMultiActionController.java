@@ -44,7 +44,7 @@ public class AuthAdminMultiActionController extends MultiActionController {
 		// 가용 유저 목록: Any 그룹에 속하지 않은 유저 목록
 		List<User> availableUsers = userService.getAvailableUsers();
 		
-		ModelAndView mv = new ModelAndView("auth/userAuthAdmin");
+		ModelAndView mv = new ModelAndView("admin/userAuthAdmin");
 		mv.addObject("userGroups", userGroups);
 		mv.addObject("availableUsers", availableUsers);
 		
@@ -71,7 +71,7 @@ public class AuthAdminMultiActionController extends MultiActionController {
 		// 가용 유저  목록
 		List<User> availableUsers = userService.getAvailableUsers();
 		
-		ModelAndView mv = new ModelAndView("auth/userAuthAdmin");
+		ModelAndView mv = new ModelAndView("admin/userAuthAdmin");
 		mv.addObject("userGroups", userGroups);
 
 		
