@@ -119,7 +119,7 @@ public class OrganMultiActionController extends MultiActionController {
 		
 		organService.updateOrgan(organCommand);
 
-		return new ModelAndView("redirect:/organ/subjectList");
+		return new ModelAndView("redirect:/organ/showSubject?organId=" + organId);
 
 	}
 	
