@@ -38,7 +38,7 @@
 				<prop key="/forum/*/removePost">removePostController</prop>
 				<prop key="/forum/*/showpost">showPostController</prop>
 				<prop key="/forum/*/download">downloadController</prop>
-				<prop key="/auth/*">authAdminMultiActionController</prop>
+				<prop key="/admin/*">authAdminMultiActionController</prop>
 			</props>
 		</property>
 	</bean>

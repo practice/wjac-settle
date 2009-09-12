@@ -77,7 +77,7 @@
 			elms.focus();	
 		}				
 
-		document.form1.action = "${pageContext.request.contextPath}/auth/updateUserAuthAdmin";
+		document.form1.action = "${pageContext.request.contextPath}/admin/updateUserAuthAdmin";
 		document.form1.submit();
 	}
 
@@ -87,7 +87,7 @@
 			alert("사용자그룹을 선택하세요.");	
 			return;				
 		}
-		document.form1.action = "${pageContext.request.contextPath}/auth/showUserAuthAdmin";
+		document.form1.action = "${pageContext.request.contextPath}/admin/showUserAuthAdmin";
 		document.form1.submit();
 	}
 
@@ -100,71 +100,92 @@
   <div id="content">
     <div id="content_top">
       <p id="title">권한관리 </p>
-      <p id="path"> PATH : Admin > 권한관리> <span id="path_b">권한관리조회/수정</span></p>
+      <p id="path"> PATH : Admin &#62; <span id="path_b">권한관리</span></p>
     </div>
     <div class="button">
       <div class="b_blue">
-        <ul>
-          <li><a href="#">사용자 관리</a></li>
-		  <li><a href="#">주관기관 관리</a></li>
-          <li><a href="#">전담기관 관리</a></li>
-        </ul>
+        <ul>          
+        	<li><a href="#" onClick="location.href='${pageContext.request.contextPath}/admin/showUserAuthAdmin';return false;">권한관리</a></li>
+			<li><a href="#">주관기관관리</a></li>
+	        <li><a href="#">전담기관관리</a></li>          
+	        <li><a href="#">사용자관리</a></li>	        
+  		</ul>
       </div>
     </div>
     <br />
-	<div id="group">
-		<ul>
-			<li>						
-				사용자그룹<p/>
-				<select name="selectedGroupId" size="10" style="width:200px;" onChange="loadData();">
-					<c:forEach items="${userGroups}" var="userGroup">
-						<c:choose>		
-							<c:when test="${userGroup.groupId == selectedGroupId}">
-								<option value="${userGroup.groupId }" selected>${userGroup.groupName }[${userGroup.role }]</option>
-							</c:when>
-							<c:otherwise>
-								<option value="${userGroup.groupId }">${userGroup.groupName }[${userGroup.role }]</option>
-							</c:otherwise>
-						</c:choose>						
-					</c:forEach>
-				</select>
-			
-			<li>
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			
-			<li>
-				가용 사용자 목록<p/>
-				<select id="availableUserId" name="availableUserId" multiple size="10" style="width:200px;" onDblClick="moveElement(this, selectedUserId);">
-					<c:forEach items="${availableUsers}" var="availableUser">		
-						<option value="${availableUser.userId }">${availableUser.username }[소속]</option>
-					</c:forEach>
-				</select>
-			<li>
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<li>
-				<br/><br/><br/>
-				<input type="button" value="선택" onClick="moveElement(availableUserId, selectedUserId);"/><br/><br/>
-				<input type="button" value="제거" onClick="moveElement(selectedUserId, availableUserId);"/>
-			<li>
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	
-			<li>									
-				선택한 사용자 목록<p/>
-				<select id="selectedUserId" name="selectedUserId" multiple size="10" style="width:200px" onDblClick="moveElement(this, availableUserId);">
-					<c:forEach items="${selectedUsers}" var="selectedUser">		
-						<option value="${selectedUser.userId }">${selectedUser.username }[소속]</option>
-					</c:forEach>
-				</select>							
-		</ul>
-	</div>
-	<br />
+	<div id="table">
+		<table width="100%" border="0" cellspacing="0">
+			<tbody>
+				<tr>
+					<td>			
+						<ul>
+							<li>
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							</li>
+							<li>
+								사용자그룹<p/>
+								<select name="selectedGroupId" size="20" style="width:200px;" onChange="loadData();">
+									<c:forEach items="${userGroups}" var="userGroup">
+										<c:choose>		
+											<c:when test="${userGroup.groupId == selectedGroupId}">
+												<option value="${userGroup.groupId }" selected>${userGroup.groupName }[${userGroup.role }]</option>
+											</c:when>
+											<c:otherwise>
+												<option value="${userGroup.groupId }">${userGroup.groupName }[${userGroup.role }]</option>
+											</c:otherwise>
+										</c:choose>						
+									</c:forEach>
+								</select>
+							</li>
+							<li>
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							</li>
+							<li>
+								가용 사용자 목록<p/>
+								<select id="availableUserId" name="availableUserId" multiple size="20" style="width:200px;" onDblClick="moveElement(this, selectedUserId);">
+									<c:forEach items="${availableUsers}" var="availableUser">		
+										<option value="${availableUser.userId }">${availableUser.username }</option>
+									</c:forEach>
+								</select>
+							</li>	
+							<li>
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							</li>
+							<li>
+								<br/><br/><br/><br/><br/>
+								<input type="button" value="선택" onClick="moveElement(availableUserId, selectedUserId);"/><br/><br/>
+								<input type="button" value="제거" onClick="moveElement(selectedUserId, availableUserId);"/>
+							</li>
+							<li>
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	
+							</li>
+							<li>			
+								소속 사용자 목록<p/>
+								<select id="selectedUserId" name="selectedUserId" multiple size="20" style="width:200px" onDblClick="moveElement(this, availableUserId);">
+									<c:forEach items="${selectedUsers}" var="selectedUser">		
+										<option value="${selectedUser.userId }">${selectedUser.username }</option>
+									</c:forEach>
+								</select>
+							</li>					
+						</ul>		
+					</td>
+				</tr>
+			</tbody>	
+		</table>
+	</div>					
 	<div class="button">
-        <div class="b_blue">
-          <ul>
-            <li><a href="#" onClick="saveData();return false;">저장</a></li>
-          </ul>
-        </div>
-    </div>
-  </div>
+		<ul>
+			<li>
+		        <div class="b_blue">
+		          <ul>
+		            <li><a href="#" onClick="saveData();return false;">저장</a></li>
+		          </ul>
+		        </div>
+		    </li>
+		</ul>
+   </div>
+ </div>
 </div>	
 </form>
 </body>
