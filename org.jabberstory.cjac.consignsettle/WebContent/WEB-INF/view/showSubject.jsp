@@ -5,7 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>CJAC</title>
-<script language="JavaScript">
+<script type="text/javascript">
 <!--
 	function gotoList(){
 		document.form1.action = "${pageContext.request.contextPath}/organ/subjectList";
@@ -38,191 +38,183 @@
 			document.form1.submit();
 		}
 	}
+		
 //-->
 </script>
 </head>
 <body>
-<!-- Start Content Title -->
-<div>
-	<H3>주관 기관 현황</H3>
-</div>
-<!-- End Content Title -->
 <form name="form1" method="post">
 <input type="hidden" name="organId" value="${organ.organId}">
-<table border="1" cellspacing="0" cellpadding="0" class="">
-	<caption class="">
-		사업정보 입력
-	</caption>
-	<colgroup>
-	<col width="15%">
-	<col width="35%">
-	<col width="15%">
-	<col width="35%">
-	</colgroup>
-	<tbody>
-		<tr>
-			<th scope="row">전담기관</th>
-			<td class="">${organ.ownerGroup.groupName}</td>
-			<th scope="row">주관기관</th>
-			<td class="">${organ.subjectGroup.groupName}</td>
-		</tr>
-		<tr>
-			<th scope="row">사업명</th>
-			<td class="">${organ.businessName}</td>
-			<th scope="row">과제명</th>
-			<td class="">${organ.projectName}</td>
-		</tr>
-		<tr>
-			<th scope="row">연구기관명</th>
-			<td class="">${organ.researchAgency}</td>
-			<th scope="row">연구책임자</th>
-			<td class="">${organ.researchResponsiblePerson}</td>
-		</tr>
-		<tr>
-			<th scope="row">협약기관 시작일</th>
-			<td class="">${organ.contractStartDate}</td>
-			<th scope="row">협약기관 종료일</th>
-			<td class="">${organ.contractEndDate}</td>
-		</tr>
-	</tbody>
-</table>
-<table border="1" cellspacing="0" cellpadding="0" class="">
-	<caption class="">
-		사업비 정보
-	</caption>
-	<colgroup>
-	<col width="15%">
-	<col width="35%">
-	<col width="15%">
-	<col width="35%">
-	</colgroup>
-	<tbody>
-		<tr>
-			<th scope="row">정부출현금</th>
-			<td class="">${organ.govContributeAmount}</td>
-			<th scope="row">민감부담금</th>
-			<td class="">${organ.nonGovContributeAmount}</td>
-		</tr>
-		<tr>
-			<th scope="row">현물</th>
-			<td class="">${organ.goodsAmount}</td>
-			<th scope="row">총현금</th>
-			<td class="">${organ.totalCashAmount}</td>
-		</tr>
-		<tr>
-			<th scope="row">정부지분</th>
-			<td class="">${organ.govInterests}</td>
-			<th scope="row">위탁정산 수수료</th>
-			<td class="">${organ.consignSettlementCommission}</td>
-		</tr>
-</table>
-<table border="1" cellspacing="0" cellpadding="0" class="">
-	<caption class="">
-		일정 정보
-	</caption>
-	<colgroup>
-	<col width="15%">
-	<col width="35%">
-	<col width="15%">
-	<col width="35%">
-	</colgroup>
-	<tbody>
-		<tr>
-			<th scope="row">사용실적 제출일</th>
-			<td class="">${organ.useResultDate}</td>
-			<th scope="row">이의 신청 접수일</th>
-			<td class="">${organ.formalObjectAcceptanceDate}</td>
-		</tr>
-		<tr>
-			<th scope="row">이의신청 결과통보일</th>
-			<td class="">${organ.formalObjectResultDate}</td>
-			<th scope="row">정산결과 보고일</th>
-			<td class="">${organ.consignSettlementResultDate}</td>
-		</tr>
-</table>
-<table border="1" cellspacing="0" cellpadding="0" class="">
-	<caption class="">
-		주관기관 담당자 정보
-	</caption>
-	<colgroup>
-	<col width="15%">
-	<col width="35%">
-	<col width="15%">
-	<col width="35%">
-	</colgroup>
-	<tbody>
-		<tr>
-			<th scope="row">주관기관담당자</th>
-			<td class="">${organ.organResponsiblePerson}</td>
-			<th scope="row">정산기관담당자</th>
-			<td class="">${organ.consignSettlementPerson}</td>
-		</tr>
-		<tr>
-			<th scope="row">연락처</th>
-			<td class="">
-				${organ.organResponsiblePhone1}-${organ.organResponsiblePhone2}-${organ.organResponsiblePhone3}
-			</td>
-			<th scope="row">연락처</th>
-			<td class="">
-				${organ.consignSettlementPhone1}-${organ.consignSettlementPhone2}-${organ.consignSettlementPhone3}
-			</td>
-		</tr>
-		<tr>
-			<th scope="row">주소</th>
-			<td class="">
-				${organ.organResponsiblePostNumber1}-${organ.organResponsiblePostNumber2}
-				${organ.organResponsibleAddress}
-			</td>
-			<th scope="row">주소</th>
-			<td class="">
-				${organ.consignSettlementPostNumber1}-${organ.consignSettlementPostNumber2}
-				${organ.consignSettlementAddress}
-			</td>
-		</tr>
-		<tr>
-			<th scope="row">E-mail</th>
-			<td class="">${organ.organResponsibleEmail}</td>
-			<th scope="row">E-mail</th>
-			<td class="">${organ.consignSettlementEmail}</td>
-		</tr>
-</table>
-<table border="1" cellspacing="0" cellpadding="0" class="">
-	<caption class="">
-		정산결과 정보
-	</caption>
-	<colgroup>
-	<col width="15%">
-	<col width="35%">
-	<col width="15%">
-	<col width="35%">
-	</colgroup>
-	<tbody>
-		<tr>
-			<th scope="row">사용잔액</th>
-			<td class="">${organ.currentAccount}</td>
-			<th scope="row">발생이자</th>
-			<td class="">${organ.currentInterest}</td>
-		</tr>
-		<tr>
-			<th scope="row">부적정금액</th>
-			<td class="">${organ.currentNonPropriety}</td>
-			<th scope="row">소계</th>
-			<td class="">${organ.currentSubTotal}</td>
-		</tr>
-		<tr>
-			<th scope="row">환수대상액</th>
-			<td colspan="3" class="">${organ.currentRedemtion}</td>
-		</tr>		
-</table>
-</form>
-<div>
-	<a href="#" onClick="showCostDetail();return false;">사업비사용명세</a>
-	<a href="#" onClick="showNonApproval1();return false;">1차 불인정 내역</a>
-	<a href="#" onClick="showNonApproval2();return false;">최종 불인정 내역</a>
-	<a href="#" onClick="editSubject();return false;">수정</a>
-	<a href="#" onClick="deleteSubject();return false;">삭제</a>
-	<a href="#" onClick="gotoList();return false;">목록</a>
-	<a href="#" onClick="alert('준비중...');return false;">인쇄</a>
+<div id="container">
+  <div id="content">
+    <div id="content_top">
+      <p id="title"> 주관기관조회 : ${organ.subjectGroup.groupName} </p>
+      <p id="path"> PATH : 주관기관현황 &#62; <span id="path_b">주관기관조회</span></p>
+    </div>
+    <div class="button">
+      <div class="b_blue">
+        <ul>
+          <li><a href="#" onClick="showNonApproval2();return false;">최종 불인정 내역</a></li>
+          <li><a href="#" onClick="showNonApproval1();return false;">1차 불인정 내역</a></li>
+          <li><a href="#" onClick="showCostDetail();return false;">사업비사용명세</a></li>
+        </ul>
+      </div>
+    </div>
+    <br />
+    <div class="subtitle">01 / 사업정보</div>
+	<div id="table">
+		<table width="100%" cellspacing="0">
+			<tbody>
+				<tr>
+					<td class="cell_title" width="130px">전담기관</td>
+					<td class="cell" width="330px">${organ.ownerGroup.groupName}</td>
+					<td class="cell_title" width="130px">주관기관</td>
+					<td class="cell" width="330px">${organ.subjectGroup.groupName}</td>
+				</tr>
+				<tr>
+					<td class="cell_title">사업명</td>
+					<td class="cell">${organ.businessName}</td>
+					<td class="cell_title">과제명</td>
+					<td class="cell">${organ.projectName}</td>
+				</tr>
+				<tr>
+					<td class="cell_title">연구기관명</td>
+					<td class="cell">${organ.researchAgency}</td>
+					<td class="cell_title">연구책임자</td>
+					<td class="cell">${organ.researchResponsiblePerson}</td>
+				</tr>
+				<tr>
+					<td class="cell_title">협약기관시작일</td>
+					<td class="cell">${organ.contractStartDate}</td>
+					<td class="cell_title">협약기관종료일</td>
+					<td class="cell">${organ.contractEndDate}</td>
+				</tr>
+			</tbody>
+		</table>
+    </div>
+	<br />
+    <div class="subtitle">02 / 사업비 정보</div>
+    <div id="table">
+      <table width="100%" cellspacing="0">
+        <tbody>
+          	<tr>
+				<td class="cell_title" width="130px">정부출현금</td>
+				<td class="cell" width="330px">${organ.govContributeAmount}원</td>
+				<td class="cell_title" width="130px">민간부담금</td>
+				<td class="cell" width="330px">${organ.nonGovContributeAmount}원</td>
+			</tr>
+			<tr>
+				<td class="cell_title">현물</td>
+				<td class="cell">${organ.goodsAmount}원</td>
+				<td class="cell_title">총현금</td>
+				<td class="cell">${organ.totalCashAmount}원</td>
+			</tr>
+			<tr>
+				<td class="cell_title">정부지분</td>
+				<td class="cell">${organ.govInterests}원</td>
+				<td class="cell_title">위탁정산수수료</td>
+				<td class="cell">${organ.consignSettlementCommission}원</td>
+			</tr>	
+        </tbody>
+      </table>
+    </div>
+    <br />
+    <div class="subtitle">03 / 일정 정보</div>
+    <div id="table">
+      <table width="100%" cellspacing="0">
+        <tbody>
+	        <tr>
+				<td class="cell_title" width="130px">사용실적 제출일</td>
+				<td class="cell" width="330px">${organ.useResultDate}</td>
+				<td class="cell_title" width="130px">이의 신청 접수일</td>
+				<td class="cell" width="330px">${organ.formalObjectAcceptanceDate}</td>
+			</tr>
+			<tr>
+				<td class="cell_title"> 이의신청 결과통보일</td>
+				<td class="cell">${organ.formalObjectResultDate}</td>
+				<td class="cell_title">정산결과 보고일</td>
+				<td class="cell">${organ.consignSettlementResultDate}</td>
+			</tr>
+        </tbody>
+      </table>
+    </div>
+    <br />
+    <div class="subtitle">04 / 주관기관 담당자 정보</div>
+    <div id="table">
+      <table width="100%" cellspacing="0">
+        <tbody>
+          <tr>
+            <td class="cell_title" width="130px">주관기관 담당자</td>
+            <td class="cell" width="100px">${organ.organResponsiblePerson}</td>
+            <td class="cell_title" width="50">연락처</td>
+            <td class="cell" width="100px">${organ.organResponsiblePhone1}-${organ.organResponsiblePhone2}-${organ.organResponsiblePhone3}</td>
+            <td class="cell_title" width="50">이메일</td>
+            <td class="cell" width="470px">${organ.organResponsibleEmail}</td>
+          </tr>
+          <tr>
+            <td class="cell_title">주소</td>
+            <td colspan="5" class="cell">(${organ.organResponsiblePostNumber1}-${organ.organResponsiblePostNumber2}) ${organ.organResponsibleAddress}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <br />
+    <div class="subtitle">05 / 정산기관 담당자 정보</div>
+    <div id="table">
+      <table width="100%" cellspacing="0">
+        <tbody>
+          <tr>
+            <td class="cell_title" width="130px">정산기관 담당자</td>
+            <td class="cell" width="100px">${organ.consignSettlementPerson}</td>
+            <td class="cell_title" width="50">연락처</td>
+            <td class="cell" width="100px">${organ.consignSettlementPhone1}-${organ.consignSettlementPhone2}-${organ.consignSettlementPhone3}</td>
+            <td class="cell_title" width="50">이메일</td>
+            <td class="cell" width="470px">${organ.consignSettlementEmail}</td>
+          </tr>
+          <tr>
+            <td class="cell_title">주소</td>
+            <td colspan="5" class="cell">(${organ.consignSettlementPostNumber1}-${organ.consignSettlementPostNumber2}) ${organ.consignSettlementAddress}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="subtitle">06 / 정산결과 정보</div>
+    <br />
+    <div id="table">
+      <table width="100%" cellspacing="0">
+        <tbody>
+          	<tr>
+				<td class="cell_title" width="130px">사용잔액</td>
+				<td class="cell" width="330px">${organ.currentAccount}원</td>
+				<td class="cell_title" width="130px">발생이자</td>
+				<td class="cell" width="330px">${organ.currentInterest}원</td>
+			</tr>
+			<tr>
+				<td class="cell_title">부적정금액</td>
+				<td class="cell">${organ.currentNonPropriety}원</td>
+				<td class="cell_title">소계</td>
+				<td class="cell">${organ.currentSubTotal}원</td>
+			</tr>
+			<tr>
+				<td class="cell_title">환수대상액</td>
+				<td colspan="3" class="cell">${organ.currentRedemtion}원</td>
+			</tr>	
+        </tbody>
+      </table>
+	<div class="button">
+        <div class="b_blue">
+          <ul>
+          	<li><a href="#" onClick="alert('준비중...');return false;">인쇄</a></li>
+          	<li><a href="#" onClick="gotoList();return false;">목록</a></li>
+            <li><a href="#" onClick="deleteSubject();return false;">삭제</a></li>
+            <li><a href="#" onClick="editSubject();return false;">수정</a></li>
+          </ul>
+        </div>
+      </div>      
+    </div>
+    
+  </div>
 </div>
-</body>
+</form>
+</body>   
 </html>

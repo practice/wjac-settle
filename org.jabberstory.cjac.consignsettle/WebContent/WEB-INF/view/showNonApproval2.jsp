@@ -23,47 +23,73 @@
 			document.form1.submit();
 		}
 	}
+
+	function showCostDetail() {
+		document.form1.action = "${pageContext.request.contextPath}/organ/showCostDetail";
+		document.form1.submit();
+	}
+
+	function showNonApproval1() {
+		document.form1.action = "${pageContext.request.contextPath}/organ/showNonApproval1";
+		document.form1.submit();
+	}
+
+	function showNonApproval2() {
+		document.form1.action = "${pageContext.request.contextPath}/organ/showNonApproval2";
+		document.form1.submit();
+	}
 //-->
 </script>
 </head>
 <body>
-<!-- Start Content Title -->
-<div>
-	<H3>최종 불인정 내역:${organ.organName}</H3>
-</div>
-<!-- End Content Title -->
 <form name="form1">
 <input type="hidden" name="organId" value="${organ.organId}"/>
-<table border="1" cellspacing="0" cellpadding="0" class="">
-	<caption class="">
-	</caption>
-	<colgroup>
-	<col width="15%">
-	<col width="18%">
-	<col width="15%">
-	<col width="18%">
-	<col width="15%">
-	<col width="19%">
-	</colgroup>
-	<tbody>
-		<tr>
-		<c:choose>		
-			<c:when test="${organ.nonApproval2 == null || organ.nonApproval2 == ''}">
-				<td colspan="6" class="">입력된 최종 불인정 내역이 없습니다.</td>
-			</c:when>	
-			<c:otherwise>			
-				<td colspan="6" class="">${organ.nonApproval2 }</td>			
-			</c:otherwise>
-		</c:choose>
-		</tr>		
-	</tbody>
-</table>
-</form>
-<div>
-	<a href="#" onClick="updateNonApproval2();return false;">최종 불인정 내역 입력/수정</a>
-	<a href="#" onClick="deleteNonApproval2();return false;">삭제</a>
-	<a href="#" onClick="showSubject();return false;">주관기관 현황</a>
-	<a href="#" onClick="alert('준비중...');return false;">인쇄</a>
+<div id="container">
+  <div id="content">
+    <div id="content_top">
+      <p id="title"> 최종 불인정 내역 조회 : ${organ.subjectGroup.groupName} </p>
+      <p id="path"> PATH : 주관기관현황  &#62; 주관기관조회  &#62; <span id="path_b">최종 불인정 내역 조회</span></p>
+    </div>
+    <div class="button">
+      <div class="b_blue">
+        <ul>
+          <li><a href="#" onClick="showNonApproval2();return false;">최종 불인정 내역</a></li>
+          <li><a href="#" onClick="showNonApproval1();return false;">1차 불인정 내역</a></li>
+          <li><a href="#" onClick="showCostDetail();return false;">사업비사용명세</a></li>
+        </ul>
+      </div>
+    </div>
+    <br />
+    <div id="table">
+	<table width="100%" cellspacing="0">
+        <tbody>
+          <tr>
+            <td colspan="6" style="height:300px">
+            <c:choose>		
+				<c:when test="${organ.nonApproval2 == null || organ.nonApproval2 == ''}">
+					등록된 최종 불인정 내역이 없습니다.
+				</c:when>	
+				<c:otherwise>			
+					${organ.nonApproval2}			
+				</c:otherwise>
+			</c:choose>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="button">
+        <div class="b_blue">
+          <ul>
+          	<li><a href="#" onClick="alert('준비중...');return false;">인쇄</a></li>
+		    <li><a href="#" onClick="showSubject();return false;">주관기관 현황</a></li>
+            <li><a href="#" onClick="deleteNonApproval2();return false;">최종 불인정 내역 삭제</a></li>
+            <li><a href="#" onClick="updateNonApproval2();return false;">최종 불인정 내역  등록/수정</a></li>
+          </ul>
+        </div>
+      </div>
+  </div>
 </div>
+</div>
+</form>
 </body>
 </html>

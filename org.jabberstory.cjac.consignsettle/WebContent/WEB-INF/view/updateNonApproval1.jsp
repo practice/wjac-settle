@@ -25,34 +25,38 @@
 </script>
 </head>
 <body>
-<!-- Start Content Title -->
-<div>
-	<H3>1차 불인정 내역:${organ.organName}</H3>
-</div>
-<!-- End Content Title -->
 <form name="form1" method="post">
 <input type="hidden" name="organId" value="${organ.organId}" />
-<table border="1" cellspacing="0" cellpadding="0" class="">
-	<caption class="">
-	</caption>
-	<colgroup>
-	<col width="15%">
-	<col width="18%">
-	<col width="15%">
-	<col width="18%">
-	<col width="15%">
-	<col width="19%">
-	</colgroup>
-	<tbody>
-		<tr>
-			<td colspan="6" class=""><textarea id="nonApproval1" name="nonApproval1">${organ.nonApproval1}</textarea></td>
-		</tr>		
-	</tbody>
-</table>
+
+<div id="container">
+  <div id="content">
+    <div id="content_top">
+      <p id="title"> 1차 불인정 내역 등록/수정  : ${organ.subjectGroup.groupName}</p>
+      <p id="path"> PATH : 주관기관현황  &#62; 주관기관조회  &#62; <span id="path_b">1차 불인정 내역 등록/수정</span></p>
+    </div>
+    <div>
+		<table width="100%" cellspacing="0">
+			<tbody>
+				<tr>
+					<td colspan="6" style="height:300px">
+						<textarea id="nonApproval1" name="nonApproval1">${organ.nonApproval1}</textarea>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>	
+	<div class="button">
+        <div class="b_blue">
+          <ul>
+            <li><a href="#" onClick="showNonApproval1();return false;">취소</a></li>
+            <li><a href="#" onClick="saveNonApproval1();return false;">저장</a></li>
+          </ul>
+        </div>
+      </div>
+	
+  </div>
+</div>
 </form>
-<div>
-	<a href="#" onClick="saveNonApproval1();return false;">저장</a>
-	<a href="#" onClick="showNonApproval1();return false;">취소</a>
-</div>	
 </body>
 </html>
+

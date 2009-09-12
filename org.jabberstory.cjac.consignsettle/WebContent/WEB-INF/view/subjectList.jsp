@@ -44,14 +44,14 @@
       <p id="title"> 주관기관목록 </p>
       <p id="path"> PATH : 주관기관현황 &#62; <span id="path_b">주관기관목록</span></p>
     </div>
-    <div class="button">
+    <!-- div class="button">
       <div class="b_blue">
         <ul>
           <li><a href="#">주관기관별 보기</a></li>
           <li><a href="#">최근등록순 보기</a></li>
         </ul>
       </div>
-    </div>
+    </div-->
 	<div id="table">
 		<table width="100%" cellspacing="0">
 			<colgroup>
@@ -67,10 +67,8 @@
 					<th width="90">전담기관</th>
 					<th width="90">주관기관</th>
 					<th width="150">사업명</th>
-					<th>과제명</th>
-					<th width="120">협약일/종료일</th>
-					<th width="60">사업내용</th>
-					<th width="70">사업비내용</th>
+					<th width="380">과제명</th>
+					<th width="150">협약일/종료일</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -88,9 +86,7 @@
 								<td><a href="#" onClick="showSubject('${organ.organId}');return false;">${organ.subjectGroup.groupName}</a></td>
 								<td>${organ.businessName}</td>
 								<td>${organ.projectName}</td>
-								<td>${organ.contractStartDate}-${organ.contractEndDate}</td>
-								<td><input class="b_view" type="button" value="보기" name="preview2" /></td>
-								<td><input class="b_view" type="button" value="보기" name="preview3" /></td>
+								<td>${organ.contractStartDate}/${organ.contractEndDate}</td>
 							</tr>
 						</c:forEach>
 					</c:otherwise>
@@ -98,7 +94,7 @@
 			</tbody>
 			<tfoot>				
 		          <tr>
-		            <td colspan="8">
+		            <td colspan="6">
 		            	<!-- Start Paginate -->
 						<caf:paging formTagName="form1"	searchFunctionName="doSearch" pagingList="${pagingList}" pageNoTagName="pageNo" />
 						<!-- End Paginate -->
