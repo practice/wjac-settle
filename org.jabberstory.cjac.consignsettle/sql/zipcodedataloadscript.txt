@@ -1,0 +1,9 @@
+load data local infile 'c:/zipcode.csv'
+into table cjac.zipcode
+fields terminated by ','
+lines terminated by '\n'
+(zipcode, serial, addr01, addr02, addr03, addr04, addr05, bungi, bungifrmain, bungifrsub, bungitomain, bungitosub, building, dongfr, dongto, datechange, addr);
+
+
+
+UPDATE zipcode SET addr = REPLACE(addr,'\r','');
