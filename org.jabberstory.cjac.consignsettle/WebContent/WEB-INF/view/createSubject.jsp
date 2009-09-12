@@ -5,12 +5,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>CJAC</title>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/common.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/PopupCalendar.js"></script>
 <script type="text/javascript">
 <!--
-	function trim(str) {
-		return str.replace(/^\s\s*/, '').replace(/\s\s*$/, '');
-	}
-
 	function requiredFieldCheck(){
 
 		var selObjOwnerGroup = document.form1.ownerGroupId;	
@@ -45,6 +43,35 @@
 		document.form1.submit();
 	}
 
+	function popUpZipCode(openerZipCode1, openerZipCode2, openerAddr){
+		window.open("${pageContext.request.contextPath}/organ/zipCodeList?openerZipCode1=" + openerZipCode1 + "&openerZipCode2=" + openerZipCode2 + "&openerAddr=" + openerAddr , "_pop", "width=400,height=450,history=no,resizable=no,status=no,scrollbars=no,menubar=no");
+	}
+
+	function checkMoney(targetId){
+		var oTarget = document.getElementById(targetId);
+		var test = oTarget.value;
+		test = test.num();
+		oTarget.value = test.money();		
+	}
+
+	function checkEmail(targetId){
+		var oTarget = document.getElementById(targetId);
+		var test = oTarget.value;
+
+		if(!test.isEmail()){
+			alert("Email을 확인해주세요.");
+			oTarget.focus();
+		}
+	}
+
+	function checkPhone(targetId,cnt){
+		var oTarget = document.getElementById(targetId);
+		var test = oTarget.value;
+
+		oTarget.value = test.num();
+				
+	}
+		
 //-->
 </script>
 </head>
@@ -53,19 +80,9 @@
 <div id="container">
   <div id="content">
     <div id="content_top">
-      <p id="title"> 주관기관입력 </p>
-      <p id="path"> PATH : 주관기관현황 &#62; <span id="path_b">주관기관입력</span></p>
+      <p id="title"> 주관기관등록 </p>
+      <p id="path"> PATH : 주관기관현황 &#62; <span id="path_b">주관기관등록</span></p>
     </div>
-    <!-- div class="button">
-      <div class="b_blue">
-        <ul>
-          <li><a href="#">최종 불인정 내역</a></li>
-          <li><a href="#">1차 불인정 내역</a></li>
-          <li><a href="#">사업비 사용명세</a></li>
-          <li><a href="#">사업정보 상세</a></li>
-        </ul>
-      </div>
-    </div-->
     <br />
     <div class="subtitle">01 / 사업정보</div>
     <div id="table">
@@ -89,21 +106,47 @@
 				</tr>
 				<tr>
 					<td class="cell_title">사업명</td>
-					<td class=""><input type="text" name="businessName" style="" title="사업명" class="line_box" style="width:250px"></td>
+					<td class="cell"><input type="text" name="businessName" style="" title="사업명" class="line_box" style="width:280px"></td>
 					<td class="cell_title">과제명</td>
-					<td class=""><input type="text" name="projectName" style="" title="과제명" class="line_box" style="width:250px"></td>
+					<td class="cell"><input type="text" name="projectName" style="" title="과제명" class="line_box" style="width:280px"></td>
 				</tr>
 				<tr>
 					<td class="cell_title">연구기관명</td>
-					<td class="cell"><input type="text" name="researchAgency" style="" title="연구기관명" class="line_box" style="width:250px"></td>
+					<td class="cell"><input type="text" name="researchAgency" style="" title="연구기관명" class="line_box" style="width:280px"></td>
 					<td class="cell_title">연구책임자</td>
-					<td class="cell"><input type="text" name="researchResponsiblePerson" style="" title="연구책임자" class="line_box" style="width:250px"></td>
+					<td class="cell"><input type="text" name="researchResponsiblePerson" style="" title="연구책임자" class="line_box" style="width:280px"></td>
 				</tr>
 				<tr>
 					<td class="cell_title">협약기관 시작일</td>
-					<td class="cell"><input type="text" name="contractStartDate" style="" title="협약기관 시작일" class="line_box" style="width:250px"></td>
+					<td class="cell">
+						<ul>
+			                <li>
+								<input type="text" name="contractStartDate" style="" title="협약기관 시작일" class="line_box" style="width:64px" readonly>
+							</li>
+							<li>
+								<div class="b_gray">
+			                    	<ul>
+			                      		<li><a href="#" onClick="popUpCalendar(this, contractStartDate, 'yyyy-mm-dd');return false;">달력</a></li>
+			                    	</ul>
+			                  	</div>
+			                 </li>
+			        	</ul>
+	                </td>
 					<td class="cell_title">협약기관 종료일</td>
-					<td class="cell"><input type="text" name="contractEndDate" style="" title="협약기관 종료일" class="line_box" style="width:250px"></td>
+					<td class="cell">
+						<ul>
+			                <li>
+								<input type="text" name="contractEndDate" style="" title="협약기관 종료일" class="line_box" style="width:64px" readonly>
+							</li>
+							<li>
+								<div class="b_gray">
+			                    	<ul>
+			                      		<li><a href="#" onClick="popUpCalendar(this, contractEndDate, 'yyyy-mm-dd');return false;">달력</a></li>
+			                    	</ul>
+			                  	</div>
+			                 </li>
+			        	</ul>
+					</td>
 				</tr>
 			</tbody>
 		</table>
@@ -115,21 +158,21 @@
 			<tbody>
 				<tr>
 					<td class="cell_title" width="120px">정부출현금</td>
-					<td class="cell"><input type="text" name="govContributeAmount" style="" title="정부출현금" class="line_box" style="width:250px"></td>
-					<td class="cell_title" width="120px">민감부담금</td>
-					<td class="cell"><input type="text" name="nonGovContributeAmount" style="" title="민감부담금" class="line_box" style="width:250px"></td>
+					<td class="cell"><input type="text" name="govContributeAmount" style="" title="정부출현금" class="line_box" style="width:150px" onblur="checkMoney('govContributeAmount');return false;">원</td>
+					<td class="cell_title" width="120px">민간부담금</td>
+					<td class="cell"><input type="text" name="nonGovContributeAmount" style="" title="민감부담금" class="line_box" style="width:150px" onblur="checkMoney('nonGovContributeAmount');return false;">원</td>
 				</tr>
 				<tr>
 					<td class="cell_title">현물</td>
-					<td class="cell"><input type="text" name="goodsAmount" style="" title="현물" class="line_box" style="width:250px"></td>
+					<td class="cell"><input type="text" name="goodsAmount" style="" title="현물" class="line_box" style="width:150px" onblur="checkMoney('goodsAmount');return false;">원</td>
 					<td class="cell_title">총현금</td>
-					<td class="cell"><input type="text" name="totalCashAmount" style="" title="총현금" class="line_box" style="width:250px"></td>
+					<td class="cell"><input type="text" name="totalCashAmount" style="" title="총현금" class="line_box" style="width:150px" onblur="checkMoney('totalCashAmount');return false;">원</td>
 				</tr>
 				<tr>
 					<td class="cell_title">정부지분</td>
-					<td class="cell"><input type="text" name="govInterests" style="" title="정부지분" class="line_box" style="width:250px"></td>
+					<td class="cell"><input type="text" name="govInterests" style="" title="정부지분" class="line_box" style="width:150px" onblur="checkMoney('govInterests');return false;">원</td>
 					<td class="cell_title">위탁정산 수수료</td>
-					<td class="cell"><input type="text" name="consignSettlementCommission" style="" title="위탁정산 수수료" class="line_box" style="width:250px"></td>
+					<td class="cell"><input type="text" name="consignSettlementCommission" style="" title="위탁정산 수수료" class="line_box" style="width:150px" onblur="checkMoney('consignSettlementCommission');return false;">원</td>
 				</tr>
 		</table>
 	</div>
@@ -140,15 +183,67 @@
 			<tbody>
 				<tr>
 					<td class="cell_title" width="120px">사용실적 제출일</td>
-					<td class="cell"><input type="text" name="useResultDate" style="" title="사용실적 제출일" class="line_box" style="width:250px"></td>
+					<td class="cell">						
+						<ul>
+			                <li>
+								<input type="text" name="useResultDate" style="" title="사용실적 제출일" class="line_box" style="width:64px" readonly>
+							</li>
+							<li>
+								<div class="b_gray">
+			                    	<ul>
+			                      		<li><a href="#" onClick="popUpCalendar(this, useResultDate, 'yyyy-mm-dd');return false;">달력</a></li>
+			                    	</ul>
+			                  	</div>
+			                 </li>
+			        	</ul>
+					</td>
 					<td class="cell_title" width="120px">이의 신청 접수일</td>
-					<td class="cell"><input type="text" name="formalObjectAcceptanceDate" style="" title="이의 신청 접수일" class="line_box" style="width:250px"></td>
+					<td class="cell">
+						<ul>
+			                <li>
+								<input type="text" name="formalObjectAcceptanceDate" style="" title="이의 신청 접수일" class="line_box" style="width:64px" readonly>
+							</li>
+							<li>
+								<div class="b_gray">
+			                    	<ul>
+			                      		<li><a href="#" onClick="popUpCalendar(this, formalObjectAcceptanceDate, 'yyyy-mm-dd');return false;">달력</a></li>
+			                    	</ul>
+			                  	</div>
+			                 </li>
+			        	</ul>
+			        </td>
 				</tr>
 				<tr>
 					<td class="cell_title">이의신청 결과통보일</td>
-					<td class="cell"><input type="text" name="formalObjectResultDate" style="" title="이의신청 결과통보일" class="line_box" style="width:250px"></td>
+					<td class="cell">						
+						<ul>
+			                <li>
+								<input type="text" name="formalObjectResultDate" style="" title="이의신청 결과통보일" class="line_box" style="width:64px" readonly>
+							</li>
+							<li>
+								<div class="b_gray">
+			                    	<ul>
+			                      		<li><a href="#" onClick="popUpCalendar(this, formalObjectResultDate, 'yyyy-mm-dd');return false;">달력</a></li>
+			                    	</ul>
+			                  	</div>
+			                 </li>
+			        	</ul>
+			        </td>
 					<td class="cell_title">정산결과 보고일</td>
-					<td class="cell"><input type="text" name="consignSettlementResultDate" style="" title="정산결과 보고일" class="line_box" style="width:250px"></td>
+					<td class="cell">						
+						<ul>
+			                <li>
+								<input type="text" name="consignSettlementResultDate" style="" title="정산결과 보고일" class="line_box" style="width:64px" readonly>
+							</li>
+							<li>
+								<div class="b_gray">
+			                    	<ul>
+			                      		<li><a href="#" onClick="popUpCalendar(this, consignSettlementResultDate, 'yyyy-mm-dd');return false;">달력</a></li>
+			                    	</ul>
+			                  	</div>
+			                 </li>
+			        	</ul>
+			        </td>
 				</tr>
 		</table>
 	</div>
@@ -162,30 +257,33 @@
 		            <td class="cell"><input type="text" name="organResponsiblePerson" style="" title="주관기관담당자" class="line_box" style="width:100px"></td>
 		            <td class="cell_title" width="50">연락처</td>
 		            <td class="cell">
-						<input type="text" name="organResponsiblePhone1" style="" title="연락처" class="line_box" style="width:50px">-
-						<input type="text" name="organResponsiblePhone2" style="" title="연락처" class="line_box" style="width:50px">-
-						<input type="text" name="organResponsiblePhone3" style="" title="연락처" class="line_box" style="width:50px">
+						<input type="text" name="organResponsiblePhone1" style="" title="연락처" class="line_box" style="width:30px" onblur="checkPhone('organResponsiblePhone1');return false;" maxlength="4">
+						-
+						<input type="text" name="organResponsiblePhone2" style="" title="연락처" class="line_box" style="width:30px" onblur="checkPhone('organResponsiblePhone2');return false;" maxlength="4">
+						-
+						<input type="text" name="organResponsiblePhone3" style="" title="연락처" class="line_box" style="width:30px" onblur="checkPhone('organResponsiblePhone3');return false;" maxlength="4">
 					</td>
 		            <td class="cell_title" width="50">이메일</td>
-		            <td class="cell"><input type="text" name="organResponsibleEmail" style="" title="E-mail" class="line_box" style="width:100px"></td>
+		            <td class="cell"><input type="text" name="organResponsibleEmail" style="" title="E-mail" class="line_box" style="width:200px" onblur="checkEmail('organResponsibleEmail');return false;"></td>
 		        </tr>
 		        <tr>
 		            <td class="cell_title">주소</td>
 		            <td colspan="5" class="cell">
 		            	<ul>
 			                <li>
-			                  	<input type="text" name="organResponsiblePostNumber1" style="" title="우편번호1" class="line_box" style="width:50px">-
-								<input type="text" name="organResponsiblePostNumber2" style="" title="우편번호2" class="line_box" style="width:50px">&nbsp;
+			                  	<input type="text" id="organResponsiblePostNumber1" name="organResponsiblePostNumber1" style="" title="우편번호1" class="line_box" style="width:30px" readonly>
+			                  	-
+								<input type="text" id="organResponsiblePostNumber2" name="organResponsiblePostNumber2" style="" title="우편번호2" class="line_box" style="width:30px" readonly>&nbsp;
 			                </li>
 			                <li>
 			                  <div class="b_gray">
 			                    <ul>
-			                      <li><a href="#">우편번호찾기</a></li>
+			                      <li><a href="#" onClick="popUpZipCode('organResponsiblePostNumber1','organResponsiblePostNumber2', 'organResponsibleAddress');return false;">우편번호검색</a></li>
 			                    </ul>
 			                  </div>
 			                </li>
 			                <li>
-			                	&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="organResponsibleAddress" style="" title="주소"  class="line_box" style="width:480px">
+			                	&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" id="organResponsibleAddress" name="organResponsibleAddress" style="" title="주소"  class="line_box" style="width:520px">
 			                </li>
 			        	</ul>
 					</td>
@@ -202,30 +300,33 @@
 		            <td class="cell"><input type="text" name="consignSettlementPerson" style="" title="정산기관담당자" class="line_box" style="width:100px"></td>
 		            <td class="cell_title" width="50">연락처</td>
 		            <td class="cell">
-						<input type="text" name="consignSettlementPhone1" style="" title="연락처" class="line_box" style="width:50px">-
-						<input type="text" name="consignSettlementPhone2" style="" title="연락처" class="line_box" style="width:50px">-
-						<input type="text" name="consignSettlementPhone3" style="" title="연락처" class="line_box" style="width:50px">
+						<input type="text" name="consignSettlementPhone1" style="" title="연락처" class="line_box" style="width:30px" onblur="checkPhone('consignSettlementPhone1');return false;" maxlength="4">
+						-
+						<input type="text" name="consignSettlementPhone2" style="" title="연락처" class="line_box" style="width:30px" onblur="checkPhone('consignSettlementPhone2');return false;" maxlength="4">
+						-
+						<input type="text" name="consignSettlementPhone3" style="" title="연락처" class="line_box" style="width:30px" onblur="checkPhone('consignSettlementPhone3');return false;" maxlength="4">
 					</td>
 		            <td class="cell_title" width="50">이메일</td>
-		            <td class="cell"><input type="text" name="consignSettlementEmail" style="" title="E-mail" class="line_box" style="width:100px"></td>
+		            <td class="cell"><input type="text" name="consignSettlementEmail" style="" title="E-mail" class="line_box" style="width:200px" onblur="checkEmail('consignSettlementEmail');return false;"></td>
 		        </tr>
 		        <tr>
 		            <td class="cell_title">주소</td>
 		            <td colspan="5" class="cell">
 		            	<ul>
 			                <li>
-			                  	<input type="text" name="consignSettlementPostNumber1" style="" title="우편번호1" class="line_box" style="width:50px">-
-								<input type="text" name="consignSettlementPostNumber2" style="" title="우편번호2" class="line_box" style="width:50px">&nbsp;
+			                  	<input type="text" id="consignSettlementPostNumber1" name="consignSettlementPostNumber1" style="" title="우편번호1" class="line_box" style="width:30px" readonly>
+			                  	-
+								<input type="text" id="consignSettlementPostNumber2" name="consignSettlementPostNumber2" style="" title="우편번호2" class="line_box" style="width:30px" readonly>&nbsp;
 			                </li>
 			                <li>
 			                  <div class="b_gray">
 			                    <ul>
-			                      <li><a href="#">우편번호찾기</a></li>
+			                      <li><a href="#" onClick="popUpZipCode('consignSettlementPostNumber1','consignSettlementPostNumber2','consignSettlementAddress');return false;">우편번호검색</a></li>
 			                    </ul>
 			                  </div>
 			                </li>
 			                <li>
-			                	&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="consignSettlementAddress" style="" title="주소"  class="line_box" style="width:480px">
+			                	&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" id="consignSettlementAddress" name="consignSettlementAddress" style="" title="주소"  class="line_box" style="width:520px">
 			                </li>
 			        	</ul>
 					</td>
@@ -239,19 +340,19 @@
 			<tbody>
 				<tr>
 					<td class="cell_title" width="120px">사용잔액</td>
-					<td class="cell"><input type="text" name="currentAccount" style="" title="사용잔액" class="line_box" style="width:250px"></td>
+					<td class="cell"><input type="text" name="currentAccount" style="" title="사용잔액" class="line_box" style="width:150px" onblur="checkMoney('currentAccount');return false;">원</td>
 					<td class="cell_title" width="120px">발생이자</td>
-					<td class="cell"><input type="text" name="currentInterest" style="" title="발생이자" class="line_box" style="width:250px"></td>
+					<td class="cell"><input type="text" name="currentInterest" style="" title="발생이자" class="line_box" style="width:150px" onblur="checkMoney('currentInterest');return false;">원</td>
 				</tr>
 				<tr>
 					<td class="cell_title">부적정금액</td>
-					<td class="cell"><input type="text" name="currentNonPropriety" style="" title="부적정금액" class="line_box" style="width:250px"></td>
+					<td class="cell"><input type="text" name="currentNonPropriety" style="" title="부적정금액" class="line_box" style="width:150px" onblur="checkMoney('currentNonPropriety');return false;">원</td>
 					<td class="cell_title">소계</td>
-					<td class="cell"><input type="text" name="currentSubTotal" style="" title="소계" class="line_box" style="width:250px"></td>
+					<td class="cell"><input type="text" name="currentSubTotal" style="" title="소계" class="line_box" style="width:150px" onblur="checkMoney('currentSubTotal');return false;">원</td>
 				</tr>
 				<tr>
 					<td class="cell_title">환수대상액</td>
-					<td colspan="3" class=""><input type="text" name="currentRedemtion" style="" title="환수대상액" class="line_box" style="width:250px"></td>
+					<td colspan="3" class="cell"><input type="text" name="currentRedemtion" style="" title="환수대상액" class="line_box" style="width:150px" onblur="checkMoney('currentRedemtion');return false;">원</td>
 				</tr>		
 		</table>
 		<div class="button">

@@ -15,12 +15,27 @@
 		document.form1.action = "${pageContext.request.contextPath}/organ/zipCodeList";
 		document.form1.submit();
 	}
+
+	function setZipCode(zipCode1, zipCode2, addr){
+		var openerZipCode1 = opener.document.getElementById("${openerZipCode1}"); 
+		var openerZipCode2 = opener.document.getElementById("${openerZipCode2}");
+		var openerAddr = opener.document.getElementById("${openerAddr}");
+		
+		openerZipCode1.value = zipCode1;
+		openerZipCode2.value = zipCode2;
+		openerAddr.value = addr;	
+
+		self.close();	
+	}
 //-->
 </script>
 </head>
 <body>
 <form name="form1" method="post">
 <input type="hidden" name="pageNo">
+<input type="hidden" name="openerZipCode1" value="${openerZipCode1}">
+<input type="hidden" name="openerZipCode2" value="${openerZipCode2}">
+<input type="hidden" name="openerAddr" value="${openerAddr}">
 <div id="popup_top">
   <div id="title"> 우편번호 검색 </div>
 </div><br />
@@ -60,7 +75,7 @@
 				<c:forEach items="${zipCodes.items}" var="zipCode" varStatus="status">
 					<tr>
 						<td>${fn:substring(zipCode.zipcode,0,3)}-${fn:substring(zipCode.zipcode,3,6)}</td>				
-						<td>${zipCode.addr}</td>
+						<td><a href="#" onClick="setZipCode('${fn:substring(zipCode.zipcode,0,3)}','${fn:substring(zipCode.zipcode,3,6)}','${zipCode.addr}');return false;">${zipCode.addr}</a></td>
 					</tr>
 				</c:forEach>
 				</tbody>

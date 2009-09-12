@@ -46,6 +46,9 @@ public class ZipCodeListController extends SimpleFormController {
 	protected ModelAndView onSubmit(HttpServletRequest request,
 			HttpServletResponse response, Object command, BindException errors)
 			throws Exception {
+		String openerZipCode1 = request.getParameter("openerZipCode1");
+		String openerZipCode2 = request.getParameter("openerZipCode2");
+		String openerAddr = request.getParameter("openerAddr");
 		ZipCodeCommand keyword = (ZipCodeCommand)command;
 		
 		if (keyword.getKeyword() != null && keyword.getKeyword().trim().length() > 0) {
@@ -54,6 +57,9 @@ public class ZipCodeListController extends SimpleFormController {
 			Paging zipCodes = zipCodeService.getZipCodesWithPaging(keyword.getKeyword(), Integer.parseInt(pageNo), pageSize);
 			ModelAndView mv = new ModelAndView("organ/zipCodeList", "zipCodes", zipCodes);
 			mv.addObject("keyword", keyword.getKeyword());
+			mv.addObject("openerZipCode1", openerZipCode1);
+			mv.addObject("openerZipCode2", openerZipCode2);
+			mv.addObject("openerAddr", openerAddr);
 			return mv;
 		}
 		return new ModelAndView("organ/zipCodeList");		
