@@ -12,7 +12,7 @@
 		<property name="username" column="USERNAME" type="string" length="32" />
 		<property name="email" column="EMAIL" type="string" length="64" />
 		<property name="password" column="PASSWORD" type="string" length="64" />
-		<many-to-one name="userGroup" class="UserGroup" column="GROUPID" foreign-key="FK_USER_GROUP"/>
+		<many-to-one name="userGroup" class="UserGroup" column="GROUPID" lazy="false" foreign-key="FK_USER_GROUP"/>
 	</class>
 	
 </hibernate-mapping>
