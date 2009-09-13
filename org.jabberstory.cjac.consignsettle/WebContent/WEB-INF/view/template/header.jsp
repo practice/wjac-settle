@@ -19,7 +19,7 @@
   </div>
   <div id="log">
     <ul>
-      <li class="white_11"><sec:authentication property="principal.username" />님 환영합니다. </li>
+      <li class="white_11">${user.username} (<sec:authentication property="principal.username" />)님 환영합니다. </li>
       <li>
         <input name="logout" type="button" value="Log-out" class="b_log" onClick="location.href='<c:url value="/j_spring_security_logout" />'"/>
       </li>

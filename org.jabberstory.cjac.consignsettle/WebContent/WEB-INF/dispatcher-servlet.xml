@@ -8,7 +8,8 @@
 	<!-- ############################################################## -->
 	<!-- Request Mapping -->
 	<!-- ############################################################## -->
-	<bean id="commonVariableInterceptor" class="org.jabberstory.cjac.consignsettle.common.util.CommonVariableInterceptorAdaptor" />
+	<bean id="commonVariableInterceptor" class="org.jabberstory.cjac.consignsettle.common.util.CommonVariableInterceptorAdaptor" 
+		p:userService-ref="userService" />
 	
 	<bean id="handlerMapping"
 		class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping">
