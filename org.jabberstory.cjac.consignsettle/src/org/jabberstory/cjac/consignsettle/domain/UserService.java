@@ -33,5 +33,8 @@ public interface UserService {
 	throws DuplicateEntityException;
 
 	public User getUser(String userId);
+	
+	public String getUserRole(String userId);
+	
 
 }
