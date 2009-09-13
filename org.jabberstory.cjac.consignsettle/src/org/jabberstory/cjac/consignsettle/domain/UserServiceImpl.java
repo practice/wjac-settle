@@ -89,5 +89,14 @@ public class UserServiceImpl implements UserService {
 		userRepository.createUser(userId, password, username, email);
 		
 	}
+	
+	@Override
+	public String getUserRole(String userId){
+		User user = userRepository.getUser(userId);
+		
+		if(user.getUserGroup() == null) return "";
+		
+		return user.getUserGroup().getRole();		
+	}
 
 }
