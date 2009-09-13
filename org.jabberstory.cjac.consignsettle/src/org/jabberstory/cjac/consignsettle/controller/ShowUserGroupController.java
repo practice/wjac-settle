@@ -20,7 +20,7 @@ public class ShowUserGroupController extends AbstractController {
 			HttpServletResponse response) throws Exception {
 		String groupId = request.getParameter("groupId");
 		UserGroup group = userService.getUserGroup(groupId);
-		ModelAndView mv = new ModelAndView("showUserGroup", "group", group);
+		ModelAndView mv = new ModelAndView("user/showUserGroup", "group", group);
 		return mv;
 	}
 }

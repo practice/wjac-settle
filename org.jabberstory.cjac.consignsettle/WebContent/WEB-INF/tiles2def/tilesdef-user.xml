@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
+<tiles-definitions>
+
+	<!-- 사용자리스트-->
+	<definition name="user/userList" extends="base_layout">
+		<put-attribute name="body" value="/WEB-INF/view/userList.jsp" />
+	</definition>
+	
+	<!-- 사용자그룹생성-->
+	<definition name="user/createUserGroup" extends="base_layout">
+		<put-attribute name="body" value="/WEB-INF/view/createUserGroup.jsp" />
+	</definition>
+	
+	<!-- 사용자그룹수정-->
+	<definition name="user/updateUserGroup" extends="base_layout">
+		<put-attribute name="body" value="/WEB-INF/view/updateUserGroup.jsp" />
+	</definition>
+	
+	<!-- 사용자그룹조회-->
+	<definition name="user/showUserGroup" extends="base_layout">
+		<put-attribute name="body" value="/WEB-INF/view/showUserGroup.jsp" />
+	</definition>
+	
+	<!-- 사용자 생성-->
+	<definition name="user/createUser" extends="base_layout">
+		<put-attribute name="body" value="/WEB-INF/view/createUser.jsp" />
+	</definition>
+
+	<!-- 사용자 조회-->
+	<definition name="user/showUser" extends="base_layout">
+		<put-attribute name="body" value="/WEB-INF/view/showUser.jsp" />
+	</definition>
+	
+</tiles-definitions>
