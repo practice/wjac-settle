@@ -36,7 +36,7 @@
 											        when 'C' then 'ROLE_ADMIN'
 											        else 'ROLE_USER'
 											      end) as authorities
-											from user a left outer join usergroup b
+											from USER a left outer join USERGROUP b
 											  on a.groupid = b.groupid
 											where userid = ?" />
 	</authentication-provider>
