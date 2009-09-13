@@ -136,7 +136,7 @@
     <div class="button">
       <div class="b_blue">
         <ul>
-          <li><a href="#">엑셀로 다운 받기</a></li>
+          <li><a href="<c:url value="/organ/excelDownload" />">엑셀 다운로드</a></li>
         </ul>
       </div>
     </div>

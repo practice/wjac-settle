@@ -13,10 +13,10 @@ public class OrganServiceImpl implements OrganService{
 		this.organRepository = organRepository;
 	}
 	
-	private UserRepository userRepository;
+	private UserService userService;
 
-	public void setUserRepository(UserRepository userRepository) {
-		this.userRepository = userRepository;
+	public void setUserService(UserService userService) {
+		this.userService = userService;
 	}
 
 	@Override
@@ -39,7 +39,7 @@ public class OrganServiceImpl implements OrganService{
 	public List<Organ> getOrgansByUserGroup(String groupId)
 			throws DataAccessException {
 		
-		UserGroup userGroup = userRepository.getUserGroup(groupId);		
+		UserGroup userGroup = userService.getUserGroup(groupId);		
 		return organRepository.getOrgans(userGroup);
 	}
 	
@@ -53,12 +53,8 @@ public class OrganServiceImpl implements OrganService{
 	public Paging getOrgansWithPaging(String userId,
 			int currentPage, int pageSize, String sortColumn)
 			throws DataAccessException {
-		String userRole = "";
-		User user = userRepository.getUser(userId);
 		
-		if(user.getUserGroup() == null) userRole = "";
-		else userRole = user.getUserGroup().getRole(); 
-			
+		String userRole = userService.getUserRole(userId);		
 		return organRepository.getOrgansWithPaging(userId, userRole, currentPage, pageSize, sortColumn);
 	}
 
