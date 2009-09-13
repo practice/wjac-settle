@@ -31,7 +31,7 @@
   <div id="content">
     <div id="content_top">
       <p id="title"> 1차 불인정 내역 등록/수정  : ${organ.subjectGroup.groupName}</p>
-      <p id="path"> PATH : 주관기관현황  &#62; 주관기관조회 > <span id="path_b">1차 불인정 내역 등록/수정</span></p>
+      <p id="path"> PATH : 주관기관현황  &#62; 주관기관조회&#62; <span id="path_b">1차 불인정 내역 등록/수정</span></p>
     </div>
     <div>
 		<table width="100%" cellspacing="0">
