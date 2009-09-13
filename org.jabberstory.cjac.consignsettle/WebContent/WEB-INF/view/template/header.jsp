@@ -4,9 +4,11 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <div id="header">
   <div>
-    <h1 id="logo"><a href="#">천지회계법인 위탁정산시스템</a></h1>
+    <h1 id="logo"><a href="<c:url value="/" />">천지회계법인 위탁정산시스템</a></h1>
   </div>
-  <div id="top_menu"><a href='#'>공지사항</a> | <a href='#'>Q&amp;A</a> | <a href='#'>회계세무 자료실</a></div>
+  <div id="top_menu"><a href='<c:url value="/forum/1/list" />'>공지사항</a> 
+  | <a href='<c:url value="/forum/2/list" />'>Q&amp;A</a> 
+  | <a href='<c:url value="/forum/3/list" />'>회계세무 자료실</a></div>
   <div id="gnb">
     <ul>
       <li id="menu01"><a href="<c:url value="/organ/subjectList" />">주관기관 현황</a></li>
