@@ -1,6 +1,13 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.List"%>
+<script>
+$(document).ready(function() {
+	$('#saveButton').bind('click', function(event) {
+		document.thisform.submit();
+	});
+});
+</script>
 <div id="container">
   <div id="content">
     <div id="content_top">
@@ -38,7 +45,7 @@
       <div class="b_blue">
         <ul>
           <li><a href="<c:url value="/forum/${forum.id}/list?page=${param.page}" />">목록보기</a></li>
-          <li><c:choose><c:when test="${childrenCount == 0}"><a href="removePost?id=${post.id}&page=${param.page}">삭제</a></c:when></c:choose></li>
+          <li><c:if test="${childrenCount == 0}"><a href="removePost?id=${post.id}&page=${param.page}">삭제</a></c:if></li>
           <li><a href="<c:url value="/forum/${forum.id}/updatePost?id=${post.id}&page=${param.page}" />">수정하기</a></li>
         </ul>
       </div>
@@ -80,21 +87,31 @@
       <div class="b_blue">
         <ul>
           <li><a href="<c:url value="/forum/${forum.id}/list?page=${param.page}" />">목록보기</a></li>
-          <li><c:choose><c:when test="${childrenCount == 0}"><a href="removePost?id=${child.id}&page=${param.page}">삭제</a></c:when></c:choose></li>
+          <li><a href="removePost?id=${child.id}&page=${param.page}">삭제</a></li>
           <li><a href="<c:url value="/forum/${forum.id}/updatePost?id=${child.id}&page=${param.page}" />">수정하기</a></li>
         </ul>
       </div>
     </div>
 	</c:forEach>
-    
+	<div style="clear: right"></div>
+	<h2>답변하기</h2>
+	<div>
+		<div id="replyArea"></div>
+	<form name="thisform" action="write" method="post" enctype="multipart/form-data">
+		<input type="hidden" name="id" value="${param.id }" />
+		<input type="hidden" name="page" value="${param.page }" />
+		<div><label>제목</label><input type="text" name="title" class="line_box" style="width:650px" /></div>
+		<div><label>내용</label><textarea name="body" style="height:100px; width:650px" ></textarea></div>
+		<div><input type="file" name="files" /></div>
+	    <div class="button">
+	      <div class="b_blue">
+	        <ul>
+	          <li><a href="#" id="saveButton">저장</a></li>
+	        </ul>
+	      </div>
+	    </div>
+	</form>
+	</div>
   </div>
 </div>
 
-<form action="write" method="post" enctype="multipart/form-data">
-	<input type="hidden" name="id" value="${param.id }" />
-	<input type="hidden" name="page" value="${param.page }" />
-	<div><label>제목</label><input type="text" name="title" /></div>
-	<div><textarea name="body" rows="10" cols="80"></textarea></div>
-	<div><input type="file" name="files" /></div>
-	<div><input type="submit" value="저장" /></div>
-</form>
