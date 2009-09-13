@@ -1,10 +1,8 @@
 package org.jabberstory.cjac.consignsettle.domain;
 
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-import org.apache.log4j.Logger;
 import org.springframework.dao.DataAccessException;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
@@ -15,9 +13,7 @@ import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
  *
  */
 public class UserRepository extends HibernateDaoSupport {
-	
-	private Logger log = Logger.getLogger(this.getClass());
-
+		
 	@SuppressWarnings("unchecked")
 	public List<UserGroup> getGroups(String groupQuery) {
 		String queryString = "from UserGroup g where g.groupId like :query or g.groupName like :query";
