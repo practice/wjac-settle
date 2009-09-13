@@ -129,7 +129,7 @@ public class OrganMultiActionController extends MultiActionController {
 
 		organService.removeOrgan(organId);
 
-		return new ModelAndView("redirect:organ/subjectList");
+		return new ModelAndView("redirect:/organ/subjectList");
 
 	}
 	

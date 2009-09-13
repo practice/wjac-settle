@@ -2,13 +2,10 @@ package org.jabberstory.cjac.consignsettle.domain;
 
 import java.util.List;
 
-import org.apache.log4j.Logger;
 import org.jabberstory.cjac.consignsettle.common.util.Paging;
 import org.springframework.dao.DataAccessException;
 
 public class OrganServiceImpl implements OrganService{
-	
-	private Logger log = Logger.getLogger(this.getClass());
 	
 	private OrganRepository organRepository;
 
