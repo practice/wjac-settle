@@ -40,11 +40,6 @@
 		}
 	}
 
-	function gotoList(){
-		document.form1.action = "${pageContext.request.contextPath}/organ/showSubject";
-		document.form1.submit();
-	}
-
 	function popUpZipCode(openerZipCode1, openerZipCode2, openerAddr){
 		window.open("${pageContext.request.contextPath}/organ/zipCodeList?openerZipCode1=" + openerZipCode1 + "&openerZipCode2=" + openerZipCode2 + "&openerAddr=" + openerAddr , "_pop", "width=400,height=450,history=no,resizable=no,status=no,scrollbars=no,menubar=no");
 	}
@@ -375,7 +370,7 @@
 		<div class="button">
 	        <div class="b_blue">
 	          <ul>
-	          	<li><a href="#" onClick="gotoList();return false;">취소</a></li>
+	          	<li><a href="<c:url value="/organ/showSubject?organId=${organ.organId}" />">취소</a></li>
 	            <li><a href="#" onClick="saveSubject();return false;">저장</a></li>	            
 	          </ul>
 	        </div>

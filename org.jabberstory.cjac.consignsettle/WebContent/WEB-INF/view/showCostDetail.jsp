@@ -1,45 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>CJAC</title>
-<script type="text/javascript">
-<!--
-	function updateCostDetail(){
-		document.form1.action = "${pageContext.request.contextPath}/organ/updateCostDetail";
-		document.form1.submit();
-	}
-
-	function showSubject() {
-		document.form1.action = "${pageContext.request.contextPath}/organ/showSubject";
-		document.form1.submit();
-	}
-
-	function deleteCostDetail() {
-		if(confirm("»èÁ¦ÇÏ½Ã°Ú½À´Ï±î?")){
-			document.form1.action = "${pageContext.request.contextPath}/organ/deleteCostDetail";
-			document.form1.submit();
-		}
-	}
-
-	function showCostDetail() {
-		document.form1.action = "${pageContext.request.contextPath}/organ/showCostDetail";
-		document.form1.submit();
-	}
-
-	function showNonApproval1() {
-		document.form1.action = "${pageContext.request.contextPath}/organ/showNonApproval1";
-		document.form1.submit();
-	}
-
-	function showNonApproval2() {
-		document.form1.action = "${pageContext.request.contextPath}/organ/showNonApproval2";
-		document.form1.submit();
-	}
-//-->
-</script>
 </head>
 <body>
 <form name="form1">
@@ -47,15 +13,15 @@
 <div id="container">
   <div id="content">
     <div id="content_top">
-      <p id="title"> »ç¾÷ºñ »ç¿ë¸í¼¼ Á¶È¸ : ${organ.subjectGroup.groupName} </p>
-      <p id="path"> PATH : ÁÖ°ü±â°üÇöÈ²  &#62; ÁÖ°ü±â°üÁ¶È¸  &#62; <span id="path_b">»ç¾÷ºñ »ç¿ë¸í¼¼ Á¶È¸</span></p>
+      <p id="title"> ì‚¬ì—…ë¹„ ì‚¬ìš©ëª…ì„¸ ì¡°íšŒ : ${organ.subjectGroup.groupName} </p>
+      <p id="path"> PATH : ì£¼ê´€ê¸°ê´€í˜„í™©  &#62; ì£¼ê´€ê¸°ê´€ì¡°íšŒ  &#62; <span id="path_b">ì‚¬ì—…ë¹„ ì‚¬ìš©ëª…ì„¸ ì¡°íšŒ</span></p>
     </div>
     <div class="button">
       <div class="b_blue">
         <ul>
-          <li><a href="#" onClick="showNonApproval2();return false;">ÃÖÁ¾ ºÒÀÎÁ¤ ³»¿ª</a></li>
-          <li><a href="#" onClick="showNonApproval1();return false;">1Â÷ ºÒÀÎÁ¤ ³»¿ª</a></li>
-          <li><a href="#" onClick="showCostDetail();return false;">»ç¾÷ºñ»ç¿ë¸í¼¼</a></li>
+          <li><a href="<c:url value="/organ/showNonApproval2?organId=${organ.organId}" />">ìµœì¢… ë¶ˆì¸ì • ë‚´ì—­</a></li>
+          <li><a href="<c:url value="/organ/showNonApproval1?organId=${organ.organId}" />">1ì°¨ ë¶ˆì¸ì • ë‚´ì—­</a></li>
+          <li><a href="<c:url value="/organ/showCostDetail?organId=${organ.organId}" />">ì‚¬ì—…ë¹„ì‚¬ìš©ëª…ì„¸</a></li>
         </ul>
       </div>
     </div>
@@ -68,7 +34,7 @@
             <td colspan="6" style="height:300px">
             <c:choose>		
 				<c:when test="${organ.costDetail == null || organ.costDetail == ''}">
-					µî·ÏµÈ »ç¾÷ºñ»ç¿ë¸í¼¼°¡ ¾ø½À´Ï´Ù.
+					ë“±ë¡ëœ ì‚¬ì—…ë¹„ì‚¬ìš©ëª…ì„¸ê°€ ì—†ìŠµë‹ˆë‹¤.
 				</c:when>	
 				<c:otherwise>			
 					${organ.costDetail}			
@@ -77,22 +43,24 @@
             </td>
           </tr>
           <tr>
-            <td class="cell_title" width="100">»ç¿ëÀÜ¾×</td>
-            <td class="cell">${organ.currentAccount}¿ø </td>
-            <td class="cell_title" width="100">¹ß»ýÀÌÀÚ(ÀÜ¾×)</td>
-            <td class="cell">${organ.currentInterest}¿ø </td>
-            <td class="cell_title" width="100">ºÒÀÎÁ¤¾×</td>
-            <td class="cell">${organ.currentNonPropriety}¿ø </td>
+            <td class="cell_title" width="100">ì‚¬ìš©ìž”ì•¡</td>
+            <td class="cell">${organ.currentAccount}ì› </td>
+            <td class="cell_title" width="100">ë°œìƒì´ìž(ìž”ì•¡)</td>
+            <td class="cell">${organ.currentInterest}ì› </td>
+            <td class="cell_title" width="100">ë¶ˆì¸ì •ì•¡</td>
+            <td class="cell">${organ.currentNonPropriety}ì› </td>
           </tr>
         </tbody>
       </table>
       <div class="button">
         <div class="b_blue">
           <ul>
-          	<li><a href="#" onClick="alert('ÁØºñÁß...');return false;">ÀÎ¼â</a></li>
-		    <li><a href="#" onClick="showSubject();return false;">ÁÖ°ü±â°ü ÇöÈ²</a></li>
-            <li><a href="#" onClick="deleteCostDetail();return false;">»ç¾÷ºñ»ç¿ë¸í¼¼ »èÁ¦</a></li>
-            <li><a href="#" onClick="updateCostDetail();return false;">»ç¾÷ºñ»ç¿ë¸í¼¼ µî·Ï/¼öÁ¤</a></li>
+          	<li><a href="#" onClick="window.print();return false;">ì¸ì‡„</a></li>
+		    <li><a href="<c:url value="/organ/showSubject?organId=${organ.organId}" />">ì£¼ê´€ê¸°ê´€ ì¡°íšŒ</a></li>
+		    <sec:authorize ifAllGranted="ROLE_ADMIN">
+	            <li><a href="<c:url value="/organ/deleteCostDetail?organId=${organ.organId}" />">ì‚¬ì—…ë¹„ì‚¬ìš©ëª…ì„¸ ì‚­ì œ</a></li>
+	            <li><a href="<c:url value="/organ/updateCostDetail?organId=${organ.organId}" />">ì‚¬ì—…ë¹„ì‚¬ìš©ëª…ì„¸ ë“±ë¡/ìˆ˜ì •</a></li>
+            </sec:authorize>
           </ul>
         </div>
       </div>

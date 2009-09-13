@@ -1,46 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>CJAC</title>
-<script type="text/javascript">
-<!--
-	function gotoList(){
-		document.form1.action = "${pageContext.request.contextPath}/organ/subjectList";
-		document.form1.submit();
-	}
-
-	function editSubject() {
-		document.form1.action = "${pageContext.request.contextPath}/organ/updateSubject";
-		document.form1.submit();
-	}
-
-	function showCostDetail() {
-		document.form1.action = "${pageContext.request.contextPath}/organ/showCostDetail";
-		document.form1.submit();
-	}
-
-	function showNonApproval1() {
-		document.form1.action = "${pageContext.request.contextPath}/organ/showNonApproval1";
-		document.form1.submit();
-	}
-
-	function showNonApproval2() {
-		document.form1.action = "${pageContext.request.contextPath}/organ/showNonApproval2";
-		document.form1.submit();
-	}
-
-	function deleteSubject() {
-		if(confirm("삭제하시겠습니까?")){
-			document.form1.action = "${pageContext.request.contextPath}/organ/deleteSubject";
-			document.form1.submit();
-		}
-	}
-		
-//-->
-</script>
 </head>
 <body>
 <form name="form1" method="post">
@@ -54,9 +19,9 @@
     <div class="button">
       <div class="b_blue">
         <ul>
-          <li><a href="#" onClick="showNonApproval2();return false;">최종 불인정 내역</a></li>
-          <li><a href="#" onClick="showNonApproval1();return false;">1차 불인정 내역</a></li>
-          <li><a href="#" onClick="showCostDetail();return false;">사업비사용명세</a></li>
+          <li><a href="<c:url value="/organ/showNonApproval2?organId=${organ.organId}" />">최종 불인정 내역</a></li>
+          <li><a href="<c:url value="/organ/showNonApproval1?organId=${organ.organId}" />">1차 불인정 내역</a></li>
+          <li><a href="<c:url value="/organ/showCostDetail?organId=${organ.organId}" />">사업비사용명세</a></li>
         </ul>
       </div>
     </div>
@@ -204,10 +169,12 @@
 	<div class="button">
         <div class="b_blue">
           <ul>
-          	<li><a href="#" onClick="alert('준비중...');return false;">인쇄</a></li>
-          	<li><a href="#" onClick="gotoList();return false;">목록</a></li>
-            <li><a href="#" onClick="deleteSubject();return false;">삭제</a></li>
-            <li><a href="#" onClick="editSubject();return false;">수정</a></li>
+          	<li><a href="#" onClick="window.print();return false;">인쇄</a></li>
+          	<li><a href="<c:url value="/organ/subjectList" />">목록</a></li>
+          	<sec:authorize ifAllGranted="ROLE_ADMIN">
+            	<li><a href="<c:url value="/organ/deleteSubject?organId=${organ.organId}" />">삭제</a></li>
+            	<li><a href="<c:url value="/organ/updateSubject?organId=${organ.organId}" />">수정</a></li>
+            </sec:authorize>
           </ul>
         </div>
       </div>      
