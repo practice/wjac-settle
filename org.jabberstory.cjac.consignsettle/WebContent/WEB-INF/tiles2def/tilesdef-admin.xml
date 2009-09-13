@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
+<tiles-definitions>
+
+	<!-- 사용자권한관리-->
+	<definition name="admin/userAuthAdmin" extends="base_layout">
+		<put-attribute name="body" value="/WEB-INF/view/userAuthAdmin.jsp" />
+	</definition>
+	
+</tiles-definitions>
