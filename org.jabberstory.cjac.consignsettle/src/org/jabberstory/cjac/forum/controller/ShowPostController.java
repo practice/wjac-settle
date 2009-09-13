@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.jabberstory.cjac.forum.domain.Forum;
 import org.jabberstory.cjac.forum.domain.ForumPost;
 import org.jabberstory.cjac.forum.domain.ForumService;
 import org.springframework.web.servlet.ModelAndView;
@@ -20,6 +21,8 @@ public class ShowPostController extends AbstractController {
 	@Override
 	protected ModelAndView handleRequestInternal(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
+		int forumId = ForumUtil.extractForumId(request);
+		Forum forum = forumService.getForum(forumId);
 		String idStr = request.getParameter("id");
 		int id = Integer.valueOf(idStr);
 		ForumPost post = forumService.getPost(id);
@@ -30,6 +33,7 @@ public class ShowPostController extends AbstractController {
 		request.setAttribute("post", post);
 		request.setAttribute("children", children);
 		request.setAttribute("childrenCount", new Integer(children.size()));
+		request.setAttribute("forum", forum);
 		return new ModelAndView("forum/showpost");
 	}
 

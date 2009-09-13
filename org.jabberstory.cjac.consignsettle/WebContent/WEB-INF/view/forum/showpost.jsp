@@ -1,41 +1,94 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.List"%>
-<html>
-<head>
-<title>Simple Forum</title>
-</head>
-<body>
+<div id="container">
+  <div id="content">
+    <div id="content_top">
+      <p id="title"> ${forum.name}</p>
+    </div>
+    <div id="table">
+      <table width="100%" cellspacing="0" style="table-layout: fixed">
+        <tbody>
+          <tr>
+            <td width="100px" class="cell_title">제목</td>
+            <td colspan="3" class="cell">${post.subject}</td>
+          </tr>
+          <tr>
+            <td width="100" class="cell_title">작성자</td>
+            <td class="cell">${post.user.username}</td>
+            <td width="100px" class="cell_title">작성일</td>
+            <td class="cell" width="200px">${post.createdDate}</td>
+          </tr>
+          <tr>
+            <td class="cell_title">첨부파일</td>
+            <td class="cell"  colspan="3">
+            	<ul><c:forEach var="file" items="${post.attachments}">
+					<li><a href="download?post=${post.id}&file=${file.id}">${file.filename}</a> (${file.filesize} bytes)</li>
+					</c:forEach>
+				</ul>
+			</td>
+          </tr>
+          <tr>
+            <td colspan="4" class="cell_contents" style="overflow: auto"><textarea readonly style="border:0; width='100%'; overflow: auto">${post.body}</textarea></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="button">
+      <div class="b_blue">
+        <ul>
+          <li><a href="<c:url value="/forum/${forum.id}/list?page=${param.page}" />">목록보기</a></li>
+          <li><c:choose><c:when test="${childrenCount == 0}"><a href="removePost?id=${post.id}&page=${param.page}">삭제</a></c:when></c:choose></li>
+          <li><a href="<c:url value="/forum/${forum.id}/updatePost?id=${post.id}&page=${param.page}" />">수정하기</a></li>
+        </ul>
+      </div>
+    </div>
 
-<p>ID: ${post.id }
-<p>Author: ${post.user.username }</p>
-<p>Subject: ${post.subject }
-<p>Body: ${post.body }</p>
-<p>At: ${post.createdDate }</p>
-<p>Attachments</p>
-<ul><c:forEach var="file" items="${post.attachments}">
-	<li><a href="download?post=${post.id}&file=${file.id}">${file.filename}</a> ${file.filesize} bytes</li>
-</c:forEach>
-</ul>
-<a href="list?page=${param.page}">List</a>, 
-<a href="updatePost?id=${post.id}&page=${param.page}">수정</a>
-<c:choose><c:when test="${childrenCount == 0}">, <a href="removePost?id=${post.id}&page=${param.page}">삭제</a></c:when></c:choose>
-<hr/>
-<c:forEach var="child" items="${children}">
-<p>ID: ${child.id }
-<p>Author: ${child.user.username }</p>
-<p>Subject: ${child.subject }
-<p>Body: ${child.body }</p>
-<p>At: ${child.createdDate }</p>
-<p>Attachments</p>
-
-<ul><c:forEach var="file" items="${child.attachments}">
-	<li><a href="download?post=${child.id}&file=${file.id}">${file.filename}</a> ${file.filesize} bytes</li>
-</c:forEach>
-</ul>
-<a href="updatePost?id=${child.id}&page=${param.page}">수정</a>
-, <a href="removePost?id=${child.id}&page=${param.page}">삭제</a>
-</c:forEach>
+	<!-- Reply area -->
+	<c:forEach var="child" items="${children}">
+    <div id="table">
+      <table width="100%" cellspacing="0" style="table-layout: fixed">
+        <tbody>
+          <c:if test="${not empty child.subject}">
+          <tr>
+            <td width="100px" class="cell_title">제목</td>
+            <td colspan="3" class="cell">${child.subject}</td>
+          </tr>
+          </c:if>
+          <tr>
+            <td width="100" class="cell_title">작성자</td>
+            <td class="cell">${child.user.username}</td>
+            <td width="100px" class="cell_title">작성일</td>
+            <td class="cell" width="200px">${child.createdDate}</td>
+          </tr>
+          <tr>
+            <td class="cell_title">첨부파일</td>
+            <td class="cell"  colspan="3">
+            	<ul><c:forEach var="file" items="${child.attachments}">
+					<li><a href="download?post=${child.id}&file=${file.id}">${file.filename}</a> (${file.filesize} bytes)</li>
+					</c:forEach>
+				</ul>
+			</td>
+          </tr>
+          <tr>
+            <td colspan="4" class="cell_contents" style="overflow: auto"><textarea readonly style="border:0; width='100%'; overflow: auto">${child.body}</textarea></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="button">
+      <div class="b_blue">
+        <ul>
+          <li><a href="<c:url value="/forum/${forum.id}/list?page=${param.page}" />">목록보기</a></li>
+          <li><c:choose><c:when test="${childrenCount == 0}"><a href="removePost?id=${child.id}&page=${param.page}">삭제</a></c:when></c:choose></li>
+          <li><a href="<c:url value="/forum/${forum.id}/updatePost?id=${child.id}&page=${param.page}" />">수정하기</a></li>
+        </ul>
+      </div>
+    </div>
+	</c:forEach>
+    
+  </div>
+</div>
 
 <form action="write" method="post" enctype="multipart/form-data">
 	<input type="hidden" name="id" value="${param.id }" />
@@ -43,7 +96,5 @@
 	<div><label>제목</label><input type="text" name="title" /></div>
 	<div><textarea name="body" rows="10" cols="80"></textarea></div>
 	<div><input type="file" name="files" /></div>
-	<div><input type="submit" value="Reply" /></div>
+	<div><input type="submit" value="저장" /></div>
 </form>
-</body>
-</html>

@@ -6,11 +6,12 @@ import org.springframework.web.multipart.MultipartFile;
 
 public interface ForumService {
 
-	public static final String FILE_PREFIX_WIN = "D:/temp/cjac/forum/";
+	public static final String FILE_PREFIX_WIN = "H:/temp/cjac/forum/";
 	public static final String FILE_PREFIX_UNIX = "/var/lib/cjac/forum/";
 	
-	public static final int PAGESIZE = 5;
+	public static final int PAGESIZE = 10;
 
+	public Forum getForum(int id);
 	public ForumPost getPost(int id);
 	public List<ForumPost> getChildrenPosts(int id);
 	public List<ForumPost> getTopLevelPosts(int forumId, int page);

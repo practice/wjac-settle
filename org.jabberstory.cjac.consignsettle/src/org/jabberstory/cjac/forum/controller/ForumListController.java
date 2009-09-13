@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.jabberstory.cjac.forum.domain.Forum;
 import org.jabberstory.cjac.forum.domain.ForumPost;
 import org.jabberstory.cjac.forum.domain.ForumService;
 import org.springframework.web.servlet.ModelAndView;
@@ -22,10 +23,12 @@ public class ForumListController extends AbstractController {
 	protected ModelAndView handleRequestInternal(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		int forumId = ForumUtil.extractForumId(request);
+		Forum forum = forumService.getForum(forumId);
 		int page = getPageParam(request);
 		ModelAndView mv = new ModelAndView();
 		List<ForumPost> posts = forumService.getTopLevelPosts(forumId, page);
 
+		mv.addObject("forum", forum);
 		mv.addObject("posts", posts);
 		if (posts.isEmpty())
 			mv.addObject("isEmptyList", Boolean.TRUE);

@@ -33,6 +33,6 @@ insert into USERGROUP(GROUPID, GROUPNAME, ROLE) values('11','고려대학교','S
 
 insert into USER(USERID, USERNAME, EMAIL, PASSWORD, GROUPID) values('admin','Administrator','admin@cjac.net','adminadmin', 1);
 
-insert into FORUM(FORUMID, NAME) values (1, 'public');
-insert into FORUM(FORUMID, NAME) values (2, 'qna');
-insert into FORUM(FORUMID, NAME) values (3, 'files');
+insert into FORUM(FORUMID, NAME) values (1, '공지사항');
+insert into FORUM(FORUMID, NAME) values (2, 'Q &amp; A');
+insert into FORUM(FORUMID, NAME) values (3, '자료실');

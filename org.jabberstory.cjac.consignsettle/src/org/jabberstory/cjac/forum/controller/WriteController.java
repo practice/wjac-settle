@@ -1,8 +1,12 @@
 package org.jabberstory.cjac.forum.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.jabberstory.cjac.forum.domain.Forum;
 import org.jabberstory.cjac.forum.domain.ForumService;
 import org.springframework.security.Authentication;
 import org.springframework.security.context.SecurityContextHolder;
@@ -21,6 +25,16 @@ public class WriteController extends SimpleFormController {
 	public WriteController() {
 		this.setCommandClass(WriteSubmitCommand.class);
 		this.setCommandName("write");
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	protected Map referenceData(HttpServletRequest request) throws Exception {
+		HashMap map = new HashMap();
+		int forumId = ForumUtil.extractForumId(request);
+		Forum forum = forumService.getForum(forumId);
+		map.put("forum", forum);
+		return map;
 	}
 
 	@Override

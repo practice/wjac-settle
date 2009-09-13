@@ -1,8 +1,12 @@
 package org.jabberstory.cjac.forum.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.jabberstory.cjac.forum.domain.Forum;
 import org.jabberstory.cjac.forum.domain.ForumPost;
 import org.jabberstory.cjac.forum.domain.ForumService;
 import org.springframework.validation.BindException;
@@ -20,6 +24,16 @@ public class UpdatePostController extends SimpleFormController {
 	public UpdatePostController() {
 		setCommandClass(WriteSubmitCommand.class);
 		setCommandName("updatePost");
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	protected Map referenceData(HttpServletRequest request) throws Exception {
+		HashMap map = new HashMap();
+		int forumId = ForumUtil.extractForumId(request);
+		Forum forum = forumService.getForum(forumId);
+		map.put("forum", forum);
+		return map;
 	}
 	
 	@Override
@@ -49,7 +63,10 @@ public class UpdatePostController extends SimpleFormController {
 		int forumId = ForumUtil.extractForumId(request);
 		int page = ForumUtil.getIntParam(request, "page", 1);
 		WriteSubmitCommand param = (WriteSubmitCommand) command;
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "title", "required");
+		ForumPost oldPost = forumService.getPost(Integer.valueOf(param.getId()));
+		if (oldPost.getRootId() == 0) {
+			ValidationUtils.rejectIfEmptyOrWhitespace(errors, "title", "required");
+		}
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "body", "required");
 		if (errors.hasErrors())
 			return showForm(request, response, errors);

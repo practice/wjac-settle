@@ -61,4 +61,9 @@ public class ForumServiceImpl implements ForumService {
 		return forumRepository.isUnix();
 	}
 
+	@Override
+	public Forum getForum(int id) {
+		return forumRepository.getForum(id);
+	}
+
 }

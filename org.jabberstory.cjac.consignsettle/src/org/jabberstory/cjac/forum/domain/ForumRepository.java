@@ -72,7 +72,7 @@ public class ForumRepository extends HibernateDaoSupport {
 		return post;
 	}
 
-	private Forum getForum(int forumId) {
+	public Forum getForum(int forumId) {
 		return (Forum) getHibernateTemplate().get(Forum.class, forumId);
 	}
 
