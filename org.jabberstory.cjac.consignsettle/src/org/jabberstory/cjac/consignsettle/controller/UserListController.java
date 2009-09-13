@@ -30,16 +30,16 @@ public class UserListController extends SimpleFormController {
 		UserSearchCommand query = (UserSearchCommand)command;
 		if (query.getUserQuery() != null && query.getUserQuery().trim().length() > 0) {
 			List<User> users = userService.getUsers(query.getUserQuery());
-			ModelAndView mv = new ModelAndView("userList", "users", users);
+			ModelAndView mv = new ModelAndView("user/userList", "users", users);
 			mv.addObject("userCount", users.size());
 			return mv;
 		} 
 		if (query.getGroupQuery() != null && query.getGroupQuery().trim().length() > 0) {
 			List<UserGroup> groups = userService.getGroups(query.getGroupQuery());
-			ModelAndView mv = new ModelAndView("userList", "groups", groups);
+			ModelAndView mv = new ModelAndView("user/userList", "groups", groups);
 			mv.addObject("groupCount", groups.size());
 			return mv;
 		}
-		return new ModelAndView("userList");
+		return new ModelAndView("user/userList");
 	}
 }

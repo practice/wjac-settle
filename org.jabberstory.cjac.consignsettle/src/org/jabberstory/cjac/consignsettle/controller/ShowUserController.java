@@ -20,7 +20,7 @@ public class ShowUserController extends AbstractController {
 			HttpServletResponse response) throws Exception {
 		String userId = request.getParameter("userId");
 		User user = userService.getUser(userId);
-		ModelAndView mv = new ModelAndView("showUser", "user", user);
+		ModelAndView mv = new ModelAndView("user/showUser", "user", user);
 		return mv;
 	}
 }
