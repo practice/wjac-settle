@@ -19,7 +19,7 @@ public class RemoveUserGroupController extends AbstractController {
 			HttpServletResponse response) throws Exception {
 		String groupId = request.getParameter("groupId");
 		userService.removeUserGroup(groupId);
-		return new ModelAndView("redirect:/user/list");
+		return new ModelAndView("redirect:/user/userGroupList");
 	}
 
 }

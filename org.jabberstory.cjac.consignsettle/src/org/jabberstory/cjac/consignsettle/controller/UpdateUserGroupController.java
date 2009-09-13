@@ -50,6 +50,7 @@ public class UpdateUserGroupController extends SimpleFormController {
 		String groupId = request.getParameter("groupId");
 		UserGroup group = userService.getUserGroup(groupId);
 		if (group != null) {
+			command.setGroupId(groupId);
 			command.setGroupName(group.getGroupName());
 			command.setRole(group.getRole());
 		}
@@ -61,10 +62,10 @@ public class UpdateUserGroupController extends SimpleFormController {
 			HttpServletResponse response, Object command, BindException errors)
 			throws Exception {
 		CreateUserGroupCommand param = (CreateUserGroupCommand) command;
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "grouName", "required");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "groupName", "required");
 		if (errors.hasErrors())
 			return showForm(request, response, errors);
 		userService.updateUserGroup(param.getGroupId(), param.getGroupName(), param.getRole());
-		return new ModelAndView("redirect:/user/list");
+		return new ModelAndView("redirect:/user/userGroupList");
 	}
 }

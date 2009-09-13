@@ -10,6 +10,11 @@
 		<put-attribute name="body" value="/WEB-INF/view/userList.jsp" />
 	</definition>
 	
+	<!-- 사용자그룹리스트-->
+	<definition name="user/userGroupList" extends="base_layout">
+		<put-attribute name="body" value="/WEB-INF/view/userGroupList.jsp" />
+	</definition>
+	
 	<!-- 사용자그룹생성-->
 	<definition name="user/createUserGroup" extends="base_layout">
 		<put-attribute name="body" value="/WEB-INF/view/createUserGroup.jsp" />

@@ -24,6 +24,7 @@
 		<property name="mappings">
 			<props>
 				<prop key="/user/list">userListController</prop>
+				<prop key="/user/userGroupList">userGroupListController</prop>
 				<prop key="/user/createUserGroup">createUserGroupController</prop>
 				<prop key="/user/updateUserGroup">updateUserGroupController</prop>
 				<prop key="/user/showUserGroup">showUserGroupController</prop>
@@ -64,13 +65,17 @@
 		p:successView="user/userList"
 		p:formView="user/userList"
 		p:userService-ref="userService" />
+	<bean id="userGroupListController" class="org.jabberstory.cjac.consignsettle.controller.UserGroupListController" 
+		p:successView="user/userGroupList"
+		p:formView="user/userGroupList"
+		p:userService-ref="userService" />	
 	<bean id="updateUserGroupController" class="org.jabberstory.cjac.consignsettle.controller.UpdateUserGroupController"
 		p:successView=""
 		p:formView="user/updateUserGroup"
 		p:userService-ref="userService" />
 	<bean id="createUserGroupController" class="org.jabberstory.cjac.consignsettle.controller.CreateUserGroupController"
 		p:successView=""
-		p:formView="cuser/reateUserGroup"
+		p:formView="user/createUserGroup"
 		p:validator-ref="createUserGroupValidator"
 		p:userService-ref="userService" />
 	<bean id="createUserGroupValidator" class="org.jabberstory.cjac.consignsettle.controller.CreateUserGroupValidator" />
