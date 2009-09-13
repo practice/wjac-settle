@@ -1,15 +1,11 @@
 package org.jabberstory.cjac.consignsettle.domain;
 
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-import org.apache.log4j.Logger;
 import org.springframework.dao.DataAccessException;
 
 public class UserServiceImpl implements UserService {
-	
-	private Logger log = Logger.getLogger(this.getClass());
 	
 	private UserRepository userRepository;
 
