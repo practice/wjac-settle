@@ -2,34 +2,44 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<html>
-<head>
-<title>Simple Forum</title>
-<style> 
-<!--
-label.write {
-	width:100px;  
-	float:left;  
-	margin-right:10px;  
-	text-align:right;  
-}
-
-input {
-}  
--->
-</style>
-<link rel="stylesheet" type="text/css" href="style.css" />
-</head>
-<body>
-<h1>Write</h1>
-
-<form method="post" enctype="multipart/form-data">
-	<p><label class="write">Title</label><input type="text" name="title" value="${updatePost.title}"/><form:errors path="write.title" /><br>
-	</p>
-	<p><textarea name="body" cols="80" rows="20"><form:errors path="write.body" />${updatePost.body}</textarea><br/>
-	</p>
-	<p><input type="submit" value="Save" /><br>
-</form>
-
-</body>
-</html>
+<script>
+$(document).ready(function() {
+	$('#saveButton').bind('click', function(event) {
+		document.thisform.submit();
+	});
+});
+</script>
+<div id="container">
+  <div id="content">
+    <div id="content_top">
+      <p id="title"> ${forum.name } </p>
+    </div>
+    <div id="table">
+		<form name="thisform" method="post" enctype="multipart/form-data">
+      <table width="100%" cellspacing="0">
+        <tbody>
+          <tr>
+            <td class="cell_title">제목</td>
+            <td class="cell"><input name="title" type="text" value="${updatePost.title}" class="line_box" style="width:650px"/><form:errors path="write.title" /></td>
+          </tr>
+          <tr>
+            <td class="cell_title">내용</td>
+            <td class="cell">
+                <textarea name="body" id="textarea" style="height:300px"><form:errors path="write.body" />${updatePost.body}</textarea>
+              </td>
+          </tr>
+        </tbody>
+      </table>
+      </form>
+    </div>
+    <div class="button">
+      <div class="b_blue">
+        <ul>
+          <li><a href="<c:url value='/forum/${forum.id}/showpost?id=${param.id}&page=${param.page}' />">취소</a></li>
+          <li><a href="#" id="saveButton">등록하기</a></li>
+        </ul>
+      </div>
+    </div>
+    <div id="table"></div>
+  </div>
+</div>

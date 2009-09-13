@@ -15,6 +15,6 @@ $(document).ready(function() {
 				}).addClass('clickable');	
 			}
 		}
-		$pager.insertBefore($table);
+		$pager.insertAfter($table);
 	});
 });
