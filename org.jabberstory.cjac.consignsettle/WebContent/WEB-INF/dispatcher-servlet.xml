@@ -30,6 +30,7 @@
 				<prop key="/user/removeUserGroup">removeUserGroupController</prop>
 				<prop key="/user/createUser">createUserController</prop>
 				<prop key="/user/showUser">showUserController</prop>
+				<prop key="/organ/excelDownload">organExcelController</prop>
 				<prop key="/organ/zipCodeList">zipCodeListController</prop>
 				<prop key="/organ/*">organMultiActionController</prop>
 				<prop key="/login">loginController</prop>
@@ -86,8 +87,6 @@
 	<bean id="authAdminMultiActionControllerMethodNameResolver" class="org.springframework.web.servlet.mvc.multiaction.PropertiesMethodNameResolver">
 		<property name="mappings">
 			<props>
-				<prop key="/showOrganAuthAdmin">showOrganAuthAdmin</prop>
-				<prop key="/updateOrganAuthAdmin">updateOrganAuthAdmin</prop>
 				<prop key="/showUserAuthAdmin">showUserAuthAdmin</prop>
 				<prop key="/updateUserAuthAdmin">updateUserAuthAdmin</prop>
 				<prop key="/*">others</prop>
@@ -98,6 +97,13 @@
 	<!-- ############################################################## -->
 	<!--  Organization(Owner, Subject) Management Controller -->
 	<!-- ############################################################## -->
+	<bean id="organExcelView" class="org.jabberstory.cjac.consignsettle.view.OrganExcelView" />
+	
+	<bean id="organExcelController" class="org.jabberstory.cjac.consignsettle.controller.OrganExcelController" 
+		p:organExcelView-ref="organExcelView"
+		p:organService-ref="organService"
+		p:userService-ref="userService" />			
+		
 	<bean id="zipCodeListController" class="org.jabberstory.cjac.consignsettle.controller.ZipCodeListController" 
 		p:successView="organ/zipCodeList"
 		p:formView="organ/zipCodeList"
