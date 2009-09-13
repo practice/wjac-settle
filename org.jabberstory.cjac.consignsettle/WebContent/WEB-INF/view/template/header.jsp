@@ -11,13 +11,15 @@
     <ul>
       <li id="menu01"><a href="<c:url value="/organ/subjectList" />">주관기관 현황</a></li>
       <li id="division">|</li>
-	  <li id="menu02"><a href="<c:url value="/organ/settlementList" />">정산진행 현황</a></li>
-      <li id="division">|</li>
+      <sec:authorize ifAnyGranted="ROLE_OWNER,ROLE_ADMIN">
+		  <li id="menu02"><a href="<c:url value="/organ/settlementList" />">정산진행 현황</a></li>
+	      <li id="division">|</li>
+      </sec:authorize>
     </ul>
   </div>
   <div id="log">
     <ul>
-      <li class="white_11">홍길동님 환영합니다. </li>
+      <li class="white_11"><sec:authentication property="principal.username" />님 환영합니다. </li>
       <li>
         <input name="logout" type="button" value="Log-out" class="b_log" onClick="location.href='<c:url value="/j_spring_security_logout" />'"/>
       </li>

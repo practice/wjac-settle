@@ -18,14 +18,7 @@
 	function doOrderedSearch(sortColumn){
 		document.form1.sortColumn.value = sortColumn;
 		doSearch(1);
-	}
-	
-	function showSubject(organId){
-		document.form1.organId.value = organId;
-		document.form1.action = "${pageContext.request.contextPath}/organ/showSubject";
-		document.form1.submit();
-	}
-
+	}	
 //-->
 </script>
 </head>
@@ -79,7 +72,7 @@
 							<tr>
 								<td>${(pagingList.currentPage - 1) * 10 + status.count}</td>
 								<td>${organ.ownerGroup.groupName}</td>
-								<td><a href="#" onClick="showSubject('${organ.organId}');return false;">${organ.subjectGroup.groupName}</a></td>
+								<td><a href="<c:url value="/organ/showSubject?organId=${organ.organId}" />">${organ.subjectGroup.groupName}</a></td>
 								<td>${organ.businessName}</td>
 								<td>${organ.projectName}</td>
 								<td>${organ.contractStartDate}/${organ.contractEndDate}</td>
