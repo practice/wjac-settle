@@ -10,7 +10,7 @@
 <!--
 	function doSearch(pageNo){
 		document.form1.pageNo.value = pageNo;
-		document.form1.action = "${pageContext.request.contextPath}/organ/subjectList";
+		document.form1.action = "${pageContext.request.contextPath}/organ/settlementList";
 		document.form1.submit();
 	}
 
