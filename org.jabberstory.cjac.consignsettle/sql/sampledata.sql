@@ -31,6 +31,8 @@ insert into USERGROUP(GROUPID, GROUPNAME, ROLE) values('9','숭실대학교','S'
 insert into USERGROUP(GROUPID, GROUPNAME, ROLE) values('10','연세대학교','S');
 insert into USERGROUP(GROUPID, GROUPNAME, ROLE) values('11','고려대학교','S');
 
+insert into USER(USERID, USERNAME, EMAIL, PASSWORD, GROUPID) values('admin','Administrator','admin@cjac.net','adminadmin', 1);
+
 insert into FORUM(FORUMID, NAME) values (1, 'public');
 insert into FORUM(FORUMID, NAME) values (2, 'qna');
 insert into FORUM(FORUMID, NAME) values (3, 'files');
