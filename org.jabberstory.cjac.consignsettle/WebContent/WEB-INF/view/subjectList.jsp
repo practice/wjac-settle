@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="caf" uri="/WEB-INF/tlds/cjac-tags.tld" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -18,12 +19,7 @@
 		document.form1.sortColumn.value = sortColumn;
 		doSearch(1);
 	}
-
-	function createSubject(){
-		document.form1.action = "${pageContext.request.contextPath}/organ/createSubject";
-		document.form1.submit();
-	}
-
+	
 	function showSubject(organId){
 		document.form1.organId.value = organId;
 		document.form1.action = "${pageContext.request.contextPath}/organ/showSubject";
@@ -103,13 +99,15 @@
 	        </tfoot>
 		</table>
 		</div>
-      	<div class="button">
-	      <div class="b_blue">
-	        <ul>
-	          <li><a href="#" onClick="createSubject();return false;">주관기관입력</a></li>
-	        </ul>
-	      </div>
-	    </div>
+		<sec:authorize ifAllGranted="ROLE_ADMIN">
+	      	<div class="button">
+		      <div class="b_blue">
+		        <ul>
+		          <li><a href="<c:url value="/organ/createSubject" />">주관기관등록</a></li>
+		        </ul>
+		      </div>
+		    </div>
+		</sec:authorize>
 	</div>
   </div>
 </form>

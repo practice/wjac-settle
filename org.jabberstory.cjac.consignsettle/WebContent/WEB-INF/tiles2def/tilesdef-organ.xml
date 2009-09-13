@@ -10,11 +10,6 @@
 	<!-- 우편번호 검색 -->
 	<definition name="organ/zipCodeList" template="/WEB-INF/view/zipCodeList.jsp" />
 	
-	<!-- 사용자권한관리-->
-	<definition name="admin/userAuthAdmin" extends="base_layout">
-		<put-attribute name="body" value="/WEB-INF/view/userAuthAdmin.jsp" />
-	</definition>
-	
 	<!-- 주관기관현황 -->
 	<definition name="organ/subjectList" extends="base_layout">
 		<put-attribute name="body" value="/WEB-INF/view/subjectList.jsp" />
