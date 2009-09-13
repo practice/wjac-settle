@@ -41,7 +41,7 @@
 	p:hibernateTemplate-ref="hibernateTemplate" />
 <bean id="organService" class="org.jabberstory.cjac.consignsettle.domain.OrganServiceImpl" 
 	p:organRepository-ref="organRepository"
-	p:userRepository-ref="userRepository" />	
+	p:userService-ref="userService" />	
 	
 <bean id="zipCodeRepository" class="org.jabberstory.cjac.consignsettle.domain.ZipCodeRepository" 
 	p:hibernateTemplate-ref="hibernateTemplate" />

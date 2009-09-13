@@ -8,6 +8,9 @@
 	<definition name="links" template="/links.jsp" />
 	
 	<!-- 우편번호 검색 -->
+	<definition name="organ/excelDownload" template="/WEB-INF/view/organExcelView" />
+	
+	<!-- 우편번호 검색 -->
 	<definition name="organ/zipCodeList" template="/WEB-INF/view/zipCodeList.jsp" />
 	
 	<!-- 주관기관현황 -->
