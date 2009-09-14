@@ -76,14 +76,16 @@ public class AuthAdminMultiActionController extends MultiActionController {
 
 		
 		// 해당 그룹에 사용자 Assign
-		if(selectedUserIds != null && selectedGroupId != null){
+		if(selectedGroupId != null){
 			
 			// 선택한 사용자 목록 Set
-			Set<User> selectedUsers = new HashSet<User>();		
-			for(int i=0; i<selectedUserIds.length; i++){			
-				selectedUsers.add(userService.getUser(selectedUserIds[i]));
-				
-			}		
+			Set<User> selectedUsers = new HashSet<User>();
+			if(selectedUserIds != null){
+				for(int i=0; i<selectedUserIds.length; i++){			
+					selectedUsers.add(userService.getUser(selectedUserIds[i]));
+					
+				}		
+			}
 			
 			// 선택한 사용자그룹에 사용자 Assign
 			userService.updateUserGroupWithUsers(selectedGroupId, selectedUsers);
