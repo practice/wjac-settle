@@ -46,7 +46,7 @@ input {
           <tr>
             <td><input name="j_username" type="text" class="logininput" />
             </td>
-            <td><input name="j_password" type="text" class="logininput"  /></td>
+            <td><input name="j_password" type="password" class="logininput"  /></td>
             <td><input type="submit" value="로그인" /><a href="#"><!-- img src="img/btn_login.gif" width="55" height="21" border="0" /--></a></td>
             <td><a href="#"><img src="img/btn_toadmin.gif" width="55" height="21"  border="0"/></a></td>
           </tr>
