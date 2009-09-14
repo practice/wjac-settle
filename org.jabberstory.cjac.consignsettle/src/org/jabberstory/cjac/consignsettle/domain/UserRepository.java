@@ -82,6 +82,13 @@ public class UserRepository extends HibernateDaoSupport {
 		group.setRole(role);
 	}
 	
+	public void updateUser(String userId, String password, String username, String email) {
+		User user = getUser(userId);
+		user.setPassword(password);
+		user.setUsername(username);
+		user.setEmail(email);
+	}
+	
 	public void updateUserGroupWithUsers(String groupId, Set<User> users) {
 		UserGroup userGroup = getUserGroup(groupId);
 		userGroup.setUsers(users);
@@ -91,6 +98,11 @@ public class UserRepository extends HibernateDaoSupport {
 	public void removeUserGroup(String groupId) {
 		UserGroup userGroup = getUserGroup(groupId);
 		getHibernateTemplate().delete(userGroup);
+	}
+	
+	public void removeUser(String userId) {
+		User user = getUser(userId);
+		getHibernateTemplate().delete(user);
 	}
 
 	public User getUser(String userId) {

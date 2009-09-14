@@ -22,16 +22,17 @@ public interface UserService {
 
 	public void updateUserGroup(String groupId, String name, String role);
 	
+	public void updateUser(String userId, String password, String username, String email);
+	
 	public void updateUserGroupWithUsers(String groupId, Set<User> users);
 
 	public void removeUserGroup(String groupId);
+	
+	public void removeUser(String userId);
 
 	public void createUser(String userId, String password, String username, String email) 
 		throws DuplicateEntityException;
 	
-	public void createUser(String userId, String password, String username, String email, String role) 
-	throws DuplicateEntityException;
-
 	public User getUser(String userId);
 	
 	public String getUserRole(String userId);

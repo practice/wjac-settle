@@ -69,6 +69,11 @@ public class UserServiceImpl implements UserService {
 	public void removeUserGroup(String groupId) {
 		userRepository.removeUserGroup(groupId);
 	}
+	
+	@Override
+	public void removeUser(String userId) {
+		userRepository.removeUser(userId);
+	}
 
 	@Override
 	public void createUser(String userId, String password, String username, String email) throws DuplicateEntityException {
@@ -84,19 +89,18 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void createUser(String userId, String password, String username,
-			String email, String role) throws DuplicateEntityException {
-		userRepository.createUser(userId, password, username, email);
-		
-	}
-	
-	@Override
 	public String getUserRole(String userId){
 		User user = userRepository.getUser(userId);
 		
 		if(user.getUserGroup() == null) return "";
 		
 		return user.getUserGroup().getRole();		
+	}
+
+	@Override
+	public void updateUser(String userId, String password, String username,
+			String email) {
+		userRepository.updateUser(userId, password, username, email);		
 	}
 
 }

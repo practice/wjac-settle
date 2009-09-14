@@ -27,8 +27,10 @@
 				<prop key="/user/userGroupList">userGroupListController</prop>
 				<prop key="/user/createUserGroup">createUserGroupController</prop>
 				<prop key="/user/updateUserGroup">updateUserGroupController</prop>
+				<prop key="/user/updateUser">updateUserController</prop>
 				<prop key="/user/showUserGroup">showUserGroupController</prop>
 				<prop key="/user/removeUserGroup">removeUserGroupController</prop>
+				<prop key="/user/removeUser">removeUserController</prop>
 				<prop key="/user/createUser">createUserController</prop>
 				<prop key="/user/showUser">showUserController</prop>
 				<prop key="/organ/excelDownload">organExcelController</prop>
@@ -59,16 +61,18 @@
 	<bean id="createUserValidator" class="org.jabberstory.cjac.consignsettle.controller.CreateUserValidator" />
 	<bean id="removeUserGroupController" class="org.jabberstory.cjac.consignsettle.controller.RemoveUserGroupController"
 		p:userService-ref="userService" />
+	<bean id="removeUserController" class="org.jabberstory.cjac.consignsettle.controller.RemoveUserController"
+		p:userService-ref="userService" />
 	<bean id="showUserGroupController" class="org.jabberstory.cjac.consignsettle.controller.ShowUserGroupController"
 		p:userService-ref="userService" />
 	<bean id="userListController" class="org.jabberstory.cjac.consignsettle.controller.UserListController" 
-		p:successView="user/userList"
-		p:formView="user/userList"
 		p:userService-ref="userService" />
 	<bean id="userGroupListController" class="org.jabberstory.cjac.consignsettle.controller.UserGroupListController" 
-		p:successView="user/userGroupList"
-		p:formView="user/userGroupList"
-		p:userService-ref="userService" />	
+		p:userService-ref="userService" />
+	<bean id="updateUserController" class="org.jabberstory.cjac.consignsettle.controller.UpdateUserController"
+		p:successView=""
+		p:formView="user/updateUser"
+		p:userService-ref="userService" />		
 	<bean id="updateUserGroupController" class="org.jabberstory.cjac.consignsettle.controller.UpdateUserGroupController"
 		p:successView=""
 		p:formView="user/updateUserGroup"
