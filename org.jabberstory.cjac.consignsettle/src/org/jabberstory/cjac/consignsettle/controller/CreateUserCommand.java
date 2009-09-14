@@ -11,8 +11,7 @@ public class CreateUserCommand {
 	private String passwordConfirm;
 	private String username;
 	private String email;
-	private String role;
-	private Set<UserGroup> userGroup = new HashSet<UserGroup>();
+	//private Set<UserGroup> userGroup = new HashSet<UserGroup>();
 	
 	public void setUserId(String userId) {
 		this.userId = userId;
@@ -26,21 +25,13 @@ public class CreateUserCommand {
 		this.password = password;
 	}
 
-	public String getRole() {
-		return role;
-	}
-
-	public void setRole(String role) {
-		this.role = role;
-	}
-
-	public Set<UserGroup> getUserGroup() {
-		return userGroup;
-	}
-
-	public void setUserGroup(Set<UserGroup> userGroup) {
-		this.userGroup = userGroup;
-	}
+//	public Set<UserGroup> getUserGroup() {
+//		return userGroup;
+//	}
+//
+//	public void setUserGroup(Set<UserGroup> userGroup) {
+//		this.userGroup = userGroup;
+//	}
 
 	public String getPassword() {
 		return password;

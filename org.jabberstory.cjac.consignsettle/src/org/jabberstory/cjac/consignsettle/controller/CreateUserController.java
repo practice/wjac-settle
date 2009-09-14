@@ -25,7 +25,7 @@ public class CreateUserController extends SimpleFormController {
 			HttpServletResponse response, Object command, BindException errors)
 			throws Exception {
 		CreateUserCommand param = (CreateUserCommand) command;
-		userService.createUser(param.getUserId(), param.getPassword(), param.getUsername(), param.getEmail(), param.getRole());
-		return new ModelAndView("redirect:/user/showUser?userId=" + param.getUserId());
+		userService.createUser(param.getUserId(), param.getPassword(), param.getUsername(), param.getEmail());
+		return new ModelAndView("redirect:/user/list");
 	}
 }

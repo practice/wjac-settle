@@ -24,6 +24,7 @@
       </div>
     </div>
     <br />
+    <!--
     <ul>
 	    <li>
 	      <input name="groupQuery" type="text" class="line_box" style="width:100px"/>
@@ -36,6 +37,7 @@
 	      </div>
 	    </li>
 	  </ul>
+	  -->
 	<br />  
 	<div id="table">
 		<table width="100%" cellspacing="0">      	

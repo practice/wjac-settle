@@ -4,77 +4,91 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>User List</title>
+<title>CJAC</title>
 </head>
 <body>
-<div>
-<form method="post">사용자 검색<input type="text" size="10" name="userQuery"><input type="submit" value="검색"></form>
-<form method="post">사용자그룹 검색<input type="text" size="10" name="groupQuery"><input type="submit" value="검색"></form>
-<div id="groupList">
-<c:choose>
-	<c:when test="${groupCount > 0}">
-		<table width="800" class="paginated" style="table-layout: fixed">
-			<thead>
-			<tr>
-			<th width="30">Group ID</th><th width="500">Group Name</th><th width="100">Role</th>
-			</tr>
-			</thead>
-			<tbody>
-			<c:forEach var="group" items="${groups}">
-			<tr>
-				<td>${group.groupId}</td><td style="text-overflow:ellipsis; overflow: hidden; ">
-					<a href="showUserGroup?groupId=${group.groupId}"><nobr>${group.groupName}</nobr></a></td>
-				<td>${group.role}</td>
-			</tr>
-			</c:forEach>
-			</tbody>
-		</table>
-		<span id="numPages" style="display: none">${numPages}</span>
-		<span id="currentPage" style="display: none">${currentPage}</span>	
-	</c:when>
-	<c:when test="${groupCount == 0}">
-			검색 결과가 없습니다.
-	</c:when>
-	<c:otherwise>
-	</c:otherwise>
-</c:choose>
+<form name="form1" method="post">
+<div id="container">
+  <div id="content">
+    <div id="content_top">
+      <p id="title">사용자관리 </p>
+      <p id="path"> PATH : Admin &#62; <span id="path_b">사용자관리</span></p>
+    </div>
+    <div class="button">
+      <div class="b_blue">
+        <ul>          
+        	<li><a href="<c:url value="/admin/showUserAuthAdmin" />">권한관리</a></li>
+	        <li><a href="<c:url value="/user/userGroupList" />">사용자그룹관리</a></li>          
+	        <li><a href="<c:url value="/user/list" />">사용자관리</a></li>	        
+  		</ul>
+      </div>
+    </div>
+    <br />
+    <!--
+    <ul>
+	    <li>
+	      <input name="userQuery" type="text" class="line_box" style="width:100px"/>
+	    </li>
+	    <li>
+	      <div class="b_gray">
+	        <ul>
+	          <li><input type="submit" value="검색"></li>
+	        </ul>
+	      </div>
+	    </li>
+	  </ul>
+	  -->
+	<br />  
+	<div id="table">
+		<table width="100%" cellspacing="0">      	
+	      	<thead>
+	        	<tr>
+	        		<th>번호</th>
+	          		<th>사용자 ID</th>
+	          		<th>사용자명</th>
+	          		<th>Email</th>
+	        	</tr>
+	      	</thead>	 
+	      	<c:choose>	
+		      	<c:when test="${userCount == 0}">
+			      	<tbody>		
+						<tr>
+							<td colspan="4">검색 결과가 없습니다.</td>
+						</tr>
+					</tbody>		    	
+				</c:when>	
+				<c:otherwise>
+				   	<tbody>				   	
+				   	<c:forEach items="${users}" var="user" varStatus="status">
+						<tr>
+							<td>${status.count}</td>
+							<td>${user.userId}</td>
+							<td>
+								<a href="<c:url value="/user/updateUser?userId=${user.userId}" />">${user.username}</a>
+							</td>
+							<td>${user.email}</td>
+						</tr>
+					</c:forEach>
+					</tbody>
+					<tfoot>				
+				          <tr>
+				            <td colspan="4">								
+							</td>
+				          </tr>
+			        </tfoot>
+				</c:otherwise>
+			</c:choose>  
+		</table>    
+		<div class="button">
+	      <div class="b_blue">
+	        <ul>
+	          <li><a href="<c:url value="/user/createUser" />">사용자등록</a></li>
+	        </ul>
+	      </div>
+	    </div>
+	</div>
+  </div>
 </div>
-<div id="userList">
-<c:choose>
-	<c:when test="${userCount > 0}">
-		<table width="800" class="paginated" style="table-layout: fixed">
-			<thead>
-			<tr>
-			<th width="30">User ID</th><th width="500">User Name</th><th width="100">E-Mail</th><th width="100">Group</th>
-			</tr>
-			</thead>
-			<tbody>
-			<c:forEach var="user" items="${users}">
-			<tr>
-				<td>${user.userId}</td><td style="text-overflow:ellipsis; overflow: hidden; ">
-					<a href="showUser?userId=${user.userId}"><nobr>${user.username}</nobr></a></td>
-				<td>${user.email}</td>
-				<td>-</td>
-			</tr>
-			</c:forEach>
-			</tbody>
-		</table>
-		<span id="numPages" style="display: none">${numPages}</span>
-		<span id="currentPage" style="display: none">${currentPage}</span>	
-	</c:when>
-	<c:when test="${userCount == 0}">
-			검색 결과가 없습니다.
-	</c:when>
-	<c:otherwise>
-	</c:otherwise>
-</c:choose>
-</div>
-</div>
-<div>
-<a href="createUser">Create User</a>, <a href="createUserGroup">Create User Group</a>
-</div>
-
-<div><a href="<c:url value="/j_spring_security_logout" />">Logout</a>
-</div>
+</form>
 </body>
 </html>
