@@ -547,7 +547,12 @@ textarea {
 	text-indent:-9000px;
 }
 
-#pager {
+.pager {
 	margin-left: auto;
 	margin-right: auto;
+	text-align: center;
+}
+
+.active {
+	background-color: #eeeeff;
 }
