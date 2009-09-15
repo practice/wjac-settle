@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.jabberstory.cjac.forum.domain.ForumPost;
 import org.jabberstory.cjac.forum.domain.ForumService;
+import org.jabberstory.web.util.WebUtil;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.AbstractController;
 
@@ -19,8 +20,8 @@ public class RemovePostController extends AbstractController {
 	protected ModelAndView handleRequestInternal(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		int forumId = ForumUtil.extractForumId(request);
-		int id = ForumUtil.getIntParam(request, "id", 0);
-		int page = ForumUtil.getIntParam(request, "page", 1);
+		int id = WebUtil.getIntParam(request, "id", 0);
+		int page = WebUtil.getIntParam(request, "page", 1);
 		ForumPost post = forumService.getPost(id);
 		int rootId = post.getRootId();
 		forumService.removePost(id);

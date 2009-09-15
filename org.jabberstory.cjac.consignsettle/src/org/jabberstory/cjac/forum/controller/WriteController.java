@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.jabberstory.cjac.forum.domain.Forum;
 import org.jabberstory.cjac.forum.domain.ForumService;
+import org.jabberstory.web.util.WebUtil;
 import org.springframework.security.Authentication;
 import org.springframework.security.context.SecurityContextHolder;
 import org.springframework.validation.BindException;
@@ -42,7 +43,7 @@ public class WriteController extends SimpleFormController {
 			HttpServletResponse response, Object command, BindException errors)
 			throws Exception {
 		int forumId = ForumUtil.extractForumId(request);
-		int id = ForumUtil.getIntParam(request, "id", -999);
+		int id = WebUtil.getIntParam(request, "id", -999);
 		WriteSubmitCommand writeCommand = (WriteSubmitCommand) command;
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		// auth type is UsernamePasswordAuthenticationToken.

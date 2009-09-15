@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.jabberstory.cjac.forum.domain.Forum;
 import org.jabberstory.cjac.forum.domain.ForumPost;
 import org.jabberstory.cjac.forum.domain.ForumService;
+import org.jabberstory.web.util.WebUtil;
 import org.springframework.validation.BindException;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.web.servlet.ModelAndView;
@@ -61,7 +62,7 @@ public class UpdatePostController extends SimpleFormController {
 			HttpServletResponse response, Object command, BindException errors)
 			throws Exception {
 		int forumId = ForumUtil.extractForumId(request);
-		int page = ForumUtil.getIntParam(request, "page", 1);
+		int page = WebUtil.getIntParam(request, "page", 1);
 		WriteSubmitCommand param = (WriteSubmitCommand) command;
 		ForumPost oldPost = forumService.getPost(Integer.valueOf(param.getId()));
 		if (oldPost.getRootId() == 0) {
