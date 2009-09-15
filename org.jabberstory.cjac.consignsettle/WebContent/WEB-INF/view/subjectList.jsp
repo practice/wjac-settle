@@ -54,9 +54,9 @@
 				<tr>
 					<th width="40">번호</th>
 					<th width="90">전담기관</th>
-					<th width="90">주관기관</th>
-					<th width="150">사업명</th>
-					<th width="380">과제명</th>
+					<th width="186">주관기관</th>
+					<th width="216">사업명</th>
+					<th width="218">과제명</th>
 					<th width="150">협약일/종료일</th>
 				</tr>
 			</thead>
