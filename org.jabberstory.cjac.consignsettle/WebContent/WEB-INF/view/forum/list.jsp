@@ -66,7 +66,7 @@ function getNextFirst(current, lastPage) {
 <div id="container">
   <div id="content">
     <div id="content_top">
-      <p id="title"> ${forum.name} </p>
+      <p id="title"> ${userGroup.groupName} ${forum.name} </p>
     </div>
     <div id="table">
 		<c:choose>

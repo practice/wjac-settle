@@ -556,3 +556,11 @@ textarea {
 .active {
 	background-color: #eeeeff;
 }
+
+.clickable {
+	cursor: pointer;
+}
+
+.page-number {
+	margin: 3px;
+}

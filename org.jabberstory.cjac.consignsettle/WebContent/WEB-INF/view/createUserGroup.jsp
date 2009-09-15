@@ -1,13 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Create User Group</title>
-</head>
-<body>
-<form method="post">
+
+<script>
+$(document).ready(function() {
+	$('#submit').bind('click', function() {
+		document.thisform.submit();
+	});
+});
+</script>
+
+<form name="thisform" method="post">
 <div id="container">
   <div id="content">
     <div id="content_top">
@@ -39,7 +41,7 @@
 	        <div class="b_blue">
 	          <ul>
 	          	<li><a href="<c:url value="/user/userGroupList" />">취소</a></li>
-	            <li><a href="#" onClick="submit();return false;">저장</a></li>	            
+	            <li><a href="#" id="submit">저장</a></li>	            
 	          </ul>
 	        </div>
 	      </div>
@@ -47,5 +49,3 @@
 	</div>
   </div>
 </form>
-</body>
-</html>

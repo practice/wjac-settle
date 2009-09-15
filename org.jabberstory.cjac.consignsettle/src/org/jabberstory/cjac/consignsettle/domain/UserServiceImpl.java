@@ -3,14 +3,21 @@ package org.jabberstory.cjac.consignsettle.domain;
 import java.util.List;
 import java.util.Set;
 
+import org.jabberstory.cjac.forum.domain.Forum;
+import org.jabberstory.cjac.forum.domain.ForumService;
 import org.springframework.dao.DataAccessException;
 
 public class UserServiceImpl implements UserService {
 	
 	private UserRepository userRepository;
+	private ForumService forumService;
 
 	public void setUserRepository(UserRepository userRepository) {
 		this.userRepository = userRepository;
+	}
+	
+	public void setForumService(ForumService forumService) {
+		this.forumService = forumService;
 	}
 
 	@Override
@@ -48,7 +55,12 @@ public class UserServiceImpl implements UserService {
 //		if (group != null) {
 //			throw new DuplicateEntityException("Already existing User Group with group id = " + groupId);		
 //		}
-		userRepository.createUserGroup(groupName, role);
+		UserGroup userGroup = userRepository.createUserGroup(groupName, role);
+		if (userGroup.isOwner()) {
+			forumService.createForum(userGroup.getGroupId(), Forum.PUBLIC_TYPE, "공지사항");
+			forumService.createForum(userGroup.getGroupId(), Forum.QNA_TYPE, "Q &amp; A");
+			forumService.createForum(userGroup.getGroupId(), Forum.FILES_TYPE, "자료실");
+		}
 	}
 
 	@Override
