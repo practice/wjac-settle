@@ -71,9 +71,10 @@ public class UserRepository extends HibernateDaoSupport {
 		return list;
 	}
 
-	public void createUserGroup(String groupName, String role) {
+	public UserGroup createUserGroup(String groupName, String role) {
 		UserGroup group = new UserGroup(groupName, role);
 		getHibernateTemplate().save(group);
+		return group;
 	}
 
 	public void updateUserGroup(String groupId, String groupName, String role) {

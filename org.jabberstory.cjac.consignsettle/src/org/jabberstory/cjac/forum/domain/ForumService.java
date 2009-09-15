@@ -22,4 +22,6 @@ public interface ForumService {
 	public ForumPost updatePost(int id, String subject, String body);
 	public void removePost(int id);
 	public boolean isUnix();
+	public Forum createForum(String groupId, String forumType, String forumName);
+	public List<Forum> getForumsFor(String userId);
 }

@@ -16,9 +16,23 @@
 package org.jabberstory.cjac.forum.domain;
 
 public class Forum {
+	public static String PUBLIC_TYPE = "public";
+	public static String QNA_TYPE = "qna";
+	public static String FILES_TYPE = "files";
+	
 	private int id;
 	private String name;
+	private String groupId; // owner group id.
+	private String forumType;	// public, qna, files
 	
+	public Forum() {
+	}
+	
+	public Forum(String groupId, String forumType, String forumName) {
+		this.groupId = groupId;
+		this.forumType = forumType;
+		this.name = forumName;
+	}
 	public void setId(int id) {
 		this.id = id;
 	}
@@ -30,5 +44,17 @@ public class Forum {
 	}
 	public String getName() {
 		return name;
+	}
+	public void setGroupId(String groupId) {
+		this.groupId = groupId;
+	}
+	public String getGroupId() {
+		return groupId;
+	}
+	public void setForumType(String forumType) {
+		this.forumType = forumType;
+	}
+	public String getForumType() {
+		return forumType;
 	}
 }

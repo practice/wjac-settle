@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.jabberstory.cjac.consignsettle.domain.UserService;
 import org.jabberstory.cjac.forum.domain.Forum;
 import org.jabberstory.cjac.forum.domain.ForumPost;
 import org.jabberstory.cjac.forum.domain.ForumService;
@@ -14,9 +15,13 @@ import org.springframework.web.servlet.mvc.AbstractController;
 public class ForumListController extends AbstractController {
 
 	private ForumService forumService;
+	private UserService userService;
 
 	public void setForumService(ForumService forumService) {
 		this.forumService = forumService;
+	}
+	public void setUserService(UserService userService) {
+		this.userService = userService;
 	}
 
 	@Override
@@ -29,6 +34,7 @@ public class ForumListController extends AbstractController {
 		List<ForumPost> posts = forumService.getTopLevelPosts(forumId, page);
 
 		mv.addObject("forum", forum);
+		mv.addObject("userGroup", userService.getUserGroup(forum.getGroupId()));
 		mv.addObject("posts", posts);
 		if (posts.isEmpty())
 			mv.addObject("isEmptyList", Boolean.TRUE);

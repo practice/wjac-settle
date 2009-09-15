@@ -33,7 +33,8 @@
 	
 <!--  Service and Repository objects -->
 <bean id="userService" class="org.jabberstory.cjac.consignsettle.domain.UserServiceImpl" 
-	p:userRepository-ref="userRepository"/>
+	p:userRepository-ref="userRepository"
+	p:forumService-ref="forumService" />
 <bean id="userRepository" class="org.jabberstory.cjac.consignsettle.domain.UserRepository" 
 	p:hibernateTemplate-ref="hibernateTemplate" />
 
@@ -49,7 +50,9 @@
 	p:zipCodeRepository-ref="zipCodeRepository" />	
 	
 <bean id="forumService" class="org.jabberstory.cjac.forum.domain.ForumServiceImpl"
-	p:forumRepository-ref="forumRepository"	/>
+	p:forumRepository-ref="forumRepository"	
+	p:userService-ref="userService"
+	p:organService-ref="organService" />
 <bean id="forumRepository" class="org.jabberstory.cjac.forum.domain.ForumRepository"
 	p:hibernateTemplate-ref="hibernateTemplate" 
 	p:userService-ref="userService" />

@@ -38,7 +38,7 @@ public class ForumRepository extends HibernateDaoSupport {
 		// TODO 이렇게 하는거 맞나?
 //		criteria.add(Restrictions.eq("forum", getForum(forumId)));
 		DetachedCriteria forumCrit = criteria.createCriteria("forum", "f", CriteriaSpecification.INNER_JOIN);
-		forumCrit.add(Restrictions.eq("id", forumId));
+		forumCrit.add(Restrictions.or(Restrictions.eq("id", forumId), Restrictions.eq("groupId", "public")));
 		criteria.addOrder(Order.desc("id"));
 		criteria.createAlias("user", "u", CriteriaSpecification.LEFT_JOIN);
 		return getHibernateTemplate().findByCriteria(criteria, ForumService.PAGESIZE * (page -1), ForumService.PAGESIZE);
@@ -49,7 +49,7 @@ public class ForumRepository extends HibernateDaoSupport {
 	 */
 	@SuppressWarnings("unchecked")
 	public Long getPageCount(int forumId) {
-		final String queryString = "select count(p) from ForumPost p where p.rootId = 0 and p.forum.id = :forumId";
+		final String queryString = "select count(p) from ForumPost p where p.rootId = 0 and (p.forum.id = :forumId or p.forum.groupId = 'public')";
 		List result = getHibernateTemplate().findByNamedParam(queryString, "forumId", forumId);
 		
 		Long postCount = ((Number)result.get(0)).longValue();
@@ -173,6 +173,18 @@ public class ForumRepository extends HibernateDaoSupport {
 
 	public boolean isUnix() {
 		return isUnix;
+	}
+
+	public Forum createForum(String groupId, String forumType, String forumName) {
+		Forum forum = new Forum(groupId, forumType, forumName);
+		getHibernateTemplate().save(forum);
+		return forum;
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Forum> findForumFor(String groupId) {
+		String query = "from Forum f where f.groupId = :groupId";
+		return getHibernateTemplate().findByNamedParam(query, "groupId", groupId);
 	}
 
 }

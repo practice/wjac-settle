@@ -2,13 +2,28 @@ package org.jabberstory.cjac.forum.domain;
 
 import java.util.List;
 
+import org.jabberstory.cjac.consignsettle.domain.Organ;
+import org.jabberstory.cjac.consignsettle.domain.OrganService;
+import org.jabberstory.cjac.consignsettle.domain.User;
+import org.jabberstory.cjac.consignsettle.domain.UserGroup;
+import org.jabberstory.cjac.consignsettle.domain.UserService;
 import org.springframework.web.multipart.MultipartFile;
 
 public class ForumServiceImpl implements ForumService {
 	private ForumRepository forumRepository;
+	private UserService userService;
+	private OrganService organService;
 
 	public void setForumRepository(ForumRepository forumRepository) {
 		this.forumRepository = forumRepository;
+	}
+
+	public void setUserService(UserService userService) {
+		this.userService = userService;
+	}
+
+	public void setOrganService(OrganService organService) {
+		this.organService = organService;
 	}
 
 	@Override
@@ -64,6 +79,29 @@ public class ForumServiceImpl implements ForumService {
 	@Override
 	public Forum getForum(int id) {
 		return forumRepository.getForum(id);
+	}
+
+	@Override
+	public Forum createForum(String groupId, String forumType, String forumName) {
+		return forumRepository.createForum(groupId, forumType, forumName);
+	}
+
+	@Override
+	public List<Forum> getForumsFor(String userId) {
+		String ownerGroupId = "public";
+		User user = userService.getUser(userId);
+		UserGroup userGroup = user.getUserGroup();
+		if (userGroup == null)
+			return forumRepository.findForumFor(ownerGroupId);
+		if (userGroup.isOwner())
+			ownerGroupId = userGroup.getGroupId();
+		else if (userGroup.isSubject()) {
+			List<Organ> organs = organService.getOrgans(userId, userGroup.getRole());
+			if (organs.size() > 0) {
+				ownerGroupId = organs.get(0).getOwnerGroup().getGroupId();
+			}
+		}
+		return forumRepository.findForumFor(ownerGroupId);
 	}
 
 }
