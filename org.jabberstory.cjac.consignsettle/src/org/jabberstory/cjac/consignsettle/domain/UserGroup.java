@@ -61,5 +61,13 @@ public class UserGroup {
 		return "UserGroup [groupId=" + groupId + ", groupName=" + groupName
 				+ ", role=" + role + "]";
 	}
+	
+	public boolean isOwner() {
+		return "O".equals(role);
+	}
+	
+	public boolean isSubject() {
+		return "S".equals(role);
+	}
 
 }
