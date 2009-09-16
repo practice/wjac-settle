@@ -110,8 +110,8 @@ public class ForumServiceImpl implements ForumService {
 	}
 
 	@Override
-	public List<Forum> getAllForums() {
-		return forumRepository.getAllForums();
+	public List<Forum> getForums(int page) {
+		return forumRepository.getForums(page);
 	}
 
 	public void setForumPermissionService(ForumPermissionService forumPermissionService) {

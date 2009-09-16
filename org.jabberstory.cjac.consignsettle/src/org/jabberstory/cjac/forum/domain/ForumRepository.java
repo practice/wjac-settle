@@ -190,7 +190,8 @@ public class ForumRepository extends HibernateDaoSupport {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Forum> getAllForums() {
+	public List<Forum> getForums(int page) {
+//		getHibernateTemplate().
 		List<Object[]> rs = getHibernateTemplate().find("from Forum f, UserGroup ug where f.groupId = ug.groupId");
 		ArrayList<Forum> list = new ArrayList<Forum>();
 		for (Object[] forums : rs) {
