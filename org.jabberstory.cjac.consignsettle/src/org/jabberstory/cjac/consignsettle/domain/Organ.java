@@ -1,5 +1,10 @@
 package org.jabberstory.cjac.consignsettle.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.jabberstory.cjac.forum.domain.PostAttachment;
+
 public class Organ {
 
 	private String organId;
@@ -19,6 +24,8 @@ public class Organ {
 	private String formalObjectAcceptanceDate;
 	private String formalObjectResultDate;
 	private String consignSettlementResultDate;
+	private String subtotal;
+	private String totalResearchAmount;
 	private String organResponsiblePerson;
 	private String organResponsiblePhone1;
 	private String organResponsiblePhone2;
@@ -40,11 +47,14 @@ public class Organ {
 	private String currentNonPropriety;
 	private String currentRedemtion;
 	private String currentSubTotal;
+	private String opinion;
+	private String remark;
 	private String costDetail;
 	private String nonApproval1;
 	private String nonApproval2;
 	private UserGroup ownerGroup;
 	private UserGroup subjectGroup;
+	private List<OrganAttachment> attachments = new ArrayList<OrganAttachment>();
 
 	public Organ() {
 	}
@@ -67,6 +77,8 @@ public class Organ {
 	 * @param formalObjectAcceptanceDate
 	 * @param formalObjectResultDate
 	 * @param consignSettlementResultDate
+	 * @param subtotal
+	 * @param totalResearchAmount
 	 * @param organResponsiblePerson
 	 * @param organResponsiblePhone1
 	 * @param organResponsiblePhone2
@@ -88,11 +100,14 @@ public class Organ {
 	 * @param currentNonPropriety
 	 * @param currentRedemtion
 	 * @param currentSubTotal
+	 * @param opinion
+	 * @param remark
 	 * @param costDetail
 	 * @param nonApproval1
 	 * @param nonApproval2
 	 * @param ownerGroup
 	 * @param subjectGroup
+	 * @param attachments
 	 */
 	public Organ(String organId, String businessName, String projectName,
 			String researchAgency, String researchResponsiblePerson,
@@ -101,7 +116,8 @@ public class Organ {
 			String goodsAmount, String totalCashAmount, String govInterests,
 			String consignSettlementCommission, String useResultDate,
 			String formalObjectAcceptanceDate, String formalObjectResultDate,
-			String consignSettlementResultDate, String organResponsiblePerson,
+			String consignSettlementResultDate, String subtotal,
+			String totalResearchAmount, String organResponsiblePerson,
 			String organResponsiblePhone1, String organResponsiblePhone2,
 			String organResponsiblePhone3, String organResponsiblePostNumber1,
 			String organResponsiblePostNumber2, String organResponsibleAddress,
@@ -113,8 +129,10 @@ public class Organ {
 			String consignSettlementAddress, String consignSettlementEmail,
 			String currentAccount, String currentInterest,
 			String currentNonPropriety, String currentRedemtion,
-			String currentSubTotal, String costDetail, String nonApproval1,
-			String nonApproval2, UserGroup ownerGroup, UserGroup subjectGroup) {
+			String currentSubTotal, String opinion, String remark,
+			String costDetail, String nonApproval1, String nonApproval2,
+			UserGroup ownerGroup, UserGroup subjectGroup,
+			List<OrganAttachment> attachments) {
 		super();
 		this.organId = organId;
 		this.businessName = businessName;
@@ -133,6 +151,8 @@ public class Organ {
 		this.formalObjectAcceptanceDate = formalObjectAcceptanceDate;
 		this.formalObjectResultDate = formalObjectResultDate;
 		this.consignSettlementResultDate = consignSettlementResultDate;
+		this.subtotal = subtotal;
+		this.totalResearchAmount = totalResearchAmount;
 		this.organResponsiblePerson = organResponsiblePerson;
 		this.organResponsiblePhone1 = organResponsiblePhone1;
 		this.organResponsiblePhone2 = organResponsiblePhone2;
@@ -154,11 +174,14 @@ public class Organ {
 		this.currentNonPropriety = currentNonPropriety;
 		this.currentRedemtion = currentRedemtion;
 		this.currentSubTotal = currentSubTotal;
+		this.opinion = opinion;
+		this.remark = remark;
 		this.costDetail = costDetail;
 		this.nonApproval1 = nonApproval1;
 		this.nonApproval2 = nonApproval2;
 		this.ownerGroup = ownerGroup;
 		this.subjectGroup = subjectGroup;
+		this.attachments = attachments;
 	}
 
 	public String getOrganId() {
@@ -295,6 +318,22 @@ public class Organ {
 
 	public void setConsignSettlementResultDate(String consignSettlementResultDate) {
 		this.consignSettlementResultDate = consignSettlementResultDate;
+	}
+
+	public String getSubtotal() {
+		return subtotal;
+	}
+
+	public void setSubtotal(String subtotal) {
+		this.subtotal = subtotal;
+	}
+
+	public String getTotalResearchAmount() {
+		return totalResearchAmount;
+	}
+
+	public void setTotalResearchAmount(String totalResearchAmount) {
+		this.totalResearchAmount = totalResearchAmount;
 	}
 
 	public String getOrganResponsiblePerson() {
@@ -465,6 +504,22 @@ public class Organ {
 		this.currentSubTotal = currentSubTotal;
 	}
 
+	public String getOpinion() {
+		return opinion;
+	}
+
+	public void setOpinion(String opinion) {
+		this.opinion = opinion;
+	}
+
+	public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+
 	public String getCostDetail() {
 		return costDetail;
 	}
@@ -501,10 +556,6 @@ public class Organ {
 		return subjectGroup;
 	}
 
-	public void setSubjectGroup(UserGroup subjectGroup) {
-		this.subjectGroup = subjectGroup;
-	}
-
 	@Override
 	public String toString() {
 		return "Organ [businessName=" + businessName
@@ -533,23 +584,36 @@ public class Organ {
 				+ govContributeAmount + ", govInterests=" + govInterests
 				+ ", nonApproval1=" + nonApproval1 + ", nonApproval2="
 				+ nonApproval2 + ", nonGovContributeAmount="
-				+ nonGovContributeAmount + ", organId=" + organId
-				+ ", organResponsibleAddress=" + organResponsibleAddress
-				+ ", organResponsibleEmail=" + organResponsibleEmail
-				+ ", organResponsiblePerson=" + organResponsiblePerson
-				+ ", organResponsiblePhone1=" + organResponsiblePhone1
-				+ ", organResponsiblePhone2=" + organResponsiblePhone2
-				+ ", organResponsiblePhone3=" + organResponsiblePhone3
-				+ ", organResponsiblePostNumber1="
+				+ nonGovContributeAmount + ", opinion=" + opinion
+				+ ", organId=" + organId + ", organResponsibleAddress="
+				+ organResponsibleAddress + ", organResponsibleEmail="
+				+ organResponsibleEmail + ", organResponsiblePerson="
+				+ organResponsiblePerson + ", organResponsiblePhone1="
+				+ organResponsiblePhone1 + ", organResponsiblePhone2="
+				+ organResponsiblePhone2 + ", organResponsiblePhone3="
+				+ organResponsiblePhone3 + ", organResponsiblePostNumber1="
 				+ organResponsiblePostNumber1
 				+ ", organResponsiblePostNumber2="
 				+ organResponsiblePostNumber2 + ", projectName=" + projectName
-				+ ", researchAgency=" + researchAgency
+				+ ", remark=" + remark + ", researchAgency=" + researchAgency
 				+ ", researchResponsiblePerson=" + researchResponsiblePerson
-				+ ", totalCashAmount=" + totalCashAmount + ", useResultDate="
-				+ useResultDate + "]";
+				+ ", subtotal=" + subtotal + ", totalCashAmount="
+				+ totalCashAmount + ", totalResearchAmount="
+				+ totalResearchAmount + ", useResultDate=" + useResultDate
+				+ "]";
 	}
 
-	
+	public void setSubjectGroup(UserGroup subjectGroup) {
+		this.subjectGroup = subjectGroup;
+	}
+
+	public List<OrganAttachment> getAttachments() {
+		return attachments;
+	}
+
+	public void setAttachments(List<OrganAttachment> attachments) {
+		this.attachments = attachments;
+	}
+
 	
 }

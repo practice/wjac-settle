@@ -13,8 +13,8 @@
 		<property name="projectName" column="PROJECT_NAME" type="string" length="32" />
 		<property name="researchAgency" column="RESEARCH_AGENCY" type="string" length="32" />
 		<property name="researchResponsiblePerson" column="RESEARCH_RESPONSIBLE_PERSON" type="string" length="32" />
-		<property name="contractStartDate" column="CONTRACT_STARTDATE" type="string" length="32" />
-		<property name="contractEndDate" column="CONTRACT_ENDDATE" type="string" length="32" />
+		<property name="contractStartDate" column="CONTRACT_STARTDATE" type="string" length="10" />
+		<property name="contractEndDate" column="CONTRACT_ENDDATE" type="string" length="10" />
 		
 		<property name="govContributeAmount" column="GOV_CONTRIBUTE_AMOUNT" type="string" length="32" />
 		<property name="nonGovContributeAmount" column="NONGOV_CONTRIBUTE_AMOUNT" type="string" length="32" />
@@ -22,35 +22,40 @@
 		<property name="totalCashAmount" column="TOTAL_CACHE_AMOUNT" type="string" length="32" />
 		<property name="govInterests" column="GOV_INTERESTS" type="string" length="32" />
 		<property name="consignSettlementCommission" column="CONSIGN_SETTLEMENT_COMMISSION" type="string" length="32" />
+		<property name="subtotal" column="SUBTOTAL" type="string" length="32" />
+		<property name="totalResearchAmount" column="TOTAL_RESEARCH_AMOUNT" type="string" length="32" />
 		
-		<property name="useResultDate" column="USE_RESULT_DATE" type="string" length="32" />
-		<property name="formalObjectAcceptanceDate" column="FORMALOBJECT_ACCEPTANCE_DATE" type="string" length="32" />
-		<property name="formalObjectResultDate" column="FORMALOBJECT_RESULT_DATE" type="string" length="32" />
-		<property name="consignSettlementResultDate" column="CONSIGN_SETTLEMENT_RESULTDATE" type="string" length="32" />
+		<property name="useResultDate" column="USE_RESULT_DATE" type="string" length="10" />
+		<property name="formalObjectAcceptanceDate" column="FORMALOBJECT_ACCEPTANCE_DATE" type="string" length="10" />
+		<property name="formalObjectResultDate" column="FORMALOBJECT_RESULT_DATE" type="string" length="10" />
+		<property name="consignSettlementResultDate" column="CONSIGN_SETTLEMENT_RESULTDATE" type="string" length="10" />
 		
 		<property name="organResponsiblePerson" column="ORGAN_RESPONSIBLE_PERSON" type="string" length="32" />
-		<property name="organResponsiblePhone1" column="ORGAN_RESPONSIBLE_PHONE1" type="string" length="32" />
-		<property name="organResponsiblePhone2" column="ORGAN_RESPONSIBLE_PHONE2" type="string" length="32" />
-		<property name="organResponsiblePhone3" column="ORGAN_RESPONSIBLE_PHONE3" type="string" length="32" />
-		<property name="organResponsiblePostNumber1" column="ORGAN_RESPONSIBLE_POSTNUMBER1" type="string" length="32" />
-		<property name="organResponsiblePostNumber2" column="ORGAN_RESPONSIBLE_POSTNUMBER2" type="string" length="32" />
-		<property name="organResponsibleAddress" column="ORGAN_RESPONSIBLE_ADDRESS" type="string" length="32" />
-		<property name="organResponsibleEmail" column="ORGAN_RESPONSIBLE_EMAIL" type="string" length="32" />
+		<property name="organResponsiblePhone1" column="ORGAN_RESPONSIBLE_PHONE1" type="string" length="4" />
+		<property name="organResponsiblePhone2" column="ORGAN_RESPONSIBLE_PHONE2" type="string" length="4" />
+		<property name="organResponsiblePhone3" column="ORGAN_RESPONSIBLE_PHONE3" type="string" length="4" />
+		<property name="organResponsiblePostNumber1" column="ORGAN_RESPONSIBLE_POSTNUMBER1" type="string" length="3" />
+		<property name="organResponsiblePostNumber2" column="ORGAN_RESPONSIBLE_POSTNUMBER2" type="string" length="3" />
+		<property name="organResponsibleAddress" column="ORGAN_RESPONSIBLE_ADDRESS" type="string" length="64" />
+		<property name="organResponsibleEmail" column="ORGAN_RESPONSIBLE_EMAIL" type="string" length="64" />
 		
 		<property name="consignSettlementPerson" column="CONSIGN_SETTLEMENT_PERSON" type="string" length="32" />
-		<property name="consignSettlementPhone1" column="CONSIGN_SETTLEMENT_PHONE1" type="string" length="32" />
-		<property name="consignSettlementPhone2" column="CONSIGN_SETTLEMENT_PHONE2" type="string" length="32" />
-		<property name="consignSettlementPhone3" column="CONSIGN_SETTLEMENT_PHONE3" type="string" length="32" />
-		<property name="consignSettlementPostNumber1" column="CONSIGN_SETTLEMENT_POSTNUMBER1" type="string" length="32" />
-		<property name="consignSettlementPostNumber2" column="CONSIGN_SETTLEMENT_POSTNUMBER2" type="string" length="32" />
-		<property name="consignSettlementAddress" column="CONSIGN_SETTLEMENT_ADDRESS" type="string" length="32" />
-		<property name="consignSettlementEmail" column="CONSIGN_SETTLEMENT_EMAIL" type="string" length="32" />
+		<property name="consignSettlementPhone1" column="CONSIGN_SETTLEMENT_PHONE1" type="string" length="4" />
+		<property name="consignSettlementPhone2" column="CONSIGN_SETTLEMENT_PHONE2" type="string" length="4" />
+		<property name="consignSettlementPhone3" column="CONSIGN_SETTLEMENT_PHONE3" type="string" length="4" />
+		<property name="consignSettlementPostNumber1" column="CONSIGN_SETTLEMENT_POSTNUMBER1" type="string" length="3" />
+		<property name="consignSettlementPostNumber2" column="CONSIGN_SETTLEMENT_POSTNUMBER2" type="string" length="3" />
+		<property name="consignSettlementAddress" column="CONSIGN_SETTLEMENT_ADDRESS" type="string" length="64" />
+		<property name="consignSettlementEmail" column="CONSIGN_SETTLEMENT_EMAIL" type="string" length="64" />
 		
 		<property name="currentAccount" column="CURRENT_AMOUNT" type="string" length="32" />
 		<property name="currentInterest" column="CURRENT_INTEREST" type="string" length="32" />
 		<property name="currentNonPropriety" column="CURRENT_NONPROPRIETY" type="string" length="32" />
 		<property name="currentRedemtion" column="CURRENT_REDEMTION" type="string" length="32" />
 		<property name="currentSubTotal" column="CURRENT_SUB_TOTAL" type="string" length="32" />
+		
+		<property name="opinion" column="OPINION" type="string" length="500" />
+		<property name="remark" column="REMARK" type="string" length="500" />
 
 		<property name="costDetail" column="COST_DETAIL" type="text"/>
 		<property name="nonApproval1" column="NON_APPROVAL1" type="text"/>
@@ -58,7 +63,23 @@
 		
 		<many-to-one name="ownerGroup" class="UserGroup" column="OWNER_GROUPID" foreign-key="FK_ORGAN_OWNERGROUP" lazy="false"/>
         <many-to-one name="subjectGroup" class="UserGroup" column="SUBJECT_GROUPID" foreign-key="FK_ORGAN_SUBJECTGROUP" lazy="false"/>
+        
+        <list name="attachments" cascade="save-update, delete">
+			<key column="ORGANID" />
+			<list-index column="LISTINDEX" />
+			<one-to-many class="OrganAttachment" />
+		</list>
        
+	</class>
+	
+	<class name="OrganAttachment" table="ORGANATTACHMENT">
+		<id name="id" column="ATTID" type="string" length="32">
+			<generator class="uuid" />
+		</id>
+		<property name="filename" column="FILENAME" type="string" length="256" />
+		<property name="filesize" column="FILESIZE" type="string" length="16" />
+		<property name="dir" column="DIR" type="string" length="256" />
+		<many-to-one name="organ" column="ORGANID" class="Organ" foreign-key="FK_ORGAN_ATTACHMENT" lazy="false"/>
 	</class>
 
 </hibernate-mapping>
