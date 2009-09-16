@@ -10,7 +10,6 @@ import org.jabberstory.cjac.forum.domain.ForumPermissionService;
 import org.jabberstory.cjac.forum.domain.ForumPost;
 import org.jabberstory.cjac.forum.domain.ForumService;
 import org.jabberstory.web.util.WebUtil;
-import org.springframework.security.AccessDeniedException;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.AbstractController;
 
@@ -38,9 +37,6 @@ public class ShowPostController extends AbstractController {
 			return null;
 		}
 		
-		if (!forumPermissionService.hasReadPermission(post))
-			throw new AccessDeniedException("You don't have enough permission to read this message");
-
 		List<ForumPost> children = forumService.getChildrenPosts(id);
 		request.setAttribute("post", post);
 		request.setAttribute("children", children);

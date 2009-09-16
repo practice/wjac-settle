@@ -53,7 +53,8 @@
 <bean id="forumService" class="org.jabberstory.cjac.forum.domain.ForumServiceImpl"
 	p:forumRepository-ref="forumRepository"	
 	p:userService-ref="userService"
-	p:organService-ref="organService" />
+	p:organService-ref="organService" 
+	p:forumPermissionService-ref="forumPermissionService" />
 <bean id="forumRepository" class="org.jabberstory.cjac.forum.domain.ForumRepository"
 	p:hibernateTemplate-ref="hibernateTemplate" 
 	p:userService-ref="userService" />
