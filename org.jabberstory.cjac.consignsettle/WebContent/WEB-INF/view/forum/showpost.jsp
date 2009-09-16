@@ -89,8 +89,10 @@ $(document).ready(function() {
       <div class="b_blue">
         <ul>
           <li><a href="<c:url value="/forum/${forum.id}/list?page=${param.page}" />">목록보기</a></li>
+          <c:if test="${child.prop['canModify']}">
           <li><a href="removePost?id=${child.id}&page=${param.page}">삭제</a></li>
           <li><a href="<c:url value="/forum/${forum.id}/updatePost?id=${child.id}&page=${param.page}" />">수정하기</a></li>
+          </c:if>
         </ul>
       </div>
     </div>
