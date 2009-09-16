@@ -3,6 +3,7 @@ package org.jabberstory.cjac.forum.domain;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.jabberstory.cjac.consignsettle.domain.User;
@@ -20,6 +21,9 @@ public class ForumPost {
 	private User user;
 	private List<PostAttachment> attachments = new ArrayList<PostAttachment>();
 	private Forum forum;
+	
+	@SuppressWarnings("unchecked")
+	private HashMap prop = new HashMap();
 
 //	private static SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd HH.mm.ss");
 	private static SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
@@ -118,6 +122,16 @@ public class ForumPost {
 
 	public Forum getForum() {
 		return forum;
+	}
+
+	@SuppressWarnings("unchecked")
+	public void setProp(HashMap prop) {
+		this.prop = prop;
+	}
+
+	@SuppressWarnings("unchecked")
+	public HashMap getProp() {
+		return prop;
 	}
 
 }
