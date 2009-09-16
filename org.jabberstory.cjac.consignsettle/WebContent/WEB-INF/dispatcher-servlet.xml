@@ -152,24 +152,30 @@
 	<!-- Forum Controller -->
 	<!-- ############################################################## -->
 	<bean id="removePostController" class="org.jabberstory.cjac.forum.controller.RemovePostController"
-		p:forumService-ref="forumService" />
+		p:forumService-ref="forumService" 
+		p:forumPermissionService-ref="forumPermissionService" />
 	<bean id="updatePostController" class="org.jabberstory.cjac.forum.controller.UpdatePostController"
 		p:successView=""
 		p:formView="forum/updatePost"
-		p:forumService-ref="forumService" />
+		p:forumService-ref="forumService" 
+		p:forumPermissionService-ref="forumPermissionService" />
 	<bean id="writeController" class="org.jabberstory.cjac.forum.controller.WriteController" 
 		p:successView=""
 		p:formView="forum/write"
 		p:forumService-ref="forumService" 
-		p:validator-ref="writeValidator" />
+		p:validator-ref="writeValidator" 
+		p:forumPermissionService-ref="forumPermissionService" />
 	<bean id="writeValidator" class="org.jabberstory.cjac.forum.controller.WriteCommandValidator" />
 	<bean id="forumListController" class="org.jabberstory.cjac.forum.controller.ForumListController" 
 		p:forumService-ref="forumService" 
-		p:userService-ref="userService" />
+		p:userService-ref="userService" 
+		p:forumPermissionService-ref="forumPermissionService" />
 	<bean id="showPostController" class="org.jabberstory.cjac.forum.controller.ShowPostController" 
-		p:forumService-ref="forumService" />
+		p:forumService-ref="forumService" 
+		p:forumPermissionService-ref="forumPermissionService" />
 	<bean id="downloadController" class="org.jabberstory.cjac.forum.controller.AttachmentDownloadController" 
-		p:forumService-ref="forumService" />
+		p:forumService-ref="forumService" 
+		p:forumPermissionService-ref="forumPermissionService" />
 	
 	<bean id="downloadView" class="org.jabberstory.cjac.forum.view.DownloadView" />
 

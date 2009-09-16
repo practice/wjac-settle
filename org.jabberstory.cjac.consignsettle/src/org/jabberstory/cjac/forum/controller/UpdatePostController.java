@@ -7,9 +7,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.jabberstory.cjac.forum.domain.Forum;
+import org.jabberstory.cjac.forum.domain.ForumPermissionService;
 import org.jabberstory.cjac.forum.domain.ForumPost;
 import org.jabberstory.cjac.forum.domain.ForumService;
 import org.jabberstory.web.util.WebUtil;
+import org.springframework.security.AccessDeniedException;
 import org.springframework.validation.BindException;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.web.servlet.ModelAndView;
@@ -17,9 +19,14 @@ import org.springframework.web.servlet.mvc.SimpleFormController;
 
 public class UpdatePostController extends SimpleFormController {
 	private ForumService forumService;
+	private ForumPermissionService forumPermissionService;
 
 	public void setForumService(ForumService forumService) {
 		this.forumService = forumService;
+	}
+
+	public void setForumPermissionService(ForumPermissionService permissionService) {
+		this.forumPermissionService = permissionService;
 	}
 
 	public UpdatePostController() {
@@ -46,6 +53,10 @@ public class UpdatePostController extends SimpleFormController {
 		WriteSubmitCommand command = new WriteSubmitCommand();
 		String id = request.getParameter("id");
 		ForumPost post = forumService.getPost(Integer.valueOf(id));
+		
+		if (!forumPermissionService.hasModificationPermission(post))
+			throw new AccessDeniedException("You don't have enough permission for modification");
+		
 		if (post != null) {
 			command.setId(id);
 			if (post.getSubject() != null) {
@@ -65,12 +76,16 @@ public class UpdatePostController extends SimpleFormController {
 		int page = WebUtil.getIntParam(request, "page", 1);
 		WriteSubmitCommand param = (WriteSubmitCommand) command;
 		ForumPost oldPost = forumService.getPost(Integer.valueOf(param.getId()));
+		if (!forumPermissionService.hasModificationPermission(oldPost))
+			throw new AccessDeniedException("You don't have enough permission for modification");
+
 		if (oldPost.getRootId() == 0) {
 			ValidationUtils.rejectIfEmptyOrWhitespace(errors, "title", "required");
 		}
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "body", "required");
 		if (errors.hasErrors())
 			return showForm(request, response, errors);
+
 		ForumPost post = forumService.updatePost(Integer.valueOf(param.getId()), param.getTitle(), param.getBody());
 		int rootId = post.getId();
 		if (post.getRootId() != 0) {

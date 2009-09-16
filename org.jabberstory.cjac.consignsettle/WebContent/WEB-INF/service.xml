@@ -21,6 +21,7 @@
 		<tx:method name="remove*" propagation="REQUIRED" />
 		<tx:method name="update*" propagation="REQUIRED" />
 		<tx:method name="get*" read-only="true" />
+		<tx:method name="has*" read-only="true" />
 		<tx:method name="find*" read-only="true" />
 		<tx:method name="search*" read-only="true" />
 	</tx:attributes>
@@ -57,4 +58,6 @@
 	p:hibernateTemplate-ref="hibernateTemplate" 
 	p:userService-ref="userService" />
 
+<bean id="forumPermissionService" class="org.jabberstory.cjac.forum.domain.ForumPermissionServiceImpl" 
+	p:forumService-ref="forumService" />
 </beans>

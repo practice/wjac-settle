@@ -7,8 +7,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.jabberstory.cjac.consignsettle.domain.UserService;
 import org.jabberstory.cjac.forum.domain.Forum;
+import org.jabberstory.cjac.forum.domain.ForumPermissionService;
 import org.jabberstory.cjac.forum.domain.ForumPost;
 import org.jabberstory.cjac.forum.domain.ForumService;
+import org.springframework.security.AccessDeniedException;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.AbstractController;
 
@@ -16,10 +18,16 @@ public class ForumListController extends AbstractController {
 
 	private ForumService forumService;
 	private UserService userService;
+	private ForumPermissionService forumPermissionService;
 
 	public void setForumService(ForumService forumService) {
 		this.forumService = forumService;
 	}
+
+	public void setForumPermissionService(ForumPermissionService permissionService) {
+		this.forumPermissionService = permissionService;
+	}
+
 	public void setUserService(UserService userService) {
 		this.userService = userService;
 	}
@@ -29,6 +37,11 @@ public class ForumListController extends AbstractController {
 			HttpServletResponse response) throws Exception {
 		int forumId = ForumUtil.extractForumId(request);
 		Forum forum = forumService.getForum(forumId);
+
+		if (!forumPermissionService.hasReadPermission(forum)) {
+			throw new AccessDeniedException("You don't have enough permission for this forum");
+		}
+		
 		int page = getPageParam(request);
 		ModelAndView mv = new ModelAndView();
 		List<ForumPost> posts = forumService.getTopLevelPosts(forumId, page);
