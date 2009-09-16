@@ -44,9 +44,11 @@ $(document).ready(function() {
     <div class="button">
       <div class="b_blue">
         <ul>
-          <li><a href="<c:url value="/forum/${forum.id}/list?page=${param.page}" />">목록보기</a></li>
+          <li><a href="<c:url value="/forum/${forum.id}/list?page=${param.page}" />">목록</a></li>
+          <c:if test="${post.prop['canModify']}">
           <li><c:if test="${childrenCount == 0}"><a href="removePost?id=${post.id}&page=${param.page}">삭제</a></c:if></li>
           <li><a href="<c:url value="/forum/${forum.id}/updatePost?id=${post.id}&page=${param.page}" />">수정하기</a></li>
+          </c:if>
         </ul>
       </div>
     </div>
