@@ -104,4 +104,9 @@ public class ForumServiceImpl implements ForumService {
 		return forumRepository.findForumFor(ownerGroupId);
 	}
 
+	@Override
+	public List<Forum> getAllForums() {
+		return forumRepository.getAllForums();
+	}
+
 }

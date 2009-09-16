@@ -44,6 +44,7 @@
 				<prop key="/forum/*/removePost">removePostController</prop>
 				<prop key="/forum/*/showpost">showPostController</prop>
 				<prop key="/forum/*/download">downloadController</prop>
+				<prop key="/forum/showForumList">showForumListController</prop>
 				<prop key="/admin/*">authAdminMultiActionController</prop>
 			</props>
 		</property>
@@ -178,6 +179,9 @@
 		p:forumPermissionService-ref="forumPermissionService" />
 	
 	<bean id="downloadView" class="org.jabberstory.cjac.forum.view.DownloadView" />
+	<bean id="showForumListController" class="org.jabberstory.cjac.forum.controller.ShowForumListController" 
+		p:forumService-ref="forumService" 
+		p:forumPermissionService-ref="forumPermissionService" />
 
 	<!-- ############################################################## -->
 	<!--  General purpose beans -->

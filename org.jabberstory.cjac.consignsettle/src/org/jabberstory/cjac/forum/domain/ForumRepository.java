@@ -3,6 +3,7 @@ package org.jabberstory.cjac.forum.domain;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -10,6 +11,7 @@ import org.hibernate.criterion.CriteriaSpecification;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
+import org.jabberstory.cjac.consignsettle.domain.UserGroup;
 import org.jabberstory.cjac.consignsettle.domain.UserService;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 import org.springframework.web.multipart.MultipartFile;
@@ -185,6 +187,19 @@ public class ForumRepository extends HibernateDaoSupport {
 	public List<Forum> findForumFor(String groupId) {
 		String query = "from Forum f where f.groupId = :groupId";
 		return getHibernateTemplate().findByNamedParam(query, "groupId", groupId);
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Forum> getAllForums() {
+		List<Object[]> rs = getHibernateTemplate().find("from Forum f, UserGroup ug where f.groupId = ug.groupId");
+		ArrayList<Forum> list = new ArrayList<Forum>();
+		for (Object[] forums : rs) {
+			Forum forum = (Forum)forums[0];
+			UserGroup ug = (UserGroup)forums[1];
+			forum.getProp().put("userGroup", ug);
+			list.add(forum);
+		}
+		return list;
 	}
 
 }

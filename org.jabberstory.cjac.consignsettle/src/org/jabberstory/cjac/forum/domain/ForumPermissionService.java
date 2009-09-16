@@ -12,4 +12,6 @@ public interface ForumPermissionService {
 
 	public abstract boolean hasRemovePermission(ForumPost post);
 
+	public boolean hasBrowserForumPermission();
+
 }
