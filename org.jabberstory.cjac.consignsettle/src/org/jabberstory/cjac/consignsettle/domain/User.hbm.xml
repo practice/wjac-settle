@@ -12,6 +12,12 @@
 		<property name="username" column="USERNAME" type="string" length="32" />
 		<property name="email" column="EMAIL" type="string" length="64" />
 		<property name="password" column="PASSWORD" type="string" length="64" />
+		<property name="postnum1" column="POSTNUM1" type="string" length="3" />
+		<property name="postnum2" column="POSTNUM2" type="string" length="3" />
+		<property name="address" column="ADDRESS" type="string" length="64" />
+		<property name="phone1" column="PHONE1" type="string" length="4" />
+		<property name="phone2" column="PHONE2" type="string" length="4" />
+		<property name="phone3" column="PHONE3" type="string" length="4" />
 		<many-to-one name="userGroup" class="UserGroup" column="GROUPID" lazy="false" foreign-key="FK_USER_GROUP"/>
 	</class>
 	
