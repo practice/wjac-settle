@@ -11,7 +11,7 @@ public interface ForumService {
 	
 	public static final int PAGESIZE = 10;
 
-	public List<Forum> getAllForums();
+	public List<Forum> getForums(int page);
 	public Forum getForum(int id);
 	public ForumPost getPost(int id);
 	public List<ForumPost> getChildrenPosts(int id);
