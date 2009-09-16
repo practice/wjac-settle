@@ -8,7 +8,12 @@
   </div>
   <div id="top_menu"><a href='<c:url value="/forum/${publicForum}/list" />'>공지사항</a> 
   | <a href='<c:url value="/forum/${qnaForum}/list" />'>Q&amp;A</a> 
-  | <a href='<c:url value="/forum/${filesForum}/list" />'>회계세무 자료실</a></div>
+  | <a href='<c:url value="/forum/${filesForum}/list" />'>회계세무 자료실</a>
+  <sec:authorize ifAnyGranted="ROLE_ADMIN">
+  		| <a href="<c:url value="/forum/showForumList" />">모든 게시판</a>
+  </sec:authorize>
+  
+  </div>
   <div id="gnb">
     <ul>
       <li id="menu01"><a href="<c:url value="/organ/subjectList" />">주관기관 현황</a></li>

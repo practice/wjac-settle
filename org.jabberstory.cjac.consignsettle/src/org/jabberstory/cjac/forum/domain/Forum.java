@@ -15,6 +15,9 @@
 */
 package org.jabberstory.cjac.forum.domain;
 
+import java.util.HashMap;
+
+@SuppressWarnings("unchecked")
 public class Forum {
 	public static String PUBLIC_TYPE = "public";
 	public static String QNA_TYPE = "qna";
@@ -24,6 +27,8 @@ public class Forum {
 	private String name;
 	private String groupId; // owner group id.
 	private String forumType;	// public, qna, files
+	
+	private HashMap prop = new HashMap();
 	
 	public Forum() {
 	}
@@ -56,5 +61,13 @@ public class Forum {
 	}
 	public String getForumType() {
 		return forumType;
+	}
+
+	public void setProp(HashMap prop) {
+		this.prop = prop;
+	}
+
+	public HashMap getProp() {
+		return prop;
 	}
 }

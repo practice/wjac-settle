@@ -61,4 +61,14 @@ public class ForumPermissionServiceImpl implements ForumPermissionService {
 		return hasReadPermission(forum);
 	}
 
+	@Override
+	public boolean hasBrowserForumPermission() {
+		GrantedAuthority[] authorities = SecurityContextHolder.getContext().getAuthentication().getAuthorities();
+		for (GrantedAuthority authority : authorities) {
+			if ("ROLE_ADMIN".equals(authority.getAuthority()))
+				return true;
+		}
+		return false;
+	}
+
 }

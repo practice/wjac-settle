@@ -31,4 +31,8 @@
 		<put-attribute name="body" value="/WEB-INF/view/forum/updatePost.jsp" />
 	</definition>
 
+	<definition name="forum/showForumList" extends="base_layout">
+		<put-attribute name="body" value="/WEB-INF/view/forum/showForumList.jsp" />
+	</definition>
+
 </tiles-definitions>
