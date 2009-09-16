@@ -7,12 +7,14 @@ import org.jabberstory.cjac.consignsettle.domain.OrganService;
 import org.jabberstory.cjac.consignsettle.domain.User;
 import org.jabberstory.cjac.consignsettle.domain.UserGroup;
 import org.jabberstory.cjac.consignsettle.domain.UserService;
+import org.springframework.security.AccessDeniedException;
 import org.springframework.web.multipart.MultipartFile;
 
 public class ForumServiceImpl implements ForumService {
 	private ForumRepository forumRepository;
 	private UserService userService;
 	private OrganService organService;
+	private ForumPermissionService forumPermissionService;
 
 	public void setForumRepository(ForumRepository forumRepository) {
 		this.forumRepository = forumRepository;
@@ -78,7 +80,10 @@ public class ForumServiceImpl implements ForumService {
 
 	@Override
 	public Forum getForum(int id) {
-		return forumRepository.getForum(id);
+		Forum forum = forumRepository.getForum(id);
+		if (!forumPermissionService.hasReadPermission(forum))
+			throw new AccessDeniedException("You don't have enough permission to read this message");
+		return forum;
 	}
 
 	@Override
@@ -107,6 +112,10 @@ public class ForumServiceImpl implements ForumService {
 	@Override
 	public List<Forum> getAllForums() {
 		return forumRepository.getAllForums();
+	}
+
+	public void setForumPermissionService(ForumPermissionService forumPermissionService) {
+		this.forumPermissionService = forumPermissionService;
 	}
 
 }
