@@ -564,3 +564,11 @@ textarea {
 .page-number {
 	margin: 3px;
 }
+
+#parentGroup {
+	maxHeight: 3000px;
+	width: 300px;
+	overflow: auto;
+	margin-left: auto;
+	margin-right: auto;
+}

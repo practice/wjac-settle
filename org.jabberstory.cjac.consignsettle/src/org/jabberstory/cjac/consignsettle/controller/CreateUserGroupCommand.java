@@ -4,6 +4,7 @@ public class CreateUserGroupCommand {
 	private String groupId;
 	private String groupName;
 	private String role;
+	private String parentGroup;
 	
 	public String getGroupId() {
 		return groupId;
@@ -23,5 +24,11 @@ public class CreateUserGroupCommand {
 	}
 	public String getRole() {
 		return role;
+	}
+	public void setParentGroup(String parentGroup) {
+		this.parentGroup = parentGroup;
+	}
+	public String getParentGroup() {
+		return parentGroup;
 	}
 }
