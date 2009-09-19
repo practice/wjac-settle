@@ -15,7 +15,7 @@ public interface UserService {
 	
 	public List<UserGroup> getGroupsByRole(String role);
 
-	public void createUserGroup(String groupName, String role) 
+	public void createUserGroup(String groupName, String role, String parentGroupId) 
 		throws DuplicateEntityException;
 
 	public UserGroup getUserGroup(String groupId);

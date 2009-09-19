@@ -7,6 +7,22 @@ $(document).ready(function() {
 		document.thisform.submit();
 	});
 });
+
+// 부모 전담기관을 하나 선택하기.
+$(document).ready(function() {
+	$('#parentGroup').find('input:eq(0)').attr('checked', 'true');
+});
+
+// 주관기관을 생성하는 경우 부모전담기관 목록을 보여줌.
+$(document).ready(function() {
+	$('.groupRole').bind('click', function() {
+		if (this.value == 'S') {
+			$('#parentGroup').fadeIn('fast');
+		} else {
+			$('#parentGroup').fadeOut('fast');
+		}
+	});
+});
 </script>
 
 <form name="thisform" method="post">
@@ -27,16 +43,24 @@ $(document).ready(function() {
 								그룹명 <input name="groupName" type="text" class="line_box" style="width:200px"/>
 							</li>
 							<li>
-								<input type="radio" name="role" value="A">관리자
-								<input type="radio" name="role" value="C">회계법인
-								<input type="radio" name="role" value="O">전담기관
-								<input type="radio" name="role" value="S" checked="checked">주관기관
+								<input class="groupRole" type="radio" name="role" value="A">관리자
+								<input class="groupRole" type="radio" name="role" value="C">회계법인
+								<input class="groupRole" type="radio" name="role" value="O">전담기관
+								<input class="groupRole" type="radio" name="role" value="S" checked="checked">주관기관
 							</li>
 						</ul>
 					</td>
 				</tr>
 			</tbody>      	
 		</table>
+		<div id="parentGroup">
+		전담기관:
+		<c:forEach var="ownerGroup" items="${ownerGroups}">
+			<ul>
+				<li style="clear: both"><input type="radio" name="parentGroup" value="${ownerGroup.groupId}">${ownerGroup.groupName}</li>
+			</ul>
+		</c:forEach>
+		</div>
 		<div class="button">
 	        <div class="b_blue">
 	          <ul>

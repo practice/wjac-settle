@@ -50,7 +50,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void createUserGroup(String groupName, String role) throws DuplicateEntityException {
+	public void createUserGroup(String groupName, String role, String parentGroupId) throws DuplicateEntityException {
 //		UserGroup group = userRepository.getUserGroup(groupId);
 //		if (group != null) {
 //			throw new DuplicateEntityException("Already existing User Group with group id = " + groupId);		
@@ -60,6 +60,10 @@ public class UserServiceImpl implements UserService {
 			forumService.createForum(userGroup.getGroupId(), Forum.PUBLIC_TYPE, "공지사항");
 			forumService.createForum(userGroup.getGroupId(), Forum.QNA_TYPE, "Q &amp; A");
 			forumService.createForum(userGroup.getGroupId(), Forum.FILES_TYPE, "자료실");
+		}
+		if (userGroup.isSubject()) {
+			UserGroup parent = userRepository.getUserGroup(parentGroupId);
+			userGroup.setParentGroup(parent);
 		}
 	}
 

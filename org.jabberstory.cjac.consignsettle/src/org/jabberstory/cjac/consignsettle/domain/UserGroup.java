@@ -9,6 +9,7 @@ public class UserGroup {
 	private String groupName;
 	private String role; // admin(A), consignee(C, 회계법인), owner(O, 전담), // subject(S, 주관)
 	private Set<User> users = new HashSet<User>(0);
+	private UserGroup parentGroup;
 
 	public UserGroup() {
 	}
@@ -68,6 +69,14 @@ public class UserGroup {
 	
 	public boolean isSubject() {
 		return "S".equals(role);
+	}
+
+	public void setParentGroup(UserGroup parentGroup) {
+		this.parentGroup = parentGroup;
+	}
+
+	public UserGroup getParentGroup() {
+		return parentGroup;
 	}
 
 }
