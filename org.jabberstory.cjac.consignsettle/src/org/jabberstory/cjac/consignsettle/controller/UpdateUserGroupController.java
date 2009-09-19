@@ -1,6 +1,7 @@
 package org.jabberstory.cjac.consignsettle.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -37,6 +38,17 @@ public class UpdateUserGroupController extends SimpleFormController {
 		
 		HashMap map = new HashMap();
 		map.put("availableRoles", availableRoles);
+		
+		String groupId = request.getParameter("groupId");
+		UserGroup group = userService.getUserGroup(groupId);
+		List<UserGroup> ownerGroupList = userService.getGroupsByRole("O");
+		TreeMap ownerGroups = new TreeMap();
+		for (UserGroup userGroup : ownerGroupList) {
+			if (group != null && !group.getGroupId().equals(userGroup.getGroupId()))
+				ownerGroups.put(userGroup.getGroupId(), userGroup.getGroupName());
+		}
+		map.put("ownerGroups", ownerGroups);
+
 		return map;
 	}
 	
@@ -53,6 +65,8 @@ public class UpdateUserGroupController extends SimpleFormController {
 			command.setGroupId(groupId);
 			command.setGroupName(group.getGroupName());
 			command.setRole(group.getRole());
+			if (group.getParentGroup() != null)
+				command.setParentGroup(group.getParentGroup().getGroupId());
 		}
 		return command;
 	}
@@ -65,7 +79,7 @@ public class UpdateUserGroupController extends SimpleFormController {
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "groupName", "required");
 		if (errors.hasErrors())
 			return showForm(request, response, errors);
-		userService.updateUserGroup(param.getGroupId(), param.getGroupName(), param.getRole());
+		userService.updateUserGroup(param.getGroupId(), param.getGroupName(), param.getRole(), param.getParentGroup());
 		return new ModelAndView("redirect:/user/userGroupList");
 	}
 }

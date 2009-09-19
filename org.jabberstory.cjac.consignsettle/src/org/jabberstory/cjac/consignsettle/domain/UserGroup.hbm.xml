@@ -16,7 +16,7 @@
 			<one-to-many class="User" />
 		</set>
 		<many-to-one name="parentGroup" column="PARENT" class="UserGroup"
-			foreign-key="FK_PARENT_GROUP" />
+			foreign-key="FK_PARENT_GROUP" lazy="false" />
 	</class>
 
 </hibernate-mapping>

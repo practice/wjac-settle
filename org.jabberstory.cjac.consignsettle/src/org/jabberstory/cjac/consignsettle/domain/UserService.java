@@ -20,7 +20,7 @@ public interface UserService {
 
 	public UserGroup getUserGroup(String groupId);
 
-	public void updateUserGroup(String groupId, String name, String role);
+	public void updateUserGroup(String groupId, String name, String role, String parentGroupId);
 	
 	public void updateUser(String userId, String password, String username, String email);
 	

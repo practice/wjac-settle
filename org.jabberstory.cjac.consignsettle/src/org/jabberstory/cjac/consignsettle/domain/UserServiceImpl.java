@@ -73,8 +73,23 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void updateUserGroup(String groupId, String name, String role) {
-		userRepository.updateUserGroup(groupId, name, role);
+	public void updateUserGroup(String groupId, String name, String role, String parentGroupId) {
+		UserGroup userGroup = userRepository.updateUserGroup(groupId, name, role);
+		if (userGroup.isOwner()) {
+			List<Forum> forums = forumService.getForumsForGroup(userGroup.getGroupId());
+			if (forums.size() == 0) {
+				forumService.createForum(userGroup.getGroupId(), Forum.PUBLIC_TYPE, "공지사항");
+				forumService.createForum(userGroup.getGroupId(), Forum.QNA_TYPE, "Q &amp; A");
+				forumService.createForum(userGroup.getGroupId(), Forum.FILES_TYPE, "자료실");
+			}
+		}
+		// parent handling.
+		if (userGroup.isSubject()) {
+			UserGroup parent = userRepository.getUserGroup(parentGroupId);
+			userGroup.setParentGroup(parent);
+		} else {
+			userGroup.setParentGroup(null);
+		}
 	}
 	
 	public void updateUserGroupWithUsers(String groupId, Set<User> users) {

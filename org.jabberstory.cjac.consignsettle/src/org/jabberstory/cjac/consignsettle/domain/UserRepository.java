@@ -77,10 +77,11 @@ public class UserRepository extends HibernateDaoSupport {
 		return group;
 	}
 
-	public void updateUserGroup(String groupId, String groupName, String role) {
+	public UserGroup updateUserGroup(String groupId, String groupName, String role) {
 		UserGroup group = getUserGroup(groupId);
 		group.setGroupName(groupName);
 		group.setRole(role);
+		return group;
 	}
 	
 	public void updateUser(String userId, String password, String username, String email) {
