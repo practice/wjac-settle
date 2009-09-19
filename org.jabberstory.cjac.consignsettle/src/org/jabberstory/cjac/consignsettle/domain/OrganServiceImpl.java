@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.jabberstory.cjac.consignsettle.common.util.Paging;
 import org.springframework.dao.DataAccessException;
+import org.springframework.web.multipart.MultipartFile;
 
 public class OrganServiceImpl implements OrganService{
 	
@@ -75,15 +76,16 @@ public class OrganServiceImpl implements OrganService{
 	}
 	
 	@Override
-	public void updateOrganNonApproval1(String organId, String nonApproval1)
-			throws DataAccessException {
-		organRepository.updateOrganNonApproval1(organId, nonApproval1);
-	}
-	
-	@Override
 	public void updateOrganNonApproval2(String organId, String nonApproval2)
 			throws DataAccessException {
 		organRepository.updateOrganNonApproval2(organId, nonApproval2);
+	}
+
+	@Override
+	public void updateOrganNonApproval1(String organId, String nonApproval1,
+			MultipartFile files) {
+		organRepository.updateOrganNonApproval1(organId, nonApproval1, files);
+		
 	}
 
 }

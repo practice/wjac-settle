@@ -64,7 +64,7 @@
 		<many-to-one name="ownerGroup" class="UserGroup" column="OWNER_GROUPID" foreign-key="FK_ORGAN_OWNERGROUP" lazy="false"/>
         <many-to-one name="subjectGroup" class="UserGroup" column="SUBJECT_GROUPID" foreign-key="FK_ORGAN_SUBJECTGROUP" lazy="false"/>
         
-        <list name="attachments" cascade="save-update, delete">
+        <list name="attachments" cascade="save-update, delete" lazy="false">
 			<key column="ORGANID" />
 			<list-index column="LISTINDEX" />
 			<one-to-many class="OrganAttachment" />

@@ -16,7 +16,7 @@
 package org.jabberstory.cjac.consignsettle.domain;
 
 public class OrganAttachment {
-	private int id;
+	private String id;
 	private String filename;
 	private long filesize;
 	private String dir;
@@ -25,11 +25,11 @@ public class OrganAttachment {
 	public OrganAttachment() {
 	}
 	
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
-	public int getId() {
+	public String getId() {
 		return id;
 	}
 

@@ -199,7 +199,7 @@ public class OrganMultiActionController extends MultiActionController {
 			return new ModelAndView("organ/updateNonApproval1", "organ", organ);
 		}
 		
-		organService.updateOrganNonApproval1(organId, nonApproval1);
+		organService.updateOrganNonApproval1(organId, nonApproval1, null);
 		organ = organService.getOrgan(organId);
 		
 		return new ModelAndView("organ/showNonApproval1", "organ", organ);
@@ -210,7 +210,7 @@ public class OrganMultiActionController extends MultiActionController {
 
 		String organId = request.getParameter("organId");
 		
-		organService.updateOrganNonApproval1(organId, "");
+		organService.updateOrganNonApproval1(organId, "", null);
 		
 		Organ organ = organService.getOrgan(organId);
 		

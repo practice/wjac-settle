@@ -603,6 +603,10 @@ public class Organ {
 				+ "]";
 	}
 
+	public void addAttachment(int index, OrganAttachment attachment) {
+		getAttachments().add(index, attachment);
+	}
+	
 	public void setSubjectGroup(UserGroup subjectGroup) {
 		this.subjectGroup = subjectGroup;
 	}
