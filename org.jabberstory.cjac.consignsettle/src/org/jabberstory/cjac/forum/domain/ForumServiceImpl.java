@@ -110,6 +110,11 @@ public class ForumServiceImpl implements ForumService {
 	}
 
 	@Override
+	public List<Forum> getForumsForGroup(String groupId) {
+		return forumRepository.findForumFor(groupId);
+	}
+
+	@Override
 	public List<Forum> getForums(int page) {
 		return forumRepository.getForums(page);
 	}

@@ -25,4 +25,5 @@ public interface ForumService {
 	public boolean isUnix();
 	public Forum createForum(String groupId, String forumType, String forumName);
 	public List<Forum> getForumsFor(String userId);
+	public List<Forum> getForumsForGroup(String groupId);
 }
