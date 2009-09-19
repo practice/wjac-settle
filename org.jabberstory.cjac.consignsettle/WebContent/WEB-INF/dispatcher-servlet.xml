@@ -34,6 +34,7 @@
 				<prop key="/user/removeUser">removeUserController</prop>
 				<prop key="/user/createUser">createUserController</prop>
 				<prop key="/user/showUser">showUserController</prop>
+				<prop key="/organ/updateNonApproval1">updateNonApproval1Controller</prop>
 				<prop key="/organ/excelDownload">organExcelController</prop>
 				<prop key="/organ/zipCodeList">zipCodeListController</prop>
 				<prop key="/organ/*">organMultiActionController</prop>
@@ -108,6 +109,11 @@
 	<!-- ############################################################## -->
 	<!--  Organization(Owner, Subject) Management Controller -->
 	<!-- ############################################################## -->
+	<bean id="updateNonApproval1Controller" class="org.jabberstory.cjac.consignsettle.controller.UpdateNonApproval1Controller" 
+		p:successView=""
+		p:formView="organ/updateNonApproval1"
+		p:organService-ref="organService" />
+		
 	<bean id="organExcelView" class="org.jabberstory.cjac.consignsettle.view.OrganExcelView" />
 	
 	<bean id="organExcelController" class="org.jabberstory.cjac.consignsettle.controller.OrganExcelController" 
@@ -209,7 +215,7 @@
 	</bean>
 	
 	<bean id="multipartResolver" class="org.jabberstory.cjac.forum.controller.MultiCommonsMultipartResolver" />
-
+	
 	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
 		<property name="basenames">
 			<list>
