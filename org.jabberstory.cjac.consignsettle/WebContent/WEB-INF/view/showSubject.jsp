@@ -63,7 +63,7 @@
       <table width="100%" cellspacing="0">
         <tbody>
           	<tr>
-				<td class="cell_title" width="130px">정부출현금</td>
+				<td class="cell_title" width="130px">정부출연금</td>
 				<td class="cell" width="330px">${organ.govContributeAmount}원</td>
 				<td class="cell_title" width="130px">민간부담금</td>
 				<td class="cell" width="330px">${organ.nonGovContributeAmount}원</td>
