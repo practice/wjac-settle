@@ -157,8 +157,8 @@
 		<table width="100%" cellspacing="0">
 			<tbody>
 				<tr>
-					<td class="cell_title" width="120px">정부출현금</td>
-					<td class="cell"><input type="text" name="govContributeAmount" style="" title="정부출현금" class="line_box" style="width:150px" onblur="checkMoney('govContributeAmount');return false;">원</td>
+					<td class="cell_title" width="120px">정부출연금</td>
+					<td class="cell"><input type="text" name="govContributeAmount" style="" title="정부출연금" class="line_box" style="width:150px" onblur="checkMoney('govContributeAmount');return false;">원</td>
 					<td class="cell_title" width="120px">민간부담금</td>
 					<td class="cell"><input type="text" name="nonGovContributeAmount" style="" title="민감부담금" class="line_box" style="width:150px" onblur="checkMoney('nonGovContributeAmount');return false;">원</td>
 				</tr>
