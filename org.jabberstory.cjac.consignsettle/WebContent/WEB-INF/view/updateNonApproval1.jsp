@@ -31,7 +31,7 @@
 		            <td class="cell_title">첨부파일</td>
 		            <td class="cell">
 		              <ul>
-		                <li><input name="files" type="file" value="" class="line_box01"/></li>		            
+		                <li><input name="file" type="file" value="" class="line_box01"/></li>		            
 		              </ul>
 		          </tr>
 			</tbody>
