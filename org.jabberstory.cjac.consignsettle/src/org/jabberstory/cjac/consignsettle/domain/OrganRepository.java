@@ -1,6 +1,10 @@
 package org.jabberstory.cjac.consignsettle.domain;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.criterion.CriteriaSpecification;
@@ -8,112 +12,173 @@ import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.jabberstory.cjac.consignsettle.common.util.Paging;
+import org.jabberstory.cjac.forum.domain.ForumPost;
+import org.jabberstory.cjac.forum.domain.PostAttachment;
 import org.springframework.dao.DataAccessException;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
+import org.springframework.web.multipart.MultipartFile;
 
 public class OrganRepository extends HibernateDaoSupport {
 
-	public void createOrgan(Organ organ) throws DataAccessException {
+	private static boolean isUnix = true;
+	public static final String FILE_PREFIX_WIN = "D:/temp/cjac/organ/";
+	public static final String FILE_PREFIX_UNIX = "/home/rnd/organ/";
+
+	static {
+		String os = System.getProperty("os.name");
+		isUnix = !os.contains("Windows");
+	}
+
+	public void createOrgan(Organ organ) {
 		getHibernateTemplate().save(organ);
 	}
-	
+
 	@SuppressWarnings("unchecked")
-	public List<Organ> getAllOrgans()
-			throws DataAccessException {		
-		
-		return getHibernateTemplate().findByNamedParam("from Organ as o", new String[]{}, new Object[]{});
-		
+	public List<Organ> getAllOrgans() throws DataAccessException {
+
+		return getHibernateTemplate().findByNamedParam("from Organ as o",
+				new String[] {}, new Object[] {});
+
 	}
 
 	@SuppressWarnings("unchecked")
 	public List<Organ> getOrgans(String userId, String userRole)
 			throws DataAccessException {
-		
+
 		StringBuffer hqlBuf = new StringBuffer();
 		List list = new ArrayList();
-		
-		if(userRole.equals("A") || userRole.equals("C")){			
+
+		if (userRole.equals("A") || userRole.equals("C")) {
 			list = getHibernateTemplate().find("from Organ o");
-		}else{		
+		} else {
 			hqlBuf.append("	from Organ o ");
 			hqlBuf.append("		left join fetch o.ownerGroup og ");
 			hqlBuf.append("		left join fetch og.users ou ");
 			hqlBuf.append("		left join fetch o.subjectGroup sg ");
 			hqlBuf.append("		left join fetch sg.users su ");
 			hqlBuf.append("	where ou.userId = :userId or su.userId = :userId");
-			list = getHibernateTemplate().findByNamedParam(hqlBuf.toString(), 
-					new String[] {"userId"}, 
-					new Object[] {userId});
+			list = getHibernateTemplate().findByNamedParam(hqlBuf.toString(),
+					new String[] { "userId" }, new Object[] { userId });
 		}
 		return list;
 	}
-	
+
 	@SuppressWarnings("unchecked")
-	public List<Organ> getOrgans(UserGroup group)
-			throws DataAccessException {
-		
+	public List<Organ> getOrgans(UserGroup group) throws DataAccessException {
+
 		String queryString = "from Organ as o where :group in elements(o.userGroups)";
-		List list = getHibernateTemplate().findByNamedParam(queryString, 
-				new String[] {"group"}, 
-				new Object[] {group});
+		List list = getHibernateTemplate().findByNamedParam(queryString,
+				new String[] { "group" }, new Object[] { group });
 		return list;
 	}
-	
-	@SuppressWarnings("unchecked")	
-	public Paging getOrgansWithPaging(String userId, String userRole, int currentPage, int pageSize, String sortColumn) throws DataAccessException {
+
+	@SuppressWarnings("unchecked")
+	public Paging getOrgansWithPaging(String userId, String userRole,
+			int currentPage, int pageSize, String sortColumn) {
 		final int fromRowNum = (currentPage - 1) * pageSize;
 		final int toRowNum = pageSize;
 		int totalCount = this.getOrgans(userId, userRole).size();
-		final Order order = (sortColumn == "") ? Order.asc("sg.groupName"): Order.desc(sortColumn);
-		
+		final Order order = (sortColumn == "") ? Order.asc("sg.groupName")
+				: Order.desc(sortColumn);
+
 		DetachedCriteria criteria = DetachedCriteria.forClass(Organ.class);
-		
-		if(userRole.equals("A") || userRole.equals("C")){			
-			criteria.createAlias("subjectGroup","sg",CriteriaSpecification.LEFT_JOIN)
-				.addOrder(order);
+
+		if (userRole.equals("A") || userRole.equals("C")) {
+			criteria.createAlias("subjectGroup", "sg",
+					CriteriaSpecification.LEFT_JOIN).addOrder(order);
+		} else {
+			criteria.createCriteria("ownerGroup", "og",
+					CriteriaSpecification.LEFT_JOIN).createCriteria("users",
+					"ou", CriteriaSpecification.LEFT_JOIN);
+			criteria.createCriteria("subjectGroup", "sg",
+					CriteriaSpecification.LEFT_JOIN).createCriteria("users",
+					"su", CriteriaSpecification.LEFT_JOIN);
+			criteria.add(
+					Restrictions.or(Restrictions.eq("ou.userId", userId),
+							Restrictions.eq("su.userId", userId))).addOrder(
+					order);
 		}
-		else {					
-			criteria.createCriteria("ownerGroup","og",CriteriaSpecification.LEFT_JOIN)
-					.createCriteria("users","ou",CriteriaSpecification.LEFT_JOIN);
-			criteria.createCriteria("subjectGroup","sg",CriteriaSpecification.LEFT_JOIN)
-					.createCriteria("users","su",CriteriaSpecification.LEFT_JOIN);
-			criteria.add(Restrictions.or(
-							Restrictions.eq("ou.userId", userId), 
-							Restrictions.eq("su.userId", userId)))
-					.addOrder(order);
-		}
-		List organs = (List)getHibernateTemplate().findByCriteria(criteria, fromRowNum, toRowNum);
-        
-		return new Paging((List)organs, totalCount, currentPage);
+		List organs = (List) getHibernateTemplate().findByCriteria(criteria,
+				fromRowNum, toRowNum);
+
+		return new Paging((List) organs, totalCount, currentPage);
 	}
 
-	
-	public Organ getOrgan(String organId) throws DataAccessException {
+	public Organ getOrgan(String organId) {
 		return (Organ) getHibernateTemplate().get(Organ.class, organId);
 	}
 
-	
-	public void removeOrgan(String organId) throws DataAccessException {
-		getHibernateTemplate().delete(getOrgan(organId));		
+	public void removeOrgan(String organId) {
+		getHibernateTemplate().delete(getOrgan(organId));
 	}
 
-		
-	public void updateOrgan(Organ organ) throws DataAccessException {
-		getHibernateTemplate().update(organ);	
+	public void updateOrgan(Organ organ) {
+		getHibernateTemplate().update(organ);
 	}
-	
-	public void updateOrganCostDetail(String organId, String costDetail) throws DataAccessException {
+
+	public void updateOrganCostDetail(String organId, String costDetail) {
 		Organ organ = getOrgan(organId);
 		organ.setCostDetail(costDetail);
 	}
 	
-	public void updateOrganNonApproval1(String organId, String nonApproval1) throws DataAccessException {
+	@SuppressWarnings("unchecked")
+	public OrganAttachment getOrganAttachment(String organId, String attId) {
+		String queryString = "from OrganAttachment a where a.id = :attId and a.organ.organId = :organId";
+		List list = getHibernateTemplate().findByNamedParam(queryString, 
+				new String[] {"attId", "organId"}, 
+				new Object[] {attId, organId});
+		if (list.size() == 0)
+			return null;
+		return (OrganAttachment)list.get(0);
+	}
+
+	public void updateOrganNonApproval1(String organId, String nonApproval1, MultipartFile files) {
 		Organ organ = getOrgan(organId);
 		organ.setNonApproval1(nonApproval1);
+		String saveDir = calcSaveDir(organ);
+		addAttachments(files, organ, saveDir, 0);
+		saveFiles(files, saveDir);
 	}
-	
-	public void updateOrganNonApproval2(String organId, String nonApproval2) throws DataAccessException {
+
+	public void updateOrganNonApproval2(String organId, String nonApproval2) {
 		Organ organ = getOrgan(organId);
 		organ.setNonApproval2(nonApproval2);
+	}
+
+	private void saveFiles(MultipartFile files, String saveDir) {
+		try {
+			if (isUnix) {
+				createDir(FILE_PREFIX_UNIX + saveDir);
+				files.transferTo(new File(FILE_PREFIX_UNIX + saveDir + "/"
+						+ files.getOriginalFilename()));
+			} else {
+				createDir(FILE_PREFIX_WIN + saveDir);
+				files.transferTo(new File(FILE_PREFIX_WIN + saveDir + "/"
+						+ files.getOriginalFilename()));
+			}
+		} catch (IllegalStateException e) {
+			throw new RuntimeException(e);
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	private void addAttachments(MultipartFile files, Organ organ,
+			String saveDir, int index) {
+		OrganAttachment attachment = new OrganAttachment();
+		attachment.setFilename(files.getOriginalFilename());
+		attachment.setFilesize(files.getSize());
+		attachment.setDir(saveDir);
+		organ.addAttachment(index, attachment);
+	}
+
+	private void createDir(String path) {
+		new File(path).mkdirs();
+	}
+
+	private String calcSaveDir(Organ organ) {
+		SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy/MM/dd/HH/");
+		String path = dateFormatter.format(new Date());
+		return path + organ.getOrganId();
 	}
 }

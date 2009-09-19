@@ -65,20 +65,30 @@
           	<tr>
 				<td class="cell_title" width="130px">정부출연금</td>
 				<td class="cell" width="330px">${organ.govContributeAmount}원</td>
-				<td class="cell_title" width="130px">민간부담금</td>
-				<td class="cell" width="330px">${organ.nonGovContributeAmount}원</td>
+				<td class="cell_title" width="130px">기업부담금</td>
+				<td class="cell" width="330px">
+					<div>
+						현금 ${organ.nonGovContributeAmount}원
+					</div>
+					<div>
+						현물 ${organ.goodsAmount}원
+					</div>
+					<div>
+						소개 ${organ.subtotal}원
+					</div>					
+				</td>
 			</tr>
 			<tr>
-				<td class="cell_title">현물</td>
-				<td class="cell">${organ.goodsAmount}원</td>
 				<td class="cell_title">총현금</td>
 				<td class="cell">${organ.totalCashAmount}원</td>
+				<td class="cell_title">총연구개발비</td>
+				<td class="cell">${organ.totalResearchAmount}원</td>
 			</tr>
 			<tr>
-				<td class="cell_title">정부지분</td>
-				<td class="cell">${organ.govInterests}원</td>
 				<td class="cell_title">위탁정산수수료</td>
 				<td class="cell">${organ.consignSettlementCommission}원</td>
+				<td class="cell_title">정부지분</td>
+				<td class="cell">${organ.govInterests}원</td>				
 			</tr>	
         </tbody>
       </table>
@@ -143,8 +153,8 @@
         </tbody>
       </table>
     </div>
-    <div class="subtitle">06 / 정산결과 정보</div>
-    <br />
+     <br />
+    <div class="subtitle">06 / 정산결과 정보</div>   
     <div id="table">
       <table width="100%" cellspacing="0">
         <tbody>

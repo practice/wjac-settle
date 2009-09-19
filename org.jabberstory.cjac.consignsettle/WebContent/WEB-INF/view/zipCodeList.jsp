@@ -8,26 +8,31 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>CJAC</title>
 <link href="${pageContext.request.contextPath}/basic.css" rel="stylesheet" type="text/css" />
-<script language="javascript">
-<!--
-	function doSearch(pageNo){
-		document.form1.pageNo.value = pageNo;
-		document.form1.action = "${pageContext.request.contextPath}/organ/zipCodeList";
-		document.form1.submit();
-	}
+<script type="text/javascript" src="${pageContext.request.contextPath}/jquery-1.2.6.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+	$('#doSearch').bind('click', function() {
+		doSearch('1');
+	});
+});
 
-	function setZipCode(zipCode1, zipCode2, addr){
-		var openerZipCode1 = opener.document.getElementById("${openerZipCode1}"); 
-		var openerZipCode2 = opener.document.getElementById("${openerZipCode2}");
-		var openerAddr = opener.document.getElementById("${openerAddr}");
-		
-		openerZipCode1.value = zipCode1;
-		openerZipCode2.value = zipCode2;
-		openerAddr.value = addr;	
 
-		self.close();	
-	}
-//-->
+function doSearch(pageNo){
+	document.form1.pageNo.value = pageNo;
+	document.form1.action = "${pageContext.request.contextPath}/organ/zipCodeList";
+	document.form1.submit();
+}
+
+function setZipCode(zipCode1, zipCode2, addr){
+	var openerZipCode1 = opener.document.getElementById("${openerZipCode1}"); 
+	var openerZipCode2 = opener.document.getElementById("${openerZipCode2}");
+	var openerAddr = opener.document.getElementById("${openerAddr}");
+	
+	openerZipCode1.value = zipCode1;
+	openerZipCode2.value = zipCode2;
+	openerAddr.value = addr;	
+	self.close();	
+}
 </script>
 </head>
 <body>
@@ -47,7 +52,7 @@
     <li>
       <div class="b_gray">
         <ul>
-          <li><a href="#" onClick="doSearch('1');return false;">우편번호검색</a></li>
+          <li><a href="#" id="doSearch">우편번호검색</a></li>
         </ul>
       </div>
     </li>
@@ -75,7 +80,7 @@
 				<c:forEach items="${zipCodes.items}" var="zipCode" varStatus="status">
 					<tr>
 						<td>${fn:substring(zipCode.zipcode,0,3)}-${fn:substring(zipCode.zipcode,3,6)}</td>				
-						<td><a href="#" onClick="setZipCode('${fn:substring(zipCode.zipcode,0,3)}','${fn:substring(zipCode.zipcode,3,6)}','${zipCode.addr}');return false;">${zipCode.addr}</a></td>
+						<td><a href="#" id="setZipCode" onClick="setZipCode('${fn:substring(zipCode.zipcode,0,3)}','${fn:substring(zipCode.zipcode,3,6)}','${zipCode.addr}');return false;">${zipCode.addr}</a></td>
 					</tr>
 				</c:forEach>
 				</tbody>
