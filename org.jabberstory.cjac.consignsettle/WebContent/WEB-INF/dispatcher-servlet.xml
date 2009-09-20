@@ -34,6 +34,7 @@
 				<prop key="/user/removeUser">removeUserController</prop>
 				<prop key="/user/createUser">createUserController</prop>
 				<prop key="/user/showUser">showUserController</prop>
+				<prop key="/organ/download">organDownloadController</prop>
 				<prop key="/organ/updateNonApproval1">updateNonApproval1Controller</prop>
 				<prop key="/organ/excelDownload">organExcelController</prop>
 				<prop key="/organ/zipCodeList">zipCodeListController</prop>
@@ -114,6 +115,9 @@
 		p:formView="organ/updateNonApproval1"
 		p:organService-ref="organService" />
 		
+	<bean id="organDownloadController" class="org.jabberstory.cjac.consignsettle.controller.AttachmentDownloadController" 
+		p:organService-ref="organService" />
+		
 	<bean id="organExcelView" class="org.jabberstory.cjac.consignsettle.view.OrganExcelView" />
 	
 	<bean id="organExcelController" class="org.jabberstory.cjac.consignsettle.controller.OrganExcelController" 
@@ -145,6 +149,7 @@
 				<prop key="/deleteCostDetail">deleteCostDetail</prop>
 				<prop key="/showNonApproval1">showNonApproval1</prop>
 				<prop key="/updateNonApproval1">updateNonApproval1</prop>
+				<prop key="/deleteNonApproval1Attachment">deleteNonApproval1Attachment</prop>
 				<prop key="/deleteNonApproval1">deleteNonApproval1</prop>
 				<prop key="/showNonApproval2">showNonApproval2</prop>
 				<prop key="/updateNonApproval2">updateNonApproval2</prop>

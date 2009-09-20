@@ -76,8 +76,9 @@
 		<id name="id" column="ATTID" type="string" length="32">
 			<generator class="uuid" />
 		</id>
+		<property name="filetype" column="FILETYPE" type="string" length="1" /><!-- 0:1차, 1:2차 -->
 		<property name="filename" column="FILENAME" type="string" length="256" />
-		<property name="filesize" column="FILESIZE" type="string" length="16" />
+		<property name="filesize" column="FILESIZE" type="long" length="16" />
 		<property name="dir" column="DIR" type="string" length="256" />
 		<many-to-one name="organ" column="ORGANID" class="Organ" foreign-key="FK_ORGAN_ATTACHMENT" lazy="false"/>
 	</class>

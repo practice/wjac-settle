@@ -7,6 +7,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 public interface OrganService {
 	
+	public static final String FILE_PREFIX_WIN = "D:/temp/cjac/organ/";
+	public static final String FILE_PREFIX_UNIX = "/home/rnd/organ/";
+	
 	List<Organ> getOrgans(String userId, String role);
 	
 	List<Organ> getOrgansByUserGroup(String groupId);
@@ -23,9 +26,15 @@ public interface OrganService {
 	
 	void updateOrganCostDetail(String organId, String costDetail);
 	
-	void updateOrganNonApproval1(String organId, String nonApproval1, MultipartFile files);
+	void updateOrganNonApproval1(String organId, String nonApproval1, MultipartFile file);
 	
 	void updateOrganNonApproval2(String organId, String nonApproval2);
 	
 	void removeOrgan(String organId);
+	
+	void removeAttachment(String organId, String attId);
+	
+	OrganAttachment getOrganAttachment(String organId, String attId);
+	
+	public boolean isUnix();
 }

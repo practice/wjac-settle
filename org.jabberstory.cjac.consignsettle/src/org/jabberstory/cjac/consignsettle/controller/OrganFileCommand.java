@@ -12,7 +12,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
-*/
+ */
 package org.jabberstory.cjac.consignsettle.controller;
 
 import java.util.ArrayList;
@@ -22,19 +22,34 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class OrganFileCommand {
 	private String organId;
+	private String organName;
 	private List<MultipartFile> files = new ArrayList<MultipartFile>();
+
+	public OrganFileCommand() {
+	}
+
 	public String getOrganId() {
 		return organId;
 	}
+
 	public void setOrganId(String organId) {
 		this.organId = organId;
 	}
+
 	public List<MultipartFile> getFiles() {
 		return files;
 	}
+
 	public void setFiles(List<MultipartFile> files) {
 		this.files = files;
 	}
-	
-	
+
+	public String getOrganName() {
+		return organName;
+	}
+
+	public void setOrganName(String organName) {
+		this.organName = organName;
+	}
+
 }
