@@ -224,8 +224,23 @@ public class OrganMultiActionController extends MultiActionController {
 		
 		Organ organ = organService.getOrgan(organId);
 		
-		return new ModelAndView("organ/showNonApproval1", "organ", organ);
+		ModelAndView mv = new ModelAndView("organ/showNonApproval1", "organ", organ);
+//		if(organ.getAttachments().size() == 0){
+//			mv.addObject("attachments", organ.getAttachments());
+//		}
 		
+		return mv;
+		
+	}
+	
+	public ModelAndView deleteNonApproval1Attachment(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+		String attId = request.getParameter("attId");
+		String organId = request.getParameter("organId"); 
+			
+		organService.removeAttachment(organId, attId);
+
+		return new ModelAndView("redirect:/organ/showNonApproval1?organId=" + organId);		
 	}
 	
 	public ModelAndView updateNonApproval2(HttpServletRequest request, HttpServletResponse response) throws Exception {

@@ -83,9 +83,23 @@ public class OrganServiceImpl implements OrganService{
 
 	@Override
 	public void updateOrganNonApproval1(String organId, String nonApproval1,
-			MultipartFile files) {
-		organRepository.updateOrganNonApproval1(organId, nonApproval1, files);
+			MultipartFile file) {
+		organRepository.updateOrganNonApproval1(organId, nonApproval1, file);
 		
 	}
 
+	@Override
+	public OrganAttachment getOrganAttachment(String organId, String attId) {
+		return organRepository.getOrganAttachments(organId, attId);
+	}
+
+	@Override
+	public boolean isUnix() {
+		return OrganRepository.isUnix();
+	}
+
+	@Override
+	public void removeAttachment(String organId, String attId) {
+		organRepository.removeAttachment(organId, attId);		
+	}
 }

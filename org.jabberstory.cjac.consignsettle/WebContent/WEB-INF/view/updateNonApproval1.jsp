@@ -9,7 +9,7 @@
 <!--
 	$(document).ready(function() {
 		$('#saveMe').bind('click', function() {
-			$('#form1').submit();			
+			$('#updateNonApproval1').submit();			
 		});
 	});
 
@@ -17,11 +17,11 @@
 </script>
 </head>
 <body>
-<form id="form1" name="form1" method="post" enctype="multipart/form-data">
+<form id="updateNonApproval1" name="updateNonApproval1" method="post" enctype="multipart/form-data">
 <div id="container">
   <div id="content">
     <div id="content_top">
-      <p id="title"> 1차 불인정 내역 등록/수정  : ${organ.subjectGroup.groupName}</p>
+      <p id="title"> 1차 불인정 내역 등록  : ${updateNonApproval1.organName}</p>
       <p id="path"> PATH : 주관기관현황  &#62; 주관기관조회  &#62; <span id="path_b">1차 불인정 내역 등록/수정</span></p>
     </div>
     <div>
@@ -31,7 +31,7 @@
 		            <td class="cell_title">첨부파일</td>
 		            <td class="cell">
 		              <ul>
-		                <li><input name="file" type="file" value="" class="line_box01"/></li>		            
+		                <li><input name="files" type="file" value="" class="line_box01"/></li>		            
 		              </ul>
 		          </tr>
 			</tbody>

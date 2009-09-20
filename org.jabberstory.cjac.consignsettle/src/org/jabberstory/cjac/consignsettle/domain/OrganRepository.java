@@ -7,28 +7,27 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.hibernate.criterion.CriteriaSpecification;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.jabberstory.cjac.consignsettle.common.util.Paging;
-import org.jabberstory.cjac.forum.domain.ForumPost;
-import org.jabberstory.cjac.forum.domain.PostAttachment;
 import org.springframework.dao.DataAccessException;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 import org.springframework.web.multipart.MultipartFile;
 
 public class OrganRepository extends HibernateDaoSupport {
 
+	protected final Log logger = LogFactory.getLog(getClass());
+	
 	private static boolean isUnix = true;
-	public static final String FILE_PREFIX_WIN = "D:/temp/cjac/organ/";
-	public static final String FILE_PREFIX_UNIX = "/home/rnd/organ/";
-
 	static {
 		String os = System.getProperty("os.name");
 		isUnix = !os.contains("Windows");
 	}
-
+	
 	public void createOrgan(Organ organ) {
 		getHibernateTemplate().save(organ);
 	}
@@ -121,8 +120,20 @@ public class OrganRepository extends HibernateDaoSupport {
 		organ.setCostDetail(costDetail);
 	}
 	
+	public void removeAttachment(String organId, String attId) {
+		Organ organ = getOrgan(organId);
+		OrganAttachment attachment = getOrganAttachment(attId);
+		organ.getAttachments().remove(attachment);
+		
+		getHibernateTemplate().delete(getOrganAttachment(attId));
+	}
+	
+	public OrganAttachment getOrganAttachment(String attId){
+		return (OrganAttachment) getHibernateTemplate().get(OrganAttachment.class, attId);
+	}
+	
 	@SuppressWarnings("unchecked")
-	public OrganAttachment getOrganAttachment(String organId, String attId) {
+	public OrganAttachment getOrganAttachments(String organId, String attId) {
 		String queryString = "from OrganAttachment a where a.id = :attId and a.organ.organId = :organId";
 		List list = getHibernateTemplate().findByNamedParam(queryString, 
 				new String[] {"attId", "organId"}, 
@@ -132,12 +143,12 @@ public class OrganRepository extends HibernateDaoSupport {
 		return (OrganAttachment)list.get(0);
 	}
 
-	public void updateOrganNonApproval1(String organId, String nonApproval1, MultipartFile files) {
+	public void updateOrganNonApproval1(String organId, String nonApproval1, MultipartFile file) {
 		Organ organ = getOrgan(organId);
 		organ.setNonApproval1(nonApproval1);
 		String saveDir = calcSaveDir(organ);
-		addAttachments(files, organ, saveDir, 0);
-		saveFiles(files, saveDir);
+		addAttachments(file, organ, saveDir, 0, "0");
+		saveFiles(file, saveDir);
 	}
 
 	public void updateOrganNonApproval2(String organId, String nonApproval2) {
@@ -145,16 +156,16 @@ public class OrganRepository extends HibernateDaoSupport {
 		organ.setNonApproval2(nonApproval2);
 	}
 
-	private void saveFiles(MultipartFile files, String saveDir) {
+	private void saveFiles(MultipartFile file, String saveDir) {
 		try {
 			if (isUnix) {
-				createDir(FILE_PREFIX_UNIX + saveDir);
-				files.transferTo(new File(FILE_PREFIX_UNIX + saveDir + "/"
-						+ files.getOriginalFilename()));
+				createDir(OrganService.FILE_PREFIX_UNIX + saveDir);
+				file.transferTo(new File(OrganService.FILE_PREFIX_UNIX + saveDir + "/"
+						+ file.getOriginalFilename()));
 			} else {
-				createDir(FILE_PREFIX_WIN + saveDir);
-				files.transferTo(new File(FILE_PREFIX_WIN + saveDir + "/"
-						+ files.getOriginalFilename()));
+				createDir(OrganService.FILE_PREFIX_WIN + saveDir);
+				file.transferTo(new File(OrganService.FILE_PREFIX_WIN + saveDir + "/"
+						+ file.getOriginalFilename()));
 			}
 		} catch (IllegalStateException e) {
 			throw new RuntimeException(e);
@@ -163,12 +174,13 @@ public class OrganRepository extends HibernateDaoSupport {
 		}
 	}
 
-	private void addAttachments(MultipartFile files, Organ organ,
-			String saveDir, int index) {
+	private void addAttachments(MultipartFile file, Organ organ,
+			String saveDir, int index, String filetype) {
 		OrganAttachment attachment = new OrganAttachment();
-		attachment.setFilename(files.getOriginalFilename());
-		attachment.setFilesize(files.getSize());
+		attachment.setFilename(file.getOriginalFilename());
+		attachment.setFilesize(file.getSize());
 		attachment.setDir(saveDir);
+		attachment.setFiletype(filetype);
 		organ.addAttachment(index, attachment);
 	}
 
@@ -177,8 +189,13 @@ public class OrganRepository extends HibernateDaoSupport {
 	}
 
 	private String calcSaveDir(Organ organ) {
-		SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy/MM/dd/HH/");
-		String path = dateFormatter.format(new Date());
-		return path + organ.getOrganId();
+		//SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy/MM/dd/HH/");
+		//String path = dateFormatter.format(new Date());
+		//return path + organ.getOrganId();
+		return organ.getOrganId();
+	}
+	
+	public static boolean isUnix() {
+		return isUnix;
 	}
 }

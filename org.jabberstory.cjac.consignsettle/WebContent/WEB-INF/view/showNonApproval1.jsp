@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -30,16 +31,26 @@
 	<table width="100%" cellspacing="0">
         <tbody>
           <tr>
-            <td colspan="6" style="height:300px">
-            <c:choose>		
-				<c:when test="${organ.nonApproval1 == null || organ.nonApproval1 == ''}">
-					등록된 1차 불인정 내역이 없습니다.
-				</c:when>	
-				<c:otherwise>			
-					${organ.nonApproval1}			
-				</c:otherwise>
-			</c:choose>
-            </td>
+            <td class="cell_title" width="130px">1차 불인정 내역</td>
+            <td class="cell">
+            	<c:choose>
+            		<c:when test="${fn:length(organ.attachments) == 0}">
+            			1차 불인정 내역이 없습니다.
+            		</c:when>
+            		<c:otherwise>            	
+			     		
+							<c:forEach var="file" items="${organ.attachments}">
+								<c:choose>
+									<c:when test="${file.filetype == '0'}">
+										<div><a href="download?organId=${organ.organId}&attId=${file.id}">${file.filename}</a> (${file.filesize} bytes)
+											&nbsp;&nbsp; <a href="deleteNonApproval1Attachment?attId=${file.id}&organId=${organ.organId}"><img src="<c:url value="/img/btn_b_commt_del.gif" />"></a></div>
+									</c:when>
+								</c:choose>												
+							</c:forEach>							
+						
+					</c:otherwise>
+				</c:choose>       	
+			</td>
           </tr>
         </tbody>
       </table>
@@ -49,8 +60,7 @@
           	<li><a href="#" onClick="window.print();return false;">인쇄</a></li>
 		    <li><a href="<c:url value="/organ/showSubject?organId=${organ.organId}" />">주관기관 조회</a></li>
 		    <sec:authorize ifAllGranted="ROLE_ADMIN">
-	            <li><a href="<c:url value="/organ/deleteNonApproval1?organId=${organ.organId}" />">1차 불인정 내역 삭제</a></li>
-	            <li><a href="<c:url value="/organ/updateNonApproval1?organId=${organ.organId}" />">1차 불인정 내역  등록/수정</a></li>
+	            <li><a href="<c:url value="/organ/updateNonApproval1?organId=${organ.organId}" />">1차 불인정 내역  등록</a></li>
 	        </sec:authorize>
           </ul>
         </div>

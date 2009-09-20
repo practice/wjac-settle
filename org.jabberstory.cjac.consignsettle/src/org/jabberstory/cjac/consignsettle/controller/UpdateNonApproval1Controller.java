@@ -18,13 +18,19 @@ package org.jabberstory.cjac.consignsettle.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.jabberstory.cjac.consignsettle.domain.Organ;
 import org.jabberstory.cjac.consignsettle.domain.OrganService;
+import org.jabberstory.cjac.forum.controller.MultiFileSupportServletRequestDataBinder;
 import org.springframework.validation.BindException;
+import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.SimpleFormController;
 
 public class UpdateNonApproval1Controller extends SimpleFormController{
+	
+	protected final Log logger = LogFactory.getLog(getClass());
 	
 	private OrganService organService;
 	
@@ -45,7 +51,8 @@ public class UpdateNonApproval1Controller extends SimpleFormController{
 		}
 		Organ organ = organService.getOrgan(request.getParameter("organId"));
 		OrganFileCommand command = new OrganFileCommand();
-		command.setOrganId(request.getParameter("organId"));
+		command.setOrganId(organ.getOrganId());
+		command.setOrganName(organ.getSubjectGroup().getGroupName());
 		//if(organ.getAttachments().size() != 0 && organ.getAttachments().get(0) != null){
 		//	command.setFiles(organ.getAttachments());
 		//}		
@@ -59,7 +66,16 @@ public class UpdateNonApproval1Controller extends SimpleFormController{
 		OrganFileCommand ofc = (OrganFileCommand)command;
 		Organ organ = organService.getOrgan(ofc.getOrganId());
 		organService.updateOrganNonApproval1(ofc.getOrganId(), "", ofc.getFiles().get(0));
-		return new ModelAndView("organ/showNonApproval1", "organ", organ);
+		return new ModelAndView("redirect:/organ/showNonApproval1?organId=" + ofc.getOrganId());
+	}
+	
+	@Override
+	protected ServletRequestDataBinder createBinder(HttpServletRequest request,
+			Object command) throws Exception {
+		ServletRequestDataBinder binder = new MultiFileSupportServletRequestDataBinder(command, getCommandName());
+		prepareBinder(binder);
+		initBinder(request, binder);
+		return binder;
 	}
 
 }
