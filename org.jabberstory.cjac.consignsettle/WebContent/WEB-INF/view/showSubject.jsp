@@ -88,7 +88,7 @@
 				<td class="cell_title">위탁정산수수료</td>
 				<td class="cell">${organ.consignSettlementCommission}원</td>
 				<td class="cell_title">정부지분</td>
-				<td class="cell">${organ.govInterests}원</td>				
+				<td class="cell">${organ.govInterests}%</td>				
 			</tr>	
         </tbody>
       </table>
