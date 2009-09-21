@@ -5,18 +5,19 @@
 $(document).ready(function() {
 	var numPages = $('#numPages').text();
 	var currentPage = $('#currentPage').text();
+	var url = 'showForumList';
 	$('table.paginated').each(function() {
 		var $table = $(this);
 		var $pager = $('<div class="pager"></div>');
 		// first page.
 		$toFirst = $('<img src="${imgpath}/page_first.gif" align="absmiddle"/>').appendTo($pager);
 		$toFirst.bind('click', function() {
-			location.href = 'list?page=1';
+			location.href = url + '?page=1';
 		}).addClass('clickable');
 		// pre first.
 		$preFirst = $('<img src="${imgpath}/page_pre.gif" align="absmiddle"/>').appendTo($pager);
 		$preFirst.bind('click', function() {
-			location.href = 'list?page=' + getPreFirst(currentPage);
+			location.href = url + '?page=' + getPreFirst(currentPage);
 		}).addClass('clickable');
 		// each page.
 		for (var page = 1; page <= numPages; page++) {
@@ -25,7 +26,7 @@ $(document).ready(function() {
 				pageButton.addClass('active');
 			else {
 				pageButton.bind('click', { newPage : page }, function(event) {
-					location.href = 'list?page=' + event.data['newPage'];
+					location.href = url + '?page=' + event.data['newPage'];
 				}).addClass('clickable');	
 			}
 		}
@@ -33,12 +34,12 @@ $(document).ready(function() {
 		// next first.
 		$preFirst = $('<img src="${imgpath}/page_next.gif" align="absmiddle"/>').appendTo($pager);
 		$preFirst.bind('click', function() {
-			location.href = 'list?page=' + getNextFirst(currentPage, numPages);
+			location.href = url + '?page=' + getNextFirst(currentPage, numPages);
 		}).addClass('clickable');
 		// last page.
 		$toLast = $('<img src="${imgpath}/page_end.gif" align="absmiddle"/>').appendTo($pager);
 		$toLast.bind('click', function() {
-			location.href = 'list?page=' + numPages;
+			location.href = url + '?page=' + numPages;
 		}).addClass('clickable');
 	});
 });
@@ -79,11 +80,14 @@ function getNextFirst(current, lastPage) {
 						</tr>
 					</thead>
 					<tbody>
-					<c:forEach var="forum" items="${forums}">
+					<c:forEach var="forum" items="${forums}" step="3">
+						<%  %>
 					<tr>
 						<td>${forum.prop["userGroup"].groupName}</td>
 						<td style="text-overflow:ellipsis; overflow: hidden; " class="cell">
-							<a href="<c:url value="/forum/${forum.id}/list" />"><nobr>${forum.name}</nobr></a></td>
+							<a href="<c:url value="/forum/${forum.id}/list" />"><nobr>${forum.name}</nobr></a>, 
+							<a href="<c:url value="/forum/${forum.id + 1}/list" />"><nobr>Q&amp;A</nobr></a>,
+							<a href="<c:url value="/forum/${forum.id + 2}/list" />"><nobr>자료실</nobr></a></td>
 					</tr>
 					</c:forEach>
 					</tbody>

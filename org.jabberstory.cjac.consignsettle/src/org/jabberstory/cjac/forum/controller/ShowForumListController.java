@@ -34,6 +34,19 @@ public class ShowForumListController extends AbstractController {
 		else
 			mv.addObject("isEmptyList", Boolean.valueOf(false));
 		mv.addObject("forums", forums);
+		
+		int numPages = forums.size() / (ForumService.PAGESIZE * 3);
+		if ((forums.size() % (3 * ForumService.PAGESIZE)) != 0)
+			numPages++;
+		mv.addObject("numPages", numPages);
+		mv.addObject("currentPage", page);
+		int firstResult = ForumService.PAGESIZE * 3 * (page -1);
+		for (int i=0; i < firstResult; i++) {
+			forums.remove(0);
+		}
+		while (forums.size() > (ForumService.PAGESIZE * 3))
+			forums.remove(forums.size() - 1);
+		
 		return mv;
 	}
 	
