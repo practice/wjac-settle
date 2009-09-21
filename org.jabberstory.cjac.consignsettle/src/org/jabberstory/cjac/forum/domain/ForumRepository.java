@@ -2,17 +2,22 @@ package org.jabberstory.cjac.forum.domain;
 
 import java.io.File;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.hibernate.HibernateException;
+import org.hibernate.Query;
+import org.hibernate.Session;
 import org.hibernate.criterion.CriteriaSpecification;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.jabberstory.cjac.consignsettle.domain.UserGroup;
 import org.jabberstory.cjac.consignsettle.domain.UserService;
+import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -190,17 +195,28 @@ public class ForumRepository extends HibernateDaoSupport {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Forum> getForums(int page) {
-//		getHibernateTemplate().
-		List<Object[]> rs = getHibernateTemplate().find("from Forum f, UserGroup ug where f.groupId = ug.groupId");
-		ArrayList<Forum> list = new ArrayList<Forum>();
-		for (Object[] forums : rs) {
-			Forum forum = (Forum)forums[0];
-			UserGroup ug = (UserGroup)forums[1];
-			forum.getProp().put("userGroup", ug);
-			list.add(forum);
-		}
-		return list;
+	public List<Forum> getForums(final int page) {
+		final ArrayList<Forum> list = new ArrayList<Forum>();
+		return (List<Forum>)getHibernateTemplate().execute(new HibernateCallback() {
+			
+			@Override
+			public Object doInHibernate(Session session) throws HibernateException,
+					SQLException {
+				String queryString = "from Forum f, UserGroup ug where f.groupId = ug.groupId";
+				Query query = session.createQuery(queryString);
+				// Don't honor page parameter. page calculation is done in controller. This is temporal !!! Sorry.
+//				query.setFirstResult(ForumService.PAGESIZE * 3 * (page -1));
+//				query.setMaxResults(ForumService.PAGESIZE * 3);
+				List<Object[]> rs = query.list();
+				for (Object[] forums : rs) {
+					Forum forum = (Forum)forums[0];
+					UserGroup ug = (UserGroup)forums[1];
+					forum.getProp().put("userGroup", ug);
+					list.add(forum);
+				}
+				return list;
+			}
+		});
 	}
 
 }
