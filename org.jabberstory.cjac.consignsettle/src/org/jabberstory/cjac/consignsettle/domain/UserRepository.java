@@ -3,6 +3,8 @@ package org.jabberstory.cjac.consignsettle.domain;
 import java.util.List;
 import java.util.Set;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.dao.DataAccessException;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
@@ -13,6 +15,8 @@ import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
  *
  */
 public class UserRepository extends HibernateDaoSupport {
+	
+	protected final Log logger = LogFactory.getLog(getClass());
 		
 	@SuppressWarnings("unchecked")
 	public List<UserGroup> getGroups(String groupQuery) {
@@ -91,6 +95,22 @@ public class UserRepository extends HibernateDaoSupport {
 		user.setEmail(email);
 	}
 	
+	public void updateUser(String userId, String password, String username,
+			String email, String postnum1, String postnum2, String address,
+			String phone1, String phone2, String phone3, UserGroup userGroup) {
+		User user = getUser(userId);
+		user.setPassword(password);
+		user.setUsername(username);
+		user.setEmail(email);
+		user.setPostnum1(postnum1);
+		user.setPostnum2(postnum2);
+		user.setAddress(address);
+		user.setPhone1(phone1);
+		user.setPhone2(phone2);
+		user.setPhone3(phone3);
+		user.setUserGroup(userGroup);
+	}
+	
 	public void updateUserGroupWithUsers(String groupId, Set<User> users) {
 		UserGroup userGroup = getUserGroup(groupId);
 		userGroup.setUsers(users);
@@ -114,6 +134,14 @@ public class UserRepository extends HibernateDaoSupport {
 
 	public void createUser(String userId, String password, String username, String email) {
 		getHibernateTemplate().save(new User(userId, username, email, password));
+	}
+	
+	public void createUser(String userId, String password, String username,
+			String email, String postnum1, String postnum2, String address,
+			String phone1, String phone2, String phone3, UserGroup userGroup) {
+		getHibernateTemplate().save(
+				new User(userId, username, email, password, postnum1, postnum2,
+						address, phone1, phone2, phone3, userGroup));
 	}
 
 }
