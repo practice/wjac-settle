@@ -38,7 +38,7 @@
 					<c:choose>
 						<c:when test="${file.filetype == '0'}">
 							<div><a href="download?organId=${organ.organId}&attId=${file.id}">${file.filename}</a> (${file.filesize} bytes)
-								&nbsp;&nbsp; <a href="deleteNonApproval1Attachment?attId=${file.id}&organId=${organ.organId}"><img src="<c:url value="/img/btn_b_commt_del.gif" />"></a></div>
+								&nbsp;&nbsp; <sec:authorize ifAllGranted="ROLE_ADMIN"><a href="deleteNonApproval1Attachment?attId=${file.id}&organId=${organ.organId}"><img src="<c:url value="/img/btn_b_commt_del.gif" />"></a></sec:authorize></div>
 							<c:set var="attCount" scope="page" value="${status.count}"></c:set>	
 						</c:when>
 					</c:choose>												
