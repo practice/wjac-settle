@@ -20,8 +20,14 @@ public class CreateUserValidator implements Validator {
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "required");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "passwordConfirm", "required");
 		if (!param.getPassword().equals(param.getPasswordConfirm()))
-			errors.rejectValue("passwordConfirm", "password mismatch");
+			errors.rejectValue("passwordConfirm", "password.mismatch");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "email", "required");
+//		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "postnum1", "required");
+//		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "postnum2", "required");
+//		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "address", "required");
+//		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "phone1", "required");
+//		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "phone2", "required");
+//		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "phone3", "required");
 	}
 
 }

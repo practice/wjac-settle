@@ -24,6 +24,10 @@ public interface UserService {
 	
 	public void updateUser(String userId, String password, String username, String email);
 	
+	public void updateUser(String userId, String password, String username,
+			String email, String postnum1, String postnum2, String address,
+			String phone1, String phone2, String phone3, String groupId);
+	
 	public void updateUserGroupWithUsers(String groupId, Set<User> users);
 
 	public void removeUserGroup(String groupId);
@@ -32,6 +36,11 @@ public interface UserService {
 
 	public void createUser(String userId, String password, String username, String email) 
 		throws DuplicateEntityException;
+	
+	public void createUser(String userId, String password, String username,
+			String email, String postnum1, String postnum2, String address,
+			String phone1, String phone2, String phone3, String groupId)
+			throws DuplicateEntityException;
 	
 	public User getUser(String userId);
 	

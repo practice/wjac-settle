@@ -47,13 +47,14 @@
 	          		<th>사용자 ID</th>
 	          		<th>사용자명</th>
 	          		<th>Email</th>
+	          		<th>그룹명</th>
 	        	</tr>
 	      	</thead>	 
 	      	<c:choose>	
 		      	<c:when test="${userCount == 0}">
 			      	<tbody>		
 						<tr>
-							<td colspan="4">검색 결과가 없습니다.</td>
+							<td colspan="5">검색 결과가 없습니다.</td>
 						</tr>
 					</tbody>		    	
 				</c:when>	
@@ -67,12 +68,22 @@
 								<a href="<c:url value="/user/updateUser?userId=${user.userId}" />">${user.username}</a>
 							</td>
 							<td>${user.email}</td>
+							<td>
+								<c:choose>
+									<c:when test="${user.userGroup.role == 'S'}">
+										${user.userGroup.parentGroup.groupName}/${user.userGroup.groupName}
+									</c:when>
+									<c:otherwise>
+										${user.userGroup.groupName}
+									</c:otherwise>
+								</c:choose>
+							</td>
 						</tr>
 					</c:forEach>
 					</tbody>
 					<tfoot>				
 				          <tr>
-				            <td colspan="4">								
+				            <td colspan="5">								
 							</td>
 				          </tr>
 			        </tfoot>

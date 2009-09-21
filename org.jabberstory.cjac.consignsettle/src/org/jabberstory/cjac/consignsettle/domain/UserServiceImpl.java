@@ -3,11 +3,15 @@ package org.jabberstory.cjac.consignsettle.domain;
 import java.util.List;
 import java.util.Set;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.jabberstory.cjac.forum.domain.Forum;
 import org.jabberstory.cjac.forum.domain.ForumService;
 import org.springframework.dao.DataAccessException;
 
 public class UserServiceImpl implements UserService {
+	
+	protected final Log logger = LogFactory.getLog(getClass());
 	
 	private UserRepository userRepository;
 	private ForumService forumService;
@@ -133,5 +137,28 @@ public class UserServiceImpl implements UserService {
 			String email) {
 		userRepository.updateUser(userId, password, username, email);		
 	}
+	
+	@Override
+	public void updateUser(String userId, String password, String username,
+			String email, String postnum1, String postnum2, String address,
+			String phone1, String phone2, String phone3, String groupId) {
+		
+		UserGroup userGroup = userRepository.getUserGroup(groupId);
+		userRepository.updateUser(userId, password, username, email, postnum1, postnum2,
+				address, phone1, phone2, phone3, userGroup);		
+	}
 
+	@Override
+	public void createUser(String userId, String password, String username,
+			String email, String postnum1, String postnum2, String address,
+			String phone1, String phone2, String phone3, String groupId)
+			throws DuplicateEntityException {
+		User user = userRepository.getUser(userId);
+		UserGroup userGroup = userRepository.getUserGroup(groupId);
+		if (user != null)
+			throw new DuplicateEntityException("Already existing user with user id = " + userId);
+		userRepository.createUser(userId, password, username, email, postnum1, postnum2,
+				address, phone1, phone2, phone3, userGroup);
+		
+	}
 }
