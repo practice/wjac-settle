@@ -33,22 +33,20 @@
           <tr>
             <td class="cell_title" width="130px">1차 불인정 내역</td>
             <td class="cell">
+            	<c:set var="attCount" scope="page" value="0"></c:set>
+            	<c:forEach var="file" items="${organ.attachments}" varStatus="status">
+					<c:choose>
+						<c:when test="${file.filetype == '0'}">
+							<div><a href="download?organId=${organ.organId}&attId=${file.id}">${file.filename}</a> (${file.filesize} bytes)
+								&nbsp;&nbsp; <a href="deleteNonApproval1Attachment?attId=${file.id}&organId=${organ.organId}"><img src="<c:url value="/img/btn_b_commt_del.gif" />"></a></div>
+							<c:set var="attCount" scope="page" value="${status.count}"></c:set>	
+						</c:when>
+					</c:choose>												
+				</c:forEach>
             	<c:choose>
-            		<c:when test="${fn:length(organ.attachments) == 0}">
+            		<c:when test="${attCount == '0'}">
             			1차 불인정 내역이 없습니다.
             		</c:when>
-            		<c:otherwise>            	
-			     		
-							<c:forEach var="file" items="${organ.attachments}">
-								<c:choose>
-									<c:when test="${file.filetype == '0'}">
-										<div><a href="download?organId=${organ.organId}&attId=${file.id}">${file.filename}</a> (${file.filesize} bytes)
-											&nbsp;&nbsp; <a href="deleteNonApproval1Attachment?attId=${file.id}&organId=${organ.organId}"><img src="<c:url value="/img/btn_b_commt_del.gif" />"></a></div>
-									</c:when>
-								</c:choose>												
-							</c:forEach>							
-						
-					</c:otherwise>
 				</c:choose>       	
 			</td>
           </tr>
@@ -57,8 +55,7 @@
       <div class="button">
         <div class="b_blue">
           <ul>
-          	<li><a href="#" onClick="window.print();return false;">인쇄</a></li>
-		    <li><a href="<c:url value="/organ/showSubject?organId=${organ.organId}" />">주관기관 조회</a></li>
+          	<li><a href="<c:url value="/organ/showSubject?organId=${organ.organId}" />">주관기관 현황 조회</a></li>
 		    <sec:authorize ifAllGranted="ROLE_ADMIN">
 	            <li><a href="<c:url value="/organ/updateNonApproval1?organId=${organ.organId}" />">1차 불인정 내역  등록</a></li>
 	        </sec:authorize>

@@ -32,13 +32,13 @@ public class OrganServiceImpl implements OrganService{
 
 	@Override
 	public List<Organ> getOrgans(String userId, String role)
-			throws DataAccessException {
+			{
 		return organRepository.getOrgans(userId, role);
 	}
 	
 	@Override
 	public List<Organ> getOrgansByUserGroup(String groupId)
-			throws DataAccessException {
+			{
 		
 		UserGroup userGroup = userService.getUserGroup(groupId);		
 		return organRepository.getOrgans(userGroup);
@@ -46,39 +46,39 @@ public class OrganServiceImpl implements OrganService{
 	
 	@Override
 	public List<Organ> getAllOrgans()
-			throws DataAccessException {
+			{
 		return organRepository.getAllOrgans();
 	}
 	
 	@Override
 	public Paging getOrgansWithPaging(String userId,
 			int currentPage, int pageSize, String sortColumn)
-			throws DataAccessException {
+			{
 		
 		String userRole = userService.getUserRole(userId);		
 		return organRepository.getOrgansWithPaging(userId, userRole, currentPage, pageSize, sortColumn);
 	}
 
 	@Override
-	public void removeOrgan(String organId) throws DataAccessException {
+	public void removeOrgan(String organId) {
 		organRepository.removeOrgan(organId);
 	}
 
 	@Override
-	public void updateOrgan(Organ organ) throws DataAccessException {
+	public void updateOrgan(Organ organ) {
 		organRepository.updateOrgan(organ);
 	}
 	
 	@Override
 	public void updateOrganCostDetail(String organId, String costDetail)
-			throws DataAccessException {
+			{
 		organRepository.updateOrganCostDetail(organId, costDetail);
 	}
 	
 	@Override
-	public void updateOrganNonApproval2(String organId, String nonApproval2)
-			throws DataAccessException {
-		organRepository.updateOrganNonApproval2(organId, nonApproval2);
+	public void updateOrganNonApproval2(String organId, String nonApproval2, MultipartFile file)
+			{
+		organRepository.updateOrganNonApproval2(organId, nonApproval2, file);
 	}
 
 	@Override

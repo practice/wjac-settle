@@ -188,48 +188,23 @@ public class OrganMultiActionController extends MultiActionController {
 		
 	}
 	
-	public ModelAndView updateNonApproval1(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		
-		String organId = request.getParameter("organId");
-		String nonApproval1 = (request.getParameter("nonApproval1") == null) ? "" : request.getParameter("nonApproval1");
-		
-		Organ organ = organService.getOrgan(organId);
-		
-		if (nonApproval1.equals("")) {
-			return new ModelAndView("organ/updateNonApproval1", "organ", organ);
-		}
-		
-		organService.updateOrganNonApproval1(organId, nonApproval1, null);
-		organ = organService.getOrgan(organId);
-		
-		return new ModelAndView("organ/showNonApproval1", "organ", organ);
-	
-	}
-	
-	public ModelAndView deleteNonApproval1(HttpServletRequest request, HttpServletResponse response) throws Exception {
-
-		String organId = request.getParameter("organId");
-		
-		organService.updateOrganNonApproval1(organId, "", null);
-		
-		Organ organ = organService.getOrgan(organId);
-		
-		return new ModelAndView("organ/showNonApproval1", "organ", organ);
-	
-	}
-	
 	public ModelAndView showNonApproval1(HttpServletRequest request, HttpServletResponse response) throws Exception {
 	
 		String organId = request.getParameter("organId");
 		
 		Organ organ = organService.getOrgan(organId);
 		
-		ModelAndView mv = new ModelAndView("organ/showNonApproval1", "organ", organ);
-//		if(organ.getAttachments().size() == 0){
-//			mv.addObject("attachments", organ.getAttachments());
-//		}
+		return new ModelAndView("organ/showNonApproval1", "organ", organ);
 		
-		return mv;
+	}
+	
+	public ModelAndView showNonApproval2(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+		String organId = request.getParameter("organId");
+		
+		Organ organ = organService.getOrgan(organId);
+		
+		return new ModelAndView("organ/showNonApproval2", "organ", organ);
 		
 	}
 	
@@ -243,47 +218,16 @@ public class OrganMultiActionController extends MultiActionController {
 		return new ModelAndView("redirect:/organ/showNonApproval1?organId=" + organId);		
 	}
 	
-	public ModelAndView updateNonApproval2(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ModelAndView deleteNonApproval2Attachment(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
-		String organId = request.getParameter("organId");
-		String nonApproval2 = (request.getParameter("nonApproval2") == null) ? "" : request.getParameter("nonApproval2");
-		
-		Organ organ = organService.getOrgan(organId);
-		
-		if (nonApproval2.equals("")) {
-			return new ModelAndView("organ/updateNonApproval2", "organ", organ);
-		}
-		
-		organService.updateOrganNonApproval2(organId, nonApproval2);
-		organ = organService.getOrgan(organId);
-		
-		return new ModelAndView("organ/showNonApproval2", "organ", organ);
-	
-	}
-	
-	public ModelAndView deleteNonApproval2(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String attId = request.getParameter("attId");
+		String organId = request.getParameter("organId"); 
+			
+		organService.removeAttachment(organId, attId);
 
-		String organId = request.getParameter("organId");
-		
-		organService.updateOrganNonApproval2(organId, "");
-		
-		Organ organ = organService.getOrgan(organId);
-		
-		return new ModelAndView("organ/showNonApproval2", "organ", organ);
-	
+		return new ModelAndView("redirect:/organ/showNonApproval2?organId=" + organId);		
 	}
 	
-	public ModelAndView showNonApproval2(HttpServletRequest request, HttpServletResponse response) throws Exception {
-	
-		String organId = request.getParameter("organId");
-		
-		Organ organ = organService.getOrgan(organId);
-		
-		return new ModelAndView("organ/showNonApproval2", "organ", organ);
-		
-	}
-		
-
 	public ModelAndView settlementPagingList(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
 		String pageNo = (request.getParameter("pageNo") == null) ? "1": request.getParameter("pageNo");
