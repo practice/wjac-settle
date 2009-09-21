@@ -28,7 +28,7 @@ import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.SimpleFormController;
 
-public class UpdateNonApproval1Controller extends SimpleFormController{
+public class UpdateNonApproval2Controller extends SimpleFormController{
 	
 	protected final Log logger = LogFactory.getLog(getClass());
 	
@@ -38,9 +38,9 @@ public class UpdateNonApproval1Controller extends SimpleFormController{
 		this.organService = organService;
 	}
 	
-	public UpdateNonApproval1Controller() {
+	public UpdateNonApproval2Controller() {
 		setCommandClass(OrganFileCommand.class);
-		setCommandName("updateNonApproval1");
+		setCommandName("updateNonApproval2");
 	}
 	
 	@Override
@@ -61,8 +61,8 @@ public class UpdateNonApproval1Controller extends SimpleFormController{
 			HttpServletResponse response, Object command, BindException errors)
 			throws Exception {
 		OrganFileCommand ofc = (OrganFileCommand)command;
-		organService.updateOrganNonApproval1(ofc.getOrganId(), "", ofc.getFiles().get(0));
-		return new ModelAndView("redirect:/organ/showNonApproval1?organId=" + ofc.getOrganId());
+		organService.updateOrganNonApproval2(ofc.getOrganId(), "", ofc.getFiles().get(0));
+		return new ModelAndView("redirect:/organ/showNonApproval2?organId=" + ofc.getOrganId());
 	}
 	
 	@Override

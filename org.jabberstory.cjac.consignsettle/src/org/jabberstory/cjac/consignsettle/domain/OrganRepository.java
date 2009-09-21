@@ -151,9 +151,12 @@ public class OrganRepository extends HibernateDaoSupport {
 		saveFiles(file, saveDir);
 	}
 
-	public void updateOrganNonApproval2(String organId, String nonApproval2) {
+	public void updateOrganNonApproval2(String organId, String nonApproval2, MultipartFile file) {
 		Organ organ = getOrgan(organId);
 		organ.setNonApproval2(nonApproval2);
+		String saveDir = calcSaveDir(organ);
+		addAttachments(file, organ, saveDir, 0, "1");
+		saveFiles(file, saveDir);
 	}
 
 	private void saveFiles(MultipartFile file, String saveDir) {

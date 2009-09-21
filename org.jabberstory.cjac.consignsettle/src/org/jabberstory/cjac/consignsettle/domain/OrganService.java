@@ -28,7 +28,7 @@ public interface OrganService {
 	
 	void updateOrganNonApproval1(String organId, String nonApproval1, MultipartFile file);
 	
-	void updateOrganNonApproval2(String organId, String nonApproval2);
+	void updateOrganNonApproval2(String organId, String nonApproval2, MultipartFile file);
 	
 	void removeOrgan(String organId);
 	
