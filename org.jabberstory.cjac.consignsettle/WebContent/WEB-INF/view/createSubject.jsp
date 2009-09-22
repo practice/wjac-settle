@@ -8,6 +8,7 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/common.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/PopupCalendar.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.dateentry.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.selectboxes.js"></script>
 <script>
 	function requiredFieldCheck(){
 
@@ -155,13 +156,14 @@
 	$(document).ready(function(){
 		$('#ownerGroupId').change(function(){
 			var selVal = $("#ownerGroupId > option:selected").val();
-			
 			$.getJSON("${pageContext.request.contextPath}/organ/getAjaxData?groupId=" + selVal, function(data, textStatus){
-				// data will be a jsonObj
-				// textStatus will be one of the following values: 
-				//   "timeout","error","notmodified","success","parsererror"	
-				if(textStatus == 'success' && data.length > 0){									
-					alert(data[0].id + data[0].value);
+				if(textStatus == 'success' && data.length > 0){		
+					for(var i = 0; i< data.length; i++){
+						$('#subjectGroupId').addOption(data[i].id, data[i].value);											
+					}
+				}else{
+					$('#subjectGroupId').removeOption(/./);
+					$('#subjectGroupId').addOption("","선택");
 				}
 			});
 		});
@@ -191,12 +193,7 @@
 									</c:forEach>
 								</select></td>
 					<td class="cell_title" width="130px">주관기관</td>
-					<td class="cell" width="330px"><select id="subjectGroupId" name="subjectGroupId">
-									<option value="">선택</option>
-									<c:forEach items="${subjectGroups}" var="subjectGroup">		
-										<option value="${subjectGroup.groupId }">${subjectGroup.groupName }</option>
-									</c:forEach>
-								</select></td>
+					<td class="cell" width="330px"><select id="subjectGroupId" name="subjectGroupId"><option value="">선택</option></select></td>
 				</tr>
 				<tr>
 					<td class="cell_title">사업명</td>
@@ -421,8 +418,7 @@
 	        <div class="b_blue">
 	          <ul>
 	          	<li><a href="<c:url value="/organ/subjectList" />">취소</a></li>
-	            <li><a href="#" id="submit">저장</a></li>
-	            <li><a href="#" id="ajaxtest">AjaxTest</a></li>	            
+	            <li><a href="#" id="submit">저장</a></li>         
 	          </ul>
 	        </div>
 	      </div>
