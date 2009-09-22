@@ -37,6 +37,12 @@ public class UserRepository extends HibernateDaoSupport {
 	}
 	
 	@SuppressWarnings("unchecked")
+	public List<UserGroup> getGroupsByParentGroupId(String groupId) {		
+		String queryString = "from UserGroup ug where ug.parentGroup.groupId = :groupId";		
+		return getHibernateTemplate().findByNamedParam(queryString, "groupId", groupId); 
+	}
+	
+	@SuppressWarnings("unchecked")
 	public List<User> getUsers(String userQuery) {
 		String queryString = "from User u where u.userId like :query or u.username like :query or u.email like :query";
 		List list = getHibernateTemplate().findByNamedParam(queryString, 
