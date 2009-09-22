@@ -8,8 +8,7 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/common.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/PopupCalendar.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.dateentry.js"></script>
-<script type="text/javascript">
-<!--
+<script>
 	function requiredFieldCheck(){
 
 		var selObjOwnerGroup = document.form1.ownerGroupId;	
@@ -81,7 +80,7 @@
 				
 	}
 
-	$(function(){
+	$(document).ready(function(){
 		$('#contractStartDate').dateEntry({dateFormat: 'ymd-'});
 		$('#contractEndDate').dateEntry({dateFormat: 'ymd-'});
 		$('#useResultDate').dateEntry({dateFormat: 'ymd-'});
@@ -152,8 +151,22 @@
 			checkPhone('consignSettlementPhone3');
 		});		
 	});
+
+	$(document).ready(function(){
+		$('#ownerGroupId').change(function(){
+			var selVal = $("#ownerGroupId > option:selected").val();
+			
+			$.getJSON("${pageContext.request.contextPath}/organ/getAjaxData?groupId=" + selVal, function(data, textStatus){
+				// data will be a jsonObj
+				// textStatus will be one of the following values: 
+				//   "timeout","error","notmodified","success","parsererror"	
+				if(textStatus == 'success' && data.length > 0){									
+					alert(data[0].id + data[0].value);
+				}
+			});
+		});
+	});
 	
-//-->
 </script>
 </head>
 <body>
@@ -408,7 +421,8 @@
 	        <div class="b_blue">
 	          <ul>
 	          	<li><a href="<c:url value="/organ/subjectList" />">취소</a></li>
-	            <li><a href="#" id="submit">저장</a></li>	            
+	            <li><a href="#" id="submit">저장</a></li>
+	            <li><a href="#" id="ajaxtest">AjaxTest</a></li>	            
 	          </ul>
 	        </div>
 	      </div>

@@ -52,6 +52,11 @@ public class UserServiceImpl implements UserService {
 		
 		return userRepository.getGroupsByRole(role);
 	}
+	
+	@Override
+	public List<UserGroup> getGroupsByParentGroupId(String groupId) {
+		return userRepository.getGroupsByParentGroupId(groupId);
+	}
 
 	@Override
 	public void createUserGroup(String groupName, String role, String parentGroupId) throws DuplicateEntityException {

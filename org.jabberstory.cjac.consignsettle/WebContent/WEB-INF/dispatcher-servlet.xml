@@ -38,6 +38,7 @@
 				<prop key="/organ/updateNonApproval1">updateNonApproval1Controller</prop>
 				<prop key="/organ/updateNonApproval2">updateNonApproval2Controller</prop>
 				<prop key="/organ/excelDownload">organExcelController</prop>
+				<prop key="/organ/getAjaxData">organAjaxDataController</prop>
 				<prop key="/organ/zipCodeList">zipCodeListController</prop>
 				<prop key="/organ/*">organMultiActionController</prop>
 				<prop key="/login">loginController</prop>
@@ -121,7 +122,7 @@
 		p:successView=""
 		p:formView="organ/updateNonApproval2"
 		p:organService-ref="organService" />	
-		
+	
 	<bean id="organDownloadController" class="org.jabberstory.cjac.consignsettle.controller.AttachmentDownloadController" 
 		p:organService-ref="organService" />
 		
@@ -131,6 +132,12 @@
 		p:organExcelView-ref="organExcelView"
 		p:organService-ref="organService"
 		p:userService-ref="userService" />			
+	
+	<bean id="organAjaxDataView" class="org.jabberstory.cjac.consignsettle.view.OrganAjaxDataView" />
+	
+	<bean id="organAjaxDataController" class="org.jabberstory.cjac.consignsettle.controller.OrganAjaxDataController" 
+		p:organAjaxDataView-ref="organAjaxDataView"
+		p:userService-ref="userService" />	
 		
 	<bean id="zipCodeListController" class="org.jabberstory.cjac.consignsettle.controller.ZipCodeListController" 
 		p:successView="organ/zipCodeList"
