@@ -1,6 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<jsp:scriptlet>
+pageContext.setAttribute("crlf", "\r\n");
+pageContext.setAttribute("lf", "\n");
+pageContext.setAttribute("cr", "\r");
+</jsp:scriptlet>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -174,6 +180,14 @@
 				<td class="cell_title">환수대상액</td>
 				<td colspan="3" class="cell">${organ.currentRedemtion}원</td>
 			</tr>	
+			<tr>
+				<td class="cell_title">검토의견</td>
+				<td colspan="3" class="cell">${fn:replace(fn:replace(organ.opinion,crlf,"<br/>")," ", "&nbsp;")}</td>
+			</tr>
+			<tr>
+				<td class="cell_title">비고</td>
+				<td colspan="3" class="cell">${fn:replace(fn:replace(organ.remark,crlf,"<br/>"), " ","&nbsp;")}</td>
+			</tr>
         </tbody>
       </table>
 	<div class="button">

@@ -470,6 +470,14 @@
 					<td class="cell_title">환수대상액</td>
 					<td colspan="3" class="cell"><input type="text" id="currentRedemtion" name="currentRedemtion" class="line_box" style="width:150px">원</td>
 				</tr>		
+				<tr>
+					<td class="cell_title">검토의견</td>
+					<td colspan="3" class="cell"><textarea id="opinion" name="opinion"></textarea></td>
+				</tr>
+				<tr>
+					<td class="cell_title">비고</td>
+					<td colspan="3" class="cell"><textarea id="remark" name="remark"></textarea></td>
+				</tr>
 		</table>
 		<div class="button">
 	        <div class="b_blue">

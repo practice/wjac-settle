@@ -63,11 +63,11 @@ public class OrganExcelView extends AbstractExcelView{
 		row.createCell((short)7).setCellValue(organ.getFormalObjectAcceptanceDate());
 		row.createCell((short)8).setCellValue(organ.getFormalObjectResultDate());
 		row.createCell((short)9).setCellValue(organ.getConsignSettlementResultDate());
-		row.createCell((short)10).setCellValue("-");
+		row.createCell((short)10).setCellValue(organ.getTotalResearchAmount());
 		row.createCell((short)11).setCellValue(organ.getGovContributeAmount());
-		row.createCell((short)12).setCellValue("-");
+		row.createCell((short)12).setCellValue(organ.getNonGovContributeAmount());
 		row.createCell((short)13).setCellValue(organ.getGoodsAmount());
-		row.createCell((short)14).setCellValue("-");
+		row.createCell((short)14).setCellValue(organ.getGoodsAmount());
 		row.createCell((short)15).setCellValue(organ.getTotalCashAmount());
 		row.createCell((short)16).setCellValue(organ.getGovInterests());
 		row.createCell((short)17).setCellValue(organ.getConsignSettlementCommission());
@@ -76,9 +76,9 @@ public class OrganExcelView extends AbstractExcelView{
 		row.createCell((short)20).setCellValue(organ.getCurrentNonPropriety());
 		row.createCell((short)21).setCellValue(organ.getCurrentSubTotal());
 		row.createCell((short)22).setCellValue(organ.getCurrentRedemtion());
-		row.createCell((short)23).setCellValue("-");
+		row.createCell((short)23).setCellValue(organ.getOpinion());
 		row.createCell((short)24).setCellValue(organ.getConsignSettlementPerson());
-		row.createCell((short)25).setCellValue("-");
+		row.createCell((short)25).setCellValue(organ.getRemark());
 		
 		return rowNum;
 	}
