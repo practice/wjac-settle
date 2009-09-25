@@ -15,7 +15,9 @@
 */
 package org.jabberstory.cjac.consignsettle.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -39,15 +41,24 @@ public class OrganAjaxDataController implements Controller{
 		this.organAjaxDataView = organAjaxDataView;
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public ModelAndView handleRequest(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		
-		String groupId = request.getParameter("groupId");
+		String groupId = (request.getParameter("groupId") == null)?"":request.getParameter("groupId");
+		String dataType = (request.getParameter("dataType") == null)?"":request.getParameter("dataType");
+				
+		Map dataMap = new HashMap();
+		dataMap.put("dataType", dataType);
+		if("".equals(dataType) || "0".equals(dataType)){
+			dataMap.put("groups", userService.getGroupsByParentGroupId(groupId));
+		}
+		if("1".equals(dataType)){
+			dataMap.put("users", userService.getUsersByGroupId(groupId));
+		}
 		
-		List<UserGroup> groups = userService.getGroupsByParentGroupId(groupId);
-		
-		return new ModelAndView(organAjaxDataView,"groups",groups);
+		return new ModelAndView(organAjaxDataView,"dataMap",dataMap);
 	}
 	
 }

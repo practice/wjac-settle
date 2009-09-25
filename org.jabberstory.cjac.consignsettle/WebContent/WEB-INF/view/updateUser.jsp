@@ -73,11 +73,11 @@ $(document).ready(function(ev) {
 						연락처 					
 					</td>
 					<td class="cell">
-						<form:input path="phone1" cssClass="line_box" cssStyle="width:30px"/><form:errors path="phone1" />
+						<form:input path="phone1" cssClass="line_box" cssStyle="width:30px" maxlength="4"/><form:errors path="phone1" />
 						-					
-						<form:input path="phone2" cssClass="line_box" cssStyle="width:30px"/><form:errors path="phone2" />
+						<form:input path="phone2" cssClass="line_box" cssStyle="width:30px" maxlength="4"/><form:errors path="phone2" />
 						-
-						<form:input path="phone3" cssClass="line_box" cssStyle="width:30px"/><form:errors path="phone3" />
+						<form:input path="phone3" cssClass="line_box" cssStyle="width:30px" maxlength="4"/><form:errors path="phone3" />
 					</td>
 				</tr>
 				<tr>
@@ -85,9 +85,9 @@ $(document).ready(function(ev) {
 		            <td class="cell">
 		            	<ul>
 			                <li>
-			                  	<form:input path="postnum1" cssClass="line_box" cssStyle="width:30px"/><form:errors path="postnum1" />
+			                  	<form:input path="postnum1" cssClass="line_box" cssStyle="width:30px" maxlength="3"/><form:errors path="postnum1" />
 			                  	-
-								<form:input path="postnum2" cssClass="line_box" cssStyle="width:30px"/><form:errors path="postnum2" />&nbsp;
+								<form:input path="postnum2" cssClass="line_box" cssStyle="width:30px" maxlength="3"/><form:errors path="postnum2" />&nbsp;
 			                </li>
 			                <li>
 			                  <div class="b_gray">

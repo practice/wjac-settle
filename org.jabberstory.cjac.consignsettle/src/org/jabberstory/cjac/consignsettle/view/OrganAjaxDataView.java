@@ -15,12 +15,14 @@
 */
 package org.jabberstory.cjac.consignsettle.view;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.jabberstory.cjac.consignsettle.domain.User;
 import org.jabberstory.cjac.consignsettle.domain.UserGroup;
 import org.springframework.web.servlet.view.AbstractView;
 
@@ -36,19 +38,38 @@ public class OrganAjaxDataView extends AbstractView {
 		response.setHeader("Pragma", "no-cache;");
 		response.setHeader("Expires", "-1;");
 		
-		List<UserGroup> groups = (List<UserGroup>)model.get("groups");
+		Map dataMap = (HashMap)model.get("dataMap");
+		String dataType = (String)dataMap.get("dataType");
+		List<UserGroup> groups = (List<UserGroup>)dataMap.get("groups");
+		List<User> users =(List<User>)dataMap.get("users");
 		
 		response.getWriter().println("[");
 		
 		int i = 0;
 		
-		for(UserGroup group:groups){
-			if(i == 0){
-				response.getWriter().println("{id:\"" + group.getGroupId() + "\", value:\"" + group.getGroupName() + "\"}");
-			}else{
-				response.getWriter().println(", {id:\"" + group.getGroupId() + "\", value:\"" + group.getGroupName() + "\"}");
-			}			
-			i++;
+		// parent group(전담기관)
+		if("".equals(dataType) || "0".equals(dataType)){		
+			for(UserGroup group:groups){
+				if(i == 0){
+					response.getWriter().println("{id:\"" + group.getGroupId() + "\", value:\"" + group.getGroupName() + "\"}");
+				}else{
+					response.getWriter().println(", {id:\"" + group.getGroupId() + "\", value:\"" + group.getGroupName() + "\"}");
+				}			
+				i++;
+			}
+		}
+		
+		// 주관기관 담당자
+		if("1".equals(dataType) && users != null){
+			User user = users.get(0);
+			response.getWriter().println("{organResponsiblePerson:\"" + user.getUsername() + "\"," +
+											"organResponsiblePhone1:\"" + user.getPhone1() + "\"," +
+											"organResponsiblePhone2:\"" + user.getPhone2() + "\"," +
+											"organResponsiblePhone3:\"" + user.getPhone3() + "\"," +
+											"organResponsibleEmail:\"" + user.getEmail() + "\"," +
+											"organResponsiblePostNumber1:\"" + user.getPostnum1() + "\"," +
+											"organResponsiblePostNumber2:\"" + user.getPostnum2() + "\"," +
+											"organResponsibleAddress:\"" + user.getAddress() + "\"}");
 		}
 		
 		response.getWriter().println("]");
