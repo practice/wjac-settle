@@ -33,11 +33,13 @@ function requiredFieldCheck(){
 }
 
 $(document).ready(function() {
-	$('#submit').bind('click', function() {
+	$('#submit').bind('click', function(ev) {
 		if(requiredFieldCheck()){
 			//$('#form1').submit();
 			document.form1.action = "${pageContext.request.contextPath}/organ/updateSubject";
 			document.form1.submit();
+			ev.preventDefault();
+			return false;
 		}			
 	});
 });

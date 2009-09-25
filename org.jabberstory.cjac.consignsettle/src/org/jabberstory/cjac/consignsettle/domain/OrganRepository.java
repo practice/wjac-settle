@@ -2,9 +2,7 @@ package org.jabberstory.cjac.consignsettle.domain;
 
 import java.io.File;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -12,6 +10,7 @@ import org.apache.commons.logging.LogFactory;
 import org.hibernate.criterion.CriteriaSpecification;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.jabberstory.cjac.consignsettle.common.util.Paging;
 import org.springframework.dao.DataAccessException;
@@ -50,12 +49,13 @@ public class OrganRepository extends HibernateDaoSupport {
 		if (userRole.equals("A") || userRole.equals("C")) {
 			list = getHibernateTemplate().find("from Organ o");
 		} else {
+			hqlBuf.append("	select distinct o ");
 			hqlBuf.append("	from Organ o ");
-			hqlBuf.append("		left join fetch o.ownerGroup og ");
-			hqlBuf.append("		left join fetch og.users ou ");
 			hqlBuf.append("		left join fetch o.subjectGroup sg ");
 			hqlBuf.append("		left join fetch sg.users su ");
-			hqlBuf.append("	where ou.userId = :userId or su.userId = :userId");
+			hqlBuf.append("		left join fetch o.subjectGroup.parentGroup pg ");
+			hqlBuf.append("		left join fetch pg.users pu ");
+			hqlBuf.append("	where su.userId = :userId or pu.userId = :userId");
 			list = getHibernateTemplate().findByNamedParam(hqlBuf.toString(),
 					new String[] { "userId" }, new Object[] { userId });
 		}
@@ -79,25 +79,27 @@ public class OrganRepository extends HibernateDaoSupport {
 		int totalCount = this.getOrgans(userId, userRole).size();
 		final Order order = (sortColumn == "") ? Order.asc("sg.groupName")
 				: Order.desc(sortColumn);
-
-		DetachedCriteria criteria = DetachedCriteria.forClass(Organ.class);
-
+		
+		DetachedCriteria organCriteria = DetachedCriteria.forClass(Organ.class);
+		
 		if (userRole.equals("A") || userRole.equals("C")) {
-			criteria.createAlias("subjectGroup", "sg",
-					CriteriaSpecification.LEFT_JOIN).addOrder(order);
+			organCriteria.createAlias("subjectGroup", "sg", CriteriaSpecification.LEFT_JOIN).
+					addOrder(order);
+		} else if (userRole.equals("O")) {
+			organCriteria.createAlias("subjectGroup", "sg", CriteriaSpecification.LEFT_JOIN)
+			.createAlias("sg.parentGroup", "pg", CriteriaSpecification.LEFT_JOIN)	
+			.createAlias("pg.users", "pu", CriteriaSpecification.LEFT_JOIN)	
+			.add(Restrictions.eq("pu.userId", userId))
+			.addOrder(order)
+			.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
 		} else {
-			criteria.createCriteria("ownerGroup", "og",
-					CriteriaSpecification.LEFT_JOIN).createCriteria("users",
-					"ou", CriteriaSpecification.LEFT_JOIN);
-			criteria.createCriteria("subjectGroup", "sg",
-					CriteriaSpecification.LEFT_JOIN).createCriteria("users",
-					"su", CriteriaSpecification.LEFT_JOIN);
-			criteria.add(
-					Restrictions.or(Restrictions.eq("ou.userId", userId),
-							Restrictions.eq("su.userId", userId))).addOrder(
-					order);
+			organCriteria.createAlias("subjectGroup", "sg", CriteriaSpecification.LEFT_JOIN)
+			.createAlias("sg.users", "su", CriteriaSpecification.LEFT_JOIN)
+			.add(Restrictions.eq("su.userId", userId))
+			.addOrder(order)
+			.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
 		}
-		List organs = (List) getHibernateTemplate().findByCriteria(criteria,
+		List organs = (List) getHibernateTemplate().findByCriteria(organCriteria,
 				fromRowNum, toRowNum);
 
 		return new Paging((List) organs, totalCount, currentPage);
