@@ -44,7 +44,8 @@
 	      	<thead>
 	        	<tr>
 	        		<th>번호</th>
-	          		<th>사용자그룹명</th>
+	          		<th>그룹명</th>
+	          		<th>상위그룹(전담기관)</th>
 	          		<th>Role</th>
 	        	</tr>
 	      	</thead>	 
@@ -52,7 +53,7 @@
 		      	<c:when test="${groupCount == 0}">
 			      	<tbody>		
 						<tr>
-							<td colspan="3">검색 결과가 없습니다.</td>
+							<td colspan="4">검색 결과가 없습니다.</td>
 						</tr>
 					</tbody>		    	
 				</c:when>	
@@ -64,6 +65,7 @@
 							<td>
 								<a href="<c:url value="/user/updateUserGroup?groupId=${group.groupId}" />">${group.groupName}</a>
 							</td>
+							<td>${group.parentGroup.groupName}</td>
 							<td>
 								<c:choose>
 									<c:when test="${group.role == 'A'}">
