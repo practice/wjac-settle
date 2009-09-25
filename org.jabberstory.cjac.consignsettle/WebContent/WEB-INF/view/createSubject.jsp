@@ -159,7 +159,8 @@
 		$('#ownerGroupId').change(function(){
 			var selVal = $("#ownerGroupId > option:selected").val();
 			$.getJSON("${pageContext.request.contextPath}/organ/getAjaxData?groupId=" + selVal, function(data, textStatus){
-				if(textStatus == 'success' && data.length > 0){		
+				if(textStatus == 'success' && data.length > 0){	
+					$('#subjectGroupId').removeOption(/./);	
 					for(var i = 0; i< data.length; i++){
 						$('#subjectGroupId').addOption(data[i].id, data[i].value);
 						$("#subjectGroupId > option[@value='']").attr("selected", "true");											
