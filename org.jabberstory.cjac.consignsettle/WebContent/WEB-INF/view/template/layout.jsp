@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7"/>
 <title><tiles:getAsString name="title" /></title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/basic.css" type="text/css" media="screen" charset="utf-8" />
 <script src="${pageContext.request.contextPath}/jquery-1.2.6.js" type="text/javascript"></script>
