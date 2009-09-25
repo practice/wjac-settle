@@ -60,7 +60,7 @@
 				<th rowspan="2" nowrap>정부지분</th>
 				<th rowspan="2" nowrap>위탁정산수수료</th>
 				<th colspan="5" nowrap>총환수대상액</th>
-				<th rowspan="2" nowrap>검토의견(부적정집행내역)</th>
+				<th rowspan="2" nowrap>검토의견<br/>(부적정집행내역)</th>
 				<th rowspan="2" nowrap>정산담당자</th>
 				<th rowspan="2" nowrap>비고</th>
 			</tr>
@@ -101,11 +101,11 @@
 							<td nowrap>${organ.formalObjectAcceptanceDate}</td>
 							<td nowrap>${organ.formalObjectResultDate}</td>
 							<td nowrap>${organ.consignSettlementResultDate}</td>
-							<td nowrap class="cell_right"><font color="red">알수없는데이터</font></td>
+							<td nowrap class="cell_right">${organ.totalResearchAmount}</td>
 							<td nowrap class="cell_right">${organ.govContributeAmount}</td>							
-							<td nowrap class="cell_right"><font color="red">알수없는데이터</font></td>
+							<td nowrap class="cell_right">${organ.nonGovContributeAmount}</td>
 							<td nowrap class="cell_right">${organ.goodsAmount}</td>
-							<td nowrap class="cell_right"><font color="red">알수없는데이터</font></td>							
+							<td nowrap class="cell_right">${organ.subtotal}</td>							
 							<td nowrap class="cell_right">${organ.totalCashAmount}</td>
 							<td nowrap class="cell_right">${organ.govInterests}</td>
 							<td nowrap class="cell_right">${organ.consignSettlementCommission}</td>
@@ -114,9 +114,9 @@
 							<td nowrap class="cell_right">${organ.currentNonPropriety}</td>
 							<td nowrap class="cell_right">${organ.currentSubTotal}</td>
 							<td nowrap class="cell_right">${organ.currentRedemtion}</td>
-							<td nowrap><font color="red">알수없는데이터</font></td>
+							<td nowrap>${organ.opinion}</td>
 							<td nowrap>${organ.consignSettlementPerson}</td>
-							<td nowrap><font color="red">알수없는데이터</font></td>
+							<td nowrap><font color="red">${organ.remark}</font></td>
 						</tr>
 					</c:forEach>
 				</c:otherwise>
