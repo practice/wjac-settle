@@ -30,8 +30,8 @@
 <div id="container">
   <div id="content">
     <div id="content_top">
-      <p id="title"> 주관기관목록 </p>
-      <p id="path"> PATH : 주관기관현황 &#62; <span id="path_b">주관기관목록</span></p>
+      <p id="title"> 주관기관 현황 목록 </p>
+      <p id="path"> PATH : 주관기관현황 &#62; <span id="path_b">주관기관 현황 목록</span></p>
     </div>
     <!-- div class="button">
       <div class="b_blue">

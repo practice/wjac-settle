@@ -556,6 +556,33 @@ public class Organ {
 		return subjectGroup;
 	}
 
+	
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((organId == null) ? 0 : organId.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Organ other = (Organ) obj;
+		if (organId == null) {
+			if (other.organId != null)
+				return false;
+		} else if (!organId.equals(other.organId))
+			return false;
+		return true;
+	}
+
 	@Override
 	public String toString() {
 		return "Organ [businessName=" + businessName

@@ -56,7 +56,7 @@
         <div class="b_blue">
           <ul>
           	<li><a href="#" onClick="window.print();return false;">인쇄</a></li>
-		    <li><a href="<c:url value="/organ/showSubject?organId=${organ.organId}" />">주관기관 조회</a></li>
+		    <li><a href="<c:url value="/organ/showSubject?organId=${organ.organId}" />">주관기관 현황 조회</a></li>
 		    <sec:authorize ifAllGranted="ROLE_ADMIN">
 	            <li><a href="<c:url value="/organ/deleteCostDetail?organId=${organ.organId}" />">사업비사용명세 삭제</a></li>
 	            <li><a href="<c:url value="/organ/updateCostDetail?organId=${organ.organId}" />">사업비사용명세 등록/수정</a></li>
