@@ -85,9 +85,9 @@ $(document).ready(function(ev) {
 		            <td class="cell">
 		            	<ul>
 			                <li>
-			                  	<input type="text" id="postnum1" name="postnum1" class="line_box" style="width:30px" /><form:errors path="postnum1" />
+			                  	<input type="text" id="postnum1" name="postnum1" class="line_box" style="width:30px" maxlength="3"/><form:errors path="postnum1" />
 			                  	-
-								<input type="text" id="postnum2" name="postnum2" class="line_box" style="width:30px" /><form:errors path="postnum2" />&nbsp;
+								<input type="text" id="postnum2" name="postnum2" class="line_box" style="width:30px" maxlength="3"/><form:errors path="postnum2" />&nbsp;
 			                </li>
 			                <li>
 			                  <div class="b_gray">

@@ -32,7 +32,7 @@
 			<tbody>
 				<tr>
 					<td class="cell_title" width="130px">전담기관</td>
-					<td class="cell" width="330px">${organ.ownerGroup.groupName}</td>
+					<td class="cell" width="330px">${organ.subjectGroup.parentGroup.groupName}</td>
 					<td class="cell_title" width="130px">주관기관</td>
 					<td class="cell" width="330px">${organ.subjectGroup.groupName}</td>
 				</tr>

@@ -159,7 +159,8 @@
 			$.getJSON("${pageContext.request.contextPath}/organ/getAjaxData?groupId=" + selVal, function(data, textStatus){
 				if(textStatus == 'success' && data.length > 0){		
 					for(var i = 0; i< data.length; i++){
-						$('#subjectGroupId').addOption(data[i].id, data[i].value);											
+						$('#subjectGroupId').addOption(data[i].id, data[i].value);
+						$("#subjectGroupId > option[@value='']").attr("selected", "true");											
 					}
 				}else{
 					$('#subjectGroupId').removeOption(/./);
@@ -168,6 +169,60 @@
 			});
 		});
 	});
+
+	$(document).ready(function(){
+		$('#subjectGroupId').change(function(){
+			var selVal = this.value;
+			if(selVal == ""){
+				//removeSubjectPerson();
+			}else{
+				$.getJSON("${pageContext.request.contextPath}/organ/getAjaxData?dataType=1&groupId=" + selVal, function(data, textStatus){
+					if(textStatus == 'success' && data.length > 0){		
+						setSubjectPerson(data[0].organResponsiblePerson,
+								data[0].organResponsiblePhone1,
+								data[0].organResponsiblePhone2,
+								data[0].organResponsiblePhone3,
+								data[0].organResponsibleEmail,
+								data[0].organResponsiblePostNumber1,
+								data[0].organResponsiblePostNumber2,
+								data[0].organResponsibleAddress);
+					}else{
+						removeSubjectPerson();
+					}
+				});
+			}
+		});
+	});
+
+	function setSubjectPerson(organResponsiblePerson, 
+								organResponsiblePhone1,
+								organResponsiblePhone2,
+								organResponsiblePhone3,
+								organResponsibleEmail,
+								organResponsiblePostNumber1,
+								organResponsiblePostNumber2,
+								organResponsibleAddress){
+
+		$('#organResponsiblePerson').val(organResponsiblePerson);
+		$('#organResponsiblePhone1').val(organResponsiblePhone1);
+		$('#organResponsiblePhone2').val(organResponsiblePhone2);
+		$('#organResponsiblePhone3').val(organResponsiblePhone3);
+		$('#organResponsibleEmail').val(organResponsibleEmail);
+		$('#organResponsiblePostNumber1').val(organResponsiblePostNumber1);
+		$('#organResponsiblePostNumber2').val(organResponsiblePostNumber2);
+		$('#organResponsibleAddress').val(organResponsibleAddress);		
+	}
+
+	function removeSubjectPerson(){
+		$('#organResponsiblePerson').val("");
+		$('#organResponsiblePhone1').val("");
+		$('#organResponsiblePhone2').val("");
+		$('#organResponsiblePhone3').val("");
+		$('#organResponsibleEmail').val("");
+		$('#organResponsiblePostNumber1').val("");
+		$('#organResponsiblePostNumber2').val("");
+		$('#organResponsibleAddress').val("");		
+	}
 	
 </script>
 </head>
