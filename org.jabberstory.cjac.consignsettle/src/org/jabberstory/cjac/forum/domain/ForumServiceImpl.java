@@ -123,4 +123,12 @@ public class ForumServiceImpl implements ForumService {
 		this.forumPermissionService = forumPermissionService;
 	}
 
+	@Override
+	public void disableForum(UserGroup userGroup) {
+		List<Forum> list = forumRepository.findForumFor(userGroup.getGroupId());
+		for (Forum forum : list) {
+			forum.setEnabled(false);
+		}
+	}
+
 }

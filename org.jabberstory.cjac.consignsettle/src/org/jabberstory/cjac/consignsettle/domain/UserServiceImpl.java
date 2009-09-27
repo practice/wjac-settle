@@ -91,6 +91,8 @@ public class UserServiceImpl implements UserService {
 				forumService.createForum(userGroup.getGroupId(), Forum.QNA_TYPE, "Q &amp; A");
 				forumService.createForum(userGroup.getGroupId(), Forum.FILES_TYPE, "자료실");
 			}
+		} else {
+			forumService.disableForum(userGroup);
 		}
 		// parent handling.
 		if (userGroup.isSubject()) {
