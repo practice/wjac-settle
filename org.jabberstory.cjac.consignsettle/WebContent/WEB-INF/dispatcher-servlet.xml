@@ -159,6 +159,7 @@
 				<prop key="/updateSubject">updateSubject</prop>
 				<prop key="/deleteSubject">deleteSubject</prop>
 				<prop key="/showCostDetail">showCostDetail</prop>
+				<prop key="/printCostDetail">printCostDetail</prop>
 				<prop key="/updateCostDetail">updateCostDetail</prop>
 				<prop key="/deleteCostDetail">deleteCostDetail</prop>
 				<prop key="/showNonApproval1">showNonApproval1</prop>

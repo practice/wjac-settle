@@ -13,6 +13,9 @@
 	<!-- 우편번호 검색 -->
 	<definition name="organ/zipCodeList" template="/WEB-INF/view/zipCodeList.jsp" />
 	
+	<!-- 사업비명세서 인쇄-->
+	<definition name="organ/printCostDetail" template="/WEB-INF/view/printCostDetail.jsp" />
+	
 	<!-- 주관기관현황 -->
 	<definition name="organ/subjectList" extends="base_layout">
 		<put-attribute name="body" value="/WEB-INF/view/subjectList.jsp" />
