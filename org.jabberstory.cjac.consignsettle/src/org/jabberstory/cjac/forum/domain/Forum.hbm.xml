@@ -13,6 +13,7 @@
 		<property name="name" column="NAME" type="string" length="64" />
 		<property name="groupId" column="GROUPID" type="string" length="32" />
 		<property name="forumType" column="FORUMTYPE" type="string" length="10" />
+		<property name="enabled" column="ENABLED" type="yes_no"></property>
 	</class>
 	
 	<class name="ForumPost" table="FORUMPOST">

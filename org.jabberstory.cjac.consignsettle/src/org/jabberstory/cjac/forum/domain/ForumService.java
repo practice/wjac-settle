@@ -2,6 +2,7 @@ package org.jabberstory.cjac.forum.domain;
 
 import java.util.List;
 
+import org.jabberstory.cjac.consignsettle.domain.UserGroup;
 import org.springframework.web.multipart.MultipartFile;
 
 public interface ForumService {
@@ -26,4 +27,5 @@ public interface ForumService {
 	public Forum createForum(String groupId, String forumType, String forumName);
 	public List<Forum> getForumsFor(String userId);
 	public List<Forum> getForumsForGroup(String groupId);
+	public void disableForum(UserGroup userGroup);
 }

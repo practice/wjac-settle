@@ -27,6 +27,7 @@ public class Forum {
 	private String name;
 	private String groupId; // owner group id.
 	private String forumType;	// public, qna, files
+	private boolean enabled = true;
 	
 	private HashMap prop = new HashMap();
 	
@@ -70,4 +71,13 @@ public class Forum {
 	public HashMap getProp() {
 		return prop;
 	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
+
+	public boolean isEnabled() {
+		return enabled;
+	}
+
 }

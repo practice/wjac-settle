@@ -190,7 +190,7 @@ public class ForumRepository extends HibernateDaoSupport {
 
 	@SuppressWarnings("unchecked")
 	public List<Forum> findForumFor(String groupId) {
-		String query = "from Forum f where f.groupId = :groupId";
+		String query = "from Forum f where f.groupId = :groupId and f.enabled <> 'N'";
 		return getHibernateTemplate().findByNamedParam(query, "groupId", groupId);
 	}
 
@@ -202,7 +202,7 @@ public class ForumRepository extends HibernateDaoSupport {
 			@Override
 			public Object doInHibernate(Session session) throws HibernateException,
 					SQLException {
-				String queryString = "from Forum f, UserGroup ug where f.groupId = ug.groupId";
+				String queryString = "from Forum f, UserGroup ug where f.groupId = ug.groupId and f.enabled <> 'N'";
 				Query query = session.createQuery(queryString);
 				// Don't honor page parameter. page calculation is done in controller. This is temporal !!! Sorry.
 //				query.setFirstResult(ForumService.PAGESIZE * 3 * (page -1));
