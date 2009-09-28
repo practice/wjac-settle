@@ -17,8 +17,7 @@
     <div class="button">
       <div class="b_blue">
         <ul>          
-        	<li><a href="<c:url value="/admin/showUserAuthAdmin" />">권한관리</a></li>
-	        <li><a href="<c:url value="/user/userGroupList" />">사용자그룹관리</a></li>          
+        	 <li><a href="<c:url value="/user/userGroupList" />">사용자그룹관리</a></li>          
 	        <li><a href="<c:url value="/user/list" />">사용자관리</a></li>	        
   		</ul>
       </div>

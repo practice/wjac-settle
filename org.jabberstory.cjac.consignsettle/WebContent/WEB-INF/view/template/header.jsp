@@ -32,7 +32,7 @@
       </li>
       <sec:authorize ifAllGranted="ROLE_ADMIN">
 	    <li>
-	        <input name="close" type="button" value="Admin"  class="b_close" onClick="location.href='<c:url value="/admin/showUserAuthAdmin" />'"/>
+	        <input name="close" type="button" value="Admin"  class="b_close" onClick="location.href='<c:url value="/user/list" />'"/>
 	    </li>
 	  </sec:authorize>
     </ul>
