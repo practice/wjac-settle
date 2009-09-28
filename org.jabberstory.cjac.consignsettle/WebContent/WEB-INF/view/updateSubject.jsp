@@ -161,22 +161,9 @@ $(document).ready(function(){
 	$('#ownerGroupId').change(function(){
 		var selVal = $("#ownerGroupId > option:selected").val();
 		$.getJSON("${pageContext.request.contextPath}/organ/getAjaxData?groupId=" + selVal, function(data, textStatus){
-			if(textStatus == 'success' && data.length > 0){		
-				for(var i = 0; i< data.length; i++){
-					$('#subjectGroupId').addOption(data[i].id, data[i].value);											
-				}
-			}else{
-				$('#subjectGroupId').removeOption(/./);
-				$('#subjectGroupId').addOption("","선택");
-			}
-		});
-	});
-});
-$(document).ready(function(){
-	$('#ownerGroupId').change(function(){
-		var selVal = $("#ownerGroupId > option:selected").val();
-		$.getJSON("${pageContext.request.contextPath}/organ/getAjaxData?groupId=" + selVal, function(data, textStatus){
-			if(textStatus == 'success' && data.length > 0){		
+			removeSubjectPerson();
+			if(textStatus == 'success' && data.length > 0){	
+				$('#subjectGroupId').removeOption(/./);	
 				for(var i = 0; i< data.length; i++){
 					$('#subjectGroupId').addOption(data[i].id, data[i].value);
 					$("#subjectGroupId > option[@value='']").attr("selected", "true");											
@@ -193,10 +180,11 @@ $(document).ready(function(){
 	$('#subjectGroupId').change(function(){
 		var selVal = this.value;
 		if(selVal == ""){
-			//removeSubjectPerson();
+			removeSubjectPerson();
 		}else{
 			$.getJSON("${pageContext.request.contextPath}/organ/getAjaxData?dataType=1&groupId=" + selVal, function(data, textStatus){
-				if(textStatus == 'success' && data.length > 0){		
+				removeSubjectPerson();
+				if(textStatus == 'success' && data.length > 0){	
 					setSubjectPerson(data[0].organResponsiblePerson,
 							data[0].organResponsiblePhone1,
 							data[0].organResponsiblePhone2,
@@ -205,8 +193,6 @@ $(document).ready(function(){
 							data[0].organResponsiblePostNumber1,
 							data[0].organResponsiblePostNumber2,
 							data[0].organResponsibleAddress);
-				}else{
-					removeSubjectPerson();
 				}
 			});
 		}
