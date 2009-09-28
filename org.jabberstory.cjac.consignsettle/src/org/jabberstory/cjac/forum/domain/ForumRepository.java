@@ -39,13 +39,19 @@ public class ForumRepository extends HibernateDaoSupport {
 	 */
 	@SuppressWarnings("unchecked")
 	public List<ForumPost> getTopLevelPosts(int forumId, int page) {
+		Forum forum = getForum(forumId);
 //		String queryString = "from ForumPost post left join fetch post.user where post.rootId = 0 order by post.id desc";
 		DetachedCriteria criteria = DetachedCriteria.forClass(ForumPost.class);
 		criteria.add(Restrictions.eq("rootId", 0));
 		// TODO 이렇게 하는거 맞나?
 //		criteria.add(Restrictions.eq("forum", getForum(forumId)));
 		DetachedCriteria forumCrit = criteria.createCriteria("forum", "f", CriteriaSpecification.INNER_JOIN);
-		forumCrit.add(Restrictions.or(Restrictions.eq("id", forumId), Restrictions.eq("groupId", "public")));
+		forumCrit.add(
+			Restrictions.or(
+				Restrictions.eq("id", forumId), 
+				// 요청한 포럼과 같은 타입의 공용포럼을 선택하여야 한다.
+				Restrictions.and(Restrictions.eq("forumType", forum.getForumType()), 
+					Restrictions.eq("groupId", "public"))));
 		criteria.addOrder(Order.desc("id"));
 		criteria.createAlias("user", "u", CriteriaSpecification.LEFT_JOIN);
 		return getHibernateTemplate().findByCriteria(criteria, ForumService.PAGESIZE * (page -1), ForumService.PAGESIZE);
