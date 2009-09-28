@@ -1,5 +1,14 @@
 /* CSS Document */
 
+* {
+	font-family: 맑은 고딕, Segoe UI, Tahoma, Malgun, 돋움;
+	font-size:11px;
+	color: #666666; 
+	line-height:18px;
+	margin:0;
+	border:0;
+}
+
 body {
 	text-align:left;
 	scrollbar-face-color:#ededed;
@@ -9,15 +18,6 @@ body {
    	scrollbar-arrow-color: #999999; 
    	scrollbar-track-color: #e5e5e5;
    	scrollbar-darkshadow-color: #e5e5e5; 
-}
-
-* {
-	font-family:"돋움";
-	font-size:11px;
-	color: #666666; 
-	line-height:18px;
-	margin:0;
-	border:0;
 }
 
 a:link {
@@ -85,21 +85,31 @@ ul li {
 }
 
 #gnb {
-	display:block;
 	background:url(img/menu_bg.gif) repeat-x;
 	width:900px;
 	height:46px;
 	margin:0;
-	padding:0;
+	padding:0 0 0 10px;
 	position:absolute;
-	top:40px;
+	top: 40px;
 }
 
-#gnb ul li {
-	float:left;
+#tln {
+	position: absolute;
+	top: 50%;
+	margin-top: -10px;
+	vertical-align: middle;
+}
+
+#gnb a.tln {
+	font-family: 맑은 고딕, Segoe UI, Tahoma, Malgun, 돋움;
+	font-size: 13px;
+	color: #FFFFFF;
+	font-weight: bold;
 }
 
 #menu01 a {
+	/* 
 	display:block;
 	margin:0;
 	height:46px;
@@ -107,13 +117,17 @@ ul li {
 	background:url(img/menu01_off.gif) no-repeat;
 	text-indent:-9000px;
 	text-decoration:none;
+	*/
 }
 
 #menu01 a:hover {
+	/* 
 	background:url(img/menu01_on.gif) no-repeat;
-}
+	*/
+	}
 
 #menu02 a {
+	/* 
 	display:block;
 	margin:0;
 	height:46px;
@@ -121,16 +135,26 @@ ul li {
 	background:url(img/menu02_off.gif) no-repeat;
 	text-indent:-9000px;
 	text-decoration:none;
+	*/
 }
 
 #menu02 a:hover {
-	background:url(img/menu02_on.gif) no-repeat;
+	/* 
+	background:url(img/menu02_on.gif) no-repeat; 
+	*/
 }
 
+#gnb a:hover {
+	color: #AAAAAA;
+}
+
+#gnb a:link {
+	color: #FFFFFF;
+}
 
 #division {
 	display:block;
-	margin:0;
+	margin:0 5px 0 5px;
 	height:46px;
 	width:2px;
 	background:url(img/menu_division.gif) no-repeat;
