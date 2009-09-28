@@ -95,7 +95,7 @@ public class OrganMultiActionController extends MultiActionController {
 		
 		if (ownerGroupId.equals("") || subjectGroupId.equals("")){
 			List<UserGroup> ownerGroups = userService.getGroupsByRole(ROLE_OWNER);
-			List<UserGroup> subjectGroups = userService.getGroupsByRole(ROLE_SUBJECT);
+			List<UserGroup> subjectGroups =userService.getGroupsByParentGroupId(organ.getSubjectGroup().getParentGroup().getGroupId());
 			ModelAndView mv = new ModelAndView("organ/updateSubject");
 			mv.addObject("ownerGroups", ownerGroups);
 			mv.addObject("subjectGroups", subjectGroups);

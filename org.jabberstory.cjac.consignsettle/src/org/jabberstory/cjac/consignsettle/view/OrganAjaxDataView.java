@@ -60,7 +60,7 @@ public class OrganAjaxDataView extends AbstractView {
 		}
 		
 		// 주관기관 담당자
-		if("1".equals(dataType) && users != null){
+		if("1".equals(dataType) && users.size() > 0){
 			User user = users.get(0);
 			response.getWriter().println("{organResponsiblePerson:\"" + user.getUsername() + "\"," +
 											"organResponsiblePhone1:\"" + user.getPhone1() + "\"," +
