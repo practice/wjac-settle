@@ -7,24 +7,30 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>CJAC</title>
-<script language="javascript">
-<!--
+<script>
 	function doSearch(pageNo){
-		document.form1.pageNo.value = pageNo;
-		document.form1.action = "${pageContext.request.contextPath}/organ/subjectList";
-		document.form1.submit();
+		document.thisForm.pageNo.value = pageNo;
+		document.thisForm.action = "${pageContext.request.contextPath}/organ/subjectList";
+		document.thisForm.submit();
 	}
 
 	function doOrderedSearch(sortColumn){
-		document.form1.sortColumn.value = sortColumn;
+		document.thisForm.sortColumn.value = sortColumn;
 		doSearch(1);
-	}	
-//-->
+	}
+
+	$(document).ready(function(){
+		$('#doKeywordSearch').bind('click', function(ev) {
+			doSearch(1);
+			//ev.preventDefault();
+			//return false;		
+		});
+	});	
 </script>
 </head>
 <body>
-<form name="form1" method="post">
-<input type="hidden" name="pageNo">
+<form id="thisForm" name="thisForm" method="post">
+<input type="hidden" name="pageNo" value="1">
 <input type="hidden" name="organId">
 <input type="hidden" name="sortColumn" value="${sortColumn}">
 <div id="container">
@@ -33,14 +39,22 @@
       <p id="title"> 주관기관 현황 목록 </p>
       <p id="path"> PATH : 주관기관현황 &#62; <span id="path_b">주관기관 현황 목록</span></p>
     </div>
-    <!-- div class="button">
-      <div class="b_blue">
-        <ul>
-          <li><a href="#">주관기관별 보기</a></li>
-          <li><a href="#">최근등록순 보기</a></li>
-        </ul>
-      </div>
-    </div-->
+    <br />
+    <div>
+      <ul>
+	    <li>
+	      <input name="keyword" type="text" value="${keyword}" class="line_box" style="width:150px"/>
+	    </li>
+	    <li>
+	      <div class="b_gray">
+	        <ul>
+	          <li><a href="#" id="doKeywordSearch">검색</a></li>
+	        </ul>
+	      </div>
+	    </li>
+	  </ul>
+	</div>
+	<br />
 	<div id="table">
 		<table width="100%" cellspacing="0">
 			<colgroup>
@@ -85,7 +99,7 @@
 		          <tr>
 		            <td colspan="6">
 		            	<!-- Start Paginate -->
-						<caf:paging formTagName="form1"	searchFunctionName="doSearch" pagingList="${pagingList}" pageNoTagName="pageNo" />
+						<caf:paging formTagName="thisForm"	searchFunctionName="doSearch" pagingList="${pagingList}" pageNoTagName="pageNo" />
 						<!-- End Paginate -->
 					</td>
 		          </tr>

@@ -52,11 +52,11 @@ public class OrganServiceImpl implements OrganService{
 	
 	@Override
 	public Paging getOrgansWithPaging(String userId,
-			int currentPage, int pageSize, String sortColumn)
+			int currentPage, int pageSize, String sortColumn, String keyword)
 			{
 		
 		String userRole = userService.getUserRole(userId);		
-		return organRepository.getOrgansWithPaging(userId, userRole, currentPage, pageSize, sortColumn);
+		return organRepository.getOrgansWithPaging(userId, userRole, currentPage, pageSize, sortColumn, keyword);
 	}
 
 	@Override

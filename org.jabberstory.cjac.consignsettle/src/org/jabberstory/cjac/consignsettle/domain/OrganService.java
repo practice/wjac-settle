@@ -16,7 +16,7 @@ public interface OrganService {
 	
 	List<Organ> getAllOrgans();
 	
-	Paging getOrgansWithPaging(String userId, int currentPage, int pageSize, String sortColumn);
+	Paging getOrgansWithPaging(String userId, int currentPage, int pageSize, String sortColumn, String keyword);
 
 	Organ getOrgan(String organId);
 
