@@ -5,6 +5,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.jabberstory.cjac.consignsettle.common.util.Paging;
 import org.jabberstory.cjac.consignsettle.domain.Organ;
 import org.jabberstory.cjac.consignsettle.domain.OrganService;
@@ -15,6 +17,8 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
 public class OrganMultiActionController extends MultiActionController {
+	
+	protected final Log logger = LogFactory.getLog(getClass());
 	
 	public OrganMultiActionController() {}
 
@@ -134,14 +138,21 @@ public class OrganMultiActionController extends MultiActionController {
 
 		String pageNo = (request.getParameter("pageNo") == null) ? "1": request.getParameter("pageNo");
 		String sortColumn = (request.getParameter("sortColumn") == null) ? "": request.getParameter("sortColumn");
-		String userId = SecurityContextHolder.getContext().getAuthentication().getName();
+		String keyword = (request.getParameter("keyword") == null) ? "": request.getParameter("keyword");
+		String userId = SecurityContextHolder.getContext().getAuthentication().getName();		
 		
 		int pageSize = 10;
 
-		Paging	pagingList = organService.getOrgansWithPaging(userId, Integer.parseInt(pageNo), pageSize, sortColumn);
+		logger.info("#################################################################");
+		logger.info("pageNo:" + pageNo);
+		logger.info("keyword:" + keyword);
+		logger.info("#################################################################");
+		
+		Paging	pagingList = organService.getOrgansWithPaging(userId, Integer.parseInt(pageNo), pageSize, sortColumn, keyword);
 		
 		ModelAndView mv = new ModelAndView("organ/subjectList", "pagingList", pagingList);
 		mv.addObject("sortColumn", sortColumn);
+		mv.addObject("keyword", keyword);
 		
 		return mv;
 
@@ -246,7 +257,7 @@ public class OrganMultiActionController extends MultiActionController {
 				
 		int pageSize = 10;
 
-		Paging pagingList = organService.getOrgansWithPaging(userId, Integer.parseInt(pageNo), pageSize, sortColumn);
+		Paging pagingList = organService.getOrgansWithPaging(userId, Integer.parseInt(pageNo), pageSize, sortColumn, "");
 		
 		ModelAndView mv = new ModelAndView("organ/settlementList", "pagingList", pagingList);
 		mv.addObject("sortColumn", sortColumn);

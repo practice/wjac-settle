@@ -9,6 +9,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.criterion.CriteriaSpecification;
 import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
@@ -61,6 +62,48 @@ public class OrganRepository extends HibernateDaoSupport {
 		}
 		return list;
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Organ> getOrgans(String userId, String userRole, String keyword)
+			throws DataAccessException {
+
+		StringBuffer hqlBuf = new StringBuffer();
+		List list = new ArrayList();
+
+		if (userRole.equals("A") || userRole.equals("C")) {
+			hqlBuf.append("	select distinct o ");
+			hqlBuf.append("	from Organ o ");
+			hqlBuf.append("		left join fetch o.subjectGroup sg ");
+			hqlBuf.append("		left join fetch sg.users su ");
+			hqlBuf.append("		left join fetch o.subjectGroup.parentGroup pg ");
+			hqlBuf.append("		left join fetch pg.users pu ");
+			hqlBuf.append("	where (o.subjectGroup.groupName like :keyword ");
+			hqlBuf.append("		or o.businessName like :keyword ");
+			hqlBuf.append("		or o.projectName like :keyword ");
+			hqlBuf.append("		or o.subjectGroup.parentGroup.groupName like :keyword) ");
+			list = getHibernateTemplate().findByNamedParam(
+					hqlBuf.toString(),
+					new String[] { "keyword"}, 
+					new Object[] { "%" + keyword + "%" });
+		} else {
+			hqlBuf.append("	select distinct o ");
+			hqlBuf.append("	from Organ o ");
+			hqlBuf.append("		left join fetch o.subjectGroup sg ");
+			hqlBuf.append("		left join fetch sg.users su ");
+			hqlBuf.append("		left join fetch o.subjectGroup.parentGroup pg ");
+			hqlBuf.append("		left join fetch pg.users pu ");
+			hqlBuf.append("	where (o.subjectGroup.groupName like :keyword ");
+			hqlBuf.append("		or o.businessName like :keyword ");
+			hqlBuf.append("		or o.projectName like :keyword ");
+			hqlBuf.append("		or o.subjectGroup.parentGroup.groupName like :keyword) ");
+			hqlBuf.append("		and ( su.userId = :userId or pu.userId = :userId)");
+			list = getHibernateTemplate().findByNamedParam(
+					hqlBuf.toString(),
+					new String[] { "userId", "keyword"}, 
+					new Object[] { userId, "%" + keyword + "%" });
+		}
+		return list;
+	}
 
 	@SuppressWarnings("unchecked")
 	public List<Organ> getOrgans(UserGroup group) throws DataAccessException {
@@ -73,31 +116,55 @@ public class OrganRepository extends HibernateDaoSupport {
 
 	@SuppressWarnings("unchecked")
 	public Paging getOrgansWithPaging(String userId, String userRole,
-			int currentPage, int pageSize, String sortColumn) {
+			int currentPage, int pageSize, String sortColumn, String keyword) {
 		final int fromRowNum = (currentPage - 1) * pageSize;
 		final int toRowNum = pageSize;
-		int totalCount = this.getOrgans(userId, userRole).size();
+		int totalCount = this.getOrgans(userId, userRole, keyword).size();
 		final Order order = (sortColumn == "") ? Order.asc("sg.groupName")
 				: Order.desc(sortColumn);
 		
 		DetachedCriteria organCriteria = DetachedCriteria.forClass(Organ.class);
 		
 		if (userRole.equals("A") || userRole.equals("C")) {
-			organCriteria.createAlias("subjectGroup", "sg", CriteriaSpecification.LEFT_JOIN).
-					addOrder(order);
+			organCriteria.createAlias("subjectGroup", "sg", CriteriaSpecification.LEFT_JOIN)
+				.createAlias("sg.parentGroup", "pg", CriteriaSpecification.LEFT_JOIN)
+				.add(Restrictions.disjunction()
+						.add(Restrictions.like("sg.groupName", keyword, MatchMode.ANYWHERE))
+						.add(Restrictions.like("businessName", keyword, MatchMode.ANYWHERE))
+						.add(Restrictions.like("projectName", keyword, MatchMode.ANYWHERE))
+						.add(Restrictions.like("pg.groupName", keyword, MatchMode.ANYWHERE)))					
+				.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY)
+				.addOrder(order);
 		} else if (userRole.equals("O")) {
 			organCriteria.createAlias("subjectGroup", "sg", CriteriaSpecification.LEFT_JOIN)
-			.createAlias("sg.parentGroup", "pg", CriteriaSpecification.LEFT_JOIN)	
-			.createAlias("pg.users", "pu", CriteriaSpecification.LEFT_JOIN)	
-			.add(Restrictions.eq("pu.userId", userId))
-			.addOrder(order)
-			.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
+				.createAlias("sg.parentGroup", "pg", CriteriaSpecification.LEFT_JOIN)	
+				.createAlias("pg.users", "pu", CriteriaSpecification.LEFT_JOIN)
+				.add(Restrictions.and(
+							Restrictions.eq("pu.userId", userId),
+							Restrictions.disjunction()
+								.add(Restrictions.like("sg.groupName", keyword, MatchMode.ANYWHERE))
+								.add(Restrictions.like("businessName", keyword, MatchMode.ANYWHERE))
+								.add(Restrictions.like("projectName", keyword, MatchMode.ANYWHERE))
+								.add(Restrictions.like("pg.groupName", keyword, MatchMode.ANYWHERE))
+						)
+				)					
+				.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY)
+				.addOrder(order);	
 		} else {
 			organCriteria.createAlias("subjectGroup", "sg", CriteriaSpecification.LEFT_JOIN)
-			.createAlias("sg.users", "su", CriteriaSpecification.LEFT_JOIN)
-			.add(Restrictions.eq("su.userId", userId))
-			.addOrder(order)
-			.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
+				.createAlias("sg.parentGroup", "pg", CriteriaSpecification.LEFT_JOIN)	
+				.createAlias("sg.users", "su", CriteriaSpecification.LEFT_JOIN)				
+				.add(Restrictions.and(
+							Restrictions.eq("su.userId", userId),
+							Restrictions.disjunction()
+								.add(Restrictions.like("sg.groupName", keyword, MatchMode.ANYWHERE))
+								.add(Restrictions.like("businessName", keyword, MatchMode.ANYWHERE))
+								.add(Restrictions.like("projectName", keyword, MatchMode.ANYWHERE))
+								.add(Restrictions.like("pg.groupName", keyword, MatchMode.ANYWHERE))
+						)
+				)					
+				.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY)
+				.addOrder(order);
 		}
 		List organs = (List) getHibernateTemplate().findByCriteria(organCriteria,
 				fromRowNum, toRowNum);
