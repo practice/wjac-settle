@@ -5,6 +5,12 @@ import java.util.Set;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.hibernate.criterion.CriteriaSpecification;
+import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.MatchMode;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
+import org.jabberstory.cjac.consignsettle.common.util.Paging;
 import org.springframework.dao.DataAccessException;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
@@ -20,11 +26,32 @@ public class UserRepository extends HibernateDaoSupport {
 		
 	@SuppressWarnings("unchecked")
 	public List<UserGroup> getGroups(String groupQuery) {
-		String queryString = "from UserGroup g where g.groupId like :query or g.groupName like :query";
+		String queryString = "from UserGroup g left join fetch g.parentGroup pg where g.groupId like :query or g.groupName like :query or pg.groupName like :query";
 		List list = getHibernateTemplate().findByNamedParam(queryString, 
 				new String[] {"query"}, 
 				new Object[] {"%" + groupQuery + "%"});
 		return list;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public Paging getUserGroupsWithPaging(int currentPage, int pageSize, String groupQuery) {
+		final int fromRowNum = (currentPage - 1) * pageSize;
+		final int toRowNum = pageSize;
+		int totalCount = this.getGroups(groupQuery).size();
+		
+		DetachedCriteria userCriteria = DetachedCriteria.forClass(UserGroup.class);
+				
+		userCriteria.createAlias("parentGroup", "pg", CriteriaSpecification.LEFT_JOIN)
+			.add(Restrictions.disjunction()
+					.add(Restrictions.like("groupId", groupQuery, MatchMode.ANYWHERE))
+					.add(Restrictions.like("groupName", groupQuery, MatchMode.ANYWHERE))
+					.add(Restrictions.like("pg.groupName", groupQuery, MatchMode.ANYWHERE)))
+			.addOrder(Order.asc("groupName"));
+		
+		List users = (List) getHibernateTemplate().findByCriteria(userCriteria,
+				fromRowNum, toRowNum);
+
+		return new Paging((List) users, totalCount, currentPage);
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -44,11 +71,35 @@ public class UserRepository extends HibernateDaoSupport {
 	
 	@SuppressWarnings("unchecked")
 	public List<User> getUsers(String userQuery) {
-		String queryString = "from User u where u.userId like :query or u.username like :query or u.email like :query";
+		String queryString = "from User u left join fetch u.userGroup ug left join fetch ug.parentGroup pg where u.userId like :query or u.username like :query or u.email like :query or ug.groupName like :query or pg.groupName like :query";
 		List list = getHibernateTemplate().findByNamedParam(queryString, 
 				new String[] {"query"}, 
 				new Object[] {"%" + userQuery + "%"});
 		return list;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public Paging getUsersWithPaging(int currentPage, int pageSize, String userQuery) {
+		final int fromRowNum = (currentPage - 1) * pageSize;
+		final int toRowNum = pageSize;
+		int totalCount = this.getUsers(userQuery).size();
+		
+		DetachedCriteria userCriteria = DetachedCriteria.forClass(User.class);
+				
+		userCriteria.createAlias("userGroup", "ug", CriteriaSpecification.LEFT_JOIN)
+			.createAlias("ug.parentGroup", "pg", CriteriaSpecification.LEFT_JOIN)
+			.add(Restrictions.disjunction()
+					.add(Restrictions.like("userId", userQuery, MatchMode.ANYWHERE))
+					.add(Restrictions.like("username", userQuery, MatchMode.ANYWHERE))
+					.add(Restrictions.like("email", userQuery, MatchMode.ANYWHERE))
+					.add(Restrictions.like("ug.groupName", userQuery, MatchMode.ANYWHERE))
+					.add(Restrictions.like("pg.groupName", userQuery, MatchMode.ANYWHERE)))
+			.addOrder(Order.asc("ug.groupName"));
+		
+		List users = (List) getHibernateTemplate().findByCriteria(userCriteria,
+				fromRowNum, toRowNum);
+
+		return new Paging((List) users, totalCount, currentPage);
 	}
 	
 	@SuppressWarnings("unchecked")

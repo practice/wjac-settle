@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.jabberstory.cjac.consignsettle.common.util.Paging;
 import org.jabberstory.cjac.consignsettle.domain.User;
 import org.jabberstory.cjac.consignsettle.domain.UserService;
 import org.springframework.web.servlet.ModelAndView;
@@ -35,9 +36,14 @@ public class UserListController extends AbstractController {
 	@Override
 	protected ModelAndView handleRequestInternal(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
-		List<User> users = userService.getUsers("");
-		ModelAndView mv = new ModelAndView("user/userList", "users", users);
-		mv.addObject("userCount", users.size());
+		
+		String pageNo = (request.getParameter("pageNo") == null) ? "1": request.getParameter("pageNo");
+		String userQuery = (request.getParameter("userQuery") == null) ? "": request.getParameter("userQuery");
+		
+		Paging	pagingList = userService.getUsersWithPaging(Integer.parseInt(pageNo), 10, userQuery);
+		
+		ModelAndView mv = new ModelAndView("user/userList", "pagingList", pagingList);
+		mv.addObject("userQuery", userQuery);
 		return mv;
 	}
 }

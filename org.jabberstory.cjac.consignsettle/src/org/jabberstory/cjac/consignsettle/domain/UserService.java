@@ -3,6 +3,8 @@ package org.jabberstory.cjac.consignsettle.domain;
 import java.util.List;
 import java.util.Set;
 
+import org.jabberstory.cjac.consignsettle.common.util.Paging;
+
 public interface UserService {
 
 	public List<User> getUsers(String userQuery);
@@ -12,6 +14,10 @@ public interface UserService {
 	public List<User> getUsersByGroupId(String groupId);
 	
 	public List<UserGroup> getGroups(String groupQuery);
+	
+	Paging getUserGroupsWithPaging(int currentPage, int pageSize, String groupQuery);
+	
+	Paging getUsersWithPaging(int currentPage, int pageSize, String userQuery);
 	
 	public List<UserGroup> getGroupsByRole(String role);
 	
