@@ -153,11 +153,6 @@ public class OrganMultiActionController extends MultiActionController {
 		
 		int pageSize = 10;
 
-		logger.info("#################################################################");
-		logger.info("pageNo:" + pageNo);
-		logger.info("keyword:" + keyword);
-		logger.info("#################################################################");
-		
 		Paging	pagingList = organService.getOrgansWithPaging(userId, Integer.parseInt(pageNo), pageSize, sortColumn, keyword);
 		
 		ModelAndView mv = new ModelAndView("organ/subjectList", "pagingList", pagingList);

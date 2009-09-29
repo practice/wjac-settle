@@ -5,6 +5,7 @@ import java.util.Set;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.jabberstory.cjac.consignsettle.common.util.Paging;
 import org.jabberstory.cjac.forum.domain.Forum;
 import org.jabberstory.cjac.forum.domain.ForumService;
 import org.springframework.dao.DataAccessException;
@@ -167,5 +168,19 @@ public class UserServiceImpl implements UserService {
 		userRepository.createUser(userId, password, username, email, postnum1, postnum2,
 				address, phone1, phone2, phone3, userGroup);
 		
+	}
+
+	@Override
+	public Paging getUsersWithPaging(int currentPage, int pageSize,
+			String userQuery) {
+		
+		return userRepository.getUsersWithPaging(currentPage, pageSize, userQuery);
+	}
+	
+	@Override
+	public Paging getUserGroupsWithPaging(int currentPage, int pageSize,
+			String groupQuery) {
+		
+		return userRepository.getUserGroupsWithPaging(currentPage, pageSize, groupQuery);
 	}
 }
