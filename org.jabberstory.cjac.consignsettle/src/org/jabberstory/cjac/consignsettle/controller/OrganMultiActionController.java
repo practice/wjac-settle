@@ -86,6 +86,16 @@ public class OrganMultiActionController extends MultiActionController {
 
 	}
 	
+	public ModelAndView printSubject(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+		String organId = request.getParameter("organId");
+
+		Organ organ = organService.getOrgan(organId);
+		
+		return new ModelAndView("organ/printSubject", "organ", organ);
+
+	}
+	
 	public ModelAndView updateSubject(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
 		String organId = request.getParameter("organId");

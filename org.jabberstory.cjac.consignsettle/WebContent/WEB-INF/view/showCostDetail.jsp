@@ -8,7 +8,7 @@
 <title>CJAC</title>
 <script>
 $(document).ready(function() {
-	$('#costDetailPrint').bind('click', function(ev) {
+	$('#printCostDetail').bind('click', function(ev) {
 		window.open('${pageContext.request.contextPath}/organ/printCostDetail?organId=${organ.organId}', '_costdetail', 'width=900,height=532,history=no,resizable=yes,status=no,scrollbars=yes,menubar=no');
 		ev.preventDefault();
 		return false;
@@ -64,7 +64,7 @@ $(document).ready(function() {
       <div class="button">
         <div class="b_blue">
           <ul>
-          	<li><a href="#" id="costDetailPrint">인쇄</a></li>
+          	<li><a href="#" id="printCostDetail">인쇄</a></li>
 		    <li><a href="<c:url value="/organ/showSubject?organId=${organ.organId}" />">주관기관 현황 조회</a></li>
 		    <sec:authorize ifAllGranted="ROLE_ADMIN">
 	            <li><a href="<c:url value="/organ/deleteCostDetail?organId=${organ.organId}" />">사업비사용명세 삭제</a></li>
