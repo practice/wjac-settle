@@ -12,6 +12,15 @@ pageContext.setAttribute("cr", "\r");
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>CJAC</title>
+<script>
+$(document).ready(function() {
+	$('#printSubject').bind('click', function(ev) {
+		window.open('${pageContext.request.contextPath}/organ/printSubject?organId=${organ.organId}', '_subject', 'width=900,height=532,history=no,resizable=yes,status=no,scrollbars=yes,menubar=no');
+		ev.preventDefault();
+		return false;
+	});
+});
+</script>
 </head>
 <body>
 <form name="form1" method="post">
@@ -193,7 +202,7 @@ pageContext.setAttribute("cr", "\r");
 	<div class="button">
         <div class="b_blue">
           <ul>
-          	<li><a href="#" onClick="window.print();return false;">인쇄</a></li>
+          	<li><a href="#" id="printSubject">인쇄</a></li>
           	<li><a href="<c:url value="/organ/subjectList" />">목록</a></li>
           	<sec:authorize ifAllGranted="ROLE_ADMIN">
             	<li><a href="<c:url value="/organ/deleteSubject?organId=${organ.organId}" />">삭제</a></li>

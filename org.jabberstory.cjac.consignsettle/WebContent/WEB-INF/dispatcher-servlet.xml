@@ -156,6 +156,7 @@
 				<prop key="/subjectList">subjectPagingList</prop>
 				<prop key="/createSubject">createSubject</prop>
 				<prop key="/showSubject">showSubject</prop>
+				<prop key="/printSubject">printSubject</prop>
 				<prop key="/updateSubject">updateSubject</prop>
 				<prop key="/deleteSubject">deleteSubject</prop>
 				<prop key="/showCostDetail">showCostDetail</prop>
