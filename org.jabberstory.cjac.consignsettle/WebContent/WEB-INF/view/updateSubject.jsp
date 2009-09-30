@@ -60,6 +60,12 @@ $(document).ready(function(ev) {
 	});
 });
 
+function checkNumWithDecimal(targetId){
+	var oTarget = document.getElementById(targetId);
+	var test = oTarget.value;
+	return test.numwithdecimal();	
+}
+
 function checkMoney(targetId){
 	var oTarget = document.getElementById(targetId);
 	var test = oTarget.value;
@@ -114,7 +120,9 @@ $(function(){
 		checkMoney('totalResearchAmount');
 	});
 	$('#govInterests').blur(function (){
-		checkMoney('govInterests');
+		if(checkNumWithDecimal('govInterests') != true){
+			$('#govInterests').val('');
+		}
 	});
 	$('#currentAccount').blur(function (){
 		checkMoney('currentAccount');
@@ -155,6 +163,9 @@ $(function(){
 	$('#consignSettlementPhone3').blur(function (){
 		checkPhone('consignSettlementPhone3');
 	});		
+	$('#carryOverAmount').blur(function (){
+		checkMoney('carryOverAmount');
+	});
 });
 
 $(document).ready(function(){
@@ -485,10 +496,12 @@ function removeSubjectPerson(){
 				<tr>
 					<td class="cell_title">부적정금액</td>
 					<td class="cell"><input type="text" id="currentNonPropriety" name="currentNonPropriety" value="${organ.currentNonPropriety}" class="line_box" style="width:150px">원</td>
-					<td class="cell_title">소계</td>
-					<td class="cell"><input type="text" id="currentSubTotal" name="currentSubTotal" value="${organ.currentSubTotal}" class="line_box" style="width:150px">원</td>
+					<td class="cell_title">차년도 이월액</td>
+					<td class="cell"><input type="text" id="carryOverAmount" name="carryOverAmount" value="${organ.carryOverAmount}" class="line_box" style="width:150px">원</td>
 				</tr>
 				<tr>
+					<td class="cell_title">소계</td>
+					<td class="cell"><input type="text" id="currentSubTotal" name="currentSubTotal" value="${organ.currentSubTotal}" class="line_box" style="width:150px">원</td>
 					<td class="cell_title">환수대상액</td>
 					<td colspan="3" class="cell"><input type="text" id="currentRedemtion" name="currentRedemtion" value="${organ.currentRedemtion}" class="line_box" style="width:150px">원</td>
 				</tr>		

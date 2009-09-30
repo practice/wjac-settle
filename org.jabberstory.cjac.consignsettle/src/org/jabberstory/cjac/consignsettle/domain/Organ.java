@@ -3,8 +3,6 @@ package org.jabberstory.cjac.consignsettle.domain;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.jabberstory.cjac.forum.domain.PostAttachment;
-
 public class Organ {
 
 	private String organId;
@@ -49,6 +47,7 @@ public class Organ {
 	private String currentSubTotal;
 	private String opinion;
 	private String remark;
+	private String carryOverAmount;
 	private String costDetail;
 	private String nonApproval1;
 	private String nonApproval2;
@@ -59,56 +58,6 @@ public class Organ {
 	public Organ() {
 	}
 
-	/**
-	 * @param organId
-	 * @param businessName
-	 * @param projectName
-	 * @param researchAgency
-	 * @param researchResponsiblePerson
-	 * @param contractStartDate
-	 * @param contractEndDate
-	 * @param govContributeAmount
-	 * @param nonGovContributeAmount
-	 * @param goodsAmount
-	 * @param totalCashAmount
-	 * @param govInterests
-	 * @param consignSettlementCommission
-	 * @param useResultDate
-	 * @param formalObjectAcceptanceDate
-	 * @param formalObjectResultDate
-	 * @param consignSettlementResultDate
-	 * @param subtotal
-	 * @param totalResearchAmount
-	 * @param organResponsiblePerson
-	 * @param organResponsiblePhone1
-	 * @param organResponsiblePhone2
-	 * @param organResponsiblePhone3
-	 * @param organResponsiblePostNumber1
-	 * @param organResponsiblePostNumber2
-	 * @param organResponsibleAddress
-	 * @param organResponsibleEmail
-	 * @param consignSettlementPerson
-	 * @param consignSettlementPhone1
-	 * @param consignSettlementPhone2
-	 * @param consignSettlementPhone3
-	 * @param consignSettlementPostNumber1
-	 * @param consignSettlementPostNumber2
-	 * @param consignSettlementAddress
-	 * @param consignSettlementEmail
-	 * @param currentAccount
-	 * @param currentInterest
-	 * @param currentNonPropriety
-	 * @param currentRedemtion
-	 * @param currentSubTotal
-	 * @param opinion
-	 * @param remark
-	 * @param costDetail
-	 * @param nonApproval1
-	 * @param nonApproval2
-	 * @param ownerGroup
-	 * @param subjectGroup
-	 * @param attachments
-	 */
 	public Organ(String organId, String businessName, String projectName,
 			String researchAgency, String researchResponsiblePerson,
 			String contractStartDate, String contractEndDate,
@@ -130,8 +79,8 @@ public class Organ {
 			String currentAccount, String currentInterest,
 			String currentNonPropriety, String currentRedemtion,
 			String currentSubTotal, String opinion, String remark,
-			String costDetail, String nonApproval1, String nonApproval2,
-			UserGroup ownerGroup, UserGroup subjectGroup,
+			String carryOverAmount, String costDetail, String nonApproval1,
+			String nonApproval2, UserGroup ownerGroup, UserGroup subjectGroup,
 			List<OrganAttachment> attachments) {
 		super();
 		this.organId = organId;
@@ -176,6 +125,7 @@ public class Organ {
 		this.currentSubTotal = currentSubTotal;
 		this.opinion = opinion;
 		this.remark = remark;
+		this.carryOverAmount = carryOverAmount;
 		this.costDetail = costDetail;
 		this.nonApproval1 = nonApproval1;
 		this.nonApproval2 = nonApproval2;
@@ -183,6 +133,8 @@ public class Organ {
 		this.subjectGroup = subjectGroup;
 		this.attachments = attachments;
 	}
+
+
 
 	public String getOrganId() {
 		return organId;
@@ -555,9 +507,15 @@ public class Organ {
 	public UserGroup getSubjectGroup() {
 		return subjectGroup;
 	}
+	
+	public String getCarryOverAmount() {
+		return carryOverAmount;
+	}
 
-	
-	
+	public void setCarryOverAmount(String carryOverAmount) {
+		this.carryOverAmount = carryOverAmount;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -583,11 +541,13 @@ public class Organ {
 		return true;
 	}
 
+	
+
 	@Override
 	public String toString() {
-		return "Organ [businessName=" + businessName
-				+ ", consignSettlementAddress=" + consignSettlementAddress
-				+ ", consignSettlementCommission="
+		return "Organ [businessName=" + businessName + ", carryOverAmount="
+				+ carryOverAmount + ", consignSettlementAddress="
+				+ consignSettlementAddress + ", consignSettlementCommission="
 				+ consignSettlementCommission + ", consignSettlementEmail="
 				+ consignSettlementEmail + ", consignSettlementPerson="
 				+ consignSettlementPerson + ", consignSettlementPhone1="
