@@ -317,7 +317,7 @@
 					<td class="cell_title">위탁정산 수수료</td>
 					<td class="cell"><input type="text" id="consignSettlementCommission" name="consignSettlementCommission" class="line_box" style="width:150px">원</td>
 					<td class="cell_title">정부지분</td>
-					<td class="cell"><input type="text" id="govInterests" name="govInterests" class="line_box" style="width:150px" maxlength="3">%</td>
+					<td class="cell"><input type="text" id="govInterests" name="govInterests" class="line_box" style="width:150px" maxlength="10">%</td>
 				</tr>
 		</table>
 	</div>
