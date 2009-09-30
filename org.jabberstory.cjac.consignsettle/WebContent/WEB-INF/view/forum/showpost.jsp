@@ -7,6 +7,12 @@ $(document).ready(function() {
 		document.thisform.submit();
 	});
 });
+
+$(document).ready(function() {
+	$('.body').each(function() {
+		$(this).css('height', $(this).attr('scrollheight'));
+	});
+});
 </script>
 <div id="container">
   <div id="content">
@@ -36,7 +42,7 @@ $(document).ready(function() {
 			</td>
           </tr>
           <tr>
-            <td colspan="4" class="cell_contents" style="overflow: auto"><textarea readonly style="border:0; width='100%'; overflow: auto">${post.body}</textarea></td>
+            <td colspan="4" class="cell_contents"><textarea class="body" readonly style="margin: 0; padding: 0; border:0; width='100%'; overflow: hidden">${post.body}</textarea></td>
           </tr>
         </tbody>
       </table>
@@ -80,7 +86,7 @@ $(document).ready(function() {
 			</td>
           </tr>
           <tr>
-            <td colspan="4" class="cell_contents" style="overflow: auto"><textarea readonly style="border:0; width='100%'; overflow: auto">${child.body}</textarea></td>
+            <td colspan="4" class="cell_contents" style="overflow: auto"><textarea class="body" readonly style="border:0; width='100%'; overflow: auto">${child.body}</textarea></td>
           </tr>
         </tbody>
       </table>
