@@ -89,7 +89,7 @@ $(document).ready(function() {
 						현물 ${organ.goodsAmount}원
 					</div>
 					<div>
-						소개 ${organ.subtotal}원
+						소계 ${organ.subtotal}원
 					</div>					
 				</td>
 			</tr>
