@@ -182,12 +182,14 @@ $(document).ready(function() {
 			<tr>
 				<td class="cell_title">부적정금액</td>
 				<td class="cell">${organ.currentNonPropriety}원</td>
-				<td class="cell_title">소계</td>
-				<td class="cell">${organ.currentSubTotal}원</td>
+				<td class="cell_title">차년도 이월액</td>
+				<td class="cell">${organ.carryOverAmount}원</td>
 			</tr>
 			<tr>
 				<td class="cell_title">환수대상액</td>
-				<td colspan="3" class="cell">${organ.currentRedemtion}원</td>
+				<td class="cell">${organ.currentRedemtion}원</td>
+				<td class="cell_title">소계</td>
+				<td class="cell">${organ.currentSubTotal}원</td>
 			</tr>	
 			<tr>
 				<td class="cell_title">검토의견</td>

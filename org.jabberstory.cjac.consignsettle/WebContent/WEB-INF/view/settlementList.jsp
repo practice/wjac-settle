@@ -59,7 +59,7 @@
 				<th rowspan="2" nowrap>총현금</th>
 				<th rowspan="2" nowrap>정부지분</th>
 				<th rowspan="2" nowrap>위탁정산수수료</th>
-				<th colspan="5" nowrap>총환수대상액</th>
+				<th colspan="6" nowrap>총환수대상액</th>
 				<th rowspan="2" nowrap>검토의견<br/>(부적정집행내역)</th>
 				<th rowspan="2" nowrap>정산담당자</th>
 				<th rowspan="2" nowrap>비고</th>
@@ -75,6 +75,7 @@
 				<th nowrap>사용잔액</th>
 				<th nowrap>발생이자</th>
 				<th nowrap>부적정금액</th>
+				<th nowrap>차년도이월액</th>
 				<th nowrap>소계</th>
 				<th nowrap>환수대상액</th>
 				
@@ -112,6 +113,7 @@
 							<td nowrap class="cell_right">${organ.currentAccount}</td>
 							<td nowrap class="cell_right">${organ.currentInterest}</td>
 							<td nowrap class="cell_right">${organ.currentNonPropriety}</td>
+							<td nowrap class="cell_right">${organ.carryOverAmount}</td>
 							<td nowrap class="cell_right">${organ.currentSubTotal}</td>
 							<td nowrap class="cell_right">${organ.currentRedemtion}</td>
 							<td nowrap>${organ.opinion}</td>
@@ -124,7 +126,7 @@
 		</tbody>
 		<tfoot>				
 	          <tr>
-	            <td colspan="8">
+	            <td colspan="12">
 	            	<!-- Start Paginate -->
 					<caf:paging formTagName="form1"	searchFunctionName="doSearch" pagingList="${pagingList}" pageNoTagName="pageNo" />
 					<!-- End Paginate -->

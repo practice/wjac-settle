@@ -74,11 +74,12 @@ public class OrganExcelView extends AbstractExcelView{
 		row.createCell((short)18).setCellValue(organ.getCurrentAccount());
 		row.createCell((short)19).setCellValue(organ.getCurrentInterest());
 		row.createCell((short)20).setCellValue(organ.getCurrentNonPropriety());
-		row.createCell((short)21).setCellValue(organ.getCurrentSubTotal());
-		row.createCell((short)22).setCellValue(organ.getCurrentRedemtion());
-		row.createCell((short)23).setCellValue(organ.getOpinion());
-		row.createCell((short)24).setCellValue(organ.getConsignSettlementPerson());
-		row.createCell((short)25).setCellValue(organ.getRemark());
+		row.createCell((short)21).setCellValue(organ.getCarryOverAmount());
+		row.createCell((short)22).setCellValue(organ.getCurrentSubTotal());
+		row.createCell((short)23).setCellValue(organ.getCurrentRedemtion());
+		row.createCell((short)24).setCellValue(organ.getOpinion());
+		row.createCell((short)25).setCellValue(organ.getConsignSettlementPerson());
+		row.createCell((short)26).setCellValue(organ.getRemark());
 		
 		return rowNum;
 	}
@@ -108,12 +109,13 @@ public class OrganExcelView extends AbstractExcelView{
 		header.createCell((short)17).setCellValue("위탁정산수수료");
 		header.createCell((short)18).setCellValue("총환수대상액(사용잔액)");
 		header.createCell((short)19).setCellValue("총환수대상액(발생이자)");
-		header.createCell((short)20).setCellValue("총환수대상액(부적정집행액)");
-		header.createCell((short)21).setCellValue("총환수대상액(소계)");
-		header.createCell((short)22).setCellValue("총환수대상액(환수대상액)");
-		header.createCell((short)23).setCellValue("검토의견(부적정집행내역)");
-		header.createCell((short)24).setCellValue("정산담당자");
-		header.createCell((short)25).setCellValue("비고");
+		header.createCell((short)20).setCellValue("총환수대상액(부적정금액)");
+		header.createCell((short)21).setCellValue("총환수대상액(차년도이월액)");
+		header.createCell((short)22).setCellValue("총환수대상액(소계)");
+		header.createCell((short)23).setCellValue("총환수대상액(환수대상액)");
+		header.createCell((short)24).setCellValue("검토의견(부적정집행내역)");
+		header.createCell((short)25).setCellValue("정산담당자");
+		header.createCell((short)26).setCellValue("비고");
 		
 		return sheet;
 	}

@@ -56,6 +56,7 @@
 		
 		<property name="opinion" column="OPINION" type="string" length="500" />
 		<property name="remark" column="REMARK" type="string" length="500" />
+		<property name="carryOverAmount" column="CARRY_OVER_AMOUNT" type="string" length="32" />
 
 		<property name="costDetail" column="COST_DETAIL" type="text"/>
 		<property name="nonApproval1" column="NON_APPROVAL1" type="text"/>
