@@ -26,7 +26,7 @@ public class UserRepository extends HibernateDaoSupport {
 		
 	@SuppressWarnings("unchecked")
 	public List<UserGroup> getGroups(String groupQuery) {
-		String queryString = "from UserGroup g left join fetch g.parentGroup pg where g.groupId like :query or g.groupName like :query or pg.groupName like :query";
+		String queryString = "from UserGroup g left join fetch g.parentGroup pg where g.groupId like :query or g.groupName like :query or pg.groupName like :query order by g.role, g.groupName";
 		List list = getHibernateTemplate().findByNamedParam(queryString, 
 				new String[] {"query"}, 
 				new Object[] {"%" + groupQuery + "%"});
@@ -46,6 +46,7 @@ public class UserRepository extends HibernateDaoSupport {
 					.add(Restrictions.like("groupId", groupQuery, MatchMode.ANYWHERE))
 					.add(Restrictions.like("groupName", groupQuery, MatchMode.ANYWHERE))
 					.add(Restrictions.like("pg.groupName", groupQuery, MatchMode.ANYWHERE)))
+			.addOrder(Order.asc("role"))		
 			.addOrder(Order.asc("groupName"));
 		
 		List users = (List) getHibernateTemplate().findByCriteria(userCriteria,
@@ -94,6 +95,7 @@ public class UserRepository extends HibernateDaoSupport {
 					.add(Restrictions.like("email", userQuery, MatchMode.ANYWHERE))
 					.add(Restrictions.like("ug.groupName", userQuery, MatchMode.ANYWHERE))
 					.add(Restrictions.like("pg.groupName", userQuery, MatchMode.ANYWHERE)))
+			.addOrder(Order.asc("ug.role"))		
 			.addOrder(Order.asc("ug.groupName"));
 		
 		List users = (List) getHibernateTemplate().findByCriteria(userCriteria,
