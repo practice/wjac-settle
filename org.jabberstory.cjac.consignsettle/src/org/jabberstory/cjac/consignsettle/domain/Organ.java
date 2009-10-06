@@ -590,8 +590,8 @@ public class Organ {
 				+ "]";
 	}
 
-	public void addAttachment(int index, OrganAttachment attachment) {
-		getAttachments().add(index, attachment);
+	public void addAttachment(OrganAttachment attachment) {
+		getAttachments().add(attachment);
 	}
 	
 	public void setSubjectGroup(UserGroup subjectGroup) {
