@@ -9,6 +9,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jabberstory.cjac.consignsettle.common.util.Paging;
 import org.jabberstory.cjac.consignsettle.domain.Organ;
+import org.jabberstory.cjac.consignsettle.domain.OrganAttachment;
 import org.jabberstory.cjac.consignsettle.domain.OrganService;
 import org.jabberstory.cjac.consignsettle.domain.UserGroup;
 import org.jabberstory.cjac.consignsettle.domain.UserService;
@@ -106,6 +107,7 @@ public class OrganMultiActionController extends MultiActionController {
 		String costDetail = organ.getCostDetail();
 		String nonApproval1 = organ.getNonApproval1();
 		String nonApproval2 = organ.getNonApproval2();
+		List<OrganAttachment> attachments = organ.getAttachments();
 		
 		if (ownerGroupId.equals("") || subjectGroupId.equals("")){
 			List<UserGroup> ownerGroups = userService.getGroupsByRole(ROLE_OWNER);
@@ -127,6 +129,7 @@ public class OrganMultiActionController extends MultiActionController {
 		organCommand.setNonApproval2(nonApproval2);
 		organCommand.setOwnerGroup(ownerGroup);
 		organCommand.setSubjectGroup(subjectGroup);
+		organCommand.setAttachments(attachments);
 		
 		organService.updateOrgan(organCommand);
 
