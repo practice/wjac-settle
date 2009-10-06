@@ -11,7 +11,6 @@ import org.hibernate.criterion.CriteriaSpecification;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Order;
-import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.jabberstory.cjac.consignsettle.common.util.Paging;
 import org.springframework.dao.DataAccessException;
@@ -216,7 +215,7 @@ public class OrganRepository extends HibernateDaoSupport {
 		Organ organ = getOrgan(organId);
 		organ.setNonApproval1(nonApproval1);
 		String saveDir = calcSaveDir(organ);
-		addAttachments(file, organ, saveDir, 0, "0");
+		addAttachments(file, organ, saveDir, "0");
 		saveFiles(file, saveDir);
 	}
 
@@ -224,7 +223,7 @@ public class OrganRepository extends HibernateDaoSupport {
 		Organ organ = getOrgan(organId);
 		organ.setNonApproval2(nonApproval2);
 		String saveDir = calcSaveDir(organ);
-		addAttachments(file, organ, saveDir, 0, "1");
+		addAttachments(file, organ, saveDir, "1");
 		saveFiles(file, saveDir);
 	}
 
@@ -247,13 +246,13 @@ public class OrganRepository extends HibernateDaoSupport {
 	}
 
 	private void addAttachments(MultipartFile file, Organ organ,
-			String saveDir, int index, String filetype) {
+			String saveDir, String filetype) {
 		OrganAttachment attachment = new OrganAttachment();
 		attachment.setFilename(file.getOriginalFilename());
 		attachment.setFilesize(file.getSize());
 		attachment.setDir(saveDir);
 		attachment.setFiletype(filetype);
-		organ.addAttachment(index, attachment);
+		organ.addAttachment(attachment);
 	}
 
 	private void createDir(String path) {
