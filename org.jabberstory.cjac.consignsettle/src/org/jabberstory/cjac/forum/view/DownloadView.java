@@ -23,7 +23,7 @@ public class DownloadView extends AbstractView {
 		response.setContentType("application/octet-stream;charset=UTF-8");
 		response.setContentLength((int)file.length());
 		response.setHeader("Content-Disposition", "attachment; filename=\"" + 
-				new String(file.getName().getBytes(), "8859_1") + "\"");
+				new String(file.getName().getBytes("euc-kr"), "8859_1") + "\"");
 		response.setHeader("Content-Transfer-Encoding", "binary");
 		FileInputStream inputStream = new FileInputStream(file);
 		ServletOutputStream outputStream = response.getOutputStream();
