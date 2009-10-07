@@ -54,9 +54,10 @@
 		<property name="currentRedemtion" column="CURRENT_REDEMTION" type="string" length="32" />
 		<property name="currentSubTotal" column="CURRENT_SUB_TOTAL" type="string" length="32" />
 		
-		<property name="opinion" column="OPINION" type="string" length="500" />
-		<property name="remark" column="REMARK" type="string" length="500" />
+		<property name="opinion" column="OPINION" type="text" />
+		<property name="remark" column="REMARK" type="text" />
 		<property name="carryOverAmount" column="CARRY_OVER_AMOUNT" type="string" length="32" />
+		<property name="opinionSummary" column="OPINION_SUMMARY" type="text" />
 
 		<property name="costDetail" column="COST_DETAIL" type="text"/>
 		<property name="nonApproval1" column="NON_APPROVAL1" type="text"/>

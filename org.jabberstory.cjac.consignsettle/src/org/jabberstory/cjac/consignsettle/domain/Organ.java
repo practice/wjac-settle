@@ -48,6 +48,7 @@ public class Organ {
 	private String opinion;
 	private String remark;
 	private String carryOverAmount;
+	private String opinionSummary;
 	private String costDetail;
 	private String nonApproval1;
 	private String nonApproval2;
@@ -79,9 +80,9 @@ public class Organ {
 			String currentAccount, String currentInterest,
 			String currentNonPropriety, String currentRedemtion,
 			String currentSubTotal, String opinion, String remark,
-			String carryOverAmount, String costDetail, String nonApproval1,
-			String nonApproval2, UserGroup ownerGroup, UserGroup subjectGroup,
-			List<OrganAttachment> attachments) {
+			String carryOverAmount, String opinionSummary, String costDetail,
+			String nonApproval1, String nonApproval2, UserGroup ownerGroup,
+			UserGroup subjectGroup, List<OrganAttachment> attachments) {
 		super();
 		this.organId = organId;
 		this.businessName = businessName;
@@ -126,6 +127,7 @@ public class Organ {
 		this.opinion = opinion;
 		this.remark = remark;
 		this.carryOverAmount = carryOverAmount;
+		this.opinionSummary = opinionSummary;
 		this.costDetail = costDetail;
 		this.nonApproval1 = nonApproval1;
 		this.nonApproval2 = nonApproval2;
@@ -133,6 +135,7 @@ public class Organ {
 		this.subjectGroup = subjectGroup;
 		this.attachments = attachments;
 	}
+
 
 
 
@@ -516,6 +519,14 @@ public class Organ {
 		this.carryOverAmount = carryOverAmount;
 	}
 
+	public String getOpinionSummary() {
+		return opinionSummary;
+	}
+
+	public void setOpinionSummary(String opinionSummary) {
+		this.opinionSummary = opinionSummary;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -572,13 +583,14 @@ public class Organ {
 				+ ", nonApproval1=" + nonApproval1 + ", nonApproval2="
 				+ nonApproval2 + ", nonGovContributeAmount="
 				+ nonGovContributeAmount + ", opinion=" + opinion
-				+ ", organId=" + organId + ", organResponsibleAddress="
-				+ organResponsibleAddress + ", organResponsibleEmail="
-				+ organResponsibleEmail + ", organResponsiblePerson="
-				+ organResponsiblePerson + ", organResponsiblePhone1="
-				+ organResponsiblePhone1 + ", organResponsiblePhone2="
-				+ organResponsiblePhone2 + ", organResponsiblePhone3="
-				+ organResponsiblePhone3 + ", organResponsiblePostNumber1="
+				+ ", opinionSummary=" + opinionSummary + ", organId=" + organId
+				+ ", organResponsibleAddress=" + organResponsibleAddress
+				+ ", organResponsibleEmail=" + organResponsibleEmail
+				+ ", organResponsiblePerson=" + organResponsiblePerson
+				+ ", organResponsiblePhone1=" + organResponsiblePhone1
+				+ ", organResponsiblePhone2=" + organResponsiblePhone2
+				+ ", organResponsiblePhone3=" + organResponsiblePhone3
+				+ ", organResponsiblePostNumber1="
 				+ organResponsiblePostNumber1
 				+ ", organResponsiblePostNumber2="
 				+ organResponsiblePostNumber2 + ", projectName=" + projectName

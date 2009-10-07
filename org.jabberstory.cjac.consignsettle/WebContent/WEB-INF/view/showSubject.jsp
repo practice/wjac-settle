@@ -196,6 +196,10 @@ $(document).ready(function() {
 				<td colspan="3" class="cell">${fn:replace(fn:replace(organ.opinion,crlf,"<br/>")," ", "&nbsp;")}</td>
 			</tr>
 			<tr>
+				<td class="cell_title">검토의견 요약</td>
+				<td colspan="3" class="cell">${fn:replace(fn:replace(organ.opinionSummary,crlf,"<br/>")," ", "&nbsp;")}</td>
+			</tr>
+			<tr>
 				<td class="cell_title">비고</td>
 				<td colspan="3" class="cell">${fn:replace(fn:replace(organ.remark,crlf,"<br/>"), " ","&nbsp;")}</td>
 			</tr>
