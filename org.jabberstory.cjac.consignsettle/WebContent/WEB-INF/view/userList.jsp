@@ -59,6 +59,7 @@
 	        	<tr>
 	        		<th>번호</th>
 	          		<th>사용자 ID</th>
+	          		<th>Password</th>
 	          		<th>사용자명</th>
 	          		<th>Email</th>
 	          		<th>그룹명</th>
@@ -68,7 +69,7 @@
 		      	<c:choose>	
 			      	<c:when test="${pagingList.totalCount == 0}">
 				      	<tr>
-							<td colspan="5">검색 결과가 없습니다.</td>
+							<td colspan="6">검색 결과가 없습니다.</td>
 						</tr>		    	
 					</c:when>	
 					<c:otherwise>	
@@ -76,6 +77,7 @@
 							<tr>
 								<td>${(pagingList.currentPage - 1) * 10 + status.count}</td>
 								<td>${user.userId}</td>
+								<td>${user.password}</td>
 								<td>
 									<a href="<c:url value="/user/updateUser?userId=${user.userId}" />">${user.username}</a>
 								</td>
