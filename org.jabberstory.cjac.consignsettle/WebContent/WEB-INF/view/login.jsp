@@ -48,10 +48,10 @@ input {
             </td>
             <td><input name="j_password" type="password" class="logininput"  /></td>
             <td><input type="submit" value="로그인" /><a href="#"><!-- img src="img/btn_login.gif" width="55" height="21" border="0" /--></a></td>
-            <td><a href="#"><img src="img/btn_toadmin.gif" width="55" height="21"  border="0"/></a></td>
+            
           </tr>
       	  <tr>
-      	  	<td colspan="4"><c:if test="${not empty param.error}"><span class="loginerror">Login error.<br/>
+      	  	<td colspan="3"><c:if test="${not empty param.error}"><span class="loginerror">Login error.<br/>
       	  		Reason : ${sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].message}</span></c:if>
       	  	</td>
       	  </tr>
@@ -68,7 +68,7 @@ input {
           <tr>
             <td width="180"><img src="img/footer.jpg" width="149" height="28" /></td>
             <td style="text-align:left">Copyright ⓒ CHEON JI ACCOUNTING Corp. All rights Reserved<br />
-              서울특별시 서초구 서초동 1537-1 개념원리빌딩 Tel.02-3700-2200 Fax.02-508-0540</td>
+              서울특별시 서초구 서초동 1537-1 개념원리빌딩 Tel.02-3700-2200 Fax.02-508-3098</td>
           </tr>
         </table></td>
     </tr>
