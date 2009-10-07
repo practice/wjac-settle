@@ -99,7 +99,7 @@
 			</tbody>	 
 			<tfoot>				
 	          <tr>
-	            <td colspan="5">		
+	            <td colspan="6">		
 	            	<!-- Start Paginate -->
 					<caf:paging formTagName="form1"	searchFunctionName="doSearch" pagingList="${pagingList}" pageNoTagName="pageNo" />
 					<!-- End Paginate -->						
