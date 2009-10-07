@@ -60,7 +60,7 @@
 				<th rowspan="2" nowrap>정부지분</th>
 				<th rowspan="2" nowrap>위탁정산수수료</th>
 				<th colspan="6" nowrap>총환수대상액</th>
-				<th rowspan="2" nowrap>검토의견<br/>(부적정집행내역)</th>
+				<th rowspan="2" nowrap>검토의견요약<br/>(부적정집행내역)</th>
 				<th rowspan="2" nowrap>정산담당자</th>
 				<th rowspan="2" nowrap>비고</th>
 			</tr>
@@ -116,7 +116,7 @@
 							<td nowrap class="cell_right">${organ.carryOverAmount}</td>
 							<td nowrap class="cell_right">${organ.currentSubTotal}</td>
 							<td nowrap class="cell_right">${organ.currentRedemtion}</td>
-							<td nowrap>${organ.opinion}</td>
+							<td nowrap>${organ.opinionSummary}</td>
 							<td nowrap>${organ.consignSettlementPerson}</td>
 							<td nowrap><font color="red">${organ.remark}</font></td>
 						</tr>

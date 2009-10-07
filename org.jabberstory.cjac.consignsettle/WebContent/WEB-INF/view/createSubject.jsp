@@ -489,6 +489,10 @@
 					<td colspan="3" class="cell"><textarea id="opinion" name="opinion"></textarea></td>
 				</tr>
 				<tr>
+					<td class="cell_title">검토의견 요약</td>
+					<td colspan="3" class="cell"><textarea id="opinionSummary" name="opinionSummary"></textarea></td>
+				</tr>
+				<tr>
 					<td class="cell_title">비고</td>
 					<td colspan="3" class="cell"><textarea id="remark" name="remark"></textarea></td>
 				</tr>
