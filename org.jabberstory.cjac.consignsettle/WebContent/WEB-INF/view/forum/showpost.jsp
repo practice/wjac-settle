@@ -104,24 +104,25 @@ $(document).ready(function() {
     </div>
 	</c:forEach>
 	<div style="clear: right"></div>
-	<h2>답변하기</h2>
-	<div>
-		<div id="replyArea"></div>
-	<form name="thisform" action="write" method="post" enctype="multipart/form-data">
-		<input type="hidden" name="id" value="${param.id }" />
-		<input type="hidden" name="page" value="${param.page }" />
-		<div><label>제목</label><input type="text" name="title" class="line_box" style="width:650px" /></div>
-		<div><label>내용</label><textarea name="body" style="height:100px; width:650px" ></textarea></div>
-		<div><input type="file" name="files" /></div>
-	    <div class="button">
-	      <div class="b_blue">
-	        <ul>
-	          <li><a href="#" id="saveButton">저장</a></li>
-	        </ul>
-	      </div>
-	    </div>
-	</form>
-	</div>
+    <c:if test="${forum.prop['canReply']}">
+		<h2>답변하기</h2>
+		<div>
+			<form name="thisform" action="write" method="post" enctype="multipart/form-data">
+				<input type="hidden" name="id" value="${param.id }" />
+				<input type="hidden" name="page" value="${param.page }" />
+				<div><label>제목</label><input type="text" name="title" class="line_box" style="width:650px" /></div>
+				<div><label>내용</label><textarea name="body" style="height:100px; width:650px" ></textarea></div>
+				<div><input type="file" name="files" /></div>
+			    <div class="button">
+			      <div class="b_blue">
+			        <ul>
+			          <li><a href="#" id="saveButton">저장</a></li>
+			        </ul>
+			      </div>
+			    </div>
+			</form>
+		</div>
+	</c:if>
   </div>
 </div>
 
