@@ -57,6 +57,7 @@ public class ForumListController extends AbstractController {
 		Long numPages = forumService.getPageCount(forumId);
 		mv.addObject("numPages", numPages);
 		mv.addObject("currentPage", page);
+		mv.addObject("writePermission", Boolean.valueOf(forumPermissionService.hasWritePermission(forum)));
 
 		mv.setViewName("forum/list");
 		return mv;

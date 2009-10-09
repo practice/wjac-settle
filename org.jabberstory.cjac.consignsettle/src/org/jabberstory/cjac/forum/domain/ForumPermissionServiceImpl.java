@@ -15,12 +15,9 @@ public class ForumPermissionServiceImpl implements ForumPermissionService {
 
 	@Override
 	public boolean hasModificationPermission(ForumPost post) {
+		if (hasAdminRole())
+			return true;
 		String logonId = SecurityContextHolder.getContext().getAuthentication().getName();
-		GrantedAuthority[] authorities = SecurityContextHolder.getContext().getAuthentication().getAuthorities();
-		for (GrantedAuthority authority : authorities) {
-			if ("ROLE_ADMIN".equals(authority.getAuthority()))
-				return true;
-		}
 		if (post.getUser().getUserId().equals(logonId)) {
 			return true;
 		}
@@ -29,11 +26,8 @@ public class ForumPermissionServiceImpl implements ForumPermissionService {
 
 	@Override
 	public boolean hasReadPermission(Forum forum) {
-		GrantedAuthority[] authorities = SecurityContextHolder.getContext().getAuthentication().getAuthorities();
-		for (GrantedAuthority authority : authorities) {
-			if ("ROLE_ADMIN".equals(authority.getAuthority()))
-				return true;
-		}
+		if (hasAdminRole())
+			return true;
 		String logonId = SecurityContextHolder.getContext().getAuthentication().getName();
 		List<Forum> myForums = forumService.getForumsFor(logonId);
 		for (Forum myForum : myForums) {
@@ -41,6 +35,15 @@ public class ForumPermissionServiceImpl implements ForumPermissionService {
 				System.out.println("######## " + myForum.getId() + ":" + forum.getId());
 				return true;
 			}
+		}
+		return false;
+	}
+	
+	private boolean hasAdminRole() {
+		GrantedAuthority[] authorities = SecurityContextHolder.getContext().getAuthentication().getAuthorities();
+		for (GrantedAuthority authority : authorities) {
+			if ("ROLE_ADMIN".equals(authority.getAuthority()))
+				return true;
 		}
 		return false;
 	}
@@ -58,17 +61,16 @@ public class ForumPermissionServiceImpl implements ForumPermissionService {
 
 	@Override
 	public boolean hasWritePermission(Forum forum) {
-		return hasReadPermission(forum);
+		if (hasAdminRole())
+			return true; 
+		if (forum.getForumType().equals("qna"))
+			return hasReadPermission(forum);
+		return false;
 	}
 
 	@Override
 	public boolean hasBrowserForumPermission() {
-		GrantedAuthority[] authorities = SecurityContextHolder.getContext().getAuthentication().getAuthorities();
-		for (GrantedAuthority authority : authorities) {
-			if ("ROLE_ADMIN".equals(authority.getAuthority()))
-				return true;
-		}
-		return false;
+		return hasAdminRole();
 	}
 
 }
