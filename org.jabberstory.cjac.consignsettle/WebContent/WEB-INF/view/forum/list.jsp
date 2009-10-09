@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <script>
 $(document).ready(function() {
 	var numPages = $('#numPages').text();
@@ -96,14 +97,17 @@ function getNextFirst(current, lastPage) {
 			</c:otherwise>
 		</c:choose>
     </div>
-    <div class="button">
-      <div class="b_blue">
-        <ul>
-          <li><a href="write">글쓰기</a></li>
-        </ul>
-      </div>
-    </div>
+    <c:if test="${writePermission}">
+	    <div class="button">
+	      <div class="b_blue">
+	        <ul>
+	          <li><a href="write">글쓰기</a></li>
+	        </ul>
+	      </div>
+	    </div>
+    </c:if>
   </div>
 </div>
 <span id="numPages" style="display: none">${numPages}</span>
-<span id="currentPage" style="display: none">${currentPage}</span>	
+<span id="currentPage" style="display: none">${currentPage}</span>
+<span id="role" style="display: none">${role}</span>
