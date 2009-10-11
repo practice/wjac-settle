@@ -29,8 +29,8 @@ public class ForumServiceImpl implements ForumService {
 	}
 
 	@Override
-	public ForumPost createPost(int forumId, String subject, String body, String userId, List<MultipartFile> files) {
-		return forumRepository.createPost(forumId, subject, body, userId, files);
+	public ForumPost createPost(int forumId, String subject, String body, String userId, List<MultipartFile> files, boolean hidden) {
+		return forumRepository.createPost(forumId, subject, body, userId, files, hidden);
 	}
 
 	@Override

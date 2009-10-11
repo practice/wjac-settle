@@ -64,6 +64,7 @@ public class UpdatePostController extends SimpleFormController {
 				command.setTitle(subject);
 			}
 			command.setBody(post.getBody());
+			command.setHidden(post.isHidden() ? "Y": "N");
 		}
 		return command;
 	}
