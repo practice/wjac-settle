@@ -66,7 +66,7 @@ public class WriteController extends SimpleFormController {
 			return new ModelAndView("redirect:" + ForumUtil.buildShowPostUrl(forumId, id, page));
 		}
 		// new forum thread.
-		forumService.createPost(forumId, writeCommand.getTitle(), writeCommand.getBody(), logonId, writeCommand.getFiles());
+		forumService.createPost(forumId, writeCommand.getTitle(), writeCommand.getBody(), logonId, writeCommand.getFiles(), writeCommand.getHidden().equals("Y"));
 		return new ModelAndView("redirect:" + ForumUtil.buildListUrl(forumId));
 	}
 	

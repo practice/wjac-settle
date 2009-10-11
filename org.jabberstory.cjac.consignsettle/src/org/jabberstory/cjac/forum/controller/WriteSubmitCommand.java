@@ -11,6 +11,7 @@ public class WriteSubmitCommand {
 	private String id;
 	private String title;
 	private String body;
+	private String hidden;
 	private List<MultipartFile> files = new ArrayList<MultipartFile>(); // 여러개의 파일을 가변적으로 업로드 할 경우? file0, file1, ... fileN 과 같이 한다?
 	
 	protected final Log logger = LogFactory.getLog(getClass());
@@ -49,6 +50,14 @@ public class WriteSubmitCommand {
 
 	public List<MultipartFile> getFiles() {
 		return files;
+	}
+
+	public void setHidden(String hidden) {
+		this.hidden = hidden;
+	}
+
+	public String getHidden() {
+		return hidden;
 	}
 
 }

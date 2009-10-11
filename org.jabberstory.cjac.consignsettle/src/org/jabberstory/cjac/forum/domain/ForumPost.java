@@ -17,7 +17,8 @@ public class ForumPost {
 	private String body;
 	private Timestamp createdDate;
 	private int readCount;
-	private int replyCount;	
+	private int replyCount;
+	private boolean hidden = false;
 	private User user;
 	private List<PostAttachment> attachments = new ArrayList<PostAttachment>();
 	private Forum forum;
@@ -34,7 +35,7 @@ public class ForumPost {
 	public ForumPost() {
 	}
 	
-	public ForumPost(String subject, String body, User user) {
+	public ForumPost(String subject, String body, User user, boolean hidden) {
 		this.step = 0;
 		this.depth = 0;
 		this.rootId = 0;
@@ -43,6 +44,7 @@ public class ForumPost {
 		this.createdDate = new Timestamp(System.currentTimeMillis());
 		this.readCount = 0;
 		this.replyCount = 0;
+		this.hidden = hidden;
 		this.user = user;
 	}
 	
@@ -132,6 +134,14 @@ public class ForumPost {
 	@SuppressWarnings("unchecked")
 	public HashMap getProp() {
 		return prop;
+	}
+
+	public void setHidden(boolean hidden) {
+		this.hidden = hidden;
+	}
+
+	public boolean isHidden() {
+		return hidden;
 	}
 
 }

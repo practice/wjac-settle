@@ -75,8 +75,8 @@ public class ForumRepository extends HibernateDaoSupport {
 	/* (non-Javadoc)
 	 * @see org.jabberstory.toy.forum.ForumService#savePost(java.lang.String, java.lang.String, java.lang.String)
 	 */
-	public ForumPost createPost(int forumId, String subject, String body, String userId, List<MultipartFile> files) {
-		ForumPost post = new ForumPost(subject, body, userService.getUser(userId));
+	public ForumPost createPost(int forumId, String subject, String body, String userId, List<MultipartFile> files, boolean hidden) {
+		ForumPost post = new ForumPost(subject, body, userService.getUser(userId), hidden);
 		post.setForum(getForum(forumId));
 		getHibernateTemplate().save(post);
 		String saveDir = calcSaveDir(post);
@@ -90,7 +90,7 @@ public class ForumRepository extends HibernateDaoSupport {
 	}
 
 	public ForumPost createReply(int forumId, int id, String subject, String body, String userId, List<MultipartFile> files) {
-		ForumPost post = new ForumPost(subject, body, userService.getUser(userId));
+		ForumPost post = new ForumPost(subject, body, userService.getUser(userId), false);
 		getHibernateTemplate().save(post);
 		String saveDir = calcSaveDir(post);
 		addAttachments(files, post, saveDir);

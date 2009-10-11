@@ -29,6 +29,7 @@
 		<property name="createdDate" column="WTIME" type="timestamp" />
 		<property name="readCount" column="READCOUNT" type="int" length="8" />
 		<property name="replyCount" column="REPLYCOUNT" type="int" length="4" />
+		<property name="hidden" column="HIDDEN" type="yes_no" />
 		<many-to-one name="user" column="USERID" class="org.jabberstory.cjac.consignsettle.domain.User" 
 			foreign-key="FK_USER_POST" fetch="join" />
 		<list name="attachments" cascade="save-update, delete">
