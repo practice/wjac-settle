@@ -63,6 +63,7 @@
 	          		<th>사용자명</th>
 	          		<th>Email</th>
 	          		<th>그룹명</th>
+	          		<th>차단 여부</th>
 	        	</tr>
 	      	</thead>	
 	      	<tbody> 
@@ -92,6 +93,7 @@
 										</c:otherwise>
 									</c:choose>
 								</td>
+								<td><c:if test="${user.blocked}">차단됨</c:if></td>
 							</tr>
 						</c:forEach>				
 					</c:otherwise>

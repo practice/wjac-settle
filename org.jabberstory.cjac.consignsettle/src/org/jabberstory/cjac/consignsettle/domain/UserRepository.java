@@ -72,7 +72,17 @@ public class UserRepository extends HibernateDaoSupport {
 	
 	@SuppressWarnings("unchecked")
 	public List<User> getUsers(String userQuery) {
-		String queryString = "from User u left join fetch u.userGroup ug left join fetch ug.parentGroup pg where u.userId like :query or u.username like :query or u.email like :query or ug.groupName like :query or pg.groupName like :query";
+		String queryString = 
+			"from User u"
+			+ " left join fetch u.userGroup ug"
+			+ " left join fetch ug.parentGroup pg"
+			+ " where u.userId like :query"
+				+ " or u.username like :query"
+				+ " or u.email like :query"
+				+ " or ug.groupName like :query"
+				+ " or pg.groupName like :query";
+//			+ "and u.blocked = false";
+					
 		List list = getHibernateTemplate().findByNamedParam(queryString, 
 				new String[] {"query"}, 
 				new Object[] {"%" + userQuery + "%"});
@@ -97,6 +107,7 @@ public class UserRepository extends HibernateDaoSupport {
 					.add(Restrictions.like("pg.groupName", userQuery, MatchMode.ANYWHERE)))
 			.addOrder(Order.asc("ug.role"))		
 			.addOrder(Order.asc("ug.groupName"));
+//		userCriteria.add(Restrictions.ne("blocked", Boolean.FALSE));
 		
 		List users = (List) getHibernateTemplate().findByCriteria(userCriteria,
 				fromRowNum, toRowNum);
@@ -109,7 +120,7 @@ public class UserRepository extends HibernateDaoSupport {
 			throws DataAccessException {		
 		
 		List list = getHibernateTemplate().find("from User u where u.userGroup = null");
-		// 해당 사용자 그룹에 할당한 사용자 목록		
+		// 해당 사용자 그룹에 할당한 사용자 목록
 		return list;
 		
 	}
@@ -154,11 +165,13 @@ public class UserRepository extends HibernateDaoSupport {
 		user.setEmail(email);
 	}
 	
-	public void updateUser(String userId, String password, String username,
+	public void updateUser(String userId, String password, boolean blocked, String username,
 			String email, String postnum1, String postnum2, String address,
 			String phone1, String phone2, String phone3, UserGroup userGroup) {
 		User user = getUser(userId);
-		user.setPassword(password);
+		if (!password.trim().isEmpty())
+			user.setPassword(password);
+		user.setBlocked(blocked);
 		user.setUsername(username);
 		user.setEmail(email);
 		user.setPostnum1(postnum1);

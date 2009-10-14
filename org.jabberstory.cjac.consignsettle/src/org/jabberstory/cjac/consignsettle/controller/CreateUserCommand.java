@@ -4,6 +4,7 @@ public class CreateUserCommand {
 	private String userId;
 	private String password;
 	private String passwordConfirm;
+	private boolean blocked = false;
 	private String username;
 	private String email;
 	private String postnum1;
@@ -27,6 +28,8 @@ public class CreateUserCommand {
 	}
 
 	public String getPassword() {
+		if (password == null)
+			return "";
 		return password;
 	}
 		
@@ -35,6 +38,8 @@ public class CreateUserCommand {
 	}
 
 	public String getPasswordConfirm() {
+		if (passwordConfirm == null)
+			return "";
 		return passwordConfirm;
 	}
 
@@ -108,6 +113,14 @@ public class CreateUserCommand {
 
 	public void setGroupId(String groupId) {
 		this.groupId = groupId;
+	}
+
+	public void setBlocked(boolean blocked) {
+		this.blocked = blocked;
+	}
+
+	public boolean isBlocked() {
+		return blocked;
 	}
 	
 

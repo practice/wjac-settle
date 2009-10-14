@@ -29,11 +29,9 @@ $(document).ready(function(ev) {
 		<table width="100%" cellspacing="0">
 			<tbody>
 				<tr>
-					<td class="cell_title" >
-						사용자ID					
-					</td>
-					<td class="cell">
-						${updateUser.userId}					
+					<td class="cell_title">사용자ID</td>
+					<td class="cell">${updateUser.userId} 
+						(<input type="checkbox" name="blockedCheckbox" value="Y" <c:if test="${updateUser.blocked}">checked</c:if>></input> 차단 여부)
 					</td>
 				</tr>				
 				<tr>
@@ -51,7 +49,7 @@ $(document).ready(function(ev) {
 					<td class="cell">
 						<form:password path="passwordConfirm" cssClass="line_box" cssStyle="width:100px"/><form:errors path="passwordConfirm" />					
 					</td>
-				</tr>				
+				</tr>
 				<tr>
 					<td class="cell_title" >
 						사용자명					
@@ -142,7 +140,7 @@ $(document).ready(function(ev) {
 	        <div class="b_blue">
 	          <ul>
 	          	<li><a href="<c:url value="/user/list" />">취소</a></li>
-	          	<li><a href="<c:url value="/user/removeUser?userId=${updateUser.userId }" />">삭제</a></li>
+	          	<!-- <li><a href="<c:url value="/user/removeUser?userId=${updateUser.userId }" />">삭제</a></li> -->
 	            <li><a href="#" id="submit">저장</a></li>	            
 	          </ul>
 	        </div>

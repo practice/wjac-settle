@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.jabberstory.cjac.consignsettle.domain.Organ;
 import org.jabberstory.cjac.consignsettle.domain.UserService;
 import org.springframework.validation.BindException;
+import org.springframework.validation.ValidationUtils;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.SimpleFormController;
 
@@ -39,6 +40,14 @@ public class CreateUserController extends SimpleFormController {
 			throws Exception {
 		CreateUserCommand param = (CreateUserCommand) command;
 
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "required");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "passwordConfirm", "required");
+		if (!param.getPassword().equals(param.getPasswordConfirm()))
+			errors.rejectValue("passwordConfirm", "password.mismatch");
+
+		if (errors.hasErrors()) {
+			return this.showForm(request, response, errors);
+		}
 		try{
 			userService.createUser(param.getUserId(), param.getPassword(), param
 					.getUsername(), param.getEmail(), param.getPostnum1(), param

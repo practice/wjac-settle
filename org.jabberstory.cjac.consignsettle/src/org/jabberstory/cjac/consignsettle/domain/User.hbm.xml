@@ -12,6 +12,7 @@
 		<property name="username" column="USERNAME" type="string" length="32" />
 		<property name="email" column="EMAIL" type="string" length="64" />
 		<property name="password" column="PASSWORD" type="string" length="64" />
+		<property name="blocked" column="BLOCKED" type="yes_no" />
 		<property name="postnum1" column="POSTNUM1" type="string" length="3" />
 		<property name="postnum2" column="POSTNUM2" type="string" length="3" />
 		<property name="address" column="ADDRESS" type="string" length="64" />

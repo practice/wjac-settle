@@ -27,7 +27,7 @@
 	</http>
 	<authentication-provider>
 		<jdbc-user-service data-source-ref="dataSource"
-			users-by-username-query="SELECT userId, password, 'true' as enabled
+			users-by-username-query="SELECT userId, password, (case blocked when 'N' then 'true' else 'false' end) as enabled
 									FROM USER
 									WHERE userId = ?"
 			authorities-by-username-query="select a.userid,

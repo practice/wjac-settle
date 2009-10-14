@@ -6,6 +6,7 @@ public class User {
 	private String username;
 	private String email;
 	private String password;
+	private boolean blocked = false;
 	private String postnum1;
 	private String postnum2;
 	private String address;
@@ -138,6 +139,14 @@ public class User {
 				+ ", phone3=" + phone3 + ", postnum1=" + postnum1
 				+ ", postnum2=" + postnum2 + ", userId=" + userId
 				+ ", username=" + username + "]";
+	}
+
+	public void setBlocked(boolean blocked) {
+		this.blocked = blocked;
+	}
+
+	public boolean isBlocked() {
+		return blocked;
 	}
 
 }
