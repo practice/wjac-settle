@@ -147,12 +147,12 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override
-	public void updateUser(String userId, String password, String username,
+	public void updateUser(String userId, String password, boolean blocked, String username,
 			String email, String postnum1, String postnum2, String address,
 			String phone1, String phone2, String phone3, String groupId) {
 		
 		UserGroup userGroup = userRepository.getUserGroup(groupId);
-		userRepository.updateUser(userId, password, username, email, postnum1, postnum2,
+		userRepository.updateUser(userId, password, blocked, username, email, postnum1, postnum2,
 				address, phone1, phone2, phone3, userGroup);		
 	}
 

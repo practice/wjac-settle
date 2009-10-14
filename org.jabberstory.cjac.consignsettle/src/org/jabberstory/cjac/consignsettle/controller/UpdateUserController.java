@@ -52,6 +52,7 @@ public class UpdateUserController extends SimpleFormController {
 		if (user != null) {
 			command.setUserId(userId);
 			command.setUsername(user.getUsername());
+			command.setBlocked(user.isBlocked());
 			command.setEmail(user.getEmail());
 			command.setPassword(user.getPassword());
 			command.setPasswordConfirm(user.getPassword());
@@ -72,14 +73,33 @@ public class UpdateUserController extends SimpleFormController {
 			throws Exception {
 		CreateUserCommand param = (CreateUserCommand) command;
 		
+		if (!param.getPassword().equals(param.getPasswordConfirm()))
+			errors.rejectValue("passwordConfirm", "password.mismatch");
+
+		if (errors.hasErrors()) {
+			return this.showForm(request, response, errors);
+		}
+
 		try{
-			userService.updateUser(param.getUserId(), param.getPassword(), param
-					.getUsername(), param.getEmail(), param.getPostnum1(), param
+			userService.updateUser(param.getUserId(), param.getPassword(), param.isBlocked(), 
+					param.getUsername(), param.getEmail(), param.getPostnum1(), param
 					.getPostnum2(), param.getAddress(), param.getPhone1(), param
 					.getPhone2(), param.getPhone3(), param.getGroupId());
 		}catch(Exception e){
 			return showForm(request, response, errors);
 		}
 		return new ModelAndView("redirect:/user/list");
+	}
+	
+	@Override
+	protected void onBind(HttpServletRequest request, Object command)
+			throws Exception {
+		super.onBind(request, command);
+		CreateUserCommand cmd = (CreateUserCommand)command;
+		String blockedCB = request.getParameter("blockedCheckbox");
+		if (blockedCB == null || blockedCB.trim().isEmpty())
+			cmd.setBlocked(false);
+		else 
+			cmd.setBlocked(true);
 	}
 }

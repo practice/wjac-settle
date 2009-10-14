@@ -17,10 +17,6 @@ public class CreateUserValidator implements Validator {
 		CreateUserCommand param = (CreateUserCommand)target;
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "userId", "required");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "username", "required");
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "required");
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "passwordConfirm", "required");
-		if (!param.getPassword().equals(param.getPasswordConfirm()))
-			errors.rejectValue("passwordConfirm", "password.mismatch");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "email", "required");
 //		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "postnum1", "required");
 //		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "postnum2", "required");
