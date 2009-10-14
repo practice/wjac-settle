@@ -104,10 +104,11 @@ public class ForumServiceImpl implements ForumService {
 		if (userGroup.isOwner())
 			ownerGroupId = userGroup.getGroupId();
 		else if (userGroup.isSubject()) {
-			List<Organ> organs = organService.getOrgans(userId, userGroup.getRole());
-			if (organs.size() > 0) {
-				ownerGroupId = organs.get(0).getOwnerGroup().getGroupId();
-			}
+			ownerGroupId = userGroup.getParentGroup().getGroupId();
+//			List<Organ> organs = organService.getOrgans(userId, userGroup.getRole());
+//			if (organs.size() > 0) {
+//				ownerGroupId = organs.get(0).getOwnerGroup().getGroupId();
+//			}
 		}
 		return forumRepository.findForumFor(ownerGroupId);
 	}
