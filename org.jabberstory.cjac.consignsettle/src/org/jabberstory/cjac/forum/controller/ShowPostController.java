@@ -43,7 +43,8 @@ public class ShowPostController extends AbstractController {
 		request.setAttribute("childrenCount", new Integer(children.size()));
 		request.setAttribute("forum", forum);
 		// pulic type일 경우 답변 기능은 필요 없음.
-		if (forum.getForumType().equals(Forum.PUBLIC_TYPE)) {
+		if (forum.getForumType().equals(Forum.PUBLIC_TYPE) || 
+				forum.getForumType().equals(Forum.FILES_TYPE)) {
 			forum.getProp().put("canReply", Boolean.valueOf(false));
 		} else {
 			forum.getProp().put("canReply", Boolean.valueOf(true));
