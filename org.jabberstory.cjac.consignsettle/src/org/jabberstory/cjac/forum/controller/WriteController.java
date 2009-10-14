@@ -17,6 +17,7 @@ import org.springframework.validation.BindException;
 import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.SimpleFormController;
+import org.springframework.web.util.WebUtils;
 
 public class WriteController extends SimpleFormController {
 	private ForumService forumService;
@@ -66,7 +67,7 @@ public class WriteController extends SimpleFormController {
 			return new ModelAndView("redirect:" + ForumUtil.buildShowPostUrl(forumId, id, page));
 		}
 		// new forum thread.
-		forumService.createPost(forumId, writeCommand.getTitle(), writeCommand.getBody(), logonId, writeCommand.getFiles(), writeCommand.getHidden().equals("Y"));
+		forumService.createPost(forumId, writeCommand.getTitle(), writeCommand.getBody(), logonId, writeCommand.getFiles(), writeCommand.isHidden());
 		return new ModelAndView("redirect:" + ForumUtil.buildListUrl(forumId));
 	}
 	
@@ -77,6 +78,19 @@ public class WriteController extends SimpleFormController {
 		prepareBinder(binder);
 		initBinder(request, binder);
 		return binder;
+	}
+	
+	@Override
+	protected void onBind(HttpServletRequest request, Object command)
+			throws Exception {
+		super.onBind(request, command);
+		WriteSubmitCommand cmd = (WriteSubmitCommand)command;
+		String hiddenCB = request.getParameter("hiddenCheckbox");
+		if (hiddenCB == null || hiddenCB.trim().isEmpty())
+			cmd.setHidden(false);
+		else 
+			cmd.setHidden(true);
+			
 	}
 
 }

@@ -37,8 +37,8 @@ $(document).ready(function() {
               </ul>
           </tr>
           <tr>
-            <td class="cell_title">숨기기</td>
-            <td class="cell"><input type="checkbox" name="hidden" value="Y"/> (회계법인 이외의 다른 기관은 볼 수 없습니다)</td>
+            <td class="cell_title">비밀글</td>
+            <td class="cell"><input type="checkbox" name="hiddenCheckbox" value="Y"/> (회계법인 이외의 다른 기관은 볼 수 없습니다)</td>
           </tr>
         </tbody>
       </table>

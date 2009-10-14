@@ -7,7 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 public interface ForumService {
 
-	public static final String FILE_PREFIX_WIN = "D:/temp/cjac/forum/";
+	public static final String FILE_PREFIX_WIN = "C:/temp/cjac/forum/";
 	public static final String FILE_PREFIX_UNIX = "/home/rnd/forum/";
 	
 	public static final int PAGESIZE = 10;

@@ -55,6 +55,9 @@ public class ForumServiceImpl implements ForumService {
 
 	@Override
 	public PostAttachment getPostAttachment(int postId, int attId) {
+		if (!forumPermissionService.hasReadPermission(getPost(postId)))
+			throw new AccessDeniedException("You don't have enough permission to download");
+		
 		return forumRepository.getPostAttachment(postId, attId);
 	}
 
