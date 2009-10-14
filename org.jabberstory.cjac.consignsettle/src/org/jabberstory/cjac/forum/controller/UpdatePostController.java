@@ -87,11 +87,23 @@ public class UpdatePostController extends SimpleFormController {
 		if (errors.hasErrors())
 			return showForm(request, response, errors);
 
-		ForumPost post = forumService.updatePost(Integer.valueOf(param.getId()), param.getTitle(), param.getBody());
+		ForumPost post = forumService.updatePost(Integer.valueOf(param.getId()), param.getTitle(), param.getBody(), param.isHidden());
 		int rootId = post.getId();
 		if (post.getRootId() != 0) {
 			rootId = post.getRootId();
 		}
 		return new ModelAndView("redirect:" + ForumUtil.buildShowPostUrl(forumId, rootId, page));
+	}
+	
+	@Override
+	protected void onBind(HttpServletRequest request, Object command)
+			throws Exception {
+		super.onBind(request, command);
+		WriteSubmitCommand cmd = (WriteSubmitCommand)command;
+		String hiddenCB = request.getParameter("hiddenCheckbox");
+		if (hiddenCB == null || hiddenCB.trim().isEmpty())
+			cmd.setHidden(false);
+		else 
+			cmd.setHidden(true);
 	}
 }

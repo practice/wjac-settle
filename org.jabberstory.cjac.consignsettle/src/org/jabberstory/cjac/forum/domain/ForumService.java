@@ -21,7 +21,7 @@ public interface ForumService {
 	public ForumPost createPost(int forumId, String subject, String body, String userId, List<MultipartFile> files, boolean hidden);
 	public PostAttachment getPostAttachment(int postId, int attId);
 	public ForumPost createReply(int forumId, int id, String subject, String body, String userId, List<MultipartFile> files);
-	public ForumPost updatePost(int id, String subject, String body);
+	public ForumPost updatePost(int id, String subject, String body, boolean hidden);
 	public void removePost(int id);
 	public boolean isUnix();
 	public Forum createForum(String groupId, String forumType, String forumName);
