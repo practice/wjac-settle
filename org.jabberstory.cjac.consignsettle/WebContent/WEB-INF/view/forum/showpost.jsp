@@ -41,6 +41,11 @@ $(document).ready(function() {
 				</ul>
 			</td>
           </tr>
+          <c:if test="${post.hidden}">
+          <tr>
+            <td colspan="4" class="cell">비밀글입니다.</td>
+          </tr>
+          </c:if>
           <tr>
             <td colspan="4" class="cell_contents"><textarea class="body" readonly style="margin: 0; padding: 0; border:0; width='100%'; overflow: hidden">${post.body}</textarea></td>
           </tr>

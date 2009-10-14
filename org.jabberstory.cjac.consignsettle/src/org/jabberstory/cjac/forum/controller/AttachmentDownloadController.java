@@ -12,7 +12,6 @@ import org.jabberstory.web.util.WebUtil;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
-import org.springframework.security.AccessDeniedException;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.View;
@@ -43,9 +42,6 @@ public class AttachmentDownloadController implements Controller, ApplicationCont
 		int postId = WebUtil.getIntParam(request, "post", -999);
 		int attId = WebUtil.getIntParam(request, "file", -999);
 
-		if (!forumPermissionService.hasReadPermission(forumService.getPost(postId)))
-			throw new AccessDeniedException("You don't have enough permission to download");
-		
 		PostAttachment attachment = forumService.getPostAttachment(postId, Integer.valueOf(attId));
 		File file;
 		if (forumService.isUnix()) {
