@@ -19,6 +19,7 @@ import org.jabberstory.cjac.consignsettle.domain.UserGroup;
 import org.jabberstory.cjac.consignsettle.domain.UserService;
 import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
+import org.springframework.security.context.SecurityContextHolder;
 import org.springframework.web.multipart.MultipartFile;
 
 public class ForumRepository extends HibernateDaoSupport {
@@ -39,21 +40,25 @@ public class ForumRepository extends HibernateDaoSupport {
 	 */
 	@SuppressWarnings("unchecked")
 	public List<ForumPost> getTopLevelPosts(int forumId, int page) {
+		String logonId = SecurityContextHolder.getContext().getAuthentication().getName();
 		Forum forum = getForum(forumId);
 //		String queryString = "from ForumPost post left join fetch post.user where post.rootId = 0 order by post.id desc";
 		DetachedCriteria criteria = DetachedCriteria.forClass(ForumPost.class);
 		criteria.add(Restrictions.eq("rootId", 0));
-		// TODO 이렇게 하는거 맞나?
-//		criteria.add(Restrictions.eq("forum", getForum(forumId)));
 		DetachedCriteria forumCrit = criteria.createCriteria("forum", "f", CriteriaSpecification.INNER_JOIN);
 		forumCrit.add(
 			Restrictions.or(
 				Restrictions.eq("id", forumId), 
 				// 요청한 포럼과 같은 타입의 공용포럼을 선택하여야 한다.
-				Restrictions.and(Restrictions.eq("forumType", forum.getForumType()), 
-					Restrictions.eq("groupId", "public"))));
+				Restrictions.and(
+						Restrictions.eq("forumType", forum.getForumType()), 
+						Restrictions.eq("groupId", "public"))));
 		criteria.addOrder(Order.desc("id"));
 		criteria.createAlias("user", "u", CriteriaSpecification.LEFT_JOIN);
+		criteria.add(Restrictions.not(
+				Restrictions.and(
+					Restrictions.ne("u.userId", logonId), 
+					Restrictions.eq("hidden", Boolean.TRUE))));
 		return getHibernateTemplate().findByCriteria(criteria, ForumService.PAGESIZE * (page -1), ForumService.PAGESIZE);
 	}
 
@@ -62,8 +67,19 @@ public class ForumRepository extends HibernateDaoSupport {
 	 */
 	@SuppressWarnings("unchecked")
 	public Long getPageCount(int forumId) {
-		final String queryString = "select count(p) from ForumPost p where p.rootId = 0 and (p.forum.id = :forumId or p.forum.groupId = 'public')";
-		List result = getHibernateTemplate().findByNamedParam(queryString, "forumId", forumId);
+		String logonId = SecurityContextHolder.getContext().getAuthentication().getName();
+		Forum forum = getForum(forumId);
+		final String queryString = 
+			"select count(p) from ForumPost p"
+			+ " where p.rootId = 0"
+			+ " and (p.forum.id = :forumId"
+			+ " or (p.forum.forumType = :type and p.forum.groupId = 'public'))"
+			+ " and not (p.user.userId <> :userId and p.hidden = true)";
+		
+		List result = getHibernateTemplate().findByNamedParam(
+				queryString, 
+				new String[] { "forumId", "type", "userId" }, 
+				new Object[] { forumId, forum.getForumType(), logonId });
 		
 		Long postCount = ((Number)result.get(0)).longValue();
 		Long pageCount = postCount / ForumService.PAGESIZE;
