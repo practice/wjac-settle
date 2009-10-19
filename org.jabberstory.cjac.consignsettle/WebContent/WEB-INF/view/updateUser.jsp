@@ -17,7 +17,9 @@ $(document).ready(function(ev) {
 });
 </script>
 
-<form:form commandName="updateUser">
+<!-- form:form commandName="updateUser" -->
+<form method="post">
+<input type="hidden" name="userId" value="${updateUser.userId}" />
 <div id="container">
   <div id="content">
     <div id="content_top">
@@ -148,4 +150,4 @@ $(document).ready(function(ev) {
 		</div>
 	</div>
   </div>
-</form:form>
+</form>
