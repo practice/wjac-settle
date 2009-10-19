@@ -1,11 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="caf" uri="/WEB-INF/tlds/cjac-tags.tld" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>CJAC</title>
 <script>
 	function doSearch(pageNo){
 		document.form1.pageNo.value = pageNo;
@@ -19,8 +14,7 @@
 		});
 	});	
 </script>
-</head>
-<body>
+
 <form id="form1" name="form1" method="post">
 <input type="hidden" name="pageNo" value="1">
 <div id="container">
@@ -101,7 +95,7 @@
 			</tbody>	 
 			<tfoot>				
 	          <tr>
-	            <td colspan="6">		
+	            <td colspan="7">		
 	            	<!-- Start Paginate -->
 					<caf:paging formTagName="form1"	searchFunctionName="doSearch" pagingList="${pagingList}" pageNoTagName="pageNo" />
 					<!-- End Paginate -->						
@@ -120,5 +114,3 @@
   </div>
 </div>
 </form>
-</body>
-</html>
