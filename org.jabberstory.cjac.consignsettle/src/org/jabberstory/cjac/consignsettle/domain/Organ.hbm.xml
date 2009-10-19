@@ -10,7 +10,7 @@
 			<generator class="uuid" />
 		</id>
 		<property name="businessName" column="BUSINESS_NAME" type="string" length="32" />
-		<property name="projectName" column="PROJECT_NAME" type="string" length="32" />
+		<property name="projectName" column="PROJECT_NAME" type="string" length="128" />
 		<property name="researchAgency" column="RESEARCH_AGENCY" type="string" length="32" />
 		<property name="researchResponsiblePerson" column="RESEARCH_RESPONSIBLE_PERSON" type="string" length="32" />
 		<property name="contractStartDate" column="CONTRACT_STARTDATE" type="string" length="10" />
