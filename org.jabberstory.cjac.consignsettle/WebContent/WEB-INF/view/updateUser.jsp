@@ -18,7 +18,7 @@ $(document).ready(function(ev) {
 </script>
 
 <!-- form:form commandName="updateUser" -->
-<form method="post">
+<form action="updateUser" method="post" id="updateUser">
 <input type="hidden" name="userId" value="${updateUser.userId}" />
 <div id="container">
   <div id="content">
@@ -41,7 +41,7 @@ $(document).ready(function(ev) {
 						Password					
 					</td>
 					<td class="cell">
-						<form:password path="password" cssClass="line_box" cssStyle="width:100px"/><form:errors path="password" />									
+						<form:password path="updateUser.password" cssClass="line_box" cssStyle="width:100px"/><form:errors path="updateUser.password" />									
 					</td>
 				</tr>
 				<tr>
@@ -49,7 +49,7 @@ $(document).ready(function(ev) {
 						Confirm Password					
 					</td>
 					<td class="cell">
-						<form:password path="passwordConfirm" cssClass="line_box" cssStyle="width:100px"/><form:errors path="passwordConfirm" />					
+						<form:password path="updateUser.passwordConfirm" cssClass="line_box" cssStyle="width:100px"/><form:errors path="updateUser.passwordConfirm" />					
 					</td>
 				</tr>
 				<tr>
@@ -57,7 +57,7 @@ $(document).ready(function(ev) {
 						사용자명					
 					</td>
 					<td class="cell">
-						 <form:input path="username" cssClass="line_box" cssStyle="width:100px"/><form:errors path="username" />					
+						 <form:input path="updateUser.username" cssClass="line_box" cssStyle="width:100px"/><form:errors path="updateUser.username" />					
 					</td>
 				</tr>
 				<tr>
@@ -65,7 +65,7 @@ $(document).ready(function(ev) {
 						Email 					
 					</td>
 					<td class="cell">
-						<form:input path="email" cssClass="line_box" cssStyle="width:200px"/><form:errors path="email" />				
+						<form:input path="updateUser.email" cssClass="line_box" cssStyle="width:200px"/><form:errors path="updateUser.email" />				
 					</td>
 				</tr>
 				<tr>
@@ -73,11 +73,11 @@ $(document).ready(function(ev) {
 						연락처 					
 					</td>
 					<td class="cell">
-						<form:input path="phone1" cssClass="line_box" cssStyle="width:30px" maxlength="4"/><form:errors path="phone1" />
+						<form:input path="updateUser.phone1" cssClass="line_box" cssStyle="width:30px" maxlength="4"/><form:errors path="updateUser.phone1" />
 						-					
-						<form:input path="phone2" cssClass="line_box" cssStyle="width:30px" maxlength="4"/><form:errors path="phone2" />
+						<form:input path="updateUser.phone2" cssClass="line_box" cssStyle="width:30px" maxlength="4"/><form:errors path="updateUser.phone2" />
 						-
-						<form:input path="phone3" cssClass="line_box" cssStyle="width:30px" maxlength="4"/><form:errors path="phone3" />
+						<form:input path="updateUser.phone3" cssClass="line_box" cssStyle="width:30px" maxlength="4"/><form:errors path="updateUser.phone3" />
 					</td>
 				</tr>
 				<tr>
@@ -85,9 +85,9 @@ $(document).ready(function(ev) {
 		            <td class="cell">
 		            	<ul>
 			                <li>
-			                  	<form:input path="postnum1" cssClass="line_box" cssStyle="width:30px" maxlength="3"/><form:errors path="postnum1" />
+			                  	<form:input path="updateUser.postnum1" cssClass="line_box" cssStyle="width:30px" maxlength="3"/><form:errors path="updateUser.postnum1" />
 			                  	-
-								<form:input path="postnum2" cssClass="line_box" cssStyle="width:30px" maxlength="3"/><form:errors path="postnum2" />&nbsp;
+								<form:input path="updateUser.postnum2" cssClass="line_box" cssStyle="width:30px" maxlength="3"/><form:errors path="updateUser.postnum2" />&nbsp;
 			                </li>
 			                <li>
 			                  <div class="b_gray">
@@ -97,7 +97,7 @@ $(document).ready(function(ev) {
 			                  </div>
 			                </li>
 			                <li>
-			                	&nbsp;&nbsp;&nbsp;&nbsp;<form:input path="address" cssClass="line_box" cssStyle="width:520px"/><form:errors path="address" />
+			                	&nbsp;&nbsp;&nbsp;&nbsp;<form:input path="updateUser.address" cssClass="line_box" cssStyle="width:520px"/><form:errors path="updateUser.address" />
 			                </li>
 			        	</ul>
 					</td>
