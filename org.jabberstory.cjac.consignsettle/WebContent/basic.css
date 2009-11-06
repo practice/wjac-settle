@@ -301,14 +301,13 @@ tfoot td {
 	width:900px;
 	height:56px;
 	font-size:11px;
-	background:url(img/footer_bg.gif) no-repeat;
+	background:url(img/footer_bg01.gif) no-repeat;
 	line-height:14px;
 	padding-top:8px;
 	margin-top:10px;
 	margin-left:auto;
 	margin-right:auto;
 }
-
 
 /*text*/
 .white_11 {
