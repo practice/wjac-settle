@@ -8,7 +8,7 @@
 <style type="text/css">
 <!--
 * {
-	font-family:"돋움";
+	font-family: 맑은 고딕, Segoe UI, Tahoma, Malgun, 돋움;
 	font-size:11px;
 	color: #666666; 
 	line-height:18px;
